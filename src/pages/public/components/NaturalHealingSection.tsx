@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useGetLandingPageContentQuery } from '../../../services/api';
 
-const BioGeometrySection = () => {
-  const { lang, t } = useLanguage();
+const NaturalHealingSection = () => {
+  const { t } = useLanguage();
   const { data: contentData } = useGetLandingPageContentQuery();
   const contactSection = contentData?.payload?.find((section: any) => section.section === 'contact');
   const whatsapp = contactSection?.metadata?.whatsapp || '22890000000';
@@ -11,42 +10,41 @@ const BioGeometrySection = () => {
 
   const benefits = [
     {
+      iconPath: "M12 6.253v13M12 6.253C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+      titleFr: "Remèdes à Base de Plantes",
+      titleEn: "Herbal Remedies",
+      descFr: "Préparations personnalisées à base de plantes pour les maux du corps.",
+      descEn: "Personalized plant-based preparations for the ailments of the body.",
+    },
+    {
+      iconPath: "M12 2C9 6 6 9.5 6 13a6 6 0 0012 0c0-3.5-3-7-6-11zM9 13a3 3 0 006 0",
+      titleFr: "Médecine Prophétique",
+      titleEn: "Prophetic Medicine",
+      descFr: "Guérison par la graine noire, le miel, des conseils sur la hijama et les remèdes de la Sunna.",
+      descEn: "Healing with black seed, honey, hijama guidance and the remedies of the Sunnah.",
+    },
+    {
       iconPath: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
-      titleFr: "Harmonisation du domicile",
-      titleEn: "Home Harmonization",
-      descFr: "Transformez votre maison en sanctuaire de repos et de guérison.",
-      descEn: "Transform your home into a sanctuary of rest and healing.",
+      titleFr: "Protection du Foyer",
+      titleEn: "Home Protection",
+      descFr: "Purification et fortification du foyer contre les nuisances invisibles, l'envie et les perturbations.",
+      descEn: "Cleansing and fortifying the home against unseen harm, envy and disturbance.",
     },
     {
-      iconPath: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
-      titleFr: "Protection EMF",
-      titleEn: "EMF Protection",
-      descFr: "Neutralisez les effets des rayonnements électromagnétiques.",
-      descEn: "Neutralize the effects of electromagnetic radiation.",
-    },
-    {
-      iconPath: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
-      titleFr: "Équilibre énergétique",
-      titleEn: "Energy Balance",
-      descFr: "Rétablissez la dynamique énergétique naturelle du bien-être.",
-      descEn: "Restore the natural energy dynamics of well-being.",
-    },
-    {
-      iconPath: "M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z",
-      titleFr: "Rayonnement géopathique",
-      titleEn: "Geopathic Radiation",
-      descFr: "Identifiez et corrigez les perturbations telluriques.",
-      descEn: "Identify and correct telluric disturbances.",
+      iconPath: "M12 3c-1.5 3-4 5.5-4 9a4 4 0 008 0c0-3.5-2.5-6-4-9z M6 20h12",
+      titleFr: "Eau Bénie & Préparations",
+      titleEn: "Blessed Water & Preparations",
+      descFr: "Versets coraniques récités sur l'eau et les éléments naturels pour la guérison et la protection.",
+      descEn: "Qur'anic verses recited over water and natural elements for healing and protection.",
     },
   ];
 
   return (
-    <section className="relative py-24 bg-gradient-to-b from-black via-purple-950/10 to-black overflow-hidden">
+    <section id="natural-healing" className="relative py-24 bg-gradient-to-b from-black via-emerald-950/10 to-black overflow-hidden">
       {/* Animated Sacred Geometry Background */}
       <div className="absolute inset-0">
         <svg className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.03]" viewBox="0 0 400 400">
           <g className="animate-spin-slower origin-center">
-            {/* Metatron's Cube simplified */}
             <circle cx="200" cy="200" r="150" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
             <circle cx="200" cy="200" r="100" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
             <circle cx="200" cy="200" r="50" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
@@ -69,15 +67,15 @@ const BioGeometrySection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1 mb-4 text-xs tracking-[0.3em] text-amber-500 border border-amber-600/30 rounded-full">
-            {t('SCIENCE VIBRATOIRE', 'VIBRATIONAL SCIENCE')}
+            {t('MÉDECINE PROPHÉTIQUE', 'PROPHETIC MEDICINE')}
           </span>
           <h2 className="text-3xl md:text-5xl font-light text-white mb-6">
-            {t('La BioGéométrie', 'BioGeometry')}
+            {t('Guérison Naturelle', 'Natural Healing')}
           </h2>
           <p className="max-w-3xl mx-auto text-gray-400">
             {t(
-              "Science environnementale moderne créée par l'Architecte égyptien Dr Ibrahim Karim, la BioGéométrie utilise les principes énergétiques des formes géométriques pour harmoniser les systèmes biologiques.",
-              "Modern environmental science created by Egyptian Architect Dr Ibrahim Karim, BioGeometry uses the energetic principles of geometric shapes to harmonize biological systems."
+              "S'appuyant sur le Tibb Nabawi (Médecine Prophétique) et des générations de savoir hérité sur les plantes curatives d'Afrique de l'Ouest, le Cheikh prescrit des remèdes naturels qui soignent le corps pendant que les azkaar soignent l'âme.",
+              "Drawing on Tibb Nabawi (Prophetic Medicine) and generations of inherited knowledge of West African healing plants, the Sheikh prescribes natural remedies that treat the body while the azkaar treat the soul."
             )}
           </p>
         </div>
@@ -87,7 +85,6 @@ const BioGeometrySection = () => {
           {/* Visual */}
           <div className="relative">
             <div className="aspect-square max-w-md mx-auto relative">
-              {/* BG3 Symbol Animation */}
               <svg viewBox="0 0 200 200" className="w-full h-full">
                 <defs>
                   <linearGradient id="bgGold" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -109,7 +106,6 @@ const BioGeometrySection = () => {
 
                 {/* Inner rotating elements */}
                 <g filter="url(#glow)" className="animate-spin-slow origin-center" style={{ transformOrigin: '100px 100px' }}>
-                  {/* Vesica Piscis */}
                   <circle cx="70" cy="100" r="50" fill="none" stroke="url(#bgGold)" strokeWidth="1.5" />
                   <circle cx="130" cy="100" r="50" fill="none" stroke="url(#bgGold)" strokeWidth="1.5" />
                 </g>
@@ -119,9 +115,6 @@ const BioGeometrySection = () => {
                   <circle cx="100" cy="100" r="15" fill="none" stroke="url(#bgGold)" strokeWidth="2" />
                   <circle cx="100" cy="100" r="5" fill="url(#bgGold)" />
                 </g>
-
-                {/* BG3 text */}
-                <text x="100" y="180" textAnchor="middle" fill="#D4AF37" fontSize="12" fontWeight="bold" letterSpacing="4">BG3</text>
               </svg>
 
               {/* Glow effect */}
@@ -132,19 +125,19 @@ const BioGeometrySection = () => {
           {/* Content */}
           <div className="space-y-6">
             <div className="p-6 bg-gradient-to-r from-amber-900/20 to-transparent border-l-2 border-amber-500 rounded-r-xl">
-              <h3 className="text-xl text-amber-400 mb-3">{t("L'énergie-qualité BG3", "BG3 Energy-Quality")}</h3>
+              <h3 className="text-xl text-amber-400 mb-3">{t("La Sagesse de la Création", "The Wisdom of Creation")}</h3>
               <p className="text-gray-300">
                 {t(
-                  "Cette clé énergétique est présente au centre du système énergétique de la Terre, de l'Univers et de tous les êtres vivants. Elle est concentrée dans les lieux sacrés reconnus depuis l'aube de l'humanité comme centres de guérison.",
-                  "This energy key is present at the center of Earth's energy system, the Universe, and all living beings. It is concentrated in sacred places recognized since the dawn of humanity as healing centers."
+                  "Allah a placé un remède dans Sa création pour chaque maladie. De la graine noire et du miel loués dans la Sunna, aux feuilles, racines et écorces connues de nos ancêtres, la médecine traditionnelle par les plantes restaure ce que la vie moderne a affaibli.",
+                  "Allah has placed a cure in His creation for every illness. From black seed and honey praised in the Sunnah, to the leaves, roots and barks known to our ancestors, traditional plant medicine restores what modern life has weakened."
                 )}
               </p>
             </div>
 
             <p className="text-gray-400 leading-relaxed">
               {t(
-                "Nos environnements domestiques modernes nous déconnectent de la dynamique énergétique naturelle. En tant que systèmes énergétiques ouverts, nous sommes submergés par les perturbations : rayonnements électromagnétiques, stress géopathique, matériaux toxiques...",
-                "Our modern home environments disconnect us from natural energy dynamics. As open energy systems, we are overwhelmed by disturbances: electromagnetic radiation, geopathic stress, toxic materials..."
+                "Nos environnements et nos régimes modernes nous ont déconnectés de cet héritage naturel. De nombreux maux du corps — fatigue, infertilité, douleurs chroniques, maladies inexpliquées — trouvent des remèdes qui poussent de la terre.",
+                "Our modern environments and diets have disconnected us from this natural inheritance. Many ailments of the body — fatigue, infertility, chronic pain, unexplained illness — have remedies that grow from the earth."
               )}
             </p>
 
@@ -154,7 +147,7 @@ const BioGeometrySection = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-amber-900/30 border border-amber-600/50 rounded-full text-amber-400 hover:bg-amber-800/40 transition-all duration-300"
             >
-              {t('Demander une étude', 'Request a study')}
+              {t('Demander une consultation de remède', 'Request a remedy consultation')}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -186,7 +179,7 @@ const BioGeometrySection = () => {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            {t('Solutions à domicile - Prix sur demande', 'Home solutions - Price on request')}
+            {t('Remèdes naturels - Prix sur demande', 'Natural remedies - Price on request')}
           </p>
         </div>
       </div>
@@ -200,4 +193,4 @@ const BioGeometrySection = () => {
   );
 };
 
-export default BioGeometrySection;
+export default NaturalHealingSection;

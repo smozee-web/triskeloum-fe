@@ -20,19 +20,19 @@ const Footer = () => {
     const links = {
         services: [
             { fr: 'Consultation', en: 'Consultation', href: '#services' },
-            { fr: "Lecture de l'Âme", en: 'Soul Reading', href: '#services' },
-            { fr: 'Bilan Énergétique', en: 'Energy Assessment', href: '#services' },
-            { fr: 'Livre de Vie', en: 'Book of Life', href: '#services' },
+            { fr: 'Diagnostic Spirituel', en: 'Spiritual Diagnosis', href: '#services' },
+            { fr: 'Ruqyah & Purification', en: 'Ruqyah & Purification', href: '#services' },
+            { fr: 'Livre de Guidance', en: 'Book of Guidance', href: '#services' },
         ],
         formations: [
             { fr: 'Formation Classique', en: 'Classic Training', href: '#formations' },
             { fr: 'Formation Premium', en: 'Premium Training', href: '#formations' },
-            { fr: 'BioGéométrie', en: 'BioGeometry', href: '#biogeometry' },
+            { fr: 'Guérison Naturelle', en: 'Natural Healing', href: '#natural-healing' },
         ],
         about: [
-            { fr: 'Le Maître', en: 'The Master', href: '#about' },
-            { fr: 'Notre Équipe', en: 'Our Team', href: '#about' },
-            { fr: 'Akpé Fondation', en: 'Akpé Foundation', href: '#' },
+            { fr: 'Le Cheikh', en: 'The Sheikh', href: '#about' },
+            { fr: 'Transmissions', en: 'Transmissions', href: '#about' },
+            { fr: 'Nous contacter', en: 'Contact Us', href: '#contact' },
         ],
     };
 
@@ -53,8 +53,8 @@ const Footer = () => {
                         </div>
                         <p className="text-gray-500 text-sm leading-relaxed mb-6 max-w-sm">
                             {t(
-                                "Cabinet digital de développement spirituel. Guérir les maux de l'âme et accompagner chacun dans un voyage profond de connaissance de soi.",
-                                "Digital spiritual development practice. Healing the wounds of the soul and guiding each person on a deep journey of self-discovery."
+                                "Pratique spirituelle islamique digitale. Guérir les cœurs à travers les sciences des Asraar et des Azkaar, et guider chaque chercheur sur le chemin de la connaissance de soi et du rapprochement d'Allah.",
+                                "Digital Islamic spiritual practice. Healing hearts through the sciences of Asraar and Azkaar, and guiding each seeker on the path of self-knowledge and nearness to Allah."
                             )}
                         </p>
                         {socialLinks.length > 0 && (
@@ -123,7 +123,7 @@ const Footer = () => {
                         © {new Date().getFullYear()} Usratul Azkaar. {t('Tous droits réservés.', 'All rights reserved.')}
                     </p>
                     <p className="text-gray-600 text-sm italic">
-                        "{t("L'éveil spirituel est un briseur d'illusions", "Spiritual awakening is a breaker of illusions")}"
+                        "{t("C'est par le rappel d'Allah que les cœurs se tranquillisent", "Verily, in the remembrance of Allah do hearts find rest")}" — {t('Coran 13:28', "Qur'an 13:28")}
                     </p>
                 </div>
             </div>

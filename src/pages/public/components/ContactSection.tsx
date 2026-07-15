@@ -9,13 +9,13 @@ const ContactSection = () => {
   const contactSection = contentData?.payload?.find((section: any) => section.section === 'contact');
   const title = contactSection ? (lang === 'fr' ? contactSection.titleFr : contactSection.titleEn) : t('Commencez votre voyage', 'Begin Your Journey');
   const subtitle = contactSection ? (lang === 'fr' ? contactSection.subtitleFr : contactSection.subtitleEn) : t('CONTACT', 'CONTACT');
-  const description = contactSection ? (lang === 'fr' ? contactSection.descriptionFr : contactSection.descriptionEn) : t("Prêt à entreprendre votre transformation intérieure ? Contactez-nous directement sur WhatsApp pour une première consultation.", "Ready to begin your inner transformation? Contact us directly on WhatsApp for an initial consultation.");
+  const description = contactSection ? (lang === 'fr' ? contactSection.descriptionFr : contactSection.descriptionEn) : t("Prêt à commencer votre purification et votre guérison ? Contactez le Cheikh directement sur WhatsApp pour une première consultation.", "Ready to begin your purification and healing? Contact the Sheikh directly on WhatsApp for an initial consultation.");
   const whatsapp = contactSection?.metadata?.whatsapp || '22890000000';
   const email = contactSection?.metadata?.email || 'contact@usratulazkaar.com';
   const meta = contactSection?.metadata || {};
   const location = contactSection
     ? (lang === 'fr' ? (meta.locationFr ?? meta.location_fr ?? '') : (meta.locationEn ?? meta.location_en ?? ''))
-    : t('Cabinet Digital - Monde entier', 'Digital Practice - Worldwide');
+    : t('Pratique Digitale - Monde entier', 'Digital Practice - Worldwide');
 
   return (
     <section id="contact" className="relative py-24 bg-gradient-to-b from-black to-stone-950 overflow-hidden">

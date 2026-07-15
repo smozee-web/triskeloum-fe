@@ -15,18 +15,18 @@ const FormationsSection = () => {
   const formationsSection = contentData?.payload?.find((section: any) => section.section === 'formations');
 
   const defaultTopics = [
-    { icon: '☿', label: t('Hermétisme', 'Hermeticism') },
-    { icon: '✡', label: t('Kabbale', 'Kabbalah') },
-    { icon: '🔮', label: t('Magie', 'Magic') },
-    { icon: '🧘', label: t('Méditation', 'Meditation') },
-    { icon: '⚗️', label: t('Alchimie', 'Alchemy') },
-    { icon: '✨', label: t('Astrologie', 'Astrology') },
-    { icon: '🔱', label: t('Chamanisme', 'Shamanism') },
+    { icon: '📿', label: t('Azkaar & Awraad', 'Azkaar & Awraad') },
+    { icon: '🕌', label: t('Asraar des Noms Divins', 'Asraar of the Divine Names') },
+    { icon: '📖', label: t('Secrets des Versets Coraniques', 'Secrets of the Qur\'anic Verses') },
+    { icon: '🌙', label: t("Tazkiyah (Purification de l'âme)", 'Tazkiyah (Purification of the Soul)') },
+    { icon: '🌿', label: t('Médecine Prophétique & Plantes', 'Prophetic & Herbal Medicine') },
+    { icon: '⭐', label: t('Sciences Sacrées des Lettres', 'Sacred Sciences of the Letters') },
+    { icon: '🤲', label: t('Ruqyah & Protection Spirituelle', 'Ruqyah & Spiritual Protection') },
   ];
 
   const topicsFromApi = (formationsSection?.metadata?.topics || []).map((topic: any) => ({
-    icon: topic.icon || '☿',
-    label: t(topic.labelFr || topic.label_fr || 'Hermétisme', topic.labelEn || topic.label_en || 'Hermeticism'),
+    icon: topic.icon || '📿',
+    label: t(topic.labelFr || topic.label_fr || 'Azkaar & Awraad', topic.labelEn || topic.label_en || 'Azkaar & Awraad'),
   }));
 
   const topics = topicsFromApi.length ? topicsFromApi : defaultTopics;
@@ -36,8 +36,8 @@ const FormationsSection = () => {
       id: 'classique',
       titleFr: 'Formation Classique',
       titleEn: 'Classic Training',
-      subtitleFr: 'Parcours initiatique complet',
-      subtitleEn: 'Complete initiatory path',
+      subtitleFr: 'Parcours complet de la science des Asraar',
+      subtitleEn: 'Complete path into the science of Asraar',
       eur: 310,
       xof: 203000,
       periodFr: '/mois',
@@ -45,23 +45,23 @@ const FormationsSection = () => {
       durationFr: 'Durée indéterminée',
       durationEn: 'Unlimited duration',
       featuresFr: [
-        'Hermétisme & Kabbale égyptienne',
-        'Magie opérative et rituelle',
-        'Méditation & élévation de conscience',
-        'Alchimie spirituelle',
-        'Astrologie sacrée',
-        'Radiesthésie & géobiologie',
-        'Chamanisme ancestral',
+        'Fondations de la science des Asraar',
+        'Azkaar et awraad : litanies quotidiennes et leurs secrets',
+        'Les Noms Divins : significations, propriétés et application',
+        'Secrets des versets et sourates coraniques',
+        "Tazkiyat an-nafs : purification du cœur et de l'âme",
+        'Introduction à la médecine prophétique et aux plantes curatives',
+        'Protection spirituelle pour soi et sa famille',
         '2 sessions live/mois (2h)',
       ],
       featuresEn: [
-        'Hermeticism & Egyptian Kabbalah',
-        'Operative and ritual magic',
-        'Meditation & consciousness elevation',
-        'Spiritual alchemy',
-        'Sacred astrology',
-        'Dowsing & geobiology',
-        'Ancestral shamanism',
+        'Foundations of the science of Asraar',
+        'Azkaar and awraad: daily litanies and their secrets',
+        'The Divine Names: meanings, properties and application',
+        'Secrets of the Qur\'anic verses and chapters',
+        'Tazkiyat an-nafs: purification of the heart and soul',
+        'Introduction to prophetic medicine and healing plants',
+        'Spiritual protection for oneself and one\'s family',
         '2 live sessions/month (2h)',
       ],
       isPremium: false,
@@ -70,7 +70,7 @@ const FormationsSection = () => {
       id: 'premium',
       titleFr: 'Formation Premium',
       titleEn: 'Premium Training',
-      subtitleFr: 'Accompagnement intensif personnalisé',
+      subtitleFr: 'Accompagnement intensif et personnalisé',
       subtitleEn: 'Intensive personalized support',
       eur: 1600,
       xof: 1050000,
@@ -80,23 +80,23 @@ const FormationsSection = () => {
       durationEn: '3-year commitment',
       featuresFr: [
         'Tout le programme Classique',
-        'Soins énergétiques ILLIMITÉS',
-        'Initiations spirituelles personnalisées',
+        'Séances ILLIMITÉES de ruqyah et de guérison',
+        'Transmission personnalisée des awraad et ijazah (autorisation)',
         '4 sessions live/mois (2h)',
-        'Transmissions personnalisées',
-        'Accompagnement sur-mesure',
-        'Accès prioritaire au Maître',
-        'Harmonisation corps subtils',
+        'Litanies prescrites individuellement selon votre nature spirituelle',
+        'Accompagnement individuel sur-mesure',
+        'Accès prioritaire au Cheikh',
+        'Purification et fortification complètes du chercheur',
       ],
       featuresEn: [
         'Full Classic program',
-        'UNLIMITED energy treatments',
-        'Personalized spiritual initiations',
+        'UNLIMITED ruqyah and healing sessions',
+        'Personalized transmission of awraad and ijazah (authorization)',
         '4 live sessions/month (2h)',
-        'Personalized transmissions',
-        'Tailored support',
-        'Priority access to the Master',
-        'Subtle bodies harmonization',
+        'Individually prescribed litanies for your spiritual nature',
+        'Tailored one-on-one guidance',
+        'Priority access to the Sheikh',
+        'Complete purification and fortification of the seeker',
       ],
       isPremium: true,
     },
@@ -127,13 +127,13 @@ const FormationsSection = () => {
   const formations = formationsFromApi.length > 0 ? formationsFromApi : defaultFormations;
 
   const headerTitle = t(
-    formationsSection?.titleFr || formationsSection?.title_fr || "L'Hermétisme Vivant",
-    formationsSection?.titleEn || formationsSection?.title_en || 'Living Hermeticism'
+    formationsSection?.titleFr || formationsSection?.title_fr || "La Science des Asraar",
+    formationsSection?.titleEn || formationsSection?.title_en || 'The Science of Asraar'
   );
   const headerSubtitle = t(formationsSection?.subtitleFr || formationsSection?.subtitle_fr || 'FORMATIONS', formationsSection?.subtitleEn || formationsSection?.subtitle_en || 'TRAINING PROGRAMS');
   const headerDescription = t(
-    formationsSection?.descriptionFr || formationsSection?.description_fr || "Héritier de la sagesse de l'Égypte antique et du dieu-prophète Hermès Trismégiste, ce parcours initiatique vous guide vers la connaissance céleste et la réalisation spirituelle.",
-    formationsSection?.descriptionEn || formationsSection?.description_en || "Heir to the wisdom of ancient Egypt and the god-prophet Hermes Trismegistus, this initiatory path guides you toward celestial knowledge and spiritual realization."
+    formationsSection?.descriptionFr || formationsSection?.description_fr || "Héritée à travers des chaînes de transmission ininterrompues des savants et saints de l'Islam, la science des Asraar dévoile les secrets des versets coraniques, des Noms Divins et des lettres — guidant l'étudiant vers la connaissance, la protection et la réalisation spirituelle.",
+    formationsSection?.descriptionEn || formationsSection?.description_en || "Inherited through unbroken chains of transmission from the scholars and saints of Islam, the science of Asraar unveils the secrets of the Qur'anic verses, the Divine Names, and the letters — guiding the student toward knowledge, protection, and spiritual realization."
   );
 
   return (

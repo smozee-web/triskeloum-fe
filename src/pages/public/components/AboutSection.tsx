@@ -8,22 +8,22 @@ const AboutSection = () => {
 
   // Get about section content from API or use hardcoded fallback
   const aboutSection = contentData?.payload?.find((section: any) => section.section === 'about');
-  const title = aboutSection ? (lang === 'fr' ? (aboutSection.titleFr ?? aboutSection.title_fr) : (aboutSection.titleEn ?? aboutSection.title_en)) : t('Le Maître', 'The Master');
+  const title = aboutSection ? (lang === 'fr' ? (aboutSection.titleFr ?? aboutSection.title_fr) : (aboutSection.titleEn ?? aboutSection.title_en)) : t('Le Cheikh', 'The Sheikh');
   const subtitle = aboutSection ? (lang === 'fr' ? (aboutSection.subtitleFr ?? aboutSection.subtitle_fr) : (aboutSection.subtitleEn ?? aboutSection.subtitle_en)) : t('À PROPOS', 'ABOUT');
-  const description = aboutSection ? (lang === 'fr' ? (aboutSection.descriptionFr ?? aboutSection.description_fr) : (aboutSection.descriptionEn ?? aboutSection.description_en)) : t("Physicien micro-vibratoire et fondateur du cabinet USRATUL AZKAAR ainsi que de l'association Akpé Fondation, j'accompagne les êtres dans leur chemin de transformation intérieure et de réalisation spirituelle.", "Micro-vibratory physicist and founder of USRATUL AZKAAR as well as the Akpé Foundation, I guide beings on their path of inner transformation and spiritual realization.");
-  const content = aboutSection ? (lang === 'fr' ? (aboutSection.contentFr ?? aboutSection.content_fr) : (aboutSection.contentEn ?? aboutSection.content_en)) : t("Ma quête a commencé à l'âge de 16 ans, guidée par une soif profonde de comprendre les mystères de l'existence. Ce parcours initiatique m'a conduit à recevoir de nombreuses transmissions sacrées, issues de traditions anciennes et complémentaires.", "My quest began at the age of 16, guided by a deep thirst to understand the mysteries of existence. This initiatory path led me to receive many sacred transmissions from ancient and complementary traditions.");
+  const description = aboutSection ? (lang === 'fr' ? (aboutSection.descriptionFr ?? aboutSection.description_fr) : (aboutSection.descriptionEn ?? aboutSection.description_en)) : t("Fondateur de USRATUL AZKAAR, j'accompagne les chercheurs sur le chemin de la purification intérieure et du rapprochement d'Allah, à travers les sciences des Asraar et des Azkaar héritées de mes maîtres, ainsi que les connaissances curatives de la médecine prophétique et traditionnelle.", "Founder of USRATUL AZKAAR, I guide seekers on the path of inner purification and nearness to Allah, through the sciences of Asraar and Azkaar inherited from my teachers, and the healing knowledge of prophetic and traditional medicine.");
+  const content = aboutSection ? (lang === 'fr' ? (aboutSection.contentFr ?? aboutSection.content_fr) : (aboutSection.contentEn ?? aboutSection.content_en)) : t("Mon chemin a commencé dès le plus jeune âge, porté par une soif profonde des sciences sacrées. Au fil des années, j'ai reçu la transmission et l'autorisation (ijazah) de maîtres de ces disciplines, ainsi qu'une vie entière d'étude des plantes curatives de nos terres.", "My path began at a young age, driven by a deep thirst for the sacred sciences. Over the years, I received transmission and authorization (ijazah) from masters of these disciplines, alongside a lifetime of study of the healing plants of our lands.");
   const meta = aboutSection?.metadata || {};
-  const masterName = meta.master_name ?? meta.masterName ?? 'Taj Rasmoon';
-  const masterTitle = aboutSection?.metadata ? (lang === 'fr' ? (meta.master_title_fr ?? meta.masterTitleFr ?? 'Maître spirituel') : (meta.master_title_en ?? meta.masterTitleEn ?? 'Spiritual Master')) : t('Maître spirituel', 'Spiritual Master');
-  const quote = aboutSection?.metadata ? (lang === 'fr' ? (meta.quote_fr ?? meta.quoteFr ?? '') : (meta.quote_en ?? meta.quoteEn ?? '')) : t("L'éveil spirituel est un briseur d'illusions.", "Spiritual awakening is a breaker of illusions.");
+  const masterName = meta.master_name ?? meta.masterName ?? 'Sheikh Antar Ayatollah Fofana';
+  const masterTitle = aboutSection?.metadata ? (lang === 'fr' ? (meta.master_title_fr ?? meta.masterTitleFr ?? 'Enseignant des Asraar & Guide Spirituel') : (meta.master_title_en ?? meta.masterTitleEn ?? 'Teacher of Asraar & Spiritual Guide')) : t('Enseignant des Asraar & Guide Spirituel', 'Teacher of Asraar & Spiritual Guide');
+  const quote = aboutSection?.metadata ? (lang === 'fr' ? (meta.quote_fr ?? meta.quoteFr ?? '') : (meta.quote_en ?? meta.quoteEn ?? '')) : t("Le rappel d'Allah est le polissoir des cœurs.", "Remembrance of Allah is the polish of the heart.");
 
   const initiationsRaw = aboutSection?.metadata?.initiations || [];
   const initiations = (initiationsRaw.length ? initiationsRaw : [
-    { icon: '🙏', labelFr: 'Hare Krishna', labelEn: 'Hare Krishna' },
-    { icon: '🐍', labelFr: 'Vodou Thron', labelEn: 'Vodou Thron' },
-    { icon: '🔮', labelFr: 'Initié au Fa', labelEn: 'Fa Initiate' },
-    { icon: '⚡', labelFr: 'Bioénergie', labelEn: 'Bioenergy' },
-    { icon: '📐', labelFr: 'BioGéométrie', labelEn: 'BioGeometry' },
+    { icon: '📿', labelFr: 'Azkaar & Awraad', labelEn: 'Azkaar & Awraad' },
+    { icon: '📖', labelFr: 'Asraar des Versets', labelEn: 'Asraar of the Verses' },
+    { icon: '🕌', labelFr: 'Les Noms Divins', labelEn: 'The Divine Names' },
+    { icon: '🌿', labelFr: 'Médecine Traditionnelle', labelEn: 'Traditional Plant Medicine' },
+    { icon: '🤲', labelFr: 'Ruqyah', labelEn: 'Ruqyah' },
   ]).map((init: any) => ({
     icon: init.icon,
     labelFr: init.label_fr ?? init.labelFr ?? '',
@@ -32,13 +32,13 @@ const AboutSection = () => {
 
   const expertiseRaw = aboutSection?.metadata ? (lang === 'fr' ? (meta.expertise_fr ?? meta.expertiseFr) : (meta.expertise_en ?? meta.expertiseEn)) : null;
   const expertise = expertiseRaw && expertiseRaw.length ? expertiseRaw : [
-    t('Hermétisme', 'Hermeticism'),
-    t('Kabbale égyptienne', 'Egyptian Kabbalah'),
-    t('Hindouisme', 'Hinduism'),
-    t('Radionique', 'Radionics'),
-    t('Radiesthésie', 'Dowsing'),
-    t('Bioénergie', 'Bioenergy'),
-    t('BioGéométrie', 'BioGeometry'),
+    t('Science des Asraar', 'Science of Asraar'),
+    t('Azkaar & Litanies', 'Azkaar & Litanies'),
+    t("Tazkiyah (Purification de l'âme)", 'Tazkiyah (Purification of the Soul)'),
+    t('Ruqyah & Protection spirituelle', 'Ruqyah & Spiritual Protection'),
+    t('Médecine prophétique', 'Prophetic Medicine'),
+    t('Plantes de guérison traditionnelles', 'Traditional Healing Plants'),
+    t('Guidance spirituelle', 'Spiritual Guidance'),
   ];
 
   const teamData = aboutSection?.metadata?.team || [];
@@ -47,8 +47,7 @@ const AboutSection = () => {
     roleFr: member.role_fr ?? member.roleFr ?? '',
     roleEn: member.role_en ?? member.roleEn ?? '',
   })) : [
-    { name: 'Taj Rasmoon', roleFr: 'PDG USRATUL AZKAAR - Maître spirituel', roleEn: 'CEO USRATUL AZKAAR - Spiritual Master' },
-    { name: 'Sali Mondor', roleFr: 'Consultante | Sophrologue | Soins', roleEn: 'Consultant | Sophrologist | Healing' },
+    { name: 'Sheikh Antar Ayatollah Fofana', roleFr: 'Fondateur USRATUL AZKAAR - Cheikh', roleEn: 'Founder USRATUL AZKAAR - Sheikh' },
   ]);
 
   return (
@@ -86,7 +85,7 @@ const AboutSection = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
                     </div>
-                    <p className="text-amber-600/60 text-sm">{t('Photo du Maître', "Master's Photo")}</p>
+                    <p className="text-amber-600/60 text-sm">{t('Photo du Cheikh', "Sheikh's Photo")}</p>
                   </div>
                 </div>
 
@@ -115,7 +114,7 @@ const AboutSection = () => {
 
             {/* Initiations */}
             <div className="pt-6">
-              <h4 className="text-sm text-amber-500 tracking-wider mb-4">{t('INITIATIONS REÇUES', 'RECEIVED INITIATIONS')}</h4>
+              <h4 className="text-sm text-amber-500 tracking-wider mb-4">{t('TRANSMISSIONS REÇUES', 'RECEIVED TRANSMISSIONS')}</h4>
               <div className="flex flex-wrap gap-3">
                 {initiations.map((init, i) => (
                   <span
