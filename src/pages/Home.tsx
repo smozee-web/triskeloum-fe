@@ -30,7 +30,7 @@ const Dashboard: React.FC = () => {
                     Dashboard
                 </h1>
                 <p className="text-sm text-gray-600 dark:text-text-tertiary">
-                    Vue d'ensemble de votre plateforme
+                    Overview of your platform
                 </p>
             </div>
 

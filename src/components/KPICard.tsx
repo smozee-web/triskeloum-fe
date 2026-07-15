@@ -64,7 +64,7 @@ const KPICard: React.FC<KPICardProps> = ({
                             {trend.value}%
                         </span>
                         <span className="text-xs text-gray-500 dark:text-text-muted ml-2">
-                            vs dernier mois
+                            vs last month
                         </span>
                     </div>
                 )}

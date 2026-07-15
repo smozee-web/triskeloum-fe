@@ -756,7 +756,7 @@ export default function CRMPage() {
                                 </h2>
                                 <p className="text-xs text-gray-500 dark:text-text-tertiary flex items-center gap-1.5">
                                     <span className={`w-2 h-2 rounded-full ${isOtherUserOnline ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'}`}></span>
-                                    {isOtherUserOnline ? 'En ligne' : 'Hors ligne'}
+                                    {isOtherUserOnline ? 'Online' : 'Offline'}
                                 </p>
                             </div>
                         </div>
