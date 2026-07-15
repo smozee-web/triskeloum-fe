@@ -5,7 +5,7 @@ import Footer from '../../components/Footer';
 import HeroSection from './components/HeroSection';
 import ServicesSection from './components/ServicesSection';
 import FormationSection from './components/FormationSection';
-import BioGeometrySection from './components/BioGeometrySection';
+import NaturalHealingSection from './components/NaturalHealingSection';
 import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 import FlameCustomCursor from '../../components/FlameCustomCursor';
@@ -34,7 +34,7 @@ const LandingPage = () => {
 
         <ServicesSection />
         <FormationSection />
-        <BioGeometrySection />
+        <NaturalHealingSection />
         <AboutSection />
         <ContactSection />
       </main>

@@ -77,38 +77,38 @@ const ServicesSection = () => {
       icon: getServiceIcon('consultation'),
       titleFr: 'Consultation',
       titleEn: 'Consultation',
-      descFr: "Un échange approfondi pour identifier vos besoins et recevoir des conseils personnalisés, dispensés par un maître ou collaborateur qualifié.",
-      descEn: "An in-depth exchange to identify your needs and receive personalized advice from a master or qualified collaborator.",
+      descFr: "Une session approfondie avec le Cheikh pour évoquer votre situation, identifier les causes spirituelles de vos difficultés, et recevoir une guidance personnalisée ainsi que des azkaar prescrits.",
+      descEn: "An in-depth session with the Sheikh to discuss your situation, identify the spiritual causes behind your difficulties, and receive personalized guidance and prescribed azkaar.",
       eur: 153,
       xof: 100000,
     },
     {
       id: 'lecture',
       icon: getServiceIcon('lecture'),
-      titleFr: "Lecture de l'Âme",
-      titleEn: "Soul Reading",
-      descFr: "Connexion à votre être intérieur pour percevoir l'état profond de votre âme, révéler ses blessures et vous offrir des clés concrètes d'évolution.",
-      descEn: "Connection to your inner being to perceive the deep state of your soul, reveal its wounds, and offer concrete keys to evolution.",
+      titleFr: "Diagnostic Spirituel",
+      titleEn: "Spiritual Diagnosis",
+      descFr: "Une évaluation profonde de votre état intérieur : l'état du cœur, les afflictions spirituelles (mauvais œil, envie, nuisances invisibles), et les blocages qui vous retiennent — avec des étapes claires pour la guérison.",
+      descEn: "A deep assessment of your inner state: the condition of the heart, spiritual afflictions (evil eye, envy, unseen harm), and the blockages holding you back — with clear steps for healing.",
       eur: 230,
       xof: 150000,
     },
     {
       id: 'bilan',
       icon: getServiceIcon('bilan'),
-      titleFr: 'Bilan Énergétique',
-      titleEn: 'Energy Assessment',
-      descFr: "Analyse complète de votre profil vibratoire : taux vibratoire, chakras, nadis, aura et blocages énergétiques pour une cartographie précise.",
-      descEn: "Complete analysis of your vibrational profile: vibrational rate, chakras, nadis, aura and energy blockages for precise mapping.",
+      titleFr: 'Séance de Ruqyah & Purification',
+      titleEn: 'Ruqyah & Purification Session',
+      descFr: "Séance de guérison par la récitation coranique, les Noms Divins et les invocations prescrites, pour purifier et protéger le corps, le foyer et l'âme des influences nuisibles.",
+      descEn: "Healing session through Qur'anic recitation, the Divine Names and prescribed supplications, to cleanse and protect the body, home and soul from harmful influences.",
       eur: 230,
       xof: 150000,
     },
     {
       id: 'livre',
       icon: getServiceIcon('livre'),
-      titleFr: 'Livre de Vie',
-      titleEn: 'Book of Life',
-      descFr: "Document personnalisé de 20 pages révélant qui vous êtes, d'où vous venez, votre mission de vie et les clés pour retrouver harmonie et équilibre.",
-      descEn: "Personalized 20-page document revealing who you are, where you come from, your life mission and the keys to finding harmony and balance.",
+      titleFr: 'Livre de Guidance',
+      titleEn: 'Book of Guidance',
+      descFr: "Un document personnalisé de 20 pages préparé à travers la science des Asraar : votre nature spirituelle, vos forces et épreuves, votre direction de vie, ainsi que les azkaar, versets et pratiques spécifiques prescrits pour votre chemin vers l'harmonie et la réussite.",
+      descEn: "A personalized 20-page document prepared through the science of Asraar: your spiritual nature, your strengths and trials, your life direction, and the specific azkaar, verses and practices prescribed for your path to harmony and success.",
       eur: 460,
       xof: 300000,
       featured: true,
@@ -119,7 +119,7 @@ const ServicesSection = () => {
   const servicesSection = contentData?.payload?.find((section: any) => section.section === 'services');
   const sectionTitle = servicesSection ? (lang === 'fr' ? servicesSection.titleFr : servicesSection.titleEn) : t('Consultations', 'Consultations');
   const sectionSubtitle = servicesSection ? (lang === 'fr' ? servicesSection.subtitleFr : servicesSection.subtitleEn) : t('NOS SERVICES', 'OUR SERVICES');
-  const sectionDescription = servicesSection ? (lang === 'fr' ? servicesSection.descriptionFr : servicesSection.descriptionEn) : t("Des accompagnements sur-mesure pour guérir les maux de l'âme et révéler votre plein potentiel spirituel.", "Tailored support to heal the wounds of the soul and reveal your full spiritual potential.");
+  const sectionDescription = servicesSection ? (lang === 'fr' ? servicesSection.descriptionFr : servicesSection.descriptionEn) : t("Un accompagnement spirituel sur-mesure, ancré dans le Coran, la Sunna et les sciences héritées des Asraar.", "Tailored spiritual guidance rooted in the Qur'an, the Sunnah, and the inherited sciences of Asraar.");
 
   return (
     <section id="services" className="relative py-24 bg-gradient-to-b from-black via-neutral-950 to-black overflow-hidden">

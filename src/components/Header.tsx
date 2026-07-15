@@ -76,7 +76,7 @@ const Header = () => {
                 USRATUL AZKAAR
               </span>
               <p className="text-[10px] text-amber-500/60 tracking-widest">
-                {t('Cabinet de développement spirituel', 'Spiritual Development Practice')}
+                {t('Pratique spirituelle islamique', 'Islamic Spiritual Practice')}
               </p>
             </div>
           </a>

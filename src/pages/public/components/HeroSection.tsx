@@ -21,9 +21,9 @@ const HeroSection = () => {
     // Get home section content from API or use hardcoded fallback
     const homeSection = contentData?.payload?.find((section: any) => section.section === 'home');
     const title = homeSection ? (lang === 'fr' ? homeSection.titleFr : homeSection.titleEn) : 'USRATUL AZKAAR';
-    const subtitle = homeSection ? (lang === 'fr' ? homeSection.subtitleFr : homeSection.subtitleEn) : t('Cabinet digital de développement spirituel', 'Digital Spiritual Development Practice');
-    const description = homeSection ? (lang === 'fr' ? homeSection.descriptionFr : homeSection.descriptionEn) : t("Guérir les maux de l'âme et accompagner chacun dans un voyage profond de connaissance de soi.", "Healing the wounds of the soul and guiding each person on a deep journey of self-discovery.");
-    const ctaText = homeSection ? (lang === 'fr' ? homeSection.ctaTextFr : homeSection.ctaTextEn) : t('Commencer le voyage', 'Begin the journey');
+    const subtitle = homeSection ? (lang === 'fr' ? homeSection.subtitleFr : homeSection.subtitleEn) : t('Pratique spirituelle islamique digitale', 'Digital Islamic Spiritual Practice');
+    const description = homeSection ? (lang === 'fr' ? homeSection.descriptionFr : homeSection.descriptionEn) : t("Faire revivre les sciences sacrées des Asraar et des Azkaar — guérir les cœurs, purifier les âmes, et guider chaque chercheur sur le chemin du rapprochement d'Allah.", "Reviving the sacred sciences of Asraar and Azkaar — healing hearts, purifying souls, and guiding each seeker on the path of nearness to Allah.");
+    const ctaText = homeSection ? (lang === 'fr' ? homeSection.ctaTextFr : homeSection.ctaTextEn) : t('Commencer votre voyage', 'Begin your journey');
     const ctaSecondaryText = homeSection?.metadata?.cta_secondary_text_fr || homeSection?.metadata?.cta_secondary_text_en ? (lang === 'fr' ? homeSection.metadata.cta_secondary_text_fr : homeSection.metadata.cta_secondary_text_en) : t('Découvrir nos services', 'Discover our services');
     const ctaSecondaryLink = homeSection?.metadata?.cta_secondary_link || '#services';
     const contactSection = contentData?.payload?.find((section: any) => section.section === 'contact');
