@@ -26,9 +26,9 @@ const LandingPage = () => {
           <button
             onClick={() => navigate('/login')}
             className="fixed bottom-8 right-8 z-40 px-6 py-3 bg-gradient-to-r from-amber-600 to-amber-800 hover:from-amber-500 hover:to-amber-700 text-white font-medium rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-amber-600/50 hover:scale-105"
-            title="Se connecter"
+            title="Login"
           >
-            Se connecter
+            Login
           </button>
         </div>
 
