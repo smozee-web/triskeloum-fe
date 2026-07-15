@@ -4,8 +4,8 @@ import { useGetLandingPageContentQuery } from '../../../services/api';
 
 const FormationsSection = () => {
   const { lang, t } = useLanguage();
-  const [showXof, setShowXof] = useState(false);
-  const formatPrice = (eur: any, xof: any) => showXof ? `${xof.toLocaleString()} XOF` : `${eur.toLocaleString()} €`;
+  const [showUsd, setShowUsd] = useState(false);
+  const formatPrice = (ghs: any, usd: any) => showUsd ? `$${usd.toLocaleString()}` : `${ghs.toLocaleString()} GHS`;
   const { data: contentData } = useGetLandingPageContentQuery();
 
     // Get contact section content from API or use hardcoded fallback
@@ -38,8 +38,8 @@ const FormationsSection = () => {
       titleEn: 'Classic Training',
       subtitleFr: 'Parcours complet de la science des Asraar',
       subtitleEn: 'Complete path into the science of Asraar',
-      eur: 310,
-      xof: 203000,
+      ghs: 5200,
+      usd: 335,
       periodFr: '/mois',
       periodEn: '/month',
       durationFr: 'Durée indéterminée',
@@ -72,8 +72,8 @@ const FormationsSection = () => {
       titleEn: 'Premium Training',
       subtitleFr: 'Accompagnement intensif et personnalisé',
       subtitleEn: 'Intensive personalized support',
-      eur: 1600,
-      xof: 1050000,
+      ghs: 27000,
+      usd: 1730,
       periodFr: '/mois',
       periodEn: '/month',
       durationFr: 'Engagement 3 ans',
@@ -112,8 +112,8 @@ const FormationsSection = () => {
       titleEn: pack.titleEn || pack.title_en || '',
       subtitleFr: pack.subtitleFr || pack.subtitle_fr || '',
       subtitleEn: pack.subtitleEn || pack.subtitle_en || '',
-      eur: pack.priceEur || pack.price_eur || 0,
-      xof: pack.priceXof || pack.price_xof || 0,
+      ghs: pack.priceGhs || pack.price_ghs || 0,
+      usd: pack.priceUsd || pack.price_usd || 0,
       periodFr: pack.periodFr || pack.period_fr || '/mois',
       periodEn: pack.periodEn || pack.period_en || '/month',
       durationFr: pack.durationFr || pack.duration_fr || '',
@@ -184,14 +184,14 @@ const FormationsSection = () => {
 
           {/* Currency Toggle */}
           <button
-            onClick={() => setShowXof(!showXof)}
+            onClick={() => setShowUsd(!showUsd)}
             className="inline-flex items-center gap-2 px-4 py-2 bg-amber-900/20 border border-amber-600/30 rounded-full text-sm text-amber-400 hover:bg-amber-900/30 transition-colors"
           >
-            <span className={!showXof ? 'font-bold' : 'opacity-60'}>EUR</span>
+            <span className={!showUsd ? 'font-bold' : 'opacity-60'}>GHS</span>
             <div className="w-8 h-4 bg-black/50 rounded-full relative">
-              <div className={`absolute top-0.5 w-3 h-3 bg-amber-500 rounded-full transition-all ${showXof ? 'left-4' : 'left-0.5'}`} />
+              <div className={`absolute top-0.5 w-3 h-3 bg-amber-500 rounded-full transition-all ${showUsd ? 'left-4' : 'left-0.5'}`} />
             </div>
-            <span className={showXof ? 'font-bold' : 'opacity-60'}>XOF</span>
+            <span className={showUsd ? 'font-bold' : 'opacity-60'}>USD</span>
           </button>
         </div>
 
@@ -236,7 +236,7 @@ const FormationsSection = () => {
                 <div className="mb-6 pb-6 border-b border-amber-900/30">
                   <div className="flex items-baseline gap-2">
                     <span className={`text-4xl font-light ${formation.isPremium ? 'text-amber-400' : 'text-white'}`}>
-                      {formatPrice(formation.eur, formation.xof)}
+                      {formatPrice(formation.ghs, formation.usd)}
                     </span>
                     <span className="text-gray-500">{t(formation.periodFr || '/mois', formation.periodEn || '/month')}</span>
                   </div>

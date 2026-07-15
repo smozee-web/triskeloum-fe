@@ -209,8 +209,8 @@ const LandingPageSettings: React.FC = () => {
                     title_en: p.title_en ?? p.titleEn ?? '',
                     subtitle_fr: p.subtitle_fr ?? p.subtitleFr ?? '',
                     subtitle_en: p.subtitle_en ?? p.subtitleEn ?? '',
-                    price_eur: p.price_eur ?? p.priceEur ?? 0,
-                    price_xof: p.price_xof ?? p.priceXof ?? 0,
+                    price_ghs: p.price_ghs ?? p.priceGhs ?? 0,
+                    price_usd: p.price_usd ?? p.priceUsd ?? 0,
                     period_fr: p.period_fr ?? p.periodFr ?? '/mois',
                     period_en: p.period_en ?? p.periodEn ?? '/month',
                     duration_fr: p.duration_fr ?? p.durationFr ?? '',
@@ -243,9 +243,8 @@ const LandingPageSettings: React.FC = () => {
                 description_fr: s.descriptionFr,
                 description_en: s.descriptionEn,
                 icon: s.icon,
-                price_eur: s.priceEur,
+                price_ghs: s.priceGhs,
                 price_usd: s.priceUsd,
-                price_xof: s.priceXof,
                 sort_order: s.sortOrder,
                 is_active: s.isActive,
             })));
@@ -559,9 +558,8 @@ const LandingPageSettings: React.FC = () => {
                 description_fr: service.description_fr,
                 description_en: service.description_en,
                 icon: service.icon,
-                price_eur: service.price_eur,
+                price_ghs: service.price_ghs,
                 price_usd: service.price_usd,
-                price_xof: service.price_xof,
                 sort_order: index + 1,
                 is_active: service.is_active !== undefined ? service.is_active : true,
             };
@@ -622,9 +620,8 @@ const LandingPageSettings: React.FC = () => {
                         description_fr: '',
                         description_en: '',
                         icon: 'consultation',
-                        price_eur: 0,
+                        price_ghs: 0,
                         price_usd: 0,
-                        price_xof: 0,
                         sort_order: services.length + 1,
                         is_active: true,
                     }])}
@@ -736,14 +733,14 @@ const LandingPageSettings: React.FC = () => {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                Price (EUR)
+                                Price (GHS)
                             </label>
                             <input
                                 type="number"
-                                value={service.price_eur}
+                                value={service.price_ghs}
                                 onChange={(e) => {
                                     const updated = [...services];
-                                    updated[index].price_eur = parseFloat(e.target.value);
+                                    updated[index].price_ghs = parseFloat(e.target.value);
                                     setServices(updated);
                                 }}
                                 className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
@@ -759,21 +756,6 @@ const LandingPageSettings: React.FC = () => {
                                 onChange={(e) => {
                                     const updated = [...services];
                                     updated[index].price_usd = parseFloat(e.target.value);
-                                    setServices(updated);
-                                }}
-                                className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                Price (XOF)
-                            </label>
-                            <input
-                                type="number"
-                                value={service.price_xof || 0}
-                                onChange={(e) => {
-                                    const updated = [...services];
-                                    updated[index].price_xof = parseFloat(e.target.value);
                                     setServices(updated);
                                 }}
                                 className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
@@ -941,8 +923,8 @@ const LandingPageSettings: React.FC = () => {
                                 title_en: '',
                                 subtitle_fr: '',
                                 subtitle_en: '',
-                                price_eur: 0,
-                                price_xof: 0,
+                                price_ghs: 0,
+                                price_usd: 0,
                                 period_fr: '/mois',
                                 period_en: '/month',
                                 duration_fr: '',
@@ -1055,14 +1037,14 @@ const LandingPageSettings: React.FC = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                    Price EUR
+                                    Price GHS
                                 </label>
                                 <input
                                     type="number"
-                                    value={pack.price_eur || 0}
+                                    value={pack.price_ghs || 0}
                                     onChange={(e) => {
                                         const updated = [...formationSettings.packs];
-                                        updated[index] = { ...pack, price_eur: parseFloat(e.target.value) || 0 };
+                                        updated[index] = { ...pack, price_ghs: parseFloat(e.target.value) || 0 };
                                         setFormationSettings({ ...formationSettings, packs: updated });
                                     }}
                                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
@@ -1070,14 +1052,14 @@ const LandingPageSettings: React.FC = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                    Price XOF
+                                    Price USD
                                 </label>
                                 <input
                                     type="number"
-                                    value={pack.price_xof || 0}
+                                    value={pack.price_usd || 0}
                                     onChange={(e) => {
                                         const updated = [...formationSettings.packs];
-                                        updated[index] = { ...pack, price_xof: parseFloat(e.target.value) || 0 };
+                                        updated[index] = { ...pack, price_usd: parseFloat(e.target.value) || 0 };
                                         setFormationSettings({ ...formationSettings, packs: updated });
                                     }}
                                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"

@@ -348,8 +348,8 @@ export interface Service {
     titleEn: string;
     descriptionFr: string;
     descriptionEn: string;
-    priceEur: number;
-    priceXof: number;
+    priceGhs: number;
+    priceUsd: number;
     icon: string;
     duration?: string;
 }
@@ -360,8 +360,8 @@ export interface Formation {
     titleEn: string;
     descriptionFr: string;
     descriptionEn: string;
-    priceEur: number;
-    priceXof: number;
+    priceGhs: number;
+    priceUsd: number;
     duration: string;
     features: { fr: string; en: string }[];
     isPremium?: boolean;

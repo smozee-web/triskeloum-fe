@@ -45,7 +45,7 @@ const getServiceIcon = (iconName: string) => {
 const ServicesSection = () => {
   const { lang, t } = useLanguage();
   const [hoveredCard, setHoveredCard] = useState<any>(null);
-  const [showXof, setShowXof] = useState(false);
+  const [showUsd, setShowUsd] = useState(false);
 
   const { data: servicesData, isLoading: servicesLoading } = useGetLandingServicesQuery();
   const { data: contentData } = useGetLandingPageContentQuery();
@@ -53,10 +53,10 @@ const ServicesSection = () => {
   // Get WhatsApp number from contact section
   const contactSection = contentData?.payload?.find((section: any) => section.section === 'contact');
   const whatsappNumber = contactSection?.metadata?.whatsapp || '22890000000';
-  
-  const formatPrice = (eur: any, xof: any) => {
-    if (showXof) return `${xof?.toLocaleString()} XOF`;
-    return `${eur} €`;
+
+  const formatPrice = (ghs: any, usd: any) => {
+    if (showUsd) return `$${usd?.toLocaleString()}`;
+    return `${ghs?.toLocaleString()} GHS`;
   };
 
   // Get services from API or use hardcoded fallback
@@ -68,8 +68,8 @@ const ServicesSection = () => {
     titleEn: service.titleEn,
     descFr: service.descriptionFr,
     descEn: service.descriptionEn,
-    eur: service.priceEur,
-    xof: service.priceXof,
+    ghs: service.priceGhs,
+    usd: service.priceUsd,
     featured: service.sortOrder === 4, // Last service is featured
   })) : [
     {
@@ -79,8 +79,8 @@ const ServicesSection = () => {
       titleEn: 'Consultation',
       descFr: "Une session approfondie avec le Cheikh pour évoquer votre situation, identifier les causes spirituelles de vos difficultés, et recevoir une guidance personnalisée ainsi que des azkaar prescrits.",
       descEn: "An in-depth session with the Sheikh to discuss your situation, identify the spiritual causes behind your difficulties, and receive personalized guidance and prescribed azkaar.",
-      eur: 153,
-      xof: 100000,
+      ghs: 2500,
+      usd: 165,
     },
     {
       id: 'lecture',
@@ -89,8 +89,8 @@ const ServicesSection = () => {
       titleEn: "Spiritual Diagnosis",
       descFr: "Une évaluation profonde de votre état intérieur : l'état du cœur, les afflictions spirituelles (mauvais œil, envie, nuisances invisibles), et les blocages qui vous retiennent — avec des étapes claires pour la guérison.",
       descEn: "A deep assessment of your inner state: the condition of the heart, spiritual afflictions (evil eye, envy, unseen harm), and the blockages holding you back — with clear steps for healing.",
-      eur: 230,
-      xof: 150000,
+      ghs: 3800,
+      usd: 248,
     },
     {
       id: 'bilan',
@@ -99,8 +99,8 @@ const ServicesSection = () => {
       titleEn: 'Ruqyah & Purification Session',
       descFr: "Séance de guérison par la récitation coranique, les Noms Divins et les invocations prescrites, pour purifier et protéger le corps, le foyer et l'âme des influences nuisibles.",
       descEn: "Healing session through Qur'anic recitation, the Divine Names and prescribed supplications, to cleanse and protect the body, home and soul from harmful influences.",
-      eur: 230,
-      xof: 150000,
+      ghs: 3800,
+      usd: 248,
     },
     {
       id: 'livre',
@@ -109,8 +109,8 @@ const ServicesSection = () => {
       titleEn: 'Book of Guidance',
       descFr: "Un document personnalisé de 20 pages préparé à travers la science des Asraar : votre nature spirituelle, vos forces et épreuves, votre direction de vie, ainsi que les azkaar, versets et pratiques spécifiques prescrits pour votre chemin vers l'harmonie et la réussite.",
       descEn: "A personalized 20-page document prepared through the science of Asraar: your spiritual nature, your strengths and trials, your life direction, and the specific azkaar, verses and practices prescribed for your path to harmony and success.",
-      eur: 460,
-      xof: 300000,
+      ghs: 7600,
+      usd: 496,
       featured: true,
     },
   ];
@@ -144,20 +144,20 @@ const ServicesSection = () => {
           
           {/* Currency Toggle */}
           <button
-            onClick={() => setShowXof(!showXof)}
+            onClick={() => setShowUsd(!showUsd)}
             className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-amber-900/20 border border-amber-600/30 rounded-full text-sm text-amber-400 hover:bg-amber-900/30 transition-colors"
           >
-            <span className={!showXof ? 'font-bold' : 'opacity-60'}>EUR</span>
+            <span className={!showUsd ? 'font-bold' : 'opacity-60'}>GHS</span>
             <div className="w-8 h-4 bg-black/50 rounded-full relative">
-              <div className={`absolute top-0.5 w-3 h-3 bg-amber-500 rounded-full transition-all ${showXof ? 'left-4' : 'left-0.5'}`} />
+              <div className={`absolute top-0.5 w-3 h-3 bg-amber-500 rounded-full transition-all ${showUsd ? 'left-4' : 'left-0.5'}`} />
             </div>
-            <span className={showXof ? 'font-bold' : 'opacity-60'}>XOF</span>
+            <span className={showUsd ? 'font-bold' : 'opacity-60'}>USD</span>
           </button>
         </div>
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service: { id: Key | null | undefined; featured: any; icon: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; titleFr: string; titleEn: string; descFr: string; descEn: string; eur: any; xof: any; }, index: number) => (
+          {services.map((service: { id: Key | null | undefined; featured: any; icon: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; titleFr: string; titleEn: string; descFr: string; descEn: string; ghs: any; usd: any; }, index: number) => (
             <div
               key={service.id}
               onMouseEnter={() => setHoveredCard(service.id)}
@@ -194,7 +194,7 @@ const ServicesSection = () => {
               {/* Price */}
               <div className="mb-6">
                 <span className="text-2xl font-light text-amber-400">
-                  {formatPrice(service.eur, service.xof)}
+                  {formatPrice(service.ghs, service.usd)}
                 </span>
               </div>
 
