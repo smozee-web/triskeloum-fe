@@ -48,12 +48,12 @@ const AdminCourseCard: React.FC<AdminCourseCardProps> = ({
                     {course.published ? (
                         <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-green-600 dark:bg-green-700 text-white rounded text-xs font-medium shadow-sm">
                             <EyeIcon className="w-3 h-3" />
-                            Publié
+                            Published
                         </span>
                     ) : (
                         <span className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-gray-600 dark:bg-gray-700 text-white rounded text-xs font-medium shadow-sm">
                             <EyeSlashIcon className="w-3 h-3" />
-                            Brouillon
+                            Draft
                         </span>
                     )}
                 </div>
@@ -93,7 +93,7 @@ const AdminCourseCard: React.FC<AdminCourseCardProps> = ({
                     <button
                         onClick={() => onView(course)}
                         className="flex-1 flex items-center justify-center gap-1 px-2 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
-                        title="Voir les détails"
+                        title="View details"
                     >
                         <EyeIcon className="w-3.5 h-3.5" />
                     </button>
@@ -104,7 +104,7 @@ const AdminCourseCard: React.FC<AdminCourseCardProps> = ({
                                 ? 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                                 : 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/40'
                         }`}
-                        title={course.published ? 'Dépublier' : 'Publier'}
+                        title={course.published ? 'Unpublish' : 'Publish'}
                     >
                         {course.published ? (
                             <EyeSlashIcon className="w-3.5 h-3.5" />
@@ -115,14 +115,14 @@ const AdminCourseCard: React.FC<AdminCourseCardProps> = ({
                     <button
                         onClick={() => onEdit(course)}
                         className="flex-1 flex items-center justify-center gap-1 px-2 py-1.5 bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors"
-                        title="Éditer"
+                        title="Edit"
                     >
                         <PencilIcon className="w-3.5 h-3.5" />
                     </button>
                     <button
                         onClick={() => onDelete(course)}
                         className="flex-1 flex items-center justify-center gap-1 px-2 py-1.5 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
-                        title="Supprimer"
+                        title="Delete"
                     >
                         <TrashIcon className="w-3.5 h-3.5" />
                     </button>

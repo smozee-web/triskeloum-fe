@@ -23,24 +23,24 @@ const CourseHeader: React.FC<CourseHeaderProps> = ({ course }) => {
                 )}
                 <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
 
-                {/* Badges flottants */}
+                {/* Floating badges */}
                 <div className="absolute top-6 right-6 flex space-x-3">
                     <StatusBadge published={course.published} />
                     {course.levels?.[0] && <LevelBadge level={course.levels[0]} />}
                 </div>
             </div>
 
-            {/* Contenu superposé */}
+            {/* Overlaid content */}
             <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
                 <div className="max-w-4xl">
-                    {/* Catégorie */}
+                    {/* Category */}
                     {course.category && (
                         <span className="inline-block px-3 py-1 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black text-sm font-medium rounded-full mb-3">
                             {course.category.title}
                         </span>
                     )}
 
-                    {/* Titre */}
+                    {/* Title */}
                     <h1 className="text-3xl md:text-4xl font-bold mb-3"
                         style={{
                             background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
@@ -50,7 +50,7 @@ const CourseHeader: React.FC<CourseHeaderProps> = ({ course }) => {
                         {course.title}
                     </h1>
 
-                    {/* Métadonnées */}
+                    {/* Metadata */}
                     <div className="flex items-center space-x-6 text-white text-sm">
                         <div className="flex items-center space-x-2">
                             <span>⏱️</span>
@@ -63,7 +63,7 @@ const CourseHeader: React.FC<CourseHeaderProps> = ({ course }) => {
                         <div className="flex items-center space-x-2">
                             <span>📅</span>
                             <span>
-                                Créé le {new Date(course.created_at).toLocaleDateString('fr-FR')}
+                                Created on {new Date(course.created_at).toLocaleDateString('en-US')}
                             </span>
                         </div>
                     </div>

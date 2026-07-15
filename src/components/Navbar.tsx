@@ -22,18 +22,18 @@ const Navbar: React.FC = () => {
       localStorage.removeItem('userEmail');
       localStorage.removeItem('userId');
       localStorage.removeItem('userRole');
-      toast.success('Déconnexion réussie');
+      toast.success('Logged out successfully');
       navigate('/login');
     } catch (error) {
       console.error('Logout error:', error);
-      toast.error('Erreur lors de la déconnexion');
+      toast.error('Error logging out');
     }
   };
 
   const getUserMenuItems = (): MenuProps['items'] => [
     {
       key: 'settings',
-      label: 'Paramètres',
+      label: 'Settings',
       icon: <SettingOutlined />,
       onClick: () => navigate('/admin/settings'),
     },
@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
     },
     {
       key: 'logout',
-      label: 'Déconnexion',
+      label: 'Logout',
       icon: <LogoutOutlined />,
       onClick: handleLogout,
       danger: true,

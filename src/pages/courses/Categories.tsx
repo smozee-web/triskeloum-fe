@@ -89,13 +89,13 @@ const Categories: React.FC = () => {
                     formData,
                     (progress) => setUploadProgress(progress)
                 );
-                toast.success('Catégorie modifiée avec succès');
+                toast.success('Category updated successfully');
             } else {
                 await uploadService.createCategory(
                     formData,
                     (progress) => setUploadProgress(progress)
                 );
-                toast.success('Catégorie créée avec succès');
+                toast.success('Category created successfully');
             }
 
             setIsModalOpen(false);
@@ -104,7 +104,7 @@ const Categories: React.FC = () => {
             refetchStats();
         } catch (error: any) {
             console.error('Upload error:', error);
-            const message = error.response?.data?.message || 'Une erreur est survenue lors de l\'upload';
+            const message = error.response?.data?.message || 'An error occurred during the upload';
             toast.error(message);
         } finally {
             setIsUploading(false);
@@ -117,12 +117,12 @@ const Categories: React.FC = () => {
 
         try {
             await deleteCategory(selectedCategory.id).unwrap();
-            toast.success('Catégorie supprimée avec succès');
+            toast.success('Category deleted successfully');
             setIsDeleteModalOpen(false);
             setSelectedCategory(null);
             refetchStats();
         } catch (error: any) {
-            toast.error(error?.data?.message || 'Une erreur est survenue');
+            toast.error(error?.data?.message || 'An error occurred');
         }
     };
 
@@ -137,9 +137,9 @@ const Categories: React.FC = () => {
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
                     <div>
-                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Catégories</h1>
+                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Categories</h1>
                         <p className="text-gray-600 mt-1 text-sm sm:text-base">
-                            Gérez les catégories de cours
+                            Manage course categories
                         </p>
                     </div>
                     <button
@@ -147,7 +147,7 @@ const Categories: React.FC = () => {
                         className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors shadow-md w-full sm:w-auto justify-center sm:justify-start"
                     >
                         <PlusIcon className="w-5 h-5 mr-2" />
-                        Nouvelle catégorie
+                        New category
                     </button>
                 </div>
 
@@ -165,7 +165,7 @@ const Categories: React.FC = () => {
                     <SearchBar
                         value={search}
                         onChange={setSearch}
-                        placeholder="Rechercher une catégorie..."
+                        placeholder="Search for a category..."
                     />
                 </div>
 
@@ -209,7 +209,7 @@ const Categories: React.FC = () => {
                 {isUploading && uploadProgress > 0 && (
                     <div className="fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-xl border border-gray-200 z-50">
                         <p className="text-sm font-medium text-gray-900 mb-2">
-                            Upload en cours...
+                            Upload in progress...
                         </p>
                         <div className="w-64 bg-gray-200 rounded-full h-2.5 overflow-hidden">
                             <div 

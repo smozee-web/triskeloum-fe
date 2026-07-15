@@ -48,7 +48,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
         }
     });
 
-    // Initialiser le formulaire avec les données du cours existant (édition)
+    // Initialize the form with the existing course data (edit mode)
     useEditCourseInitialization({
         initialData,
         setValue: methods.setValue,
@@ -57,20 +57,20 @@ const CourseForm: React.FC<CourseFormProps> = ({
         setSectionCoverPreviews
     });
 
-    // Vérifier brouillon au montage
+    // Check for draft on mount
     useEffect(() => {
         if (!initialData && hasDraft) {
             setShowDraftPrompt(true);
         }
     }, []);
 
-    // Restaurer brouillon
+    // Restore draft
     const handleRestoreDraft = async () => {
         const draft = await loadDraft();
         if (draft) {
             const { data, files } = draft;
 
-            // Restaurer formulaire
+            // Restore form
             Object.keys(data).forEach(key => {
                 if (key !== 'sections' && key !== 'coverPreview' && key !== 'sectionCoverPreviews' && key !== 'timestamp') {
                     methods.setValue(key as any, data[key]);
@@ -81,7 +81,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
             setCoverPreview(data.coverPreview || null);
             setSectionCoverPreviews(data.sectionCoverPreviews || {});
 
-            // Restaurer fichiers
+            // Restore files
             if (files['mainCover']) {
                 setMainCoverFile(files['mainCover']);
             }
@@ -95,7 +95,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
             });
             setSectionCoverFiles(sectionFiles);
 
-            toast.success('Brouillon restauré');
+            toast.success('Draft restored');
         }
         setShowDraftPrompt(false);
     };
@@ -105,7 +105,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
         setShowDraftPrompt(false);
     };
 
-    // Préparer données pour auto-save
+    // Prepare data for auto-save
     const formValues = methods.watch();
 
     const draftData = useMemo(() => ({
@@ -123,14 +123,14 @@ const CourseForm: React.FC<CourseFormProps> = ({
         }), {})
     }), [mainCoverFile, sectionCoverFiles]);
 
-    // Auto-save (désactivé en mode édition)
+    // Auto-save (disabled in edit mode)
     const { isSaving: isAutoSaving } = useAutoSave(
         draftData,
         allFiles,
         {
             onSave: saveDraft,
             delay: 3000,
-            enabled: !initialData // Seulement en mode création
+            enabled: !initialData // Only in creation mode
         }
     );
 
@@ -145,16 +145,16 @@ const CourseForm: React.FC<CourseFormProps> = ({
             formData.append('category', data.category.toString());
             formData.append('published', data.published ? 'true' : 'false');
 
-            // Ajouter le fichier de couverture principal uniquement s'il y a un nouveau fichier
+            // Add the main cover file only if there is a new file
             if (mainCoverFile) {
                 formData.append('file', mainCoverFile);
             }
 
-            // Gérer le contenu: soit sections, soit media
+            // Handle content: either sections or media
             if (contentType === 'media' && mediaFile) {
                 formData.append('courseMedia', mediaFile);
             } else if (contentType === 'sections') {
-                // Ajouter les fichiers de couverture des sections
+                // Add the section cover files
                 Object.entries(sectionCoverFiles).forEach(([index, file]) => {
                     formData.append(`section_cover_${index}`, file);
                 });
@@ -164,13 +164,13 @@ const CourseForm: React.FC<CourseFormProps> = ({
                 }
             }
 
-            // Appel API unique via onSubmit (gérée par la page parent)
+            // Single API call via onSubmit (handled by the parent page)
             await onSubmit(formData);
             await clearDraft();
             onCancel();
         } catch (error: any) {
-            console.error('Erreur:', error);
-            toast.error(error?.response?.data?.message || 'Erreur lors de l\'enregistrement');
+            console.error('Error:', error);
+            toast.error(error?.response?.data?.message || 'Error while saving');
         } finally {
             setUploadProgress(0);
         }
@@ -178,10 +178,10 @@ const CourseForm: React.FC<CourseFormProps> = ({
 
     const handleCancel = async () => {
         if (!initialData && (formValues.title || sections.length > 0)) {
-            const shouldSave = window.confirm('Voulez-vous sauvegarder un brouillon avant de quitter ?');
+            const shouldSave = window.confirm('Do you want to save a draft before leaving?');
             if (shouldSave) {
                 await saveDraft(draftData, allFiles);
-                toast.success('Brouillon sauvegardé');
+                toast.success('Draft saved');
             }
         }
         onCancel();
@@ -189,26 +189,26 @@ const CourseForm: React.FC<CourseFormProps> = ({
 
     return (
         <>
-            {/* Prompt restauration brouillon */}
+            {/* Draft restore prompt */}
             {showDraftPrompt && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-black/70 backdrop-blur-sm">
                     <div className="bg-white dark:bg-bg-tertiary rounded-lg p-6 max-w-md mx-4 shadow-xl border border-gray-200 dark:border-gray-800">
-                        <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-text-primary">Brouillon détecté</h3>
+                        <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-text-primary">Draft detected</h3>
                         <p className="text-gray-600 dark:text-text-secondary mb-4">
-                            Un brouillon de cours a été trouvé. Voulez-vous le restaurer ?
+                            A course draft was found. Do you want to restore it?
                         </p>
                         <div className="flex space-x-3">
                             <button
                                 onClick={handleRestoreDraft}
                                 className="flex-1 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-md hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors"
                             >
-                                Restaurer
+                                Restore
                             </button>
                             <button
                                 onClick={handleDiscardDraft}
                                 className="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-text-primary rounded-md hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
                             >
-                                Ignorer
+                                Discard
                             </button>
                         </div>
                     </div>
@@ -217,20 +217,20 @@ const CourseForm: React.FC<CourseFormProps> = ({
 
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onFormSubmit)} className="space-y-8">
-                    {/* Indicateur de sauvegarde */}
+                    {/* Save indicator */}
                     {!initialData && (isAutoSaving || isSaving) && (
                         <div className="flex items-center justify-end space-x-2 text-sm text-amber-700 dark:text-amber-400">
                             <CloudArrowUpIcon className="w-4 h-4 animate-pulse" />
-                            <span>Sauvegarde automatique...</span>
+                            <span>Auto-saving...</span>
                         </div>
                     )}
 
-                    {/* Barre de progression upload */}
+                    {/* Upload progress bar */}
                     {uploadProgress > 0 && uploadProgress < 100 && (
                         <div className="bg-gradient-to-br from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 rounded-lg p-4 border border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
                             <div className="flex items-center justify-between mb-2">
                                 <span className="text-sm font-medium text-gray-900 dark:text-text-primary">
-                                    Upload en cours...
+                                    Upload in progress...
                                 </span>
                                 <span className="text-sm font-medium text-amber-700 dark:text-amber-400">
                                     {uploadProgress}%
@@ -255,7 +255,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
 
                     {/* Content Type Toggle */}
                     <div className="bg-gradient-to-br from-[#D4AF37]/5 to-[#FFD700]/5 dark:from-[#D4AF37]/10 dark:to-[#FFD700]/10 rounded-lg p-4 space-y-4 border border-[#D4AF37]/20 dark:border-[#D4AF37]/30">
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Type de contenu</h3>
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Content type</h3>
                         <div className="flex gap-4">
                             <label className="flex items-center cursor-pointer">
                                 <input
@@ -265,7 +265,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
                                     onChange={(e) => setContentType(e.target.value as 'sections' | 'media')}
                                     className="h-4 w-4 text-amber-600 dark:text-amber-500 focus:ring-amber-500"
                                 />
-                                <span className="ml-2 text-gray-700 dark:text-text-secondary">Sections structurées</span>
+                                <span className="ml-2 text-gray-700 dark:text-text-secondary">Structured sections</span>
                             </label>
                             <label className="flex items-center cursor-pointer">
                                 <input
@@ -275,7 +275,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
                                     onChange={(e) => setContentType(e.target.value as 'sections' | 'media')}
                                     className="h-4 w-4 text-amber-600 dark:text-amber-500 focus:ring-amber-500"
                                 />
-                                <span className="ml-2 text-gray-700 dark:text-text-secondary">Audio/Vidéo direct</span>
+                                <span className="ml-2 text-gray-700 dark:text-text-secondary">Direct Audio/Video</span>
                             </label>
                         </div>
 
@@ -283,7 +283,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
                         {contentType === 'media' && (
                             <div className="border-t border-[#D4AF37]/20 dark:border-[#D4AF37]/30 pt-4 mt-4">
                                 <label htmlFor="courseMedia" className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                    Upload Audio ou Vidéo
+                                    Upload Audio or Video
                                 </label>
                                 <div className="flex items-center space-x-4">
                                     <input
@@ -297,7 +297,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
                                                     setMediaFile(file);
                                                     setMediaPreview(`${file.type.split('/')[0]}: ${file.name}`);
                                                 } else {
-                                                    toast.error('Veuillez sélectionner un fichier audio ou vidéo');
+                                                    toast.error('Please select an audio or video file');
                                                 }
                                             }
                                         }}
@@ -309,7 +309,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
                                         </div>
                                     )}
                                 </div>
-                                {!mediaFile && <p className="text-xs text-red-600 dark:text-red-400 mt-1">Un fichier audio ou vidéo est requis</p>}
+                                {!mediaFile && <p className="text-xs text-red-600 dark:text-red-400 mt-1">An audio or video file is required</p>}
                             </div>
                         )}
                     </div>
@@ -334,14 +334,14 @@ const CourseForm: React.FC<CourseFormProps> = ({
                             className="px-6 py-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-text-primary bg-white dark:bg-bg-secondary rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                             disabled={isSubmitting}
                         >
-                            Annuler
+                            Cancel
                         </button>
                         <button
                             type="submit"
                             className="px-6 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-md hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={isSubmitting || uploadProgress > 0}
                         >
-                            {isSubmitting ? 'Enregistrement...' : initialData ? 'Mettre à jour' : 'Créer le cours'}
+                            {isSubmitting ? 'Saving...' : initialData ? 'Update' : 'Create course'}
                         </button>
                     </div>
                 </form>

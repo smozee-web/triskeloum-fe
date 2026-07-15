@@ -27,7 +27,7 @@ const UsersByLevelChart: React.FC<UsersByLevelChartProps> = ({ data }) => {
             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent dark:from-amber-500/5 dark:to-transparent pointer-events-none" />
             <div className="relative z-10">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-4">
-                    Répartition par niveau
+                    Distribution by level
                 </h3>
             <ResponsiveContainer width="100%" height={300}>
                 <PieChart>

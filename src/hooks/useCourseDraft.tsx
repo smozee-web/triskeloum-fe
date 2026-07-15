@@ -18,8 +18,8 @@ export const useCourseDraft = () => {
       setIsDraftLoaded(true);
       return draft;
     } catch (error) {
-      console.error('Erreur lors du chargement du brouillon:', error);
-      toast.error('Erreur lors du chargement du brouillon');
+      console.error('Error while loading the draft:', error);
+      toast.error('Error while loading the draft');
       return null;
     }
   }, []);
@@ -30,7 +30,7 @@ export const useCourseDraft = () => {
       await courseDraftService.saveDraft(data, files);
       setHasDraft(true);
     } catch (error) {
-      console.error('Erreur lors de la sauvegarde du brouillon:', error);
+      console.error('Error while saving the draft:', error);
     } finally {
       setIsSaving(false);
     }
@@ -40,10 +40,10 @@ export const useCourseDraft = () => {
     try {
       await courseDraftService.clearDraft();
       setHasDraft(false);
-      toast.success('Brouillon supprimé');
+      toast.success('Draft deleted');
     } catch (error) {
-      console.error('Erreur lors de la suppression du brouillon:', error);
-      toast.error('Erreur lors de la suppression du brouillon');
+      console.error('Error while deleting the draft:', error);
+      toast.error('Error while deleting the draft');
     }
   }, []);
 

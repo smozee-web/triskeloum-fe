@@ -27,7 +27,7 @@ interface CourseDraftData {
         
         localStorage.setItem(this.DRAFT_KEY, JSON.stringify(draftData));
       } catch (error) {
-        console.error('Erreur lors de la sauvegarde du brouillon:', error);
+        console.error('Error while saving the draft:', error);
       }
     }
   
@@ -47,7 +47,7 @@ interface CourseDraftData {
   
         return draft;
       } catch (error) {
-        console.error('Erreur lors de la récupération du brouillon:', error);
+        console.error('Error while retrieving the draft:', error);
         return null;
       }
     }

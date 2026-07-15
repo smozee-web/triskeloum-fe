@@ -547,7 +547,7 @@ export default function CRMPage() {
         } catch (error) {
             console.error('❌ Error sending message:', error);
             setMessages(prev => prev.filter(m => m.id !== tempMessage.id));
-            toast.error('Erreur lors de l\'envoi du message', { duration: 8000 });
+            toast.error('Error while sending the message', { duration: 8000 });
         } finally {
             setIsSending(false);
         }
@@ -610,7 +610,7 @@ export default function CRMPage() {
     const getRoomDisplayName = (room: Room): string => {
         if (room.isDirect) {
             const otherU = room.users.find(u => u.id !== currentUser?.id);
-            return otherU ? `${otherU.firstname} ${otherU.lastname}` : 'Utilisateur inconnu';
+            return otherU ? `${otherU.firstname} ${otherU.lastname}` : 'Unknown user';
         }
         return room.name;
     };
@@ -648,7 +648,7 @@ export default function CRMPage() {
                         <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-600" />
                         <input
                             type="text"
-                            placeholder="Rechercher..."
+                            placeholder="Search..."
                             className="w-full pl-9 pr-4 py-2 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-text-primary focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
@@ -665,8 +665,8 @@ export default function CRMPage() {
                     ) : filteredRooms.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-full px-4 text-center">
                             <ChatBubbleLeftRightIcon className="w-12 h-12 text-gray-300 dark:text-gray-700 mb-3" />
-                            <p className="font-medium text-gray-600 dark:text-text-secondary text-sm">Aucune conversation</p>
-                            <p className="text-xs text-gray-400 dark:text-text-tertiary mt-1">Commencez une nouvelle discussion</p>
+                            <p className="font-medium text-gray-600 dark:text-text-secondary text-sm">No conversation</p>
+                            <p className="text-xs text-gray-400 dark:text-text-tertiary mt-1">Start a new discussion</p>
                         </div>
                     ) : (
                         <div className="p-2">
@@ -729,7 +729,7 @@ export default function CRMPage() {
                                                         lastMessage.user.id === currentUser?.id
                                                             ? `Vous: ${lastMessage.content}`
                                                             : lastMessage.content
-                                                    ) : 'Aucun message'}
+                                                    ) : 'No message'}
                                                 </p>
                                             </div>
                                         </div>
@@ -770,7 +770,7 @@ export default function CRMPage() {
                                         ? 'bg-green-100 dark:bg-green-900/30 hover:bg-green-200 dark:hover:bg-green-900/40 text-green-600 dark:text-green-400'
                                         : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-text-secondary'
                                 }`}
-                                title={isVoiceRoomActive ? 'Raccrocher' : 'Démarrer un appel vocal'}
+                                title={isVoiceRoomActive ? 'Hang up' : 'Start a voice call'}
                             >
                                 <PhoneIcon className="w-5 h-5" />
                             </button>
@@ -793,8 +793,8 @@ export default function CRMPage() {
                         {messages.length === 0 ? (
                             <div className="flex flex-col items-center justify-center h-full">
                                 <ChatBubbleLeftRightIcon className="w-16 h-16 text-gray-200 dark:text-gray-700 mb-4" />
-                                <p className="font-medium text-gray-600 dark:text-text-secondary">Début de la conversation</p>
-                                <p className="text-sm text-gray-400 dark:text-text-tertiary mt-1">Envoyez un message pour démarrer</p>
+                                <p className="font-medium text-gray-600 dark:text-text-secondary">Start of the conversation</p>
+                                <p className="text-sm text-gray-400 dark:text-text-tertiary mt-1">Send a message to get started</p>
                             </div>
                         ) : (
                             messages.map((msg, idx) => {
@@ -840,7 +840,7 @@ export default function CRMPage() {
                                                         onClick={() => window.location.href = '/admin/voice-rooms'}
                                                         className="w-full mt-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
                                                     >
-                                                        Voir le salon
+                                                        View room
                                                     </button>
                                                 </div>
                                             )}
@@ -972,7 +972,7 @@ export default function CRMPage() {
                                 onClick={() => fileInputRef.current?.click()}
                                 disabled={isSending}
                                 className="px-3 py-2 text-gray-600 dark:text-text-secondary hover:text-gray-800 dark:hover:text-text-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                                title="Ajouter un fichier"
+                                title="Add a file"
                             >
                                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
@@ -980,7 +980,7 @@ export default function CRMPage() {
                             </button>
                             <input
                                 type="text"
-                                placeholder="Écrivez un message..."
+                                placeholder="Write a message..."
                                 className="flex-1 px-4 py-2 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-text-primary focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent"
                                 value={messageInput}
                                 onChange={(e) => setMessageInput(e.target.value)}
@@ -996,7 +996,7 @@ export default function CRMPage() {
                                 ) : (
                                     <>
                                         <PaperAirplaneIcon className="w-4 h-4" />
-                                        <span>Envoyer</span>
+                                        <span>Send</span>
                                     </>
                                 )}
                             </button>
@@ -1016,8 +1016,8 @@ export default function CRMPage() {
                     <div className="p-6 rounded-full bg-gradient-to-br from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 mb-4">
                         <ChatBubbleLeftRightIcon className="w-16 h-16 text-gray-300 dark:text-gray-700" />
                     </div>
-                    <p className="text-lg font-semibold text-black dark:text-text-primary mb-2">Aucune conversation sélectionnée</p>
-                    <p className="text-sm text-gray-500 dark:text-text-tertiary">Choisissez une conversation pour commencer</p>
+                    <p className="text-lg font-semibold text-black dark:text-text-primary mb-2">No conversation selected</p>
+                    <p className="text-sm text-gray-500 dark:text-text-tertiary">Choose a conversation to get started</p>
                 </div>
             )}
 

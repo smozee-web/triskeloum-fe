@@ -53,9 +53,9 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
         const newErrors: { title?: string; cover?: string } = {};
 
         if (!title.trim()) {
-            newErrors.title = 'Le titre est requis';
+            newErrors.title = 'Title is required';
         } else if (title.length < 3) {
-            newErrors.title = 'Le titre doit contenir au moins 3 caractères';
+            newErrors.title = 'Title must contain at least 3 characters';
         }
 
         setErrors(newErrors);
@@ -69,19 +69,19 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
             // Vérifier le type de fichier
             const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
             if (!allowedTypes.includes(file.type)) {
-                setErrors(prev => ({ 
-                    ...prev, 
-                    cover: 'Le fichier doit être une image (JPEG, PNG, WEBP)' 
+                setErrors(prev => ({
+                    ...prev,
+                    cover: 'The file must be an image (JPEG, PNG, WEBP)'
                 }));
                 return;
             }
 
-            // Vérifier la taille (ex: max 5MB)
+            // Check size (e.g. max 5MB)
             const maxSize = 5 * 1024 * 1024; // 5MB
             if (file.size > maxSize) {
-                setErrors(prev => ({ 
-                    ...prev, 
-                    cover: 'La taille du fichier ne doit pas dépasser 5MB' 
+                setErrors(prev => ({
+                    ...prev,
+                    cover: 'The file size must not exceed 5MB'
                 }));
                 return;
             }
@@ -136,7 +136,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
                     {/* Header */}
                     <div className="flex items-center justify-between p-6 border-b border-gray-200">
                         <h3 className="text-xl font-semibold text-gray-900">
-                            {category ? 'Modifier la catégorie' : 'Nouvelle catégorie'}
+                            {category ? 'Edit category' : 'New category'}
                         </h3>
                         <button
                             onClick={onClose}
@@ -152,7 +152,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
                         {/* Title */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Titre <span className="text-red-500">*</span>
+                                Title <span className="text-red-500">*</span>
                             </label>
                             <input
                                 type="text"
@@ -166,7 +166,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
                                 className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
                                     errors.title ? 'border-red-500' : 'border-gray-300'
                                 }`}
-                                placeholder="Ex: Développement Web"
+                                placeholder="Ex: Web Development"
                                 disabled={isLoading}
                             />
                             {errors.title && (
@@ -177,7 +177,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
                         {/* Cover Upload */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Image de couverture
+                                Cover image
                             </label>
                             
                             {/* Upload Area */}
@@ -201,7 +201,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
                                     >
                                         <PhotoIcon className="w-10 h-10 text-gray-400 mb-2" />
                                         <p className="text-sm text-gray-600">
-                                            Cliquez pour choisir une image
+                                            Click to choose an image
                                         </p>
                                         <p className="text-xs text-gray-500 mt-1">
                                             JPEG, PNG, WEBP (max 5MB)
@@ -233,7 +233,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
                                 <p className="mt-1 text-sm text-red-600">{errors.cover}</p>
                             )}
                             <p className="mt-1 text-xs text-gray-500">
-                                Optionnel - Une image par défaut sera utilisée si aucune image n'est fournie
+                                Optional - A default image will be used if no image is provided
                             </p>
                         </div>
 
@@ -245,7 +245,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
                                 className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 disabled={isLoading}
                             >
-                                Annuler
+                                Cancel
                             </button>
                             <button
                                 type="submit"
@@ -258,10 +258,10 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
                                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                                         </svg>
-                                        En cours...
+                                        Processing...
                                     </span>
                                 ) : (
-                                    category ? 'Modifier' : 'Créer'
+                                    category ? 'Update' : 'Create'
                                 )}
                             </button>
                         </div>

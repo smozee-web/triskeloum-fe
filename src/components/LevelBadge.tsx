@@ -33,26 +33,26 @@ const LevelBadge: React.FC<LevelBadgeProps> = ({
     lg: 'w-5 h-5'
   };
 
-  // Configuration des niveaux basée sur le rank
+  // Level configuration based on rank
   const getLevelConfig = (rank: number) => {
     switch (rank) {
       case 1:
         return {
           color: 'bg-blue-50 text-blue-700 border-blue-200',
           icon: '🟦',
-          label: 'Débutant'
+          label: 'Beginner'
         };
       case 2:
         return {
           color: 'bg-purple-50 text-purple-700 border-purple-200',
           icon: '🟪',
-          label: 'Intermédiaire'
+          label: 'Intermediate'
         };
       case 3:
         return {
           color: 'bg-orange-50 text-orange-700 border-orange-200',
           icon: '🟧',
-          label: 'Avancé'
+          label: 'Advanced'
         };
       case 4:
         return {
@@ -64,13 +64,13 @@ const LevelBadge: React.FC<LevelBadgeProps> = ({
         return {
           color: 'bg-gray-50 text-gray-700 border-gray-200',
           icon: '⚪',
-          label: 'Non défini'
+          label: 'Not defined'
         };
     }
   };
 
   const levelConfig = getLevelConfig(level?.rank || 0);
-  const displayName = level?.name || 'Non défini';
+  const displayName = level?.name || 'Not defined';
 
   return (
     <span
@@ -79,7 +79,7 @@ const LevelBadge: React.FC<LevelBadgeProps> = ({
         ${sizeClasses[size]}
         ${levelConfig.color}
       `}
-      title={`Niveau ${level?.rank} - ${levelConfig.label}`}
+      title={`Level ${level?.rank} - ${levelConfig.label}`}
     >
       {showIcon && (
         <span className={iconSize[size]}>
@@ -87,14 +87,14 @@ const LevelBadge: React.FC<LevelBadgeProps> = ({
         </span>
       )}
       <span>
-        {showRank && level?.rank && `Niv. ${level.rank} - `}
+        {showRank && level?.rank && `Lvl. ${level.rank} - `}
         {displayName}
       </span>
     </span>
   );
 };
 
-// Version simplifiée pour les cas courants
+// Simplified version for common cases
 export const SimpleLevelBadge: React.FC<{ rank: number; size?: 'sm' | 'md' | 'lg' }> = ({ 
   rank, 
   size = 'md' 
@@ -106,14 +106,14 @@ export const SimpleLevelBadge: React.FC<{ rank: number; size?: 'sm' | 'md' | 'lg
   };
 
   const levelConfig = {
-    1: { color: 'bg-blue-100 text-blue-800 border-blue-300', label: 'Niv. 1' },
-    2: { color: 'bg-purple-100 text-purple-800 border-purple-300', label: 'Niv. 2' },
-    3: { color: 'bg-orange-100 text-orange-800 border-orange-300', label: 'Niv. 3' },
-    4: { color: 'bg-red-100 text-red-800 border-red-300', label: 'Niv. 4' }
+    1: { color: 'bg-blue-100 text-blue-800 border-blue-300', label: 'Lvl. 1' },
+    2: { color: 'bg-purple-100 text-purple-800 border-purple-300', label: 'Lvl. 2' },
+    3: { color: 'bg-orange-100 text-orange-800 border-orange-300', label: 'Lvl. 3' },
+    4: { color: 'bg-red-100 text-red-800 border-red-300', label: 'Lvl. 4' }
   };
 
-  const config = levelConfig[rank as keyof typeof levelConfig] || 
-    { color: 'bg-gray-100 text-gray-800 border-gray-300', label: `Niv. ${rank}` };
+  const config = levelConfig[rank as keyof typeof levelConfig] ||
+    { color: 'bg-gray-100 text-gray-800 border-gray-300', label: `Lvl. ${rank}` };
 
   return (
     <span

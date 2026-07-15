@@ -48,16 +48,16 @@ const Sidebar = () => {
 
   const menuItems: MenuItem[] = [
     { key: '1', icon: <DashboardOutlined />, label: 'Dashboard', path: '/admin' },
-    { key: '2', icon: <TeamOutlined />, label: 'Utilisateurs', path: '/admin/users' },
-    { key: '3', icon: <BarsOutlined />, label: 'Niveaux', path: '/admin/levels' },
-    { key: '4', icon: <BookOutlined />, label: 'Cours', path: '/admin/courses/list' },
-    { key: '5', icon: <FireOutlined />, label: 'Exercices', path: '/admin/courses/exercises' },
+    { key: '2', icon: <TeamOutlined />, label: 'Users', path: '/admin/users' },
+    { key: '3', icon: <BarsOutlined />, label: 'Levels', path: '/admin/levels' },
+    { key: '4', icon: <BookOutlined />, label: 'Courses', path: '/admin/courses/list' },
+    { key: '5', icon: <FireOutlined />, label: 'Exercises', path: '/admin/courses/exercises' },
     { key: '6', icon: <MessageOutlined />, label: 'Chat', path: '/admin/crm' },
-    { key: '7', icon: <AudioOutlined />, label: 'Salons', path: '/admin/voice-rooms' },
+    { key: '7', icon: <AudioOutlined />, label: 'Rooms', path: '/admin/voice-rooms' },
     { key: '8', icon: <VideoCameraOutlined />, label: 'Reels', path: '/admin/courses/reels' },
-    { key: '9', icon: <FileTextOutlined />, label: 'Citations', path: '/admin/courses/quotes' },
+    { key: '9', icon: <FileTextOutlined />, label: 'Quotes', path: '/admin/courses/quotes' },
     { key: '10', icon: <QuestionCircleOutlined />, label: 'FAQs', path: '/admin/courses/faqs' },
-    { key: '11', icon: <GlobalOutlined />, label: 'Page d\'accueil', path: '/admin/landing-page-settings' },
+    { key: '11', icon: <GlobalOutlined />, label: 'Homepage', path: '/admin/landing-page-settings' },
   ];
 
   const handleMenuClick = (item: MenuItem) => {

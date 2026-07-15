@@ -11,7 +11,7 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({
     value,
     onChange,
-    placeholder = 'Rechercher une catégorie...'
+    placeholder = 'Search for a category...'
 }) => {
     return (
         <div className="relative">

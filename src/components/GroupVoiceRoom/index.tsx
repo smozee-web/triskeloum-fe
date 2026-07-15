@@ -218,7 +218,7 @@ export const GroupVoiceRoom: React.FC<GroupVoiceRoomProps> = ({ voiceRoomId, onC
       await notifyJoinRoom();
     } catch (err) {
       console.error('❌ Error:', err);
-      setError('Impossible de rejoindre le salon vocal');
+      setError('Unable to join the voice room');
       setIsLoading(false);
     }
   };
@@ -326,7 +326,7 @@ export const GroupVoiceRoom: React.FC<GroupVoiceRoomProps> = ({ voiceRoomId, onC
       }
     } catch (err: any) {
       console.error('Error starting recording:', err);
-      alert(err.message || 'Impossible de démarrer l\'enregistrement');
+      alert(err.message || 'Unable to start recording');
       throw err;
     }
   };
@@ -350,7 +350,7 @@ export const GroupVoiceRoom: React.FC<GroupVoiceRoomProps> = ({ voiceRoomId, onC
       }
     } catch (err: any) {
       console.error('Error stopping recording:', err);
-      alert(err.message || 'Impossible d\'arrêter l\'enregistrement');
+      alert(err.message || 'Unable to stop recording');
       throw err;
     }
   };
@@ -374,7 +374,7 @@ export const GroupVoiceRoom: React.FC<GroupVoiceRoomProps> = ({ voiceRoomId, onC
             <line x1="12" y1="16" x2="12.01" y2="16" strokeWidth="2" strokeLinecap="round"/>
           </svg>
           <p>{error}</p>
-          <button onClick={onClose} className="close-btn">Fermer</button>
+          <button onClick={onClose} className="close-btn">Close</button>
         </div>
       </div>
     );
@@ -448,18 +448,18 @@ export const GroupVoiceRoom: React.FC<GroupVoiceRoomProps> = ({ voiceRoomId, onC
             <div className="icon-wrapper">
               {isMuted ? <FaMicrophoneSlash /> : <FaMicrophone />}
             </div>
-            <span className="label">{isMuted ? 'Micro coupé' : 'Micro actif'}</span>
+            <span className="label">{isMuted ? 'Mic muted' : 'Mic active'}</span>
           </button>
 
           <button
             className="control-btn-redesigned danger"
             onClick={handleLeave}
-            title="Quitter le salon"
+            title="Leave the room"
           >
             <div className="icon-wrapper">
               <FaPhone className="rotate-135" />
             </div>
-            <span className="label">Quitter</span>
+            <span className="label">Leave</span>
           </button>
         </div>
 {/* 

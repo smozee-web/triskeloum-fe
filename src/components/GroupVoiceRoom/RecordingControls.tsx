@@ -51,13 +51,13 @@ export const RecordingControls: React.FC<RecordingControlsProps> = ({
           className="recording-btn recording-active"
           onClick={handleStopRecording}
           disabled={isProcessing}
-          title="Arrêter l'enregistrement"
+          title="Stop recording"
         >
           <div className="icon-wrapper">
             <FaStop />
           </div>
           <span className="label">
-            {isProcessing ? 'Arrêt...' : 'Arrêter l\'enregistrement'}
+            {isProcessing ? 'Stopping...' : 'Stop recording'}
           </span>
           <span className="recording-indicator pulse"></span>
         </button>
@@ -66,13 +66,13 @@ export const RecordingControls: React.FC<RecordingControlsProps> = ({
           className="recording-btn"
           onClick={handleStartRecording}
           disabled={isProcessing}
-          title="Démarrer l'enregistrement"
+          title="Start recording"
         >
           <div className="icon-wrapper">
             <FaCircle />
           </div>
           <span className="label">
-            {isProcessing ? 'Démarrage...' : 'Enregistrer'}
+            {isProcessing ? 'Starting...' : 'Record'}
           </span>
         </button>
       )}

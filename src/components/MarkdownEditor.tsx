@@ -12,7 +12,7 @@ interface MarkdownEditorProps {
 const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
   value,
   onChange,
-  placeholder = 'Écrivez ici...'
+  placeholder = 'Write here...'
 }) => {
   const [isPreview, setIsPreview] = useState(false);
   
@@ -26,18 +26,18 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
             onClick={() => setIsPreview(false)}
             className={`px-3 py-1 text-sm rounded-md ${!isPreview ? 'bg-white shadow-sm' : 'hover:bg-gray-100'}`}
           >
-            Éditer
+            Edit
           </button>
           <button
             type="button"
             onClick={() => setIsPreview(true)}
             className={`px-3 py-1 text-sm rounded-md ${isPreview ? 'bg-white shadow-sm' : 'hover:bg-gray-100'}`}
           >
-            Aperçu
+            Preview
           </button>
         </div>
         <div className="text-xs text-gray-500">
-          Supporte le markdown
+          Supports markdown
         </div>
       </div>
       
@@ -50,7 +50,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({
                 {value}
               </ReactMarkdown>
             ) : (
-              <p className="text-gray-400 italic">Aucun contenu à afficher</p>
+              <p className="text-gray-400 italic">No content to display</p>
             )}
           </div>
         ) : (

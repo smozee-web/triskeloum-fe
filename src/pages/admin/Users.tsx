@@ -93,7 +93,7 @@ const Users: React.FC = () => {
       setUsers(data?.users);
       setPagination(data.pagination);
     } catch (error: any) {
-      toast.error(error?.response?.data?.message || 'Erreur lors du chargement des utilisateurs');
+      toast.error(error?.response?.data?.message || 'Error while loading users');
     } finally {
       setIsLoading(false);
     }
@@ -159,10 +159,10 @@ const Users: React.FC = () => {
     try {
       setIsProcessing(true);
       await adminUsersService.blockUser(user.id);
-      toast.success('Utilisateur bloqué avec succès');
+      toast.success('User blocked successfully');
       setUsers(users.map(u => u.id === user.id ? { ...u, is_blocked: true } : u));
     } catch (error: any) {
-      toast.error(error?.response?.data?.message || 'Erreur lors du blocage');
+      toast.error(error?.response?.data?.message || 'Error while blocking');
     } finally {
       setIsProcessing(false);
     }
@@ -173,10 +173,10 @@ const Users: React.FC = () => {
     try {
       setIsProcessing(true);
       await adminUsersService.unblockUser(user.id);
-      toast.success('Utilisateur débloqué avec succès');
+      toast.success('User unblocked successfully');
       setUsers(users.map(u => u.id === user.id ? { ...u, is_blocked: false } : u));
     } catch (error: any) {
-      toast.error(error?.response?.data?.message || 'Erreur lors du déblocage');
+      toast.error(error?.response?.data?.message || 'Error while unblocking');
     } finally {
       setIsProcessing(false);
     }
@@ -194,21 +194,21 @@ const Users: React.FC = () => {
     try {
       setIsProcessing(true);
       await adminUsersService.deleteUser(selectedUser.id);
-      toast.success('Utilisateur supprimé avec succès');
+      toast.success('User deleted successfully');
       setUsers(users.filter(u => u.id !== selectedUser.id));
       setIsDeleteModalOpen(false);
       setSelectedUser(null);
     } catch (error: any) {
-      toast.error(error?.response?.data?.message || 'Erreur lors de la suppression');
+      toast.error(error?.response?.data?.message || 'Error while deleting');
     } finally {
       setIsProcessing(false);
     }
   };
 
   const formatDate = (dateString: string | null) => {
-    if (!dateString) return 'Jamais';
+    if (!dateString) return 'Never';
     const date = new Date(dateString);
-    return date.toLocaleDateString('fr-FR', { 
+    return date.toLocaleDateString('en-US', {
       year: 'numeric', 
       month: 'short', 
       day: 'numeric',
@@ -246,14 +246,14 @@ const Users: React.FC = () => {
       );
 
       if (response.data.success) {
-        toast.success('Chat ouvert');
+        toast.success('Chat opened');
         navigate('/admin/crm', { state: { selectedRoomId: response.data.payload.id } });
       } else {
-        toast.error('Erreur lors de l\'ouverture du chat');
+        toast.error('Error while opening the chat');
       }
     } catch (error: any) {
       console.error('Error starting chat:', error);
-      toast.error(error?.response?.data?.message || 'Erreur lors de l\'ouverture du chat');
+      toast.error(error?.response?.data?.message || 'Error while opening the chat');
     } finally {
       setIsChatLoading(null);
     }
@@ -267,7 +267,7 @@ const Users: React.FC = () => {
       if (editingUser) {
         // Update user
         await adminUsersService.updateUser(editingUser.id, formData);
-        toast.success('Utilisateur modifié avec succès');
+        toast.success('User updated successfully');
         
         // Update local state
         setUsers(users.map(u => 
@@ -278,13 +278,13 @@ const Users: React.FC = () => {
       } else {
         // Create user
         const newUser = await adminUsersService.createUser(formData);
-        toast.success('Utilisateur créé avec succès');
+        toast.success('User created successfully');
         
         // Refresh users list
         fetchUsers();
       }
     } catch (error: any) {
-      toast.error(error?.response?.data?.message || 'Erreur lors de l\'enregistrement');
+      toast.error(error?.response?.data?.message || 'Error while saving');
     } finally {
       setIsFormSubmitting(false);
     }
@@ -302,16 +302,16 @@ const Users: React.FC = () => {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}>
-              Gestion des Utilisateurs
+              User Management
             </h1>
-            <p className="text-sm text-gray-600 dark:text-text-tertiary">Gérez et contrôlez les utilisateurs de la plateforme</p>
+            <p className="text-sm text-gray-600 dark:text-text-tertiary">Manage and control the platform's users</p>
           </div>
           <button
             onClick={handleCreateUser}
             className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
           >
             <PlusIcon className="h-5 w-5" />
-            Créer utilisateur
+            Create user
           </button>
         </div>
 
@@ -335,7 +335,7 @@ const Users: React.FC = () => {
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <UsersIcon className="h-6 w-6 text-black" />
                 </div>
-                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Total Utilisateurs</h3>
+                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Total Users</h3>
                 <p className="text-2xl font-bold text-gray-900 dark:text-text-primary">{stats.totalUsers || 0}</p>
               </div>
             </div>
@@ -347,7 +347,7 @@ const Users: React.FC = () => {
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <UserPlusIcon className="h-6 w-6 text-black" />
                 </div>
-                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Nouveaux (7 jours)</h3>
+                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">New (7 days)</h3>
                 <p className="text-2xl font-bold text-gray-900 dark:text-text-primary">{stats.newUsersWeek || 0}</p>
               </div>
             </div>
@@ -359,9 +359,9 @@ const Users: React.FC = () => {
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <UserGroupIcon className="h-6 w-6 text-black" />
                 </div>
-                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Utilisateurs Actifs</h3>
+                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Active Users</h3>
                 <p className="text-2xl font-bold text-gray-900 dark:text-text-primary">{stats.activeUsers || 0}</p>
-                <p className="text-xs text-gray-500 dark:text-text-muted mt-1">{stats.activeUsersPercentage || 0}% du total</p>
+                <p className="text-xs text-gray-500 dark:text-text-muted mt-1">{stats.activeUsersPercentage || 0}% of total</p>
               </div>
             </div>
 
@@ -372,7 +372,7 @@ const Users: React.FC = () => {
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <ClockIcon className="h-6 w-6 text-black" />
                 </div>
-                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Nouveaux (30 jours)</h3>
+                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">New (30 days)</h3>
                 <p className="text-2xl font-bold text-gray-900 dark:text-text-primary">{stats.newUsersMonth || 0}</p>
               </div>
             </div>
@@ -385,7 +385,7 @@ const Users: React.FC = () => {
             <SearchBar
               value={search}
               onChange={setSearch}
-              placeholder="Rechercher par nom, email ou téléphone..."
+              placeholder="Search by name, email or phone..."
             />
           </div>
           <div className="text-right">
@@ -403,7 +403,7 @@ const Users: React.FC = () => {
                 className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-tertiary uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               >
                 <div className="flex items-center">
-                  Utilisateur
+                  User
                   <SortIcon field="firstname" />
                 </div>
               </th>
@@ -421,31 +421,31 @@ const Users: React.FC = () => {
                 className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-tertiary uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               >
                 <div className="flex items-center">
-                  Téléphone
+                  Phone
                   <SortIcon field="phone" />
                 </div>
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-tertiary uppercase tracking-wider">
-                Niveau
+                Level
               </th>
               <th
                 onClick={() => handleSort('role')}
                 className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-tertiary uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               >
                 <div className="flex items-center">
-                  Rôle
+                  Role
                   <SortIcon field="role" />
                 </div>
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-tertiary uppercase tracking-wider">
-                Statut
+                Status
               </th>
               <th
                 onClick={() => handleSort('last_login')}
                 className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-tertiary uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               >
                 <div className="flex items-center">
-                  Dernière connexion
+                  Last login
                   <SortIcon field="last_login" />
                 </div>
               </th>
@@ -466,7 +466,7 @@ const Users: React.FC = () => {
                 <td colSpan={8} className="px-6 py-8">
                   <div className="text-center py-12">
                     <p className="text-gray-500 dark:text-text-tertiary text-sm">
-                      {search ? 'Aucun utilisateur correspondant à votre recherche' : 'Aucun utilisateur trouvé'}
+                      {search ? 'No user matching your search' : 'No users found'}
                     </p>
                   </div>
                 </td>
@@ -508,7 +508,7 @@ const Users: React.FC = () => {
                         ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400'
                         : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300'
                     }`}>
-                      {user.role === 'admin' ? 'Administrateur' : 'Utilisateur'}
+                      {user.role === 'admin' ? 'Administrator' : 'User'}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -517,7 +517,7 @@ const Users: React.FC = () => {
                         ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400'
                         : 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400'
                     }`}>
-                      {user.is_blocked ? 'Bloqué' : 'Actif'}
+                      {user.is_blocked ? 'Blocked' : 'Active'}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-text-secondary">
@@ -529,7 +529,7 @@ const Users: React.FC = () => {
                         onClick={() => handleStartChat(user)}
                         disabled={isProcessing || isChatLoading === user.id}
                         className="p-2 rounded-md text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 disabled:opacity-50 transition-colors"
-                        title="Démarrer un chat"
+                        title="Start a chat"
                       >
                         <ChatBubbleLeftIcon className="h-5 w-5" />
                       </button>
@@ -537,7 +537,7 @@ const Users: React.FC = () => {
                         onClick={() => handleEditUser(user)}
                         disabled={isProcessing}
                         className="p-2 rounded-md text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 disabled:opacity-50 transition-colors"
-                        title="Modifier l'utilisateur"
+                        title="Edit user"
                       >
                         <PencilIcon className="h-5 w-5" />
                       </button>
@@ -546,7 +546,7 @@ const Users: React.FC = () => {
                           onClick={() => handleUnblock(user)}
                           disabled={isProcessing}
                           className="p-2 rounded-md text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 disabled:opacity-50 transition-colors"
-                          title="Débloquer l'utilisateur"
+                          title="Unblock user"
                         >
                           <LockOpenIcon className="h-5 w-5" />
                         </button>
@@ -555,7 +555,7 @@ const Users: React.FC = () => {
                           onClick={() => handleBlock(user)}
                           disabled={isProcessing}
                           className="p-2 rounded-md text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 disabled:opacity-50 transition-colors"
-                          title="Bloquer l'utilisateur"
+                          title="Block user"
                         >
                           <LockClosedIcon className="h-5 w-5" />
                         </button>
@@ -564,7 +564,7 @@ const Users: React.FC = () => {
                         onClick={() => handleDeleteClick(user)}
                         disabled={isProcessing}
                         className="p-2 rounded-md text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 disabled:opacity-50 transition-colors"
-                        title="Supprimer l'utilisateur"
+                        title="Delete user"
                       >
                         <TrashIcon className="h-5 w-5" />
                       </button>
@@ -605,15 +605,15 @@ const Users: React.FC = () => {
       {/* Delete Confirmation Modal */}
       <ConfirmModal
         isOpen={isDeleteModalOpen}
-        title="Supprimer l'utilisateur"
-        message={`Êtes-vous sûr de vouloir supprimer ${selectedUser?.firstname} ${selectedUser?.lastname} ? Cette action ne peut pas être annulée.`}
+        title="Delete user"
+        message={`Are you sure you want to delete ${selectedUser?.firstname} ${selectedUser?.lastname}? This action cannot be undone.`}
         onConfirm={handleConfirmDelete}
         onClose={() => {
           setIsDeleteModalOpen(false);
           setSelectedUser(null);
         }}
         isLoading={isProcessing}
-        confirmText="Supprimer"
+        confirmText="Delete"
         isDangerous={true}
       />
     </div>

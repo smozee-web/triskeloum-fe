@@ -39,7 +39,7 @@ export const CommentInput: React.FC<CommentInputProps> = ({ onSendComment, disab
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyPress={handleKeyPress}
-        placeholder="Écrire un message..."
+        placeholder="Write a message..."
         disabled={disabled || isSending}
         maxLength={500}
       />

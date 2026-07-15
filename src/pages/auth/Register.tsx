@@ -17,8 +17,8 @@ const Register: React.FC = () => {
                     <h1 className="text-4xl font-light tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 mb-4">
                         USRATUL AZKAAR
                     </h1>
-                    <p className="text-amber-500/80 text-lg mb-2">Cabinet digital de développement spirituel</p>
-                    <p className="text-gray-400">L'inscription n'est pas encore disponible</p>
+                    <p className="text-amber-500/80 text-lg mb-2">Digital cabinet for spiritual development</p>
+                    <p className="text-gray-400">Registration is not yet available</p>
                 </div>
 
                 <div className="mt-8">
@@ -26,7 +26,7 @@ const Register: React.FC = () => {
                         onClick={() => navigate('/login')}
                         className="px-8 py-3 bg-gradient-to-r from-amber-600 to-amber-800 hover:from-amber-500 hover:to-amber-700 text-white font-medium rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-amber-600/30"
                     >
-                        Retour à la connexion
+                        Back to login
                     </button>
                 </div>
             </div>

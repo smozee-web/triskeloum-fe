@@ -14,12 +14,12 @@ import { exerciseService } from '../../services/exercises';
 import { buildFileUrl } from '../../utils/urlUtils';
 
 const EXERCISE_TYPES = [
-    { value: 'PHYSICAL', label: 'Physique' },
+    { value: 'PHYSICAL', label: 'Physical' },
     { value: 'MENTAL', label: 'Mental' },
-    { value: 'BREATHING', label: 'Respiration' },
-    { value: 'MEDITATION', label: 'Méditation' },
+    { value: 'BREATHING', label: 'Breathing' },
+    { value: 'MEDITATION', label: 'Meditation' },
     { value: 'YOGA', label: 'Yoga' },
-    { value: 'OTHER', label: 'Autre' }
+    { value: 'OTHER', label: 'Other' }
 ];
 
 interface ExerciseFormData {
@@ -123,32 +123,32 @@ const Exercises: React.FC = () => {
     };
 
     const handleDelete = async (exerciseId: number) => {
-        if (!window.confirm('Êtes-vous sûr de vouloir supprimer cet exercice ?')) {
+        if (!window.confirm('Are you sure you want to delete this exercise?')) {
             return;
         }
         try {
             await deleteExercise(exerciseId).unwrap();
-            toast.success('Exercice supprimé');
+            toast.success('Exercise deleted');
             setDeleteConfirmId(null);
             refetch();
         } catch (error: any) {
-            toast.error(error?.data?.message || 'Erreur lors de la suppression');
+            toast.error(error?.data?.message || 'Error while deleting');
         }
     };
 
     const handleToggleActive = async (exercise: any) => {
         try {
             await toggleActive(exercise.id).unwrap();
-            toast.success(exercise.isActive ? 'Exercice désactivé' : 'Exercice activé');
+            toast.success(exercise.isActive ? 'Exercise deactivated' : 'Exercise activated');
             refetch();
         } catch (error: any) {
-            toast.error(error?.data?.message || 'Erreur');
+            toast.error(error?.data?.message || 'Error');
         }
     };
 
     const handleViewMedia = (exercise: any) => {
         if (!exercise.mediaUrl) {
-            toast.error('Aucun fichier disponible');
+            toast.error('No file available');
             return;
         }
 
@@ -170,7 +170,7 @@ const Exercises: React.FC = () => {
             setDescriptionInModal(exercise.description);
             setDescriptionModalOpen(true);
         } else {
-            toast.error('Aucune description disponible');
+            toast.error('No description available');
         }
     };
 
@@ -179,12 +179,12 @@ const Exercises: React.FC = () => {
 
         // Validation
         if (!formData.title || !formData.type || !formData.duration || !formData.levelId) {
-            toast.error('Veuillez remplir tous les champs requis');
+            toast.error('Please fill in all required fields');
             return;
         }
 
         if (!selectedExercise && !formData.mediaFile) {
-            toast.error('Veuillez ajouter un fichier (PDF ou VIDEO)');
+            toast.error('Please add a file (PDF or VIDEO)');
             return;
         }
 
@@ -207,10 +207,10 @@ const Exercises: React.FC = () => {
 
             if (selectedExercise) {
                 await exerciseService.updateExercise(selectedExercise.id, formDataToSend, setUploadProgress);
-                toast.success('Exercice modifié');
+                toast.success('Exercise updated');
             } else {
                 await exerciseService.createExercise(formDataToSend, setUploadProgress);
-                toast.success('Exercice créé');
+                toast.success('Exercise created');
             }
 
             setIsFormModalOpen(false);
@@ -218,7 +218,7 @@ const Exercises: React.FC = () => {
             refetch();
         } catch (error: any) {
             console.error('Error:', error);
-            toast.error(error?.message || 'Erreur lors de la soumission');
+            toast.error(error?.message || 'Error while submitting');
         } finally {
             setIsUploading(false);
         }
@@ -236,16 +236,16 @@ const Exercises: React.FC = () => {
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                             }}>
-                            Exercices
+                            Exercises
                         </h1>
-                        <p className="text-gray-600 dark:text-text-tertiary mt-1 text-sm sm:text-base">Gérez tous vos exercices</p>
+                        <p className="text-gray-600 dark:text-text-tertiary mt-1 text-sm sm:text-base">Manage all your exercises</p>
                     </div>
                     <button
                         onClick={handleCreate}
                         className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start"
                     >
                         <PlusIcon className="w-5 h-5 mr-2" />
-                        Nouvel exercice
+                        New exercise
                     </button>
                 </div>
 
@@ -257,7 +257,7 @@ const Exercises: React.FC = () => {
                             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                 <Dumbbell className="w-6 h-6 text-black" />
                             </div>
-                            <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Total Exercices</h3>
+                            <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Total Exercises</h3>
                             <p className="text-2xl font-bold text-gray-900 dark:text-text-primary">{stats.total}</p>
                         </div>
                     </div>
@@ -268,7 +268,7 @@ const Exercises: React.FC = () => {
                             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                 <CheckCircle className="w-6 h-6 text-white" />
                             </div>
-                            <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Exercices Actifs</h3>
+                            <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Active Exercises</h3>
                             <p className="text-2xl font-bold text-green-600 dark:text-green-400">{stats.active}</p>
                         </div>
                     </div>
@@ -279,7 +279,7 @@ const Exercises: React.FC = () => {
                             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-gray-600 to-gray-700 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                 <PauseCircle className="w-6 h-6 text-white" />
                             </div>
-                            <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Inactifs</h3>
+                            <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Inactive</h3>
                             <p className="text-2xl font-bold text-gray-700 dark:text-gray-300">{stats.inactive}</p>
                         </div>
                     </div>
@@ -292,7 +292,7 @@ const Exercises: React.FC = () => {
                             <SearchBar
                                 value={search}
                                 onChange={setSearch}
-                                placeholder="Rechercher un exercice..."
+                                placeholder="Search for an exercise..."
                             />
 
                             <select
@@ -303,7 +303,7 @@ const Exercises: React.FC = () => {
                                 }}
                                 className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent text-sm transition-all"
                             >
-                                <option value="">Tous les types</option>
+                                <option value="">All types</option>
                                 {EXERCISE_TYPES.map(type => (
                                     <option key={type.value} value={type.value}>{type.label}</option>
                                 ))}
@@ -317,9 +317,9 @@ const Exercises: React.FC = () => {
                                 }}
                                 className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent text-sm transition-all"
                             >
-                                <option value="all">Tous les statuts</option>
-                                <option value="active">Actifs uniquement</option>
-                                <option value="inactive">Inactifs uniquement</option>
+                                <option value="all">All statuses</option>
+                                <option value="active">Active only</option>
+                                <option value="inactive">Inactive only</option>
                             </select>
 
                             <select
@@ -330,10 +330,10 @@ const Exercises: React.FC = () => {
                                 }}
                                 className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent text-sm transition-all"
                             >
-                                <option value={6}>6 par page</option>
-                                <option value={12}>12 par page</option>
-                                <option value={24}>24 par page</option>
-                                <option value={48}>48 par page</option>
+                                <option value={6}>6 per page</option>
+                                <option value={12}>12 per page</option>
+                                <option value={24}>24 per page</option>
+                                <option value={48}>48 per page</option>
                             </select>
                         </div>
 
@@ -374,14 +374,14 @@ const Exercises: React.FC = () => {
                     <div className="w-16 h-16 bg-gradient-to-br from-[#D4AF37]/20 to-[#FFD700]/20 dark:from-[#D4AF37]/30 dark:to-[#FFD700]/30 rounded-full flex items-center justify-center mx-auto mb-4">
                         <Dumbbell className="w-8 h-8 text-amber-600 dark:text-amber-400" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">Aucun exercice</h3>
-                    <p className="text-gray-600 dark:text-text-secondary mb-6">Commencez par créer votre premier exercice</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">No exercise</h3>
+                    <p className="text-gray-600 dark:text-text-secondary mb-6">Start by creating your first exercise</p>
                     <button
                         onClick={handleCreate}
                         className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-all duration-200"
                     >
                         <PlusIcon className="w-5 h-5 mr-2" />
-                        Créer un exercice
+                        Create an exercise
                     </button>
                 </div>
             ) : (
@@ -399,7 +399,7 @@ const Exercises: React.FC = () => {
                                                     ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
                                                     : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-text-tertiary'
                                             }`}>
-                                                {exercise.isActive ? 'Actif' : 'Inactif'}
+                                                {exercise.isActive ? 'Active' : 'Inactive'}
                                             </span>
                                             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 flex items-center justify-center border border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
                                                 <Dumbbell className="w-4 h-4 text-amber-600 dark:text-amber-400" />
@@ -420,7 +420,7 @@ const Exercises: React.FC = () => {
                                             <span>{exercise.duration} min</span>
                                         </div>
                                         <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-text-secondary">
-                                            <span className="font-medium">Niveau:</span>
+                                            <span className="font-medium">Level:</span>
                                             <span>{exercise.level?.name}</span>
                                         </div>
                                     </div>
@@ -430,7 +430,7 @@ const Exercises: React.FC = () => {
                                         <button
                                             onClick={() => handleViewMedia(exercise)}
                                             className="flex-1 p-2 bg-amber-50 dark:bg-amber-900/20 hover:bg-amber-100 dark:hover:bg-amber-900/30 rounded transition"
-                                            title={exercise.mediaType === 'VIDEO' ? 'Lire la vidéo' : 'Consulter le PDF'}
+                                            title={exercise.mediaType === 'VIDEO' ? 'Watch the video' : 'View the PDF'}
                                         >
                                             {exercise.mediaType === 'VIDEO' ? (
                                                 <PlayIcon className="w-4 h-4 text-amber-600 dark:text-amber-400 mx-auto" />
@@ -442,7 +442,7 @@ const Exercises: React.FC = () => {
                                             <button
                                                 onClick={() => handleViewDescription(exercise)}
                                                 className="flex-1 p-2 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded transition"
-                                                title="Voir la description"
+                                                title="View the description"
                                             >
                                                 <InformationCircleIcon className="w-4 h-4 text-blue-600 dark:text-blue-400 mx-auto" />
                                             </button>
@@ -451,7 +451,7 @@ const Exercises: React.FC = () => {
                                             onClick={() => handleToggleActive(exercise)}
                                             disabled={isToggling}
                                             className="flex-1 p-2 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition"
-                                            title={exercise.isActive ? 'Désactiver' : 'Activer'}
+                                            title={exercise.isActive ? 'Deactivate' : 'Activate'}
                                         >
                                             <EyeIcon className={`w-4 h-4 mx-auto ${exercise.isActive ? 'text-green-600 dark:text-green-400' : 'text-gray-400 dark:text-gray-600 opacity-50'}`} />
                                         </button>
@@ -477,11 +477,11 @@ const Exercises: React.FC = () => {
                             <table className="w-full">
                                 <thead className="bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 border-b border-gray-200 dark:border-gray-800">
                                     <tr>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase">Titre</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase">Title</th>
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase">Type</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase">Durée</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase">Niveau</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase">Statut</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase">Duration</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase">Level</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase">Status</th>
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase">Actions</th>
                                     </tr>
                                 </thead>
@@ -500,7 +500,7 @@ const Exercises: React.FC = () => {
                                                         ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
                                                         : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-text-tertiary'
                                                 }`}>
-                                                    {exercise.isActive ? 'Actif' : 'Inactif'}
+                                                    {exercise.isActive ? 'Active' : 'Inactive'}
                                                 </span>
                                             </td>
                                             <td className="px-6 py-4 text-sm">
@@ -508,7 +508,7 @@ const Exercises: React.FC = () => {
                                                     <button
                                                         onClick={() => handleViewMedia(exercise)}
                                                         className="p-2 hover:bg-amber-50 dark:hover:bg-amber-900/30 rounded transition"
-                                                        title={exercise.mediaType === 'VIDEO' ? 'Lire la vidéo' : 'Consulter le PDF'}
+                                                        title={exercise.mediaType === 'VIDEO' ? 'Watch the video' : 'View the PDF'}
                                                     >
                                                         {exercise.mediaType === 'VIDEO' ? (
                                                             <PlayIcon className="w-5 h-5 text-amber-600 dark:text-amber-400" />
@@ -520,7 +520,7 @@ const Exercises: React.FC = () => {
                                                         <button
                                                             onClick={() => handleViewDescription(exercise)}
                                                             className="p-2 hover:bg-amber-50 dark:hover:bg-amber-900/30 rounded transition"
-                                                            title="Voir la description"
+                                                            title="View the description"
                                                         >
                                                             <InformationCircleIcon className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                                                         </button>
@@ -529,7 +529,7 @@ const Exercises: React.FC = () => {
                                                         onClick={() => handleToggleActive(exercise)}
                                                         disabled={isToggling}
                                                         className="p-2 hover:bg-amber-50 dark:hover:bg-amber-900/30 rounded transition"
-                                                        title={exercise.isActive ? 'Désactiver' : 'Activer'}
+                                                        title={exercise.isActive ? 'Deactivate' : 'Activate'}
                                                     >
                                                         {exercise.isActive ? (
                                                             <EyeIcon className="w-5 h-5 text-green-600 dark:text-green-400" />
@@ -599,7 +599,7 @@ const Exercises: React.FC = () => {
                             {mediaInModal?.mediaType === 'VIDEO' ? (
                                 <>
                                     <Film className="w-5 h-5" />
-                                    Vidéo
+                                    Video
                                 </>
                             ) : (
                                 <>
@@ -624,7 +624,7 @@ const Exercises: React.FC = () => {
                                 style={{ maxHeight: '500px' }}
                             >
                                 <source src={mediaInModal?.mediaUrl} type="video/mp4" />
-                                Votre navigateur ne supporte pas la lecture vidéo.
+                                Your browser does not support video playback.
                             </video>
                         </div>
                     ) : (
@@ -641,7 +641,7 @@ const Exercises: React.FC = () => {
                     <div className="mt-4 flex justify-between items-center text-sm text-gray-600 dark:text-text-secondary">
                         <span>{mediaInModal?.title}</span>
                         {mediaInModal?.mediaType === 'VIDEO' && mediaInModal?.duration && (
-                            <span>Durée: {mediaInModal.duration} min</span>
+                            <span>Duration: {mediaInModal.duration} min</span>
                         )}
                     </div>
                 </div>
@@ -660,17 +660,17 @@ const Exercises: React.FC = () => {
                             )}
                         </div>
                         <h2 className="text-2xl font-bold text-gray-900 dark:text-text-primary">
-                            {selectedExercise ? 'Modifier l\'exercice' : 'Créer un nouvel exercice'}
+                            {selectedExercise ? 'Edit exercise' : 'Create a new exercise'}
                         </h2>
                     </div>
 
                     <form onSubmit={handleFormSubmit} className="space-y-6">
-                        {/* Titre */}
+                        {/* Title */}
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">Titre *</label>
+                            <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">Title *</label>
                             <input
                                 type="text"
-                                placeholder="Entrez le titre de l'exercice"
+                                placeholder="Enter the exercise title"
                                 value={formData.title}
                                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                 className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:bg-white dark:focus:bg-bg-secondary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
@@ -678,7 +678,7 @@ const Exercises: React.FC = () => {
                             />
                         </div>
 
-                        {/* Type et Durée - Grid */}
+                        {/* Type and Duration - Grid */}
                         <div className="grid grid-cols-2 gap-4">
                             {/* Type */}
                             <div>
@@ -689,16 +689,16 @@ const Exercises: React.FC = () => {
                                     className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:bg-white dark:focus:bg-bg-secondary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all appearance-none cursor-pointer"
                                     required
                                 >
-                                    <option value="">Sélectionner</option>
+                                    <option value="">Select</option>
                                     {EXERCISE_TYPES.map(type => (
                                         <option key={type.value} value={type.value}>{type.label}</option>
                                     ))}
                                 </select>
                             </div>
 
-                            {/* Durée */}
+                            {/* Duration */}
                             <div>
-                                <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">Durée (min) *</label>
+                                <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">Duration (min) *</label>
                                 <input
                                     type="number"
                                     min="1"
@@ -711,16 +711,16 @@ const Exercises: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Niveau */}
+                        {/* Level */}
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">Niveau *</label>
+                            <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">Level *</label>
                             <select
                                 value={formData.levelId}
                                 onChange={(e) => setFormData({ ...formData, levelId: parseInt(e.target.value) })}
                                 className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:bg-white dark:focus:bg-bg-secondary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all appearance-none cursor-pointer"
                                 required
                             >
-                                <option value="0">Sélectionner un niveau</option>
+                                <option value="0">Select a level</option>
                                 {levels.map((level: any) => (
                                     <option key={level.id} value={level.id}>{level.name}</option>
                                 ))}
@@ -733,13 +733,13 @@ const Exercises: React.FC = () => {
                             <RichTextEditor
                                 value={formData.description}
                                 onChange={(value) => setFormData({ ...formData, description: value })}
-                                placeholder="Décrivez cet exercice en détail..."
+                                placeholder="Describe this exercise in detail..."
                             />
                         </div>
 
                         {/* Media Type Selector */}
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">Type de contenu *</label>
+                            <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">Content type *</label>
                             <div className="flex gap-4">
                                 <label className="flex items-center cursor-pointer">
                                     <input
@@ -766,7 +766,7 @@ const Exercises: React.FC = () => {
                                     />
                                     <span className="text-gray-700 dark:text-text-secondary flex items-center gap-1">
                                         <Film className="w-4 h-4" />
-                                        VIDÉO
+                                        VIDEO
                                     </span>
                                 </label>
                             </div>
@@ -775,7 +775,7 @@ const Exercises: React.FC = () => {
                         {/* Media File Upload */}
                         <div>
                             <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">
-                                Fichier {formData.mediaType} {!selectedExercise && <span className="text-red-500 dark:text-red-400">*</span>}
+                                {formData.mediaType} file {!selectedExercise && <span className="text-red-500 dark:text-red-400">*</span>}
                             </label>
                             <label className="flex items-center justify-center w-full px-4 py-6 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg cursor-pointer bg-gray-50 dark:bg-bg-secondary hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                                 <div className="text-center">
@@ -787,10 +787,10 @@ const Exercises: React.FC = () => {
                                         )}
                                     </div>
                                     <p className="text-sm font-medium text-gray-700 dark:text-text-primary">
-                                        {formData.mediaFile ? formData.mediaFile.name : `Cliquez ou glissez le ${formData.mediaType}`}
+                                        {formData.mediaFile ? formData.mediaFile.name : `Click or drag the ${formData.mediaType}`}
                                     </p>
                                     <p className="text-xs text-gray-500 dark:text-text-tertiary mt-1">
-                                        {formData.mediaType === 'PDF' ? 'PDF jusqu\'à 10MB' : 'VIDEO (MP4, MOV, WEBM) jusqu\'à 100MB'}
+                                        {formData.mediaType === 'PDF' ? 'PDF up to 10MB' : 'VIDEO (MP4, MOV, WEBM) up to 100MB'}
                                     </p>
                                 </div>
                                 <input
@@ -802,22 +802,22 @@ const Exercises: React.FC = () => {
                                 />
                             </label>
                             {selectedExercise && !formData.mediaFile && (
-                                <p className="text-xs text-gray-500 dark:text-text-tertiary mt-2">Fichier actuel: {selectedExercise.mediaUrl}</p>
+                                <p className="text-xs text-gray-500 dark:text-text-tertiary mt-2">Current file: {selectedExercise.mediaUrl}</p>
                             )}
                         </div>
 
                         {/* Cover Image */}
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">Image de couverture</label>
+                            <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">Cover image</label>
                             <label className="flex items-center justify-center w-full px-4 py-6 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg cursor-pointer bg-gray-50 dark:bg-bg-secondary hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                                 <div className="text-center">
                                     <div className="flex justify-center mb-2">
                                         <Image className="w-8 h-8 text-gray-600 dark:text-text-secondary" />
                                     </div>
                                     <p className="text-sm font-medium text-gray-700 dark:text-text-primary">
-                                        {formData.coverFile ? formData.coverFile.name : 'Cliquez ou glissez l\'image'}
+                                        {formData.coverFile ? formData.coverFile.name : 'Click or drag the image'}
                                     </p>
-                                    <p className="text-xs text-gray-500 dark:text-text-tertiary mt-1">JPG, PNG, GIF, WEBP jusqu'à 5MB</p>
+                                    <p className="text-xs text-gray-500 dark:text-text-tertiary mt-1">JPG, PNG, GIF, WEBP up to 5MB</p>
                                 </div>
                                 <input
                                     type="file"
@@ -832,7 +832,7 @@ const Exercises: React.FC = () => {
                         {isUploading && (
                             <div className="bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 rounded-lg p-4 border border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
                                 <div className="flex items-center justify-between mb-2">
-                                    <p className="text-sm font-medium text-gray-900 dark:text-text-primary">Envoi en cours...</p>
+                                    <p className="text-sm font-medium text-gray-900 dark:text-text-primary">Uploading...</p>
                                     <span className="text-sm font-semibold text-amber-700 dark:text-amber-400">{uploadProgress}%</span>
                                 </div>
                                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
@@ -852,7 +852,7 @@ const Exercises: React.FC = () => {
                                 disabled={isUploading}
                                 className="flex-1 px-6 py-3 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-text-primary font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Annuler
+                                Cancel
                             </button>
                             <button
                                 type="submit"
@@ -876,12 +876,12 @@ const Exercises: React.FC = () => {
                                 ) : selectedExercise ? (
                                     <>
                                         <Pencil className="w-4 h-4" />
-                                        Modifier l'exercice
+                                        Update exercise
                                     </>
                                 ) : (
                                     <>
                                         <Plus className="w-4 h-4" />
-                                        Créer l'exercice
+                                        Create exercise
                                     </>
                                 )}
                             </button>

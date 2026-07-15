@@ -11,7 +11,7 @@ import {
     Legend
 } from 'recharts';
 import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { enUS } from 'date-fns/locale';
 
 interface ChartData {
     date: string;
@@ -25,7 +25,7 @@ interface UsersGrowthChartProps {
 const UsersGrowthChart: React.FC<UsersGrowthChartProps> = ({ data }) => {
     const formattedData = data.map(item => ({
         ...item,
-        formattedDate: format(new Date(item.date), 'dd MMM', { locale: fr })
+        formattedDate: format(new Date(item.date), 'dd MMM', { locale: enUS })
     }));
 
     return (
@@ -34,7 +34,7 @@ const UsersGrowthChart: React.FC<UsersGrowthChartProps> = ({ data }) => {
             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent dark:from-amber-500/5 dark:to-transparent pointer-events-none" />
             <div className="relative z-10">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-4">
-                    Évolution des inscriptions
+                    Registration growth
                 </h3>
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={formattedData}>
@@ -64,7 +64,7 @@ const UsersGrowthChart: React.FC<UsersGrowthChartProps> = ({ data }) => {
                         dataKey="count"
                         stroke="#D4AF37"
                         strokeWidth={3}
-                        name="Nouveaux utilisateurs"
+                        name="New users"
                         dot={{ fill: '#FFD700', r: 4, strokeWidth: 2, stroke: '#D4AF37' }}
                         activeDot={{ r: 6, fill: '#FFD700', stroke: '#D4AF37', strokeWidth: 2 }}
                     />

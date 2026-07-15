@@ -25,12 +25,12 @@ interface Notification {
 }
 
 const notificationTypes = [
-    { value: 'all', label: 'Toutes' },
+    { value: 'all', label: 'All' },
     { value: 'message', label: 'Messages' },
-    { value: 'reminder', label: 'Rappels' },
-    { value: 'assignment', label: 'Assignations' },
-    { value: 'announcement', label: 'Annonces' },
-    { value: 'admin_contact', label: 'Contact Admin' }
+    { value: 'reminder', label: 'Reminders' },
+    { value: 'assignment', label: 'Assignments' },
+    { value: 'announcement', label: 'Announcements' },
+    { value: 'admin_contact', label: 'Admin Contact' }
 ];
 
 export default function NotificationsPage() {
@@ -137,10 +137,10 @@ export default function NotificationsPage() {
         const notifDate = new Date(date);
         const seconds = Math.floor((now.getTime() - notifDate.getTime()) / 1000);
 
-        if (seconds < 60) return 'À l\'instant';
-        if (seconds < 3600) return `Il y a ${Math.floor(seconds / 60)}m`;
-        if (seconds < 86400) return `Il y a ${Math.floor(seconds / 3600)}h`;
-        return `Il y a ${Math.floor(seconds / 86400)}j`;
+        if (seconds < 60) return 'Just now';
+        if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+        if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+        return `${Math.floor(seconds / 86400)}d ago`;
     };
 
     const unreadFiltered = filteredNotifications.filter(n => !n.readAt).length;
@@ -157,7 +157,7 @@ export default function NotificationsPage() {
                     <div>
                         <h1 className="text-4xl font-bold text-slate-900">Notifications</h1>
                         <p className="text-slate-600 mt-1">
-                            {unreadCount} non lue{unreadCount !== 1 ? 's' : ''}
+                            {unreadCount} unread
                         </p>
                     </div>
                 </div>
@@ -169,7 +169,7 @@ export default function NotificationsPage() {
                         <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
                         <input
                             type="text"
-                            placeholder="Rechercher..."
+                            placeholder="Search..."
                             className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
@@ -184,14 +184,14 @@ export default function NotificationsPage() {
                                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center gap-2"
                             >
                                 <CheckIcon className="w-5 h-5" />
-                                Marquer tout comme lu
+                                Mark all as read
                             </button>
                         )}
                         <button
                             onClick={fetchNotifications}
                             className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors font-medium"
                         >
-                            Rafraîchir
+                            Refresh
                         </button>
                     </div>
                 </div>
@@ -219,11 +219,11 @@ export default function NotificationsPage() {
             {/* Stats */}
             <div className="max-w-6xl mx-auto mb-8 grid grid-cols-2 gap-4">
                 <div className="bg-white rounded-lg shadow-sm p-4 border-l-4 border-l-blue-600">
-                    <p className="text-slate-600 text-sm font-medium">Non lues</p>
+                    <p className="text-slate-600 text-sm font-medium">Unread</p>
                     <p className="text-3xl font-bold text-slate-900 mt-2">{unreadFiltered}</p>
                 </div>
                 <div className="bg-white rounded-lg shadow-sm p-4 border-l-4 border-l-green-600">
-                    <p className="text-slate-600 text-sm font-medium">Lues</p>
+                    <p className="text-slate-600 text-sm font-medium">Read</p>
                     <p className="text-3xl font-bold text-slate-900 mt-2">{readFiltered}</p>
                 </div>
             </div>
@@ -235,14 +235,14 @@ export default function NotificationsPage() {
                         <div className="inline-block animate-spin">
                             <BellIcon className="w-8 h-8 text-blue-600" />
                         </div>
-                        <p className="text-slate-600 mt-4">Chargement...</p>
+                        <p className="text-slate-600 mt-4">Loading...</p>
                     </div>
                 ) : filteredNotifications.length === 0 ? (
                     <div className="bg-white rounded-lg shadow-sm p-12 text-center">
                         <BellIcon className="w-16 h-16 mx-auto text-slate-300 mb-4" />
-                        <p className="text-slate-600 text-lg font-medium">Aucune notification</p>
+                        <p className="text-slate-600 text-lg font-medium">No notification</p>
                         <p className="text-slate-500 text-sm mt-2">
-                            {selectedType === 'all' ? 'Vous êtes à jour!' : 'Aucune notification de ce type'}
+                            {selectedType === 'all' ? 'You are all caught up!' : 'No notification of this type'}
                         </p>
                     </div>
                 ) : (
@@ -283,7 +283,7 @@ export default function NotificationsPage() {
                                                         <button
                                                             onClick={() => markAsRead(notif.id)}
                                                             className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
-                                                            title="Marquer comme lu"
+                                                            title="Mark as read"
                                                         >
                                                             <CheckIcon className="w-5 h-5 text-slate-600" />
                                                         </button>
@@ -292,7 +292,7 @@ export default function NotificationsPage() {
                                                 <button
                                                     onClick={() => deleteNotification(notif.id)}
                                                     className="p-2 hover:bg-red-50 rounded-lg transition-colors"
-                                                    title="Supprimer"
+                                                    title="Delete"
                                                 >
                                                     <TrashIcon className="w-5 h-5 text-red-600" />
                                                 </button>

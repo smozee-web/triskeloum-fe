@@ -60,23 +60,23 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
     const newErrors: any = {};
 
     if (!formData.firstname.trim()) {
-      newErrors.firstname = 'Le prénom est requis';
+      newErrors.firstname = 'First name is required';
     }
 
     if (!formData.lastname.trim()) {
-      newErrors.lastname = 'Le nom est requis';
+      newErrors.lastname = 'Last name is required';
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'L\'email est requis';
+      newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Email invalide';
+      newErrors.email = 'Invalid email';
     }
 
     if (!user && !formData.password) {
-      newErrors.password = 'Le mot de passe est requis pour la création';
+      newErrors.password = 'Password is required for creation';
     } else if (!user && formData.password.length < 6) {
-      newErrors.password = 'Le mot de passe doit avoir au moins 6 caractères';
+      newErrors.password = 'Password must be at least 6 characters';
     }
 
     setErrors(newErrors);
@@ -113,7 +113,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
         password: ''
       }));
     }
-    toast.success('Mot de passe généré avec succès!');
+    toast.success('Password generated successfully!');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -132,7 +132,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
         level: formData.level ? Number(formData.level) : undefined
       };
 
-      // Pour la création, inclure email et password
+      // For creation, include email and password
       if (!user) {
         submitData.email = formData.email;
         submitData.password = formData.password;
@@ -141,7 +141,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
       await onSubmit(submitData);
       onClose();
     } catch (error: any) {
-      toast.error(error?.response?.data?.message || 'Erreur lors de l\'enregistrement');
+      toast.error(error?.response?.data?.message || 'Error while saving');
     }
   };
 
@@ -153,7 +153,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
         {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-800">
           <h2 className="text-xl font-bold text-gray-900 dark:text-text-primary">
-            {user ? 'Modifier l\'utilisateur' : 'Créer un utilisateur'}
+            {user ? 'Edit user' : 'Create a user'}
           </h2>
           <button
             onClick={onClose}
@@ -169,7 +169,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
           {/* Firstname */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-1">
-              Prénom
+              First name
             </label>
             <input
               type="text"
@@ -187,7 +187,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
           {/* Lastname */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-1">
-              Nom
+              Last name
             </label>
             <input
               type="text"
@@ -223,7 +223,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
           {/* Phone */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-1">
-              Téléphone (optionnel)
+              Phone (optional)
             </label>
             <input
               type="tel"
@@ -240,17 +240,17 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
             <div>
               <div className="flex justify-between items-center mb-1">
                 <label className="block text-sm font-medium text-gray-700 dark:text-text-primary">
-                  Mot de passe
+                  Password
                 </label>
                 <button
                   type="button"
                   onClick={generateRandomPassword}
                   disabled={isLoading}
                   className="inline-flex items-center gap-1 text-xs px-2 py-1 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded disabled:opacity-50 disabled:hover:bg-transparent transition-colors"
-                  title="Générer un mot de passe aléatoire"
+                  title="Generate a random password"
                 >
                   <SparklesIcon className="h-3 w-3" />
-                  <span>Auto-générer</span>
+                  <span>Auto-generate</span>
                 </button>
               </div>
               <input
@@ -259,7 +259,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
                 value={formData.password}
                 onChange={handleChange}
                 disabled={isLoading}
-                placeholder="Entrez un mot de passe ou cliquez sur Auto-générer"
+                placeholder="Enter a password or click Auto-generate"
                 className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary placeholder-gray-400 dark:placeholder-text-tertiary focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:opacity-50 transition-all ${
                   errors.password ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-700'
                 }`}
@@ -271,7 +271,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
           {/* Role */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-1">
-              Rôle
+              Role
             </label>
             <select
               name="role"
@@ -280,8 +280,8 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
               disabled={isLoading}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:opacity-50 transition-all"
             >
-              <option value="user">Utilisateur</option>
-              <option value="admin">Administrateur</option>
+              <option value="user">User</option>
+              <option value="admin">Administrator</option>
             </select>
           </div>
 
@@ -289,7 +289,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
           {levels.length > 0 && (
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-1">
-                Niveau (optionnel)
+                Level (optional)
               </label>
               <select
                 name="level"
@@ -298,7 +298,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
                 disabled={isLoading}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 disabled:bg-gray-50 dark:disabled:bg-gray-900 disabled:opacity-50 transition-all"
               >
-                <option value="">Sélectionner un niveau</option>
+                <option value="">Select a level</option>
                 {levels.map(level => (
                   <option key={level.id} value={level.id}>
                     {level.name}
@@ -316,7 +316,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
               disabled={isLoading}
               className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-text-primary rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50 transition-colors"
             >
-              Annuler
+              Cancel
             </button>
             <button
               type="submit"
@@ -324,7 +324,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
               className="flex-1 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-md hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2 transition-all duration-200"
             >
               {isLoading && <div className="animate-spin h-4 w-4 border-2 border-black border-t-transparent rounded-full" />}
-              {user ? 'Modifier' : 'Créer'}
+              {user ? 'Update' : 'Create'}
             </button>
           </div>
         </form>

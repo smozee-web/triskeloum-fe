@@ -62,12 +62,12 @@ const AdminCourseListItem: React.FC<AdminCourseListItemProps> = ({
                             {course.published ? (
                                 <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-600 dark:bg-green-700 text-white rounded-full text-xs font-medium shadow-sm">
                                     <EyeSlashIcon className="w-3.5 h-3.5" />
-                                    Publié
+                                    Published
                                 </span>
                             ) : (
                                 <span className="inline-flex items-center gap-1 px-3 py-1 bg-gray-600 dark:bg-gray-700 text-white rounded-full text-xs font-medium shadow-sm">
                                     <EyeIcon className="w-3.5 h-3.5" />
-                                    Brouillon
+                                    Draft
                                 </span>
                             )}
                         </div>
@@ -97,10 +97,10 @@ const AdminCourseListItem: React.FC<AdminCourseListItemProps> = ({
                     <button
                         onClick={() => onView(course)}
                         className="flex items-center justify-center gap-1.5 px-3 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
-                        title="Voir les détails"
+                        title="View details"
                     >
                         <EyeIcon className="w-4 h-4" />
-                        <span className="text-sm font-medium">Détails</span>
+                        <span className="text-sm font-medium">Details</span>
                     </button>
                     <button
                         onClick={() => onTogglePublish(course)}
@@ -109,35 +109,35 @@ const AdminCourseListItem: React.FC<AdminCourseListItemProps> = ({
                                 ? 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                                 : 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/40'
                         }`}
-                        title={course.published ? 'Dépublier' : 'Publier'}
+                        title={course.published ? 'Unpublish' : 'Publish'}
                     >
                         {course.published ? (
                             <>
                                 <EyeSlashIcon className="w-4 h-4" />
-                                <span>Dépublier</span>
+                                <span>Unpublish</span>
                             </>
                         ) : (
                             <>
                                 <EyeIcon className="w-4 h-4" />
-                                <span>Publier</span>
+                                <span>Publish</span>
                             </>
                         )}
                     </button>
                     <button
                         onClick={() => onEdit(course)}
                         className="flex items-center justify-center gap-1.5 px-3 py-2 bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors"
-                        title="Éditer"
+                        title="Edit"
                     >
                         <PencilIcon className="w-4 h-4" />
-                        <span className="text-sm font-medium">Éditer</span>
+                        <span className="text-sm font-medium">Edit</span>
                     </button>
                     <button
                         onClick={() => onDelete(course)}
                         className="flex items-center justify-center gap-1.5 px-3 py-2 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
-                        title="Supprimer"
+                        title="Delete"
                     >
                         <TrashIcon className="w-4 h-4" />
-                        <span className="text-sm font-medium">Supprimer</span>
+                        <span className="text-sm font-medium">Delete</span>
                     </button>
                 </div>
             </div>

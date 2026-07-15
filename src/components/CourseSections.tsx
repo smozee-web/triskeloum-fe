@@ -12,7 +12,7 @@ interface CourseSectionsProps {
 
 const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
   const [expandedSections, setExpandedSections] = useState<Set<number>>(
-    new Set([0]) // Première section ouverte par défaut
+    new Set([0]) // First section open by default
   );
   const [expandedParts, setExpandedParts] = useState<Set<string>>(new Set());
 
@@ -44,7 +44,7 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
   if (!sections || sections.length === 0) {
     return (
       <div className="text-center py-12 bg-gray-50 dark:bg-bg-secondary rounded-lg border border-gray-200 dark:border-gray-800">
-        <p className="text-gray-500 dark:text-text-tertiary">Aucune section disponible pour ce cours.</p>
+        <p className="text-gray-500 dark:text-text-tertiary">No section available for this course.</p>
       </div>
     );
   }
@@ -57,7 +57,7 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }}>
-        Contenu du cours
+        Course content
       </h2>
 
       {sections.map((section, sectionIndex) => {
@@ -68,7 +68,7 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
             key={section.id}
             className="border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden shadow-sm bg-white dark:bg-bg-secondary transition-all duration-200 hover:shadow-md hover:border-amber-500 dark:hover:border-amber-500"
           >
-            {/* En-tête de section */}
+            {/* Section header */}
             <button
               type="button"
               onClick={() => toggleSection(sectionIndex)}
@@ -86,7 +86,7 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
                 <div className="flex items-center space-x-2">
                   {section.content?.parts && (
                     <span className="text-xs bg-gradient-to-r from-[#D4AF37]/20 to-[#FFD700]/20 dark:from-[#D4AF37]/30 dark:to-[#FFD700]/30 text-amber-700 dark:text-amber-400 px-2 py-1 rounded-full font-medium border border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
-                      {section.content.parts.length} partie{section.content.parts.length > 1 ? 's' : ''}
+                      {section.content.parts.length} part{section.content.parts.length > 1 ? 's' : ''}
                     </span>
                   )}
                   {isSectionExpanded ? (
@@ -98,10 +98,10 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
               </div>
             </button>
 
-            {/* Contenu de section */}
+            {/* Section content */}
             {isSectionExpanded && (
               <div className="p-6 animate-in">
-                {/* Image de couverture */}
+                {/* Cover image */}
                 {section.content?.cover && (
                   <div className="mb-6 rounded-lg overflow-hidden shadow-md">
                     <img
@@ -112,7 +112,7 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
                   </div>
                 )}
 
-                {/* Résumé */}
+                {/* Summary */}
                 {section.content?.summary && (
                   <div className="mb-6 p-4 bg-gradient-to-r from-[#D4AF37]/5 to-[#FFD700]/5 dark:from-[#D4AF37]/10 dark:to-[#FFD700]/10 rounded-lg border-l-4 border-[#D4AF37]">
                     <h4 className="text-sm font-semibold mb-3 flex items-center"
@@ -124,7 +124,7 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
                       <span className="w-6 h-6 bg-gradient-to-br from-[#D4AF37] to-[#FFD700] text-black rounded-full flex items-center justify-center text-xs mr-2">
                         i
                       </span>
-                      Résumé
+                      Summary
                     </h4>
                     <div className="prose prose-sm max-w-none text-gray-700 dark:text-text-secondary">
                       <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -134,11 +134,11 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
                   </div>
                 )}
 
-                {/* Fichiers Media */}
+                {/* Media Files */}
                 {section.content?.media && section.content.media.length > 0 && (
                   <div className="mb-6 space-y-3">
                     <h4 className="text-sm font-semibold text-gray-700 dark:text-text-primary mb-3">
-                      Contenu Média
+                      Media Content
                     </h4>
                     {section.content.media.map((media, mediaIndex) => (
                       <div key={mediaIndex} className="border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden bg-gray-50 dark:bg-bg-tertiary p-4">
@@ -149,7 +149,7 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
                             controlsList="nodownload"
                           >
                             <source src={media.url} type="video/mp4" />
-                            Votre navigateur ne supporte pas la lecture vidéo
+                            Your browser does not support video playback
                           </video>
                         ) : (
                           <div className="flex items-center gap-4">
@@ -159,14 +159,14 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
                               </svg>
                             </div>
                             <div className="flex-1">
-                              <p className="text-sm font-medium text-gray-900 mb-2">Fichier audio</p>
+                              <p className="text-sm font-medium text-gray-900 mb-2">Audio file</p>
                               <audio 
                                 controls 
                                 className="w-full"
                                 controlsList="nodownload"
                               >
                                 <source src={media.url} type="audio/mpeg" />
-                                Votre navigateur ne supporte pas la lecture audio
+                                Your browser does not support audio playback
                               </audio>
                             </div>
                           </div>
@@ -176,11 +176,11 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
                   </div>
                 )}
 
-                {/* Parties */}
+                {/* Parts */}
                 {section.content?.parts && section.content.parts.length > 0 && (
                   <div className="space-y-3">
                     <h4 className="text-sm font-semibold text-gray-700 dark:text-text-primary mb-3">
-                      Contenu détaillé
+                      Detailed content
                     </h4>
                     {section.content.parts.map((part, partIndex) => {
                       const partKey = `${sectionIndex}-${partIndex}`;
@@ -191,7 +191,7 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
                           key={partIndex}
                           className="border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden hover:shadow-sm transition-shadow duration-200"
                         >
-                          {/* En-tête de partie */}
+                          {/* Part header */}
                           <button
                             type="button"
                             onClick={() => togglePart(sectionIndex, partIndex)}
@@ -214,7 +214,7 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
                             </div>
                           </button>
 
-                          {/* Contenu de partie */}
+                          {/* Part content */}
                           {isPartExpanded && part.content && (
                             <div className="p-4 bg-white dark:bg-bg-secondary border-t border-gray-100 dark:border-gray-800 animate-in">
                               <div className="prose prose-sm max-w-none text-gray-700 dark:text-text-secondary dark:prose-invert">

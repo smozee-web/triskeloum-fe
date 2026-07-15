@@ -8,11 +8,11 @@ const Unauthorized = () => {
   return (
     <Result
       status="403"
-      title="403 - Accès non autorisé"
-      subTitle="Désolé, vous n'avez pas les permissions nécessaires pour accéder à cette page."
+      title="403 - Unauthorized access"
+      subTitle="Sorry, you do not have the necessary permissions to access this page."
       extra={
         <Button type="primary" onClick={() => navigate('/')}>
-          Retour à l'accueil
+          Back to home
         </Button>
       }
     />

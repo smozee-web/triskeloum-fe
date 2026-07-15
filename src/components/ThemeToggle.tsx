@@ -18,18 +18,18 @@ const ThemeToggle = ({ className = '', showLabel = false }: ThemeToggleProps) =>
           ? 'bg-amber-900/20 hover:bg-amber-900/30 text-amber-400'
           : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
       } ${className}`}
-      title={isDark ? 'Passer en mode clair' : 'Passer en mode sombre'}
-      aria-label={isDark ? 'Activer le mode clair' : 'Activer le mode sombre'}
+      title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-label={isDark ? 'Enable light mode' : 'Enable dark mode'}
     >
       {isDark ? (
         <>
           <SunOutlined className="text-lg" />
-          {showLabel && <span className="text-sm font-medium">Clair</span>}
+          {showLabel && <span className="text-sm font-medium">Light</span>}
         </>
       ) : (
         <>
           <MoonOutlined className="text-lg" />
-          {showLabel && <span className="text-sm font-medium">Sombre</span>}
+          {showLabel && <span className="text-sm font-medium">Dark</span>}
         </>
       )}
     </button>

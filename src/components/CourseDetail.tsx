@@ -17,20 +17,20 @@ const CourseDetail: React.FC = () => {
   const [togglePublish] = useTogglePublishCourseMutation();
 
   const handleEdit = (course: any) => {
-    toast('Fonctionnalité d\'édition en cours de développement', { icon: '🚧' });
+    toast('Edit feature under development', { icon: '🚧' });
   };
 
   const handleDelete = async (course: any) => {
-    if (!window.confirm(`Voulez-vous vraiment supprimer "${course.title}" ?`)) {
+    if (!window.confirm(`Are you sure you want to delete "${course.title}"?`)) {
       return;
     }
 
     try {
       await deleteCourse(course.id).unwrap();
-      toast.success('Cours supprimé avec succès');
+      toast.success('Course deleted successfully');
       navigate('/admin/courses');
     } catch (error: any) {
-      toast.error(error?.data?.message || 'Erreur lors de la suppression');
+      toast.error(error?.data?.message || 'Error while deleting');
     }
   };
 
@@ -38,10 +38,10 @@ const CourseDetail: React.FC = () => {
     try {
       await togglePublish(course.id).unwrap();
       toast.success(
-        course.published ? 'Cours dépublié avec succès' : 'Cours publié avec succès'
+        course.published ? 'Course unpublished successfully' : 'Course published successfully'
       );
     } catch (error: any) {
-      toast.error(error?.data?.message || 'Erreur lors du changement de statut');
+      toast.error(error?.data?.message || 'Error while changing status');
     }
   };
 
@@ -50,14 +50,14 @@ const CourseDetail: React.FC = () => {
       <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="text-center py-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Cours non trouvé
+            Course not found
           </h2>
           <button
             onClick={() => navigate('/admin/courses/list')}
             className="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800"
           >
             <ArrowLeftIcon className="w-4 h-4 mr-2" />
-            Retour aux cours
+            Back to courses
           </button>
         </div>
       </div>
@@ -66,13 +66,13 @@ const CourseDetail: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-8">
-      {/* Bouton retour */}
+      {/* Back button */}
       <button
         onClick={() => navigate(-1)}
         className="inline-flex items-center px-4 py-2 mb-6 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
       >
         <ArrowLeftIcon className="w-4 h-4 mr-2" />
-        Retour
+        Back
       </button>
 
       <CourseDetails

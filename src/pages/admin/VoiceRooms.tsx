@@ -117,7 +117,7 @@ export default function VoiceRoomsPage() {
         const handleVoiceRoomCreated = (data: { voiceRoom: VoiceRoomData }) => {
             console.log('🎙️ Voice room created:', data.voiceRoom);
             setVoiceRooms(prev => [data.voiceRoom, ...prev]);
-            toast.success(`Nouveau salon vocal: ${data.voiceRoom.name}`);
+            toast.success(`New voice room: ${data.voiceRoom.name}`);
         };
 
         const handleUserJoined = (data: { voiceRoomId: number; userId: number; activeParticipantIds: number[] }) => {
@@ -155,7 +155,7 @@ export default function VoiceRoomsPage() {
                 setSelectedRoom(prev => prev ? { ...prev, isActive: false, activeParticipantIds: [] } : null);
                 handleLeaveRoom();
             }
-            toast('Salon vocal terminé', { icon: '🔇' });
+            toast('Voice room ended', { icon: '🔇' });
         };
 
         const handleCommentAdded = (data: { voiceRoomId: number; comment: VoiceRoomComment }) => {
@@ -219,7 +219,7 @@ export default function VoiceRoomsPage() {
             setVoiceRooms(response.data.payload || []);
         } catch (error: any) {
             console.error('Error fetching voice rooms:', error);
-            toast.error(error.response?.data?.message || 'Erreur lors du chargement des salons vocaux');
+            toast.error(error.response?.data?.message || 'Error while loading voice rooms');
         } finally {
             setIsLoading(false);
         }
@@ -278,10 +278,10 @@ export default function VoiceRoomsPage() {
             await AgoraService.join(appId, channelName, token, uid);
 
             setIsJoined(true);
-            toast.success('Connecté au salon vocal');
+            toast.success('Connected to the voice room');
         } catch (error: any) {
             console.error('Error joining voice room:', error);
-            toast.error(error.response?.data?.message || 'Impossible de rejoindre le salon vocal');
+            toast.error(error.response?.data?.message || 'Unable to join the voice room');
         } finally {
             setIsConnecting(false);
         }
@@ -292,7 +292,7 @@ export default function VoiceRoomsPage() {
             await AgoraService.leave();
             setIsJoined(false);
             setIsMuted(false);
-            toast('Déconnecté du salon vocal', { icon: '👋' });
+            toast('Disconnected from the voice room', { icon: '👋' });
         } catch (error) {
             console.error('Error leaving voice room:', error);
         }
@@ -304,7 +304,7 @@ export default function VoiceRoomsPage() {
             setIsMuted(!isMuted);
         } catch (error) {
             console.error('Error toggling mute:', error);
-            toast.error('Erreur lors du changement de micro');
+            toast.error('Error while changing microphone');
         }
     };
 
@@ -321,7 +321,7 @@ export default function VoiceRoomsPage() {
             setNewComment('');
         } catch (error: any) {
             console.error('Error sending comment:', error);
-            toast.error('Erreur lors de l\'envoi du commentaire');
+            toast.error('Error while sending the comment');
         } finally {
             setIsSubmitting(false);
         }
@@ -354,10 +354,10 @@ export default function VoiceRoomsPage() {
             );
             setRoomFiles(filesResponse.data.payload || []);
 
-            toast.success('Fichier partagé avec succès');
+            toast.success('File shared successfully');
         } catch (error: any) {
             console.error('Error uploading file:', error);
-            toast.error('Erreur lors du partage du fichier');
+            toast.error('Error while sharing the file');
         } finally {
             setUploadingFile(false);
             if (fileInputRef.current) {
@@ -417,7 +417,7 @@ export default function VoiceRoomsPage() {
                         className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors font-medium text-sm mb-3"
                     >
                         <PlusIcon className="w-4 h-4" />
-                        Créer un salon
+                        Create a room
                     </button>
 
                     {/* Search */}
@@ -425,7 +425,7 @@ export default function VoiceRoomsPage() {
                         <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-600" />
                         <input
                             type="text"
-                            placeholder="Rechercher..."
+                            placeholder="Search..."
                             className="w-full pl-9 pr-4 py-2 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-text-primary focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
@@ -442,7 +442,7 @@ export default function VoiceRoomsPage() {
                                     : 'text-gray-600 dark:text-text-tertiary hover:text-gray-900 dark:hover:text-text-primary'
                             }`}
                         >
-                            Tous
+                            All
                         </button>
                         <button
                             onClick={() => setFilterStatus('active')}
@@ -452,7 +452,7 @@ export default function VoiceRoomsPage() {
                                     : 'text-gray-600 dark:text-text-tertiary hover:text-gray-900 dark:hover:text-text-primary'
                             }`}
                         >
-                            Actifs
+                            Active
                         </button>
                         <button
                             onClick={() => setFilterStatus('finished')}
@@ -462,7 +462,7 @@ export default function VoiceRoomsPage() {
                                     : 'text-gray-600 dark:text-text-tertiary hover:text-gray-900 dark:hover:text-text-primary'
                             }`}
                         >
-                            Terminés
+                            Finished
                         </button>
                     </div>
                 </div>
@@ -476,8 +476,8 @@ export default function VoiceRoomsPage() {
                     ) : filteredRooms.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-full px-4 text-center">
                             <MicrophoneIcon className="w-12 h-12 text-gray-300 dark:text-gray-700 mb-3" />
-                            <p className="font-medium text-gray-600 dark:text-text-secondary text-sm">Aucun salon</p>
-                            <p className="text-xs text-gray-400 dark:text-text-tertiary mt-1">Créez un nouveau salon vocal</p>
+                            <p className="font-medium text-gray-600 dark:text-text-secondary text-sm">No room</p>
+                            <p className="text-xs text-gray-400 dark:text-text-tertiary mt-1">Create a new voice room</p>
                         </div>
                     ) : (
                         <div className="p-2">
@@ -531,10 +531,10 @@ export default function VoiceRoomsPage() {
                                 <MicrophoneIcon className="w-12 h-12 text-amber-600 dark:text-amber-400" />
                             </div>
                             <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">
-                                Sélectionnez un salon vocal
+                                Select a voice room
                             </h3>
                             <p className="text-gray-500 dark:text-text-tertiary text-sm">
-                                Choisissez un salon dans la liste pour voir les détails
+                                Choose a room from the list to see the details
                             </p>
                         </div>
                     </div>
@@ -551,12 +551,12 @@ export default function VoiceRoomsPage() {
                                         {selectedRoom.isActive && (
                                             <div className="flex items-center gap-1 text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 px-3 py-1 rounded-full text-xs font-medium border border-green-200 dark:border-green-700">
                                                 <div className="w-2 h-2 bg-green-600 dark:bg-green-400 rounded-full animate-pulse"></div>
-                                                En cours
+                                                In progress
                                             </div>
                                         )}
                                         {!selectedRoom.isActive && (
                                             <div className="flex items-center gap-1 text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full text-xs font-medium border border-gray-200 dark:border-gray-700">
-                                                Terminé
+                                                Finished
                                             </div>
                                         )}
                                     </div>
@@ -577,12 +577,12 @@ export default function VoiceRoomsPage() {
                                                 {isConnecting ? (
                                                     <>
                                                         <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                                                        Connexion...
+                                                        Connecting...
                                                     </>
                                                 ) : (
                                                     <>
                                                         <PhoneIcon className="w-5 h-5" />
-                                                        Rejoindre
+                                                        Join
                                                     </>
                                                 )}
                                             </button>
@@ -591,7 +591,7 @@ export default function VoiceRoomsPage() {
                                                 <button
                                                     onClick={toggleMute}
                                                     className="p-3 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                                                    title={isMuted ? "Activer le micro" : "Couper le micro"}
+                                                    title={isMuted ? "Turn on the mic" : "Mute the mic"}
                                                 >
                                                     {isMuted ? (
                                                         <FaMicrophoneSlash className="w-5 h-5 text-red-600" />
@@ -604,7 +604,7 @@ export default function VoiceRoomsPage() {
                                                     className="flex items-center gap-2 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
                                                 >
                                                     <StopIcon className="w-5 h-5" />
-                                                    Quitter
+                                                    Leave
                                                 </button>
                                             </div>
                                         )}
@@ -617,13 +617,13 @@ export default function VoiceRoomsPage() {
                                 <div className="flex items-center gap-2 text-gray-600 dark:text-text-secondary">
                                     <UsersIcon className="w-4 h-4" />
                                     <span>
-                                        Par {selectedRoom.creator.firstname} {selectedRoom.creator.lastname}
+                                        By {selectedRoom.creator.firstname} {selectedRoom.creator.lastname}
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-2 text-gray-600 dark:text-text-secondary">
                                     <ClockIcon className="w-4 h-4" />
                                     <span>
-                                        Créé le {new Date(selectedRoom.createdAt || (selectedRoom as any).created_at).toLocaleDateString('fr-FR', {
+                                        Created on {new Date(selectedRoom.createdAt || (selectedRoom as any).created_at).toLocaleDateString('en-US', {
                                             day: 'numeric',
                                             month: 'long',
                                             year: 'numeric',
@@ -635,7 +635,7 @@ export default function VoiceRoomsPage() {
                                 {!selectedRoom.isActive && selectedRoom.endedAt && (
                                     <div className="flex items-center gap-2 text-gray-600 dark:text-text-secondary">
                                         <span>
-                                            Terminé le {new Date(selectedRoom.endedAt).toLocaleDateString('fr-FR', {
+                                            Ended on {new Date(selectedRoom.endedAt).toLocaleDateString('en-US', {
                                                 day: 'numeric',
                                                 month: 'long',
                                                 hour: '2-digit',
@@ -695,14 +695,14 @@ export default function VoiceRoomsPage() {
                                                 <div className="flex items-center gap-2 mb-4">
                                                     <ChatBubbleLeftIcon className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                                                     <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">
-                                                        Commentaires ({roomComments.length})
+                                                        Comments ({roomComments.length})
                                                     </h3>
                                                 </div>
                                                 {roomComments.length === 0 ? (
                                                     <p className="text-gray-500 dark:text-text-tertiary text-sm">
                                                         {selectedRoom.isActive
-                                                            ? "Aucun commentaire pour le moment"
-                                                            : "Aucun commentaire n'a été publié durant ce salon vocal"}
+                                                            ? "No comments yet"
+                                                            : "No comments were posted during this voice room"}
                                                     </p>
                                                 ) : (
                                                     <div className="space-y-3">
@@ -739,14 +739,14 @@ export default function VoiceRoomsPage() {
                                         <div className="flex items-center gap-2 mb-4">
                                             <DocumentIcon className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">
-                                                Fichiers partagés ({roomFiles.length})
+                                                Shared files ({roomFiles.length})
                                             </h3>
                                         </div>
                                         {roomFiles.length === 0 ? (
                                             <p className="text-gray-500 dark:text-text-tertiary text-sm">
                                                 {selectedRoom.isActive
-                                                    ? "Aucun fichier partagé pour le moment"
-                                                    : "Aucun fichier n'a été partagé durant ce salon vocal"}
+                                                    ? "No files shared yet"
+                                                    : "No files were shared during this voice room"}
                                             </p>
                                         ) : (
                                             <div className="space-y-2">
@@ -796,7 +796,7 @@ export default function VoiceRoomsPage() {
                                                     onClick={() => fileInputRef.current?.click()}
                                                     disabled={uploadingFile || !selectedRoom}
                                                     className="p-3 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                                                    title="Partager un fichier"
+                                                    title="Share a file"
                                                 >
                                                     {uploadingFile ? (
                                                         <div className="w-5 h-5 border-2 border-gray-600 border-t-transparent rounded-full animate-spin"></div>
@@ -809,7 +809,7 @@ export default function VoiceRoomsPage() {
                                                     value={newComment}
                                                     onChange={(e) => setNewComment(e.target.value)}
                                                     onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSendComment()}
-                                                    placeholder="Écrire un message..."
+                                                    placeholder="Write a message..."
                                                     disabled={isSubmitting || !selectedRoom}
                                                     className="flex-1 px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary placeholder-gray-400 dark:placeholder-gray-600 focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                                                 />
@@ -817,7 +817,7 @@ export default function VoiceRoomsPage() {
                                                     onClick={handleSendComment}
                                                     disabled={isSubmitting || !newComment.trim() || !selectedRoom}
                                                     className="p-3 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                                                    title="Envoyer"
+                                                    title="Send"
                                                 >
                                                     {isSubmitting ? (
                                                         <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
@@ -880,7 +880,7 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
             setUsers(Array.isArray(usersData) ? usersData : []);
         } catch (error: any) {
             console.error('Error fetching users:', error);
-            toast.error('Erreur lors du chargement des utilisateurs');
+            toast.error('Error while loading users');
         }
     };
 
@@ -888,7 +888,7 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
         e.preventDefault();
 
         if (!name.trim()) {
-            toast.error('Le nom du salon est requis');
+            toast.error('The room name is required');
             return;
         }
 
@@ -906,12 +906,12 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
                 { headers: getAuthHeader() }
             );
 
-            toast.success('Salon vocal créé avec succès');
+            toast.success('Voice room created successfully');
             onCreated();
             onClose();
         } catch (error) {
             console.error('Error creating voice room:', error);
-            toast.error('Erreur lors de la création du salon');
+            toast.error('Error while creating the room');
         } finally {
             setIsLoading(false);
         }
@@ -935,7 +935,7 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
             <div className="bg-white dark:bg-bg-tertiary rounded-xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col border border-gray-200 dark:border-gray-800 shadow-xl">
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800">
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-text-primary">Créer un salon vocal</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-text-primary">Create a voice room</h2>
                     <button
                         onClick={onClose}
                         className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
@@ -949,14 +949,14 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
                     {/* Name */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                            Nom du salon *
+                            Room name *
                         </label>
                         <input
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
-                            placeholder="Ex: Discussion équipe"
+                            placeholder="Ex: Team discussion"
                             required
                         />
                     </div>
@@ -964,13 +964,13 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
                     {/* Description */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                            Description (optionnel)
+                            Description (optional)
                         </label>
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent resize-none transition-all"
-                            placeholder="Décrivez le sujet du salon..."
+                            placeholder="Describe the room topic..."
                             rows={3}
                         />
                     </div>
@@ -978,14 +978,14 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
                     {/* Max Participants */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                            Nombre max de participants (optionnel)
+                            Max number of participants (optional)
                         </label>
                         <input
                             type="number"
                             value={maxParticipants}
                             onChange={(e) => setMaxParticipants(e.target.value)}
                             className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
-                            placeholder="Illimité"
+                            placeholder="Unlimited"
                             min="2"
                         />
                     </div>
@@ -993,7 +993,7 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
                     {/* Participants */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                            Inviter des participants
+                            Invite participants
                         </label>
 
                         {selectedUsers.length > 0 && (
@@ -1030,14 +1030,14 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
                                 onFocus={() => setIsDropdownOpen(true)}
                                 onBlur={() => setTimeout(() => setIsDropdownOpen(false), 150)}
                                 className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all mb-2"
-                                placeholder="Rechercher un utilisateur..."
+                                placeholder="Search for a user..."
                             />
 
                             {isDropdownOpen && (
                                 <div className="absolute z-10 w-full bg-white dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-60 overflow-y-auto">
                                     {filteredUsers.length === 0 && (
                                         <div className="px-4 py-3 text-sm text-gray-500 dark:text-text-tertiary">
-                                            Aucun utilisateur trouvé
+                                            No user found
                                         </div>
                                     )}
                                     {filteredUsers.map(user => (
@@ -1069,7 +1069,7 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
                         </div>
                         {selectedUserIds.length > 0 && (
                             <p className="text-sm text-gray-600 dark:text-text-secondary mt-2">
-                                {selectedUserIds.length} participant{selectedUserIds.length > 1 ? 's' : ''} sélectionné{selectedUserIds.length > 1 ? 's' : ''}
+                                {selectedUserIds.length} participant{selectedUserIds.length > 1 ? 's' : ''} selected
                             </p>
                         )}
                     </div>
@@ -1082,7 +1082,7 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
                         onClick={onClose}
                         className="px-6 py-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-text-primary bg-white dark:bg-bg-secondary rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-medium"
                     >
-                        Annuler
+                        Cancel
                     </button>
                     <button
                         onClick={handleCreate}
@@ -1092,12 +1092,12 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
                         {isLoading ? (
                             <>
                                 <div className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-transparent"></div>
-                                Création...
+                                Creating...
                             </>
                         ) : (
                             <>
                                 <PlusIcon className="w-5 h-5" />
-                                Créer le salon
+                                Create room
                             </>
                         )}
                     </button>

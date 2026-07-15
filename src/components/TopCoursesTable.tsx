@@ -11,7 +11,7 @@ const TopCoursesTable: React.FC<TopCoursesTableProps> = ({ courses }) => {
     return (
         <div className="bg-white dark:bg-bg-tertiary rounded-xl border border-gray-200 dark:border-border transition-colors duration-300 hover:border-amber-500 dark:hover:border-amber-500 overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200 dark:border-border">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Cours les plus populaires</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Most popular courses</h3>
             </div>
             <div className="divide-y divide-gray-200 dark:divide-border">
                 {courses.map((course, index) => (
@@ -30,7 +30,7 @@ const TopCoursesTable: React.FC<TopCoursesTableProps> = ({ courses }) => {
                                         {course.title}
                                     </p>
                                     <p className="text-sm text-gray-500 dark:text-text-muted">
-                                        {course.enrollments} inscription{course.enrollments > 1 ? 's' : ''}
+                                        {course.enrollments} enrollment{course.enrollments > 1 ? 's' : ''}
                                     </p>
                                 </div>
                             </div>

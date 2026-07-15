@@ -26,7 +26,7 @@ const Sections: React.FC<SectionsProps> = ({
   const handleAddSection = () => {
     const newSection = {
       id: Date.now(),
-      title: 'Nouvelle section',
+      title: 'New section',
       order: sections.length,
       content: {
         cover: '',
@@ -41,7 +41,7 @@ const Sections: React.FC<SectionsProps> = ({
     };
     
     setSections([...sections, newSection]);
-    toast.success('Section ajoutée');
+    toast.success('Section added');
   };
 
   const handleRemoveSection = (index: number) => {
@@ -99,20 +99,20 @@ const Sections: React.FC<SectionsProps> = ({
   return (
     <div className="mt-8">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-medium text-gray-900 dark:text-text-primary">Sections du cours</h3>
+        <h3 className="text-lg font-medium text-gray-900 dark:text-text-primary">Course sections</h3>
         <button
           type="button"
           onClick={handleAddSection}
           className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-md hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors"
         >
-          Ajouter une section
+          Add a section
         </button>
       </div>
 
       {sections.length === 0 ? (
         <div className="bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-800 rounded-md p-6 text-center">
           <p className="text-gray-600 dark:text-text-secondary">
-            Aucune section ajoutée. Cliquez sur "Ajouter une section" pour commencer.
+            No section added. Click "Add a section" to get started.
           </p>
         </div>
       ) : (
