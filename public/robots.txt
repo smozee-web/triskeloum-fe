@@ -1,5 +1,5 @@
-# Robots.txt for SERANOUN - Cabinet Digital de Développement Spirituel
-# https://seranoun.com
+# Robots.txt for USRATUL AZKAAR - Cabinet Digital de Développement Spirituel
+# https://usratulazkaar.com
 
 # Allow all search engines to crawl the site
 User-agent: *
@@ -21,7 +21,7 @@ Allow: /fonts/
 Allow: /assets/
 
 # Sitemap location
-Sitemap: https://seranoun.com/sitemap.xml
+Sitemap: https://usratulazkaar.com/sitemap.xml
 
 # Crawl-delay for specific bots (optional)
 User-agent: Googlebot

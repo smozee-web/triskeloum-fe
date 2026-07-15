@@ -10,7 +10,7 @@ const AboutSection = () => {
   const aboutSection = contentData?.payload?.find((section: any) => section.section === 'about');
   const title = aboutSection ? (lang === 'fr' ? (aboutSection.titleFr ?? aboutSection.title_fr) : (aboutSection.titleEn ?? aboutSection.title_en)) : t('Le Maître', 'The Master');
   const subtitle = aboutSection ? (lang === 'fr' ? (aboutSection.subtitleFr ?? aboutSection.subtitle_fr) : (aboutSection.subtitleEn ?? aboutSection.subtitle_en)) : t('À PROPOS', 'ABOUT');
-  const description = aboutSection ? (lang === 'fr' ? (aboutSection.descriptionFr ?? aboutSection.description_fr) : (aboutSection.descriptionEn ?? aboutSection.description_en)) : t("Physicien micro-vibratoire et fondateur du cabinet Seranoun ainsi que de l'association Akpé Fondation, j'accompagne les êtres dans leur chemin de transformation intérieure et de réalisation spirituelle.", "Micro-vibratory physicist and founder of Seranoun as well as the Akpé Foundation, I guide beings on their path of inner transformation and spiritual realization.");
+  const description = aboutSection ? (lang === 'fr' ? (aboutSection.descriptionFr ?? aboutSection.description_fr) : (aboutSection.descriptionEn ?? aboutSection.description_en)) : t("Physicien micro-vibratoire et fondateur du cabinet USRATUL AZKAAR ainsi que de l'association Akpé Fondation, j'accompagne les êtres dans leur chemin de transformation intérieure et de réalisation spirituelle.", "Micro-vibratory physicist and founder of USRATUL AZKAAR as well as the Akpé Foundation, I guide beings on their path of inner transformation and spiritual realization.");
   const content = aboutSection ? (lang === 'fr' ? (aboutSection.contentFr ?? aboutSection.content_fr) : (aboutSection.contentEn ?? aboutSection.content_en)) : t("Ma quête a commencé à l'âge de 16 ans, guidée par une soif profonde de comprendre les mystères de l'existence. Ce parcours initiatique m'a conduit à recevoir de nombreuses transmissions sacrées, issues de traditions anciennes et complémentaires.", "My quest began at the age of 16, guided by a deep thirst to understand the mysteries of existence. This initiatory path led me to receive many sacred transmissions from ancient and complementary traditions.");
   const meta = aboutSection?.metadata || {};
   const masterName = meta.master_name ?? meta.masterName ?? 'Taj Rasmoon';
@@ -47,7 +47,7 @@ const AboutSection = () => {
     roleFr: member.role_fr ?? member.roleFr ?? '',
     roleEn: member.role_en ?? member.roleEn ?? '',
   })) : [
-    { name: 'Taj Rasmoon', roleFr: 'PDG Seranoun - Maître spirituel', roleEn: 'CEO Seranoun - Spiritual Master' },
+    { name: 'Taj Rasmoon', roleFr: 'PDG USRATUL AZKAAR - Maître spirituel', roleEn: 'CEO USRATUL AZKAAR - Spiritual Master' },
     { name: 'Sali Mondor', roleFr: 'Consultante | Sophrologue | Soins', roleEn: 'Consultant | Sophrologist | Healing' },
   ]);
 

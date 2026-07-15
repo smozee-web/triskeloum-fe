@@ -1,5 +1,5 @@
 /**
- * Seranoun Design System
+ * Usratul Azkaar Design System
  * Premium black and gold spiritual aesthetic
  */
 

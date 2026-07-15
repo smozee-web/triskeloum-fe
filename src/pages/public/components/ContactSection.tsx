@@ -11,7 +11,7 @@ const ContactSection = () => {
   const subtitle = contactSection ? (lang === 'fr' ? contactSection.subtitleFr : contactSection.subtitleEn) : t('CONTACT', 'CONTACT');
   const description = contactSection ? (lang === 'fr' ? contactSection.descriptionFr : contactSection.descriptionEn) : t("Prêt à entreprendre votre transformation intérieure ? Contactez-nous directement sur WhatsApp pour une première consultation.", "Ready to begin your inner transformation? Contact us directly on WhatsApp for an initial consultation.");
   const whatsapp = contactSection?.metadata?.whatsapp || '22890000000';
-  const email = contactSection?.metadata?.email || 'contact@seranoun.com';
+  const email = contactSection?.metadata?.email || 'contact@usratulazkaar.com';
   const meta = contactSection?.metadata || {};
   const location = contactSection
     ? (lang === 'fr' ? (meta.locationFr ?? meta.location_fr ?? '') : (meta.locationEn ?? meta.location_en ?? ''))

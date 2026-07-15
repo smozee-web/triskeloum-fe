@@ -78,7 +78,7 @@ const Sidebar = () => {
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
           }}>
-          SERANOUN
+          USRATUL AZKAAR
         </h2>
       </div>
 

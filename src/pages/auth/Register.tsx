@@ -15,7 +15,7 @@ const Register: React.FC = () => {
             <div className="relative z-10 text-center">
                 <div className="mb-8">
                     <h1 className="text-4xl font-light tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 mb-4">
-                        SERANOUN
+                        USRATUL AZKAAR
                     </h1>
                     <p className="text-amber-500/80 text-lg mb-2">Cabinet digital de développement spirituel</p>
                     <p className="text-gray-400">L'inscription n'est pas encore disponible</p>
