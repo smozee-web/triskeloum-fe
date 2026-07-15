@@ -138,10 +138,10 @@ export default function NotificationCenter() {
         const notifDate = new Date(date);
         const seconds = Math.floor((now.getTime() - notifDate.getTime()) / 1000);
 
-        if (seconds < 60) return 'À l\'instant';
-        if (seconds < 3600) return `Il y a ${Math.floor(seconds / 60)}m`;
-        if (seconds < 86400) return `Il y a ${Math.floor(seconds / 3600)}h`;
-        return `Il y a ${Math.floor(seconds / 86400)}j`;
+        if (seconds < 60) return 'Just now';
+        if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+        if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+        return `${Math.floor(seconds / 86400)}d ago`;
     };
 
     return (
@@ -171,7 +171,7 @@ export default function NotificationCenter() {
                                     onClick={markAllAsRead}
                                     className="text-xs px-3 py-1 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition-colors font-medium"
                                 >
-                                    Marquer tout comme lu
+                                    Mark all as read
                                 </button>
                             )}
                             <button
@@ -188,8 +188,8 @@ export default function NotificationCenter() {
                         {notifications.length === 0 ? (
                             <div className="p-8 text-center text-slate-500">
                                 <BellIcon className="w-12 h-12 mx-auto mb-3 text-slate-300" />
-                                <p className="font-medium">Aucune notification</p>
-                                <p className="text-sm">Vous êtes à jour!</p>
+                                <p className="font-medium">No notification</p>
+                                <p className="text-sm">You are all caught up!</p>
                             </div>
                         ) : (
                             notifications.map(notif => (
@@ -231,7 +231,7 @@ export default function NotificationCenter() {
                                                 <button
                                                     onClick={(e) => markAsRead(notif.id, e)}
                                                     className="p-1 hover:bg-slate-200 rounded transition-colors"
-                                                    title="Marquer comme lu"
+                                                    title="Mark as read"
                                                 >
                                                     <CheckIcon className="w-4 h-4 text-slate-600" />
                                                 </button>
@@ -239,7 +239,7 @@ export default function NotificationCenter() {
                                             <button
                                                 onClick={(e) => deleteNotification(notif.id, e)}
                                                 className="p-1 hover:bg-red-100 rounded transition-colors"
-                                                title="Supprimer"
+                                                title="Delete"
                                             >
                                                 <TrashIcon className="w-4 h-4 text-red-600" />
                                             </button>
@@ -254,7 +254,7 @@ export default function NotificationCenter() {
                     {notifications.length > 0 && (
                         <div className="p-3 border-t border-slate-200 text-center">
                             <button className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors">
-                                Voir toutes les notifications
+                                View all notifications
                             </button>
                         </div>
                     )}

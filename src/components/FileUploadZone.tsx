@@ -133,7 +133,7 @@ const FileUploadZone: React.FC<FileUploadZoneProps> = ({
                                         <ImageIcon className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0" />
                                     )}
                                     <span className="text-sm text-gray-700 dark:text-text-primary truncate font-medium">
-                                        {selectedFile?.name || 'Fichier prévisualisé'}
+                                        {selectedFile?.name || 'Previewed file'}
                                     </span>
                                 </div>
                                 <motion.button
@@ -160,7 +160,7 @@ const FileUploadZone: React.FC<FileUploadZoneProps> = ({
                                 }}
                                 className="w-full py-2 px-4 text-sm text-amber-700 dark:text-amber-400 bg-white dark:bg-bg-tertiary border border-amber-300 dark:border-amber-700 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors font-medium"
                             >
-                                Remplacer le fichier
+                                Replace file
                             </motion.button>
                         </motion.div>
                     ) : (
@@ -179,10 +179,10 @@ const FileUploadZone: React.FC<FileUploadZoneProps> = ({
                                 <Upload className="w-12 h-12 text-amber-600 dark:text-amber-400 mx-auto" />
                             </motion.div>
                             <p className="text-sm font-semibold text-gray-700 dark:text-text-primary mb-1">
-                                Glissez-déposez votre fichier
+                                Drag and drop your file
                             </p>
                             <p className="text-xs text-gray-500 dark:text-text-tertiary">
-                                ou cliquez pour parcourir
+                                or click to browse
                             </p>
                         </motion.div>
                     )}

@@ -52,7 +52,7 @@ export const VoiceRoom: React.FC<VoiceRoomProps> = ({ roomId, onClose }) => {
       await notifyJoinRoom();
     } catch (err) {
       console.error('❌ Error:', err);
-      setError('Impossible de rejoindre le salon vocal');
+      setError('Unable to join the voice room');
       setIsLoading(false);
     }
   };
@@ -130,7 +130,7 @@ export const VoiceRoom: React.FC<VoiceRoomProps> = ({ roomId, onClose }) => {
     return (
       <div className="voice-room error">
         <p>{error}</p>
-        <button onClick={onClose}>Fermer</button>
+        <button onClick={onClose}>Close</button>
       </div>
     );
   }
@@ -166,7 +166,7 @@ export const VoiceRoom: React.FC<VoiceRoomProps> = ({ roomId, onClose }) => {
           <div className="icon-wrapper">
             {isMuted ? <FaMicrophoneSlash /> : <FaMicrophone />}
           </div>
-          <span className="label">{isMuted ? 'Micro coupé' : 'Micro actif'}</span>
+          <span className="label">{isMuted ? 'Mic muted' : 'Mic active'}</span>
         </button>
 
         <button className="control-btn danger" onClick={handleLeave}>

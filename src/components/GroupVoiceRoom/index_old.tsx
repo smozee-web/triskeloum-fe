@@ -54,7 +54,7 @@ export const GroupVoiceRoom: React.FC<GroupVoiceRoomProps> = ({ voiceRoomId, onC
       await notifyJoinRoom();
     } catch (err) {
       console.error('❌ Error:', err);
-      setError('Impossible de rejoindre le salon vocal');
+      setError('Unable to join the voice room');
       setIsLoading(false);
     }
   };
@@ -132,7 +132,7 @@ export const GroupVoiceRoom: React.FC<GroupVoiceRoomProps> = ({ voiceRoomId, onC
     return (
       <div className="voice-room error">
         <p>{error}</p>
-        <button onClick={onClose}>Fermer</button>
+        <button onClick={onClose}>Close</button>
       </div>
     );
   }
@@ -142,7 +142,7 @@ export const GroupVoiceRoom: React.FC<GroupVoiceRoomProps> = ({ voiceRoomId, onC
       <div className="voice-room-header">
         <div className="status-indicator">
           <span className="dot pulse"></span>
-          <span className="text">Salon vocal en cours</span>
+          <span className="text">Voice room in progress</span>
         </div>
         <span className="participants-count">
           {participants.length + 1} participant{participants.length > 0 ? 's' : ''}
@@ -168,14 +168,14 @@ export const GroupVoiceRoom: React.FC<GroupVoiceRoomProps> = ({ voiceRoomId, onC
           <div className="icon-wrapper">
             {isMuted ? <FaMicrophoneSlash /> : <FaMicrophone />}
           </div>
-          <span className="label">{isMuted ? 'Micro coupé' : 'Micro actif'}</span>
+          <span className="label">{isMuted ? 'Mic muted' : 'Mic active'}</span>
         </button>
 
         <button className="control-btn danger" onClick={handleLeave}>
           <div className="icon-wrapper">
             <FaPhone className="rotate-135" />
           </div>
-          <span className="label">Quitter</span>
+          <span className="label">Leave</span>
         </button>
       </div>
     </div>

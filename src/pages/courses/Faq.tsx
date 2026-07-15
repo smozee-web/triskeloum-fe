@@ -14,10 +14,10 @@ interface FaqFormData extends FaqData {
 }
 
 const FAQ_CATEGORIES = [
-    { value: 'account', label: 'Compte' },
-    { value: 'courses', label: 'Cours' },
-    { value: 'payment', label: 'Paiement' },
-    { value: 'settings', label: 'Paramètres' },
+    { value: 'account', label: 'Account' },
+    { value: 'courses', label: 'Courses' },
+    { value: 'payment', label: 'Payment' },
+    { value: 'settings', label: 'Settings' },
 ];
 
 const Faq: React.FC = () => {
@@ -57,7 +57,7 @@ const Faq: React.FC = () => {
                 setFaqs(response?.payload || []);
                 setTotalPages(response?.payload?.pagination?.totalPages || 1);
             } catch (error: any) {
-                toast.error(error?.message || 'Erreur lors du chargement');
+                toast.error(error?.message || 'Error while loading');
             } finally {
                 setIsLoading(false);
             }
@@ -99,15 +99,15 @@ const Faq: React.FC = () => {
     };
 
     const handleDelete = async (faqId: number) => {
-        if (!window.confirm('Êtes-vous sûr de vouloir supprimer cette FAQ ?')) {
+        if (!window.confirm('Are you sure you want to delete this FAQ?')) {
             return;
         }
         try {
             await faqService.deleteFaq(faqId);
-            toast.success('FAQ supprimée');
+            toast.success('FAQ deleted');
             setPage(1);
         } catch (error: any) {
-            toast.error(error?.message || 'Erreur lors de la suppression');
+            toast.error(error?.message || 'Error while deleting');
         }
     };
 
@@ -116,7 +116,7 @@ const Faq: React.FC = () => {
 
         // Validation
         if (!formData.question || !formData.answer) {
-            toast.error('Veuillez remplir tous les champs requis');
+            toast.error('Please fill in all required fields');
             return;
         }
 
@@ -125,10 +125,10 @@ const Faq: React.FC = () => {
 
             if (selectedFaq) {
                 await faqService.updateFaq(selectedFaq.id, formData);
-                toast.success('FAQ modifiée');
+                toast.success('FAQ updated');
             } else {
                 await faqService.createFaq(formData);
-                toast.success('FAQ créée');
+                toast.success('FAQ created');
             }
 
             setIsFormModalOpen(false);
@@ -137,7 +137,7 @@ const Faq: React.FC = () => {
             setSearch('');
         } catch (error: any) {
             console.error('Error:', error);
-            toast.error(error?.message || 'Erreur lors de la soumission');
+            toast.error(error?.message || 'Error while submitting');
         } finally {
             setIsSubmitting(false);
         }
@@ -157,14 +157,14 @@ const Faq: React.FC = () => {
                             }}>
                             FAQs
                         </h1>
-                        <p className="text-gray-600 dark:text-text-tertiary mt-1 text-sm sm:text-base">Gérez les questions fréquemment posées</p>
+                        <p className="text-gray-600 dark:text-text-tertiary mt-1 text-sm sm:text-base">Manage frequently asked questions</p>
                     </div>
                     <button
                         onClick={handleCreate}
                         className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors shadow-md w-full sm:w-auto justify-center sm:justify-start font-medium"
                     >
                         <PlusIcon className="w-5 h-5 mr-2" />
-                        Nouvelle FAQ
+                        New FAQ
                     </button>
                 </div>
 
@@ -190,7 +190,7 @@ const Faq: React.FC = () => {
                         <div className="relative">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm font-medium text-gray-600 dark:text-text-tertiary">Publiées</p>
+                                    <p className="text-sm font-medium text-gray-600 dark:text-text-tertiary">Published</p>
                                     <p className="text-2xl sm:text-3xl font-bold text-green-600 dark:text-green-400 mt-2">{stats.published}</p>
                                 </div>
                                 <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -205,7 +205,7 @@ const Faq: React.FC = () => {
                         <div className="relative">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm font-medium text-gray-600 dark:text-text-tertiary">Total des vues</p>
+                                    <p className="text-sm font-medium text-gray-600 dark:text-text-tertiary">Total views</p>
                                     <div className="flex items-center gap-2 mt-2">
                                         <Eye className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                                         <p className="text-2xl sm:text-3xl font-bold text-purple-600 dark:text-purple-400">{stats.views}</p>
@@ -224,7 +224,7 @@ const Faq: React.FC = () => {
                     <SearchBar
                         value={search}
                         onChange={setSearch}
-                        placeholder="Rechercher une FAQ..."
+                        placeholder="Search for a FAQ..."
                     />
                 </div>
 
@@ -236,14 +236,14 @@ const Faq: React.FC = () => {
                         <div className="w-16 h-16 bg-gradient-to-br from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
                             <HelpCircle className="w-8 h-8 text-amber-600 dark:text-amber-400" />
                         </div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">Aucune FAQ</h3>
-                        <p className="text-gray-600 dark:text-text-tertiary mb-6 text-sm sm:text-base">Commencez par créer votre première FAQ</p>
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">No FAQ</h3>
+                        <p className="text-gray-600 dark:text-text-tertiary mb-6 text-sm sm:text-base">Start by creating your first FAQ</p>
                         <button
                             onClick={handleCreate}
                             className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors font-medium"
                         >
                             <PlusIcon className="w-5 h-5 mr-2" />
-                            Créer une FAQ
+                            Create a FAQ
                         </button>
                     </div>
                 ) : (
@@ -254,9 +254,9 @@ const Faq: React.FC = () => {
                                 <thead className="bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 border-b border-gray-200 dark:border-gray-800">
                                     <tr>
                                         <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Question</th>
-                                        <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Catégorie</th>
-                                        <th className="hidden lg:table-cell px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Vues</th>
-                                        <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Statut</th>
+                                        <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Category</th>
+                                        <th className="hidden lg:table-cell px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Views</th>
+                                        <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Status</th>
                                         <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Actions</th>
                                     </tr>
                                 </thead>
@@ -285,21 +285,21 @@ const Faq: React.FC = () => {
                                                             : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-400 border-gray-200 dark:border-gray-700'
                                                     }`}
                                                 >
-                                                    {faq.is_published ? 'Publiée' : 'Brouillon'}
+                                                    {faq.is_published ? 'Published' : 'Draft'}
                                                 </span>
                                             </td>
                                             <td className="px-4 sm:px-6 py-4">
                                                 <div className="flex gap-2">
                                                     <button
                                                         onClick={() => handleEdit(faq)}
-                                                        title="Modifier"
+                                                        title="Edit"
                                                         className="p-2 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/30 rounded-lg transition-colors"
                                                     >
                                                         <PencilIcon className="w-4 h-4" />
                                                     </button>
                                                     <button
                                                         onClick={() => handleDelete(faq.id)}
-                                                        title="Supprimer"
+                                                        title="Delete"
                                                         className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
                                                     >
                                                         <TrashIcon className="w-4 h-4" />
@@ -327,7 +327,7 @@ const Faq: React.FC = () => {
                 <Modal2
                     isOpen={isFormModalOpen}
                     onClose={() => setIsFormModalOpen(false)}
-                    title={selectedFaq ? 'Modifier la FAQ' : 'Créer une nouvelle FAQ'}
+                    title={selectedFaq ? 'Edit FAQ' : 'Create a new FAQ'}
                     size="lg"
                 >
                     <div className="p-4 sm:p-6">
@@ -342,28 +342,28 @@ const Faq: React.FC = () => {
                             value={formData.question}
                             onChange={(e) => setFormData({ ...formData, question: e.target.value })}
                             className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
-                            placeholder="Entrez la question"
+                            placeholder="Enter the question"
                         />
                     </div>
 
                     {/* Answer */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                            Réponse *
+                            Answer *
                         </label>
                         <textarea
                             value={formData.answer}
                             onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
                             rows={5}
                             className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent resize-none transition-all"
-                            placeholder="Entrez la réponse détaillée"
+                            placeholder="Enter the detailed answer"
                         />
                     </div>
 
                     {/* Category */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                            Catégorie *
+                            Category *
                         </label>
                         <select
                             value={formData.category}
@@ -381,7 +381,7 @@ const Faq: React.FC = () => {
                     {/* Order */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                            Ordre d'affichage
+                            Display order
                         </label>
                         <input
                             type="number"
@@ -391,7 +391,7 @@ const Faq: React.FC = () => {
                             placeholder="0"
                             min="0"
                         />
-                        <p className="text-xs text-gray-500 dark:text-text-tertiary mt-1">Les FAQs sont triées par ordre croissant</p>
+                        <p className="text-xs text-gray-500 dark:text-text-tertiary mt-1">FAQs are sorted in ascending order</p>
                     </div>
 
                     {/* Published */}
@@ -404,7 +404,7 @@ const Faq: React.FC = () => {
                             className="w-4 h-4 text-amber-600 dark:text-amber-500 border-gray-300 dark:border-gray-700 rounded focus:ring-amber-500"
                         />
                         <label htmlFor="is_published" className="ml-2 text-sm text-gray-900 dark:text-text-primary">
-                            Publier cette FAQ
+                            Publish this FAQ
                         </label>
                     </div>
 
@@ -415,14 +415,14 @@ const Faq: React.FC = () => {
                             onClick={() => setIsFormModalOpen(false)}
                             className="px-4 py-2 text-gray-700 dark:text-text-primary bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                         >
-                            Annuler
+                            Cancel
                         </button>
                         <button
                             type="submit"
                             disabled={isSubmitting}
                             className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors disabled:opacity-50 font-medium"
                         >
-                            {isSubmitting ? 'Traitement...' : selectedFaq ? 'Modifier' : 'Créer'}
+                            {isSubmitting ? 'Processing...' : selectedFaq ? 'Update' : 'Create'}
                         </button>
                             </div>
                         </form>

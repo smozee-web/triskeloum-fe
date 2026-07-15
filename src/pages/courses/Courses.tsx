@@ -77,16 +77,16 @@ const Courses: React.FC = () => {
     };
 
     const handleDelete = async (course: Course) => {
-        if (!window.confirm(`Voulez-vous vraiment supprimer "${course.title}" ?`)) {
+        if (!window.confirm(`Are you sure you want to delete "${course.title}"?`)) {
             return;
         }
 
         try {
             await deleteCourse(course.id).unwrap();
-            toast.success('Cours supprimé avec succès');
+            toast.success('Course deleted successfully');
             refetch();
         } catch (error: any) {
-            toast.error(error?.data?.message || 'Erreur lors de la suppression');
+            toast.error(error?.data?.message || 'Error while deleting');
         }
     };
 
@@ -99,11 +99,11 @@ const Courses: React.FC = () => {
         try {
             await togglePublish(course.id).unwrap();
             toast.success(
-                course.published ? 'Cours dépublié avec succès' : 'Cours publié avec succès'
+                course.published ? 'Course unpublished successfully' : 'Course published successfully'
             );
             refetch();
         } catch (error: any) {
-            toast.error(error?.data?.message || 'Erreur lors du changement de statut');
+            toast.error(error?.data?.message || 'Error while changing status');
         }
     };
 
@@ -112,7 +112,7 @@ const Courses: React.FC = () => {
         setSelectedCourseId(null);
     };
 
-    // Gestion des actions dans le modal de détails
+    // Manage actions in the details modal
     const handleDetailEdit = (course: Course) => {
         handleEdit(course);
         handleCloseModal();
@@ -125,25 +125,25 @@ const Courses: React.FC = () => {
 
     const handleDetailTogglePublish = async (course: Course) => {
         await handleTogglePublish(course);
-        // Ne pas fermer le modal pour permettre à l'utilisateur de voir le changement
+        // Do not close the modal so the user can see the change
     };
 
     const handleFormSubmit = async (formData: FormData) => {
         try {
             if (selectedCourseForEdit) {
-                // Mise à jour du cours existant
+                // Update the existing course
                 await courseService.updateCourse(selectedCourseForEdit.id, formData);
-                toast.success('Cours mis à jour avec succès');
+                toast.success('Course updated successfully');
             } else {
-                // Créer un nouveau cours
+                // Create a new course
                 const result = await courseService.createCourse(formData);
 
-                // Créer les sections s'il y en a
+                // Create the sections if any
                 const sectionsData = formData.get('sections');
                 if (sectionsData) {
                     const sections = JSON.parse(sectionsData as string);
 
-                    // Créer chaque section
+                    // Create each section
                     for (const section of sections) {
                         await courseService.createSection(result.payload.id, {
                             title: section.title,
@@ -153,14 +153,14 @@ const Courses: React.FC = () => {
                     }
                 }
 
-                toast.success('Cours créé avec succès');
+                toast.success('Course created successfully');
             }
 
             setIsFormModalOpen(false);
             refetch();
         } catch (error: any) {
-            console.error('Erreur lors de la soumission du formulaire:', error);
-            toast.error(error?.response?.data?.message || error?.message || 'Une erreur est survenue');
+            console.error('Error while submitting the form:', error);
+            toast.error(error?.response?.data?.message || error?.message || 'An error occurred');
         }
     };
 
@@ -187,16 +187,16 @@ const Courses: React.FC = () => {
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                             }}>
-                            Cours
+                            Courses
                         </h1>
-                        <p className="text-gray-600 dark:text-text-tertiary mt-1 text-sm sm:text-base">Gérez tous vos cours</p>
+                        <p className="text-gray-600 dark:text-text-tertiary mt-1 text-sm sm:text-base">Manage all your courses</p>
                     </div>
                     <button
                         onClick={handleCreate}
                         className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start"
                     >
                         <PlusIcon className="w-5 h-5 mr-2" />
-                        Nouveau cours
+                        New course
                     </button>
                 </div>
 
@@ -209,7 +209,7 @@ const Courses: React.FC = () => {
                             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                 <AcademicCapIcon className="h-6 w-6 text-black" />
                             </div>
-                            <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Total Cours</h3>
+                            <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Total Courses</h3>
                             <p className="text-2xl font-bold text-gray-900 dark:text-text-primary">{stats.total}</p>
                         </div>
                     </div>
@@ -221,7 +221,7 @@ const Courses: React.FC = () => {
                             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                 <CheckCircleIcon className="h-6 w-6 text-white" />
                             </div>
-                            <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Cours Publiés</h3>
+                            <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Published Courses</h3>
                             <p className="text-2xl font-bold text-green-600 dark:text-green-400">{stats.published}</p>
                         </div>
                     </div>
@@ -233,7 +233,7 @@ const Courses: React.FC = () => {
                             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-gray-600 to-gray-700 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                 <DocumentTextIcon className="h-6 w-6 text-white" />
                             </div>
-                            <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Brouillons</h3>
+                            <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Drafts</h3>
                             <p className="text-2xl font-bold text-gray-700 dark:text-gray-300">{stats.draft}</p>
                         </div>
                     </div>
@@ -245,7 +245,7 @@ const Courses: React.FC = () => {
                         <SearchBar
                             value={search}
                             onChange={setSearch}
-                            placeholder="Rechercher un cours..."
+                            placeholder="Search for a course..."
                         />
 
                         <select
@@ -256,9 +256,9 @@ const Courses: React.FC = () => {
                             }}
                             className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent text-sm transition-all"
                         >
-                            <option value="">Tous les statuts</option>
-                            <option value="published">Publiés</option>
-                            <option value="draft">Brouillons</option>
+                            <option value="">All statuses</option>
+                            <option value="published">Published</option>
+                            <option value="draft">Drafts</option>
                         </select>
 
                         <select
@@ -269,7 +269,7 @@ const Courses: React.FC = () => {
                             }}
                             className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent text-sm transition-all"
                         >
-                            <option value="">Tous les niveaux</option>
+                            <option value="">All levels</option>
                             {levels.map((level: any) => (
                                 <option key={level.id} value={level.id}>
                                     {level.name}
@@ -282,10 +282,10 @@ const Courses: React.FC = () => {
                             onChange={(e) => setLimit(Number(e.target.value))}
                             className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent text-sm transition-all"
                         >
-                            <option value="6">6 par page</option>
-                            <option value="12">12 par page</option>
-                            <option value="24">24 par page</option>
-                            <option value="48">48 par page</option>
+                            <option value="6">6 per page</option>
+                            <option value="12">12 per page</option>
+                            <option value="24">24 per page</option>
+                            <option value="48">48 per page</option>
                         </select>
 
                         {/* View Toggle - Compact */}
@@ -325,12 +325,12 @@ const Courses: React.FC = () => {
                             <AcademicCapIcon className="h-8 w-8 text-amber-600 dark:text-amber-400" />
                         </div>
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">
-                            {debouncedSearch ? 'Aucun cours trouvé' : 'Aucun cours'}
+                            {debouncedSearch ? 'No course found' : 'No courses'}
                         </h3>
                         <p className="text-gray-600 dark:text-text-tertiary mb-6 text-sm sm:text-base">
                             {debouncedSearch
-                                ? 'Essayez de modifier vos filtres de recherche'
-                                : 'Commencez par créer votre premier cours'}
+                                ? 'Try adjusting your search filters'
+                                : 'Start by creating your first course'}
                         </p>
                         {!debouncedSearch && (
                             <button
@@ -338,7 +338,7 @@ const Courses: React.FC = () => {
                                 className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                             >
                                 <PlusIcon className="w-5 h-5 mr-2" />
-                                Créer un cours
+                                Create a course
                             </button>
                         )}
                     </div>
@@ -386,7 +386,7 @@ const Courses: React.FC = () => {
                     </>
                 )}
 
-                {/* Modal de détails */}
+                {/* Details modal */}
                 <Modal2
                     isOpen={isDetailModalOpen}
                     onClose={handleCloseModal}
@@ -409,7 +409,7 @@ const Courses: React.FC = () => {
                     initialData={selectedCourseForEdit}
                     onSubmit={handleFormSubmit}
                     isSubmitting={isCreating || isUpdating || isCreatingSection}
-                    title={selectedCourseForEdit ? 'Modifier le cours' : 'Créer un nouveau cours'}
+                    title={selectedCourseForEdit ? 'Edit course' : 'Create a new course'}
                 />
             </div>
         </div>

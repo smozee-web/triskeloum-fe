@@ -38,14 +38,14 @@ const PartItem: React.FC<PartItemProps> = ({
               )}
             </button>
             <span className="text-xs font-medium text-gray-500">
-              Partie {partIndex + 1}
+              Part {partIndex + 1}
             </span>
             <input
               type="text"
               value={part.title}
               onChange={(e) => onChange('title', e.target.value)}
               className="font-medium text-gray-900 border-none focus:ring-0 p-0 bg-transparent flex-1"
-              placeholder="Titre de la partie"
+              placeholder="Part title"
             />
           </div>
           <button
@@ -53,7 +53,7 @@ const PartItem: React.FC<PartItemProps> = ({
             onClick={onRemove}
             className="text-sm text-red-600 hover:text-red-800 hover:bg-red-50 px-2 py-1 rounded transition-all duration-200"
           >
-            Supprimer
+            Delete
           </button>
         </div>
       </div>
@@ -64,7 +64,7 @@ const PartItem: React.FC<PartItemProps> = ({
           <RichTextEditor
             value={part.content}
             onChange={(value) => onChange('content', value)}
-            placeholder="Contenu de la partie..."
+            placeholder="Part content..."
           />
         </div>
       )}

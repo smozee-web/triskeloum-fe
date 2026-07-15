@@ -51,38 +51,38 @@ const Login = () => {
                 console.error('Login error:', result.error);
                 const error: any = result.error;
                 const status = error?.status || error?.data?.statusCode;
-                const message = error?.data?.message || 'Erreur de connexion';
+                const message = error?.data?.message || 'Login error';
 
                 switch (status) {
                     case 404:
                         Swal.fire({
                             icon: 'error',
-                            title: 'Utilisateur introuvable',
-                            text: message || 'Email ou mot de passe incorrect.',
+                            title: 'User not found',
+                            text: message || 'Incorrect email or password.',
                         });
                         break;
 
                     case 401:
                         Swal.fire({
                             icon: 'error',
-                            title: 'Erreur d\'authentification',
-                            text: message || 'Email ou mot de passe incorrect.',
+                            title: 'Authentication error',
+                            text: message || 'Incorrect email or password.',
                         });
                         break;
 
                     case 403:
                         Swal.fire({
                             icon: 'warning',
-                            title: 'Compte en attente',
-                            text: message || 'Votre compte est en attente de validation.',
+                            title: 'Account pending',
+                            text: message || 'Your account is pending validation.',
                         });
                         break;
 
                     default:
                         Swal.fire({
                             icon: 'error',
-                            title: 'Erreur de connexion',
-                            text: message || 'Une erreur est survenue.',
+                            title: 'Login error',
+                            text: message || 'An error occurred.',
                         });
                         break;
                 }
@@ -101,8 +101,8 @@ const Login = () => {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Connexion réussie',
-                    text: 'Bienvenue sur USRATUL AZKAAR !',
+                    title: 'Login successful',
+                    text: 'Welcome to USRATUL AZKAAR!',
                     timer: 2000,
                     showConfirmButton: false,
                 });
@@ -117,8 +117,8 @@ const Login = () => {
             console.error('Login error:', error);
             Swal.fire({
                 icon: 'error',
-                title: 'Erreur serveur',
-                text: 'Une erreur interne s\'est produite. Veuillez réessayer.',
+                title: 'Server error',
+                text: 'An internal error occurred. Please try again.',
             });
         }
     };
@@ -128,7 +128,7 @@ const Login = () => {
             <div className="w-full flex items-center justify-center min-h-screen bg-black">
                 <div className="text-center">
                     <Spin size="large" />
-                    <div className="mt-4 text-amber-400">Vérification...</div>
+                    <div className="mt-4 text-amber-400">Checking...</div>
                 </div>
             </div>
         );
@@ -165,7 +165,7 @@ const Login = () => {
                         USRATUL AZKAAR
                     </h1>
                     <p className="text-amber-500/80 text-sm tracking-[0.2em] uppercase">
-                        Cabinet digital de développement spirituel
+                        Digital cabinet for spiritual development
                     </p>
                 </div>
 
@@ -185,32 +185,32 @@ const Login = () => {
                                     rules={[
                                         {
                                             required: true,
-                                            message: 'Veuillez entrer votre email'
+                                            message: 'Please enter your email'
                                         },
                                         {
                                             type: 'email',
-                                            message: 'Format d\'email invalide'
+                                            message: 'Invalid email format'
                                         }
                                     ]}
                                 >
                                     <Input
                                         prefix={<MailOutlined className="text-amber-600" />}
-                                        placeholder="votre@email.com"
+                                        placeholder="your@email.com"
                                         className="rounded-lg bg-gray-900 border-amber-600/30 text-white placeholder-gray-600 hover:border-amber-500 focus:border-amber-400 h-12"
                                     />
                                 </Form.Item>
 
                                 <Form.Item
-                                    label={<span className="text-amber-400 font-medium">Mot de passe</span>}
+                                    label={<span className="text-amber-400 font-medium">Password</span>}
                                     name="password"
                                     rules={[{
                                         required: true,
-                                        message: 'Veuillez entrer votre mot de passe'
+                                        message: 'Please enter your password'
                                     }]}
                                 >
                                     <Input.Password
                                         prefix={<LockOutlined className="text-amber-600" />}
-                                        placeholder="Votre mot de passe"
+                                        placeholder="Your password"
                                         className="rounded-lg bg-gray-900 border-amber-600/30 text-white placeholder-gray-600 hover:border-amber-500 focus:border-amber-400 h-12"
                                     />
                                 </Form.Item>
@@ -218,7 +218,7 @@ const Login = () => {
                                 <div className="flex justify-between items-center">
                                     <Form.Item name="remember" valuePropName="checked" noStyle>
                                         <Checkbox className="text-gray-400">
-                                            <span className="text-sm text-gray-400">Se souvenir de moi</span>
+                                            <span className="text-sm text-gray-400">Remember me</span>
                                         </Checkbox>
                                     </Form.Item>
                                     <a
@@ -228,12 +228,12 @@ const Login = () => {
                                             e.preventDefault();
                                             Swal.fire({
                                                 icon: 'info',
-                                                title: 'Mot de passe oublié ?',
-                                                text: 'Contactez votre administrateur système.',
+                                                title: 'Forgot your password?',
+                                                text: 'Contact your system administrator.',
                                             });
                                         }}
                                     >
-                                        Mot de passe oublié ?
+                                        Forgot your password?
                                     </a>
                                 </div>
 
@@ -244,7 +244,7 @@ const Login = () => {
                                         loading={isLoading}
                                         className="w-full h-12 bg-gradient-to-r from-amber-600 to-amber-800 hover:from-amber-500 hover:to-amber-700 border-0 rounded-lg text-lg font-semibold shadow-lg hover:shadow-amber-600/30 transition-all duration-300 text-black"
                                     >
-                                        {isLoading ? 'Connexion...' : 'Se connecter'}
+                                        {isLoading ? 'Signing in...' : 'Sign in'}
                                     </Button>
                                 </Form.Item>
                             </div>

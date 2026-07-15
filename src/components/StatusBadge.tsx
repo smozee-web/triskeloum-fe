@@ -24,14 +24,14 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
     lg: 'w-5 h-5'
   };
 
-  const statusConfig = published 
+  const statusConfig = published
     ? {
-        label: 'Publié',
+        label: 'Published',
         icon: '🟢',
         classes: 'bg-green-50 text-green-700 border-green-200'
       }
     : {
-        label: 'Brouillon',
+        label: 'Draft',
         icon: '🟡',
         classes: 'bg-yellow-50 text-yellow-700 border-yellow-200'
       };

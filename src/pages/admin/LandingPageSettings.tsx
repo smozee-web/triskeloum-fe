@@ -338,7 +338,7 @@ const LandingPageSettings: React.FC = () => {
                 }).unwrap();
             } else if (activeTab === 'services') {
                 // Handle services save through individual create/update operations
-                toast('Utilisez les boutons individuels pour sauvegarder les services');
+                toast('Use the individual buttons to save services');
                 return;
             } else if (activeTab === 'formations') {
                 await updateContent({
@@ -358,7 +358,7 @@ const LandingPageSettings: React.FC = () => {
                 }).unwrap();
             } else if (activeTab === 'pricing') {
                 // Handle pricing save through individual create/update operations
-                toast('Utilisez les boutons individuels pour sauvegarder les plans');
+                toast('Use the individual buttons to save plans');
                 return;
             } else if (activeTab === 'social') {
                 await updateContent({
@@ -369,23 +369,23 @@ const LandingPageSettings: React.FC = () => {
                 }).unwrap();
             }
 
-            toast.success('Paramètres sauvegardés avec succès');
+            toast.success('Settings saved successfully');
         } catch (error: any) {
             console.error('Save error:', error);
-            toast.error(error?.data?.message || 'Erreur lors de la sauvegarde');
+            toast.error(error?.data?.message || 'Error while saving');
         } finally {
             setIsSaving(false);
         }
     };
 
     const tabs = [
-        { id: 'home' as TabType, label: 'Accueil', icon: Home },
+        { id: 'home' as TabType, label: 'Home', icon: Home },
         { id: 'services' as TabType, label: 'Services', icon: Briefcase },
-        { id: 'formations' as TabType, label: 'Formations', icon: BookOpen },
-        { id: 'pricing' as TabType, label: 'Tarifs', icon: DollarSign },
-        { id: 'about' as TabType, label: 'À propos', icon: Users },
+        { id: 'formations' as TabType, label: 'Training', icon: BookOpen },
+        { id: 'pricing' as TabType, label: 'Pricing', icon: DollarSign },
+        { id: 'about' as TabType, label: 'About', icon: Users },
         { id: 'contact' as TabType, label: 'Contact', icon: Mail },
-        { id: 'social' as TabType, label: 'Réseaux sociaux', icon: Share2 },
+        { id: 'social' as TabType, label: 'Social Media', icon: Share2 },
     ];
 
     const renderHomeSection = () => (
@@ -393,7 +393,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Titre (Français)
+                        Title (French)
                     </label>
                     <input
                         type="text"
@@ -418,7 +418,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Sous-titre (Français)
+                        Subtitle (French)
                     </label>
                     <input
                         type="text"
@@ -443,12 +443,12 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Description (Français)
+                        Description (French)
                     </label>
                     <RichTextEditor
                         value={homeSettings.description_fr}
                         onChange={(value) => setHomeSettings({ ...homeSettings, description_fr: value })}
-                        placeholder="Description en français..."
+                        placeholder="Description in French..."
                     />
                 </div>
                 <div>
@@ -465,7 +465,7 @@ const LandingPageSettings: React.FC = () => {
 
             <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                    Image Hero
+                    Hero Image
                 </label>
                 <input
                     type="file"
@@ -478,7 +478,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Texte CTA Principal (Français)
+                        Primary CTA Text (French)
                     </label>
                     <input
                         type="text"
@@ -500,7 +500,7 @@ const LandingPageSettings: React.FC = () => {
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Lien CTA Principal
+                        Primary CTA Link
                     </label>
                     <input
                         type="text"
@@ -515,7 +515,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Texte CTA Secondaire (Français)
+                        Secondary CTA Text (French)
                     </label>
                     <input
                         type="text"
@@ -537,7 +537,7 @@ const LandingPageSettings: React.FC = () => {
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Lien CTA Secondaire
+                        Secondary CTA Link
                     </label>
                     <input
                         type="text"
@@ -571,17 +571,17 @@ const LandingPageSettings: React.FC = () => {
 
             if (isPersisted && serviceId) {
                 await updateService({ id: serviceId, data: serviceData }).unwrap();
-                toast.success('Service mis à jour avec succès');
+                toast.success('Service updated successfully');
             } else {
                 const result = await createService(serviceData).unwrap();
                 const updated = [...services];
                 updated[index].id = result.payload.id;
                 setServices(updated);
-                toast.success('Service créé avec succès');
+                toast.success('Service created successfully');
             }
         } catch (error: any) {
             console.error('Save service error:', error);
-            toast.error(error?.data?.message || 'Erreur lors de la sauvegarde du service');
+            toast.error(error?.data?.message || 'Error while saving the service');
         }
     };
 
@@ -594,7 +594,7 @@ const LandingPageSettings: React.FC = () => {
             return;
         }
 
-        if (!confirm('Voulez-vous vraiment supprimer ce service ?')) return;
+        if (!confirm('Are you sure you want to delete this service?')) return;
 
         try {
             const serviceId = typeof service.id === 'string' ? parseInt(service.id, 10) : service.id;
@@ -603,10 +603,10 @@ const LandingPageSettings: React.FC = () => {
                 const currentId = typeof s.id === 'string' ? parseInt(s.id, 10) : s.id;
                 return currentId !== serviceId;
             }));
-            toast.success('Service supprimé avec succès');
+            toast.success('Service deleted successfully');
         } catch (error: any) {
             console.error('Delete service error:', error);
-            toast.error(error?.data?.message || 'Erreur lors de la suppression du service');
+            toast.error(error?.data?.message || 'Error while deleting the service');
         }
     };
 
@@ -630,7 +630,7 @@ const LandingPageSettings: React.FC = () => {
                     }])}
                     className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                 >
-                    + Ajouter un service
+                    + Add a service
                 </button>
             </div>
 
@@ -643,13 +643,13 @@ const LandingPageSettings: React.FC = () => {
                                 onClick={() => handleSaveService(service, index)}
                                 className="px-3 py-1.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm"
                             >
-                                Sauvegarder
+                                Save
                             </button>
                             <button
                                 onClick={() => handleDeleteService(service)}
                                 className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
                             >
-                                Supprimer
+                                Delete
                             </button>
                         </div>
                     </div>
@@ -657,7 +657,7 @@ const LandingPageSettings: React.FC = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                Titre (Français)
+                                Title (French)
                             </label>
                             <input
                                 type="text"
@@ -687,7 +687,7 @@ const LandingPageSettings: React.FC = () => {
                         </div>
                         <div className="md:col-span-2">
                             <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                Description (Français)
+                                Description (French)
                             </label>
                             <textarea
                                 value={service.description_fr}
@@ -717,7 +717,7 @@ const LandingPageSettings: React.FC = () => {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                Icône
+                                Icon
                             </label>
                             <select
                                 value={service.icon}
@@ -729,14 +729,14 @@ const LandingPageSettings: React.FC = () => {
                                 className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                             >
                                 <option value="consultation">Consultation</option>
-                                <option value="lecture">Lecture</option>
-                                <option value="bilan">Bilan</option>
-                                <option value="livre">Livre</option>
+                                <option value="lecture">Reading</option>
+                                <option value="bilan">Assessment</option>
+                                <option value="livre">Book</option>
                             </select>
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                Prix (EUR)
+                                Price (EUR)
                             </label>
                             <input
                                 type="number"
@@ -751,7 +751,7 @@ const LandingPageSettings: React.FC = () => {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                Prix (USD)
+                                Price (USD)
                             </label>
                             <input
                                 type="number"
@@ -766,7 +766,7 @@ const LandingPageSettings: React.FC = () => {
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                Prix (XOF)
+                                Price (XOF)
                             </label>
                             <input
                                 type="number"
@@ -790,7 +790,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Titre (Français)
+                        Title (French)
                     </label>
                     <input
                         type="text"
@@ -815,7 +815,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Sous-titre (Français)
+                        Subtitle (French)
                     </label>
                     <input
                         type="text"
@@ -840,7 +840,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Description (Français)
+                        Description (French)
                     </label>
                     <textarea
                         value={formationSettings.description_fr}
@@ -864,7 +864,7 @@ const LandingPageSettings: React.FC = () => {
 
             <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-bg-secondary space-y-3">
                 <div className="flex items-center justify-between">
-                    <h4 className="font-medium text-gray-900 dark:text-text-primary">Thématiques (pills)</h4>
+                    <h4 className="font-medium text-gray-900 dark:text-text-primary">Topics (pills)</h4>
                     <button
                         onClick={() => setFormationSettings({
                             ...formationSettings,
@@ -872,14 +872,14 @@ const LandingPageSettings: React.FC = () => {
                         })}
                         className="text-sm px-3 py-1.5 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:shadow"
                     >
-                        + Ajouter un sujet
+                        + Add a topic
                     </button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {formationSettings.topics.map((topic, index) => (
                         <div key={index} className="p-3 border border-gray-200 dark:border-gray-700 rounded-lg space-y-2">
                             <div className="flex justify-between items-center">
-                                <span className="text-sm text-gray-600 dark:text-text-secondary">Sujet {index + 1}</span>
+                                <span className="text-sm text-gray-600 dark:text-text-secondary">Topic {index + 1}</span>
                                 <button
                                     onClick={() => setFormationSettings({
                                         ...formationSettings,
@@ -887,12 +887,12 @@ const LandingPageSettings: React.FC = () => {
                                     })}
                                     className="text-red-600 hover:text-red-700 text-sm"
                                 >
-                                    Supprimer
+                                    Delete
                                 </button>
                             </div>
                             <input
                                 type="text"
-                                placeholder="Icône (emoji ou nom)"
+                                placeholder="Icon (emoji or name)"
                                 value={topic.icon}
                                 onChange={(e) => {
                                     const updated = [...formationSettings.topics];
@@ -929,7 +929,7 @@ const LandingPageSettings: React.FC = () => {
             </div>
 
             <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Packs de formation</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Training packs</h3>
                 <button
                     onClick={() => setFormationSettings({
                         ...formationSettings,
@@ -955,7 +955,7 @@ const LandingPageSettings: React.FC = () => {
                     })}
                     className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                 >
-                    + Ajouter un pack
+                    + Add a pack
                 </button>
             </div>
 
@@ -984,7 +984,7 @@ const LandingPageSettings: React.FC = () => {
                                     })}
                                     className="text-red-600 hover:text-red-700 text-sm"
                                 >
-                                    Supprimer
+                                    Delete
                                 </button>
                             </div>
                         </div>
@@ -992,7 +992,7 @@ const LandingPageSettings: React.FC = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                    Titre (FR)
+                                    Title (FR)
                                 </label>
                                 <input
                                     type="text"
@@ -1022,7 +1022,7 @@ const LandingPageSettings: React.FC = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                    Sous-titre (FR)
+                                    Subtitle (FR)
                                 </label>
                                 <input
                                     type="text"
@@ -1055,7 +1055,7 @@ const LandingPageSettings: React.FC = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                    Prix EUR
+                                    Price EUR
                                 </label>
                                 <input
                                     type="number"
@@ -1070,7 +1070,7 @@ const LandingPageSettings: React.FC = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                    Prix XOF
+                                    Price XOF
                                 </label>
                                 <input
                                     type="number"
@@ -1085,7 +1085,7 @@ const LandingPageSettings: React.FC = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                    Période (FR)
+                                    Period (FR)
                                 </label>
                                 <input
                                     type="text"
@@ -1118,7 +1118,7 @@ const LandingPageSettings: React.FC = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                    Durée (FR)
+                                    Duration (FR)
                                 </label>
                                 <input
                                     type="text"
@@ -1151,7 +1151,7 @@ const LandingPageSettings: React.FC = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                    Features (FR) — une par ligne
+                                    Features (FR) — one per line
                                 </label>
                                 <textarea
                                     rows={5}
@@ -1191,7 +1191,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Titre (Français)
+                        Title (French)
                     </label>
                     <input
                         type="text"
@@ -1216,7 +1216,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Sous-titre (Français)
+                        Subtitle (French)
                     </label>
                     <input
                         type="text"
@@ -1241,7 +1241,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Description (Français)
+                        Description (French)
                     </label>
                     <textarea
                         value={aboutSettings.description_fr}
@@ -1266,7 +1266,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Contenu (Français)
+                        Content (French)
                     </label>
                     <textarea
                         value={aboutSettings.content_fr}
@@ -1289,11 +1289,11 @@ const LandingPageSettings: React.FC = () => {
             </div>
 
             <div className="border-t border-gray-300 dark:border-gray-700 pt-6 mt-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-4">Profil du Maître</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-4">Master Profile</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                            Nom du Maître
+                            Master Name
                         </label>
                         <input
                             type="text"
@@ -1304,7 +1304,7 @@ const LandingPageSettings: React.FC = () => {
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                            Titre (Français)
+                            Title (French)
                         </label>
                         <input
                             type="text"
@@ -1326,7 +1326,7 @@ const LandingPageSettings: React.FC = () => {
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                            Citation (Français)
+                            Quote (French)
                         </label>
                         <textarea
                             value={aboutSettings.quote_fr}
@@ -1350,7 +1350,7 @@ const LandingPageSettings: React.FC = () => {
             </div>
 
             <div className="text-sm text-gray-600 dark:text-text-secondary">
-                <p>Note: Pour modifier les initiations, domaines d'expertise et équipe, veuillez éditer directement le fichier de configuration ou utilisez l'API.</p>
+                <p>Note: To edit initiations, areas of expertise and team, please edit the configuration file directly or use the API.</p>
             </div>
         </div>
     );
@@ -1358,7 +1358,7 @@ const LandingPageSettings: React.FC = () => {
     const renderPricingSection = () => (
         <div className="space-y-6">
             <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Plans tarifaires</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Pricing plans</h3>
                 <button
                     onClick={() => setPricingPlans([...pricingPlans, {
                         id: Date.now(),
@@ -1374,7 +1374,7 @@ const LandingPageSettings: React.FC = () => {
                     }])}
                     className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                 >
-                    + Ajouter un plan
+                    + Add a plan
                 </button>
             </div>
 
@@ -1394,7 +1394,7 @@ const LandingPageSettings: React.FC = () => {
                         <div className="space-y-4">
                             <input
                                 type="text"
-                                placeholder="Nom (FR)"
+                                placeholder="Name (FR)"
                                 value={plan.name_fr}
                                 onChange={(e) => {
                                     const updated = [...pricingPlans];
@@ -1417,7 +1417,7 @@ const LandingPageSettings: React.FC = () => {
                             <div className="grid grid-cols-2 gap-2">
                                 <input
                                     type="number"
-                                    placeholder="Prix EUR"
+                                    placeholder="Price EUR"
                                     value={plan.price_eur}
                                     onChange={(e) => {
                                         const updated = [...pricingPlans];
@@ -1428,7 +1428,7 @@ const LandingPageSettings: React.FC = () => {
                                 />
                                 <input
                                     type="number"
-                                    placeholder="Prix USD"
+                                    placeholder="Price USD"
                                     value={plan.price_usd}
                                     onChange={(e) => {
                                         const updated = [...pricingPlans];
@@ -1449,7 +1449,7 @@ const LandingPageSettings: React.FC = () => {
                                     }}
                                     className="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500"
                                 />
-                                <span className="text-sm text-gray-700 dark:text-text-secondary">Recommandé</span>
+                                <span className="text-sm text-gray-700 dark:text-text-secondary">Recommended</span>
                             </label>
                         </div>
                     </div>
@@ -1463,7 +1463,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Titre (Français)
+                        Title (French)
                     </label>
                     <input
                         type="text"
@@ -1488,7 +1488,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Sous-titre (Français)
+                        Subtitle (French)
                     </label>
                     <input
                         type="text"
@@ -1513,7 +1513,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Description (Français)
+                        Description (French)
                     </label>
                     <textarea
                         value={contactSettings.description_fr}
@@ -1564,7 +1564,7 @@ const LandingPageSettings: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                        Localisation (Français)
+                        Location (French)
                     </label>
                     <input
                         type="text"
@@ -1620,10 +1620,10 @@ const LandingPageSettings: React.FC = () => {
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                         }}>
-                        Configuration de la page d'accueil
+                        Homepage Configuration
                     </h1>
                     <p className="text-gray-600 dark:text-text-tertiary mt-1 text-sm sm:text-base">
-                        Gérez le contenu de votre page d'accueil publique
+                        Manage your public homepage content
                     </p>
                 </div>
 
@@ -1669,7 +1669,7 @@ const LandingPageSettings: React.FC = () => {
                         className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:hover:scale-100"
                     >
                         <Save className="w-5 h-5" />
-                        {isSaving ? 'Enregistrement...' : 'Enregistrer les modifications'}
+                        {isSaving ? 'Saving...' : 'Save changes'}
                     </button>
                 </div>
             </div>

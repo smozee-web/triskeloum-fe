@@ -19,7 +19,7 @@ const StatsCards: React.FC<StatsCardsProps> = ({ total, withCourses, empty }) =>
             textColor: 'text-blue-600'
         },
         {
-            label: 'Avec cours',
+            label: 'With courses',
             value: withCourses,
             icon: CheckCircleIcon,
             color: 'green',
@@ -27,7 +27,7 @@ const StatsCards: React.FC<StatsCardsProps> = ({ total, withCourses, empty }) =>
             textColor: 'text-green-600'
         },
         {
-            label: 'Vides',
+            label: 'Empty',
             value: empty,
             icon: XCircleIcon,
             color: 'orange',

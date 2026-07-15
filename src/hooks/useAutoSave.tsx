@@ -28,7 +28,7 @@ export const useAutoSave = (
       await onSave(data, files);
       lastSavedRef.current = JSON.stringify(data);
     } catch (error) {
-      console.error('Erreur auto-save:', error);
+      console.error('Auto-save error:', error);
     } finally {
       isSavingRef.current = false;
     }

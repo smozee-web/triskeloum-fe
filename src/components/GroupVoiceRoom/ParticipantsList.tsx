@@ -93,7 +93,7 @@ export const ParticipantsList: React.FC<ParticipantsListProps> = ({
                 )}
               </div>
               <span className="participant-status">
-                {participant.isActive ? 'En ligne' : 'Hors ligne'}
+                {participant.isActive ? 'Online' : 'Offline'}
               </span>
             </div>
 

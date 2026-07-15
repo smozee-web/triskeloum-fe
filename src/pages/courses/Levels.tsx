@@ -110,11 +110,11 @@ const Levels: React.FC = () => {
         const errors: Record<string, string> = {};
 
         if (!formData.name.trim()) {
-            errors.name = 'Le nom est requis';
+            errors.name = 'Name is required';
         }
 
         if (!formData.rank || formData.rank < 1) {
-            errors.rank = 'Le rang doit être supérieur à 0';
+            errors.rank = 'Rank must be greater than 0';
         }
 
         setFormErrors(errors);
@@ -135,11 +135,11 @@ const Levels: React.FC = () => {
                     id: selectedLevel.id,
                     data: formData,
                 }).unwrap();
-                toast.success('Niveau mis à jour avec succès');
+                toast.success('Level updated successfully');
             } else {
                 // Create
                 await createLevel(formData).unwrap();
-                toast.success('Niveau créé avec succès');
+                toast.success('Level created successfully');
             }
 
             setIsFormModalOpen(false);
@@ -147,7 +147,7 @@ const Levels: React.FC = () => {
             refetch();
             refetchStats();
         } catch (error: any) {
-            toast.error(error?.data?.message || 'Une erreur est survenue');
+            toast.error(error?.data?.message || 'An error occurred');
         }
     };
 
@@ -156,13 +156,13 @@ const Levels: React.FC = () => {
 
         try {
             await deleteLevel(selectedLevel.id).unwrap();
-            toast.success('Niveau supprimé avec succès');
+            toast.success('Level deleted successfully');
             setIsDeleteModalOpen(false);
             setSelectedLevel(null);
             refetch();
             refetchStats();
         } catch (error: any) {
-            toast.error(error?.data?.message || 'Une erreur est survenue');
+            toast.error(error?.data?.message || 'An error occurred');
         }
     };
 
@@ -183,16 +183,16 @@ const Levels: React.FC = () => {
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                             }}>
-                            Niveaux
+                            Levels
                         </h1>
-                        <p className="text-gray-600 dark:text-text-tertiary mt-1 text-sm sm:text-base">Gérez les niveaux de votre plateforme</p>
+                        <p className="text-gray-600 dark:text-text-tertiary mt-1 text-sm sm:text-base">Manage your platform's levels</p>
                     </div>
                     <button
                         onClick={handleCreate}
                         className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start"
                     >
                         <PlusIcon className="w-5 h-5 mr-2" />
-                        Nouveau niveau
+                        New level
                     </button>
                 </div>
 
@@ -206,7 +206,7 @@ const Levels: React.FC = () => {
                                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                     <ChartBarIcon className="h-6 w-6 text-black" />
                                 </div>
-                                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Total Niveaux</h3>
+                                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Total Levels</h3>
                                 <p className="text-2xl font-bold text-gray-900 dark:text-text-primary">{stats.total}</p>
                             </div>
                         </div>
@@ -218,7 +218,7 @@ const Levels: React.FC = () => {
                                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                     <GlobeAltIcon className="h-6 w-6 text-white" />
                                 </div>
-                                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Niveaux Publics</h3>
+                                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Public Levels</h3>
                                 <p className="text-2xl font-bold text-green-600 dark:text-green-400">{stats.public}</p>
                             </div>
                         </div>
@@ -230,7 +230,7 @@ const Levels: React.FC = () => {
                                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-gray-600 to-gray-700 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                     <LockClosedIcon className="h-6 w-6 text-white" />
                                 </div>
-                                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Niveaux Privés</h3>
+                                <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Private Levels</h3>
                                 <p className="text-2xl font-bold text-gray-700 dark:text-gray-300">{stats.private}</p>
                             </div>
                         </div>
@@ -243,7 +243,7 @@ const Levels: React.FC = () => {
                         <SearchBar
                             value={search}
                             onChange={setSearch}
-                            placeholder="Rechercher un niveau..."
+                            placeholder="Search for a level..."
                         />
                     </div>
                 </div>
@@ -257,12 +257,12 @@ const Levels: React.FC = () => {
                             <BookOpen className="w-8 h-8 text-amber-600 dark:text-amber-400" />
                         </div>
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">
-                            {debouncedSearch ? 'Aucun niveau trouvé' : 'Aucun niveau'}
+                            {debouncedSearch ? 'No level found' : 'No levels'}
                         </h3>
                         <p className="text-gray-600 dark:text-text-tertiary mb-6 text-sm sm:text-base">
                             {debouncedSearch
-                                ? 'Essayez de modifier votre recherche'
-                                : 'Commencez par créer votre premier niveau'}
+                                ? 'Try adjusting your search'
+                                : 'Start by creating your first level'}
                         </p>
                         {!debouncedSearch && (
                             <button
@@ -270,7 +270,7 @@ const Levels: React.FC = () => {
                                 className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                             >
                                 <PlusIcon className="w-5 h-5 mr-2" />
-                                Créer un niveau
+                                Create a level
                             </button>
                         )}
                     </div>
@@ -286,11 +286,11 @@ const Levels: React.FC = () => {
                                 }}
                                 className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent text-sm transition-all"
                             >
-                                <option value={5}>5 par page</option>
-                                <option value={10}>10 par page</option>
-                                <option value={25}>25 par page</option>
-                                <option value={50}>50 par page</option>
-                                <option value={100}>100 par page</option>
+                                <option value={5}>5 per page</option>
+                                <option value={10}>10 per page</option>
+                                <option value={25}>25 per page</option>
+                                <option value={50}>50 per page</option>
+                                <option value={100}>100 per page</option>
                             </select>
                         </div>
 
@@ -304,7 +304,7 @@ const Levels: React.FC = () => {
                                             className="px-4 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-gray-900 dark:text-text-tertiary cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                                         >
                                             <div className="flex items-center">
-                                                Rang
+                                                Rank
                                                 <SortIcon field="rank" />
                                             </div>
                                         </th>
@@ -313,18 +313,18 @@ const Levels: React.FC = () => {
                                             className="px-4 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-gray-900 dark:text-text-tertiary cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                                         >
                                             <div className="flex items-center">
-                                                Nom
+                                                Name
                                                 <SortIcon field="name" />
                                             </div>
                                         </th>
-                                        <th className="hidden sm:table-cell px-6 py-4 text-left text-xs font-semibold text-gray-900 dark:text-text-tertiary">Cours</th>
-                                        <th className="hidden lg:table-cell px-6 py-4 text-left text-xs font-semibold text-gray-900 dark:text-text-tertiary">Utilisateurs</th>
+                                        <th className="hidden sm:table-cell px-6 py-4 text-left text-xs font-semibold text-gray-900 dark:text-text-tertiary">Courses</th>
+                                        <th className="hidden lg:table-cell px-6 py-4 text-left text-xs font-semibold text-gray-900 dark:text-text-tertiary">Users</th>
                                         <th
                                             onClick={() => handleSort('is_public')}
                                             className="px-4 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-gray-900 dark:text-text-tertiary cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                                         >
                                             <div className="flex items-center">
-                                                Statut
+                                                Status
                                                 <SortIcon field="is_public" />
                                             </div>
                                         </th>
@@ -350,7 +350,7 @@ const Levels: React.FC = () => {
                                                             : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300'
                                                     }`}
                                                 >
-                                                    {level.is_public ? 'Public' : 'Privé'}
+                                                    {level.is_public ? 'Public' : 'Private'}
                                                 </span>
                                             </td>
                                             <td className="px-4 sm:px-6 py-4 text-right">
@@ -358,7 +358,7 @@ const Levels: React.FC = () => {
                                                     <button
                                                         onClick={() => handleEdit(level)}
                                                         className="p-2 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded-lg transition-colors"
-                                                        title="Modifier"
+                                                        title="Edit"
                                                     >
                                                         <PencilIcon className="w-4 h-4 sm:w-5 sm:h-5" />
                                                     </button>
@@ -366,7 +366,7 @@ const Levels: React.FC = () => {
                                                         onClick={() => handleDelete(level)}
                                                         disabled={isDeleting}
                                                         className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors disabled:opacity-50"
-                                                        title="Supprimer"
+                                                        title="Delete"
                                                     >
                                                         <TrashIcon className="w-4 h-4 sm:w-5 sm:h-5" />
                                                     </button>
@@ -408,7 +408,7 @@ const Levels: React.FC = () => {
                                 )}
                             </div>
                             <h2 className="text-2xl font-bold text-gray-900 dark:text-text-primary">
-                                {selectedLevel ? 'Modifier le niveau' : 'Créer un nouveau niveau'}
+                                {selectedLevel ? 'Edit level' : 'Create a new level'}
                             </h2>
                         </div>
 
@@ -416,7 +416,7 @@ const Levels: React.FC = () => {
                             {/* Name */}
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">
-                                    Nom du niveau *
+                                    Level name *
                                 </label>
                                 <input
                                     type="text"
@@ -425,7 +425,7 @@ const Levels: React.FC = () => {
                                     className={`w-full px-4 py-3 border rounded-lg bg-gray-50 dark:bg-bg-secondary text-gray-900 dark:text-text-primary placeholder-gray-400 dark:placeholder-gray-600 focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all ${
                                         formErrors.name ? 'border-red-500 dark:border-red-400 bg-red-50 dark:bg-red-900/10' : 'border-gray-300 dark:border-gray-700'
                                     }`}
-                                    placeholder="ex: Débutant"
+                                    placeholder="e.g. Beginner"
                                 />
                                 {formErrors.name && (
                                     <p className="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center gap-1">
@@ -438,7 +438,7 @@ const Levels: React.FC = () => {
                             {/* Rank */}
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">
-                                    Rang *
+                                    Rank *
                                 </label>
                                 <input
                                     type="number"
@@ -447,7 +447,7 @@ const Levels: React.FC = () => {
                                     className={`w-full px-4 py-3 border rounded-lg bg-gray-50 dark:bg-bg-secondary text-gray-900 dark:text-text-primary placeholder-gray-400 dark:placeholder-gray-600 focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all ${
                                         formErrors.rank ? 'border-red-500 dark:border-red-400 bg-red-50 dark:bg-red-900/10' : 'border-gray-300 dark:border-gray-700'
                                     }`}
-                                    placeholder="ex: 1"
+                                    placeholder="e.g. 1"
                                     min="1"
                                 />
                                 {formErrors.rank && (
@@ -457,7 +457,7 @@ const Levels: React.FC = () => {
                                     </p>
                                 )}
                                 <p className="text-xs text-gray-500 dark:text-text-tertiary mt-2">
-                                    Le rang détermine l'ordre d'affichage des niveaux
+                                    The rank determines the display order of levels
                                 </p>
                             </div>
 
@@ -473,10 +473,10 @@ const Levels: React.FC = () => {
                                     />
                                     <div className="flex-1">
                                         <label htmlFor="is_public" className="block text-sm font-semibold text-gray-700 dark:text-text-primary cursor-pointer">
-                                            Rendre ce niveau public
+                                            Make this level public
                                         </label>
                                         <p className="text-xs text-gray-500 dark:text-text-tertiary mt-1">
-                                            Les niveaux publics sont visibles par tous les utilisateurs
+                                            Public levels are visible to all users
                                         </p>
                                     </div>
                                 </div>
@@ -489,7 +489,7 @@ const Levels: React.FC = () => {
                                     onClick={() => setIsFormModalOpen(false)}
                                     className="flex-1 px-6 py-3 border-2 border-gray-300 dark:border-gray-700 rounded-lg text-gray-700 dark:text-text-primary font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                                 >
-                                    Annuler
+                                    Cancel
                                 </button>
                                 <button
                                     type="submit"
@@ -499,10 +499,10 @@ const Levels: React.FC = () => {
                                     {isCreating || isUpdating ? (
                                         <span className="flex items-center justify-center gap-2">
                                             <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                                            Chargement...
+                                            Loading...
                                         </span>
                                     ) : (
-                                        selectedLevel ? 'Mettre à jour' : 'Créer le niveau'
+                                        selectedLevel ? 'Update' : 'Create level'
                                     )}
                                 </button>
                             </div>
@@ -523,19 +523,19 @@ const Levels: React.FC = () => {
                                 <ExclamationTriangleIcon className="h-6 w-6 text-white" />
                             </div>
                             <h2 className="text-2xl font-bold text-gray-900 dark:text-text-primary">
-                                Supprimer le niveau
+                                Delete level
                             </h2>
                         </div>
 
                         {/* Content */}
                         <div className="bg-red-50 dark:bg-red-900/10 rounded-lg p-4 border border-red-200 dark:border-red-900/30 mb-6">
                             <p className="text-gray-700 dark:text-text-secondary text-base">
-                                Êtes-vous sûr de vouloir supprimer le niveau{' '}
-                                <span className="font-semibold text-red-600 dark:text-red-400">"{selectedLevel?.name}"</span> ?
+                                Are you sure you want to delete the level{' '}
+                                <span className="font-semibold text-red-600 dark:text-red-400">"{selectedLevel?.name}"</span>?
                             </p>
                             <p className="text-sm text-gray-600 dark:text-text-tertiary mt-3 flex items-start gap-2">
                                 <ExclamationTriangleIcon className="w-4 h-4 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
-                                <span>Cette action est irréversible et supprimera toutes les données associées.</span>
+                                <span>This action is irreversible and will delete all associated data.</span>
                             </p>
                         </div>
 
@@ -546,7 +546,7 @@ const Levels: React.FC = () => {
                                 disabled={isDeleting}
                                 className="flex-1 px-6 py-3 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-text-primary font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Annuler
+                                Cancel
                             </button>
                             <button
                                 onClick={handleConfirmDelete}
@@ -556,10 +556,10 @@ const Levels: React.FC = () => {
                                 {isDeleting ? (
                                     <span className="flex items-center justify-center gap-2">
                                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                                        Suppression...
+                                        Deleting...
                                     </span>
                                 ) : (
-                                    'Supprimer définitivement'
+                                    'Delete permanently'
                                 )}
                             </button>
                         </div>

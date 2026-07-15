@@ -20,8 +20,8 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
     onConfirm,
     onClose,
     isLoading = false,
-    confirmText = 'Confirmer',
-    cancelText = 'Annuler',
+    confirmText = 'Confirm',
+    cancelText = 'Cancel',
     isDangerous = false
 }) => {
     if (!isOpen) return null;

@@ -57,7 +57,7 @@ const Quotes: React.FC = () => {
                 setQuotes(response?.payload?.data || []);
                 setTotalPages(response?.payload?.pagination?.totalPages || 1);
             } catch (error: any) {
-                toast.error(error?.message || 'Erreur lors du chargement');
+                toast.error(error?.message || 'Error while loading');
             } finally {
                 setIsLoading(false);
             }
@@ -88,21 +88,21 @@ const Quotes: React.FC = () => {
             author: quote.author,
             coverFile: null
         });
-        // Afficher la couverture existante en preview
+        // Show the existing cover as a preview
         setCoverPreview(quote.cover || null);
         setIsFormModalOpen(true);
     };
 
     const handleDelete = async (quoteId: number) => {
-        if (!window.confirm('Êtes-vous sûr de vouloir supprimer cette citation ?')) {
+        if (!window.confirm('Are you sure you want to delete this quote?')) {
             return;
         }
         try {
             await quoteService.deleteQuote(quoteId);
-            toast.success('Citation supprimée');
+            toast.success('Quote deleted');
             setPage(1);
         } catch (error: any) {
-            toast.error(error?.message || 'Erreur lors de la suppression');
+            toast.error(error?.message || 'Error while deleting');
         }
     };
 
@@ -111,36 +111,36 @@ const Quotes: React.FC = () => {
 
         // Validation
         if (!formData.content || !formData.author) {
-            toast.error('Veuillez remplir tous les champs requis');
+            toast.error('Please fill in all required fields');
             return;
         }
 
         try {
             setIsSubmitting(true);
 
-            // Créer FormData
+            // Build FormData
             const submitData = new FormData();
             submitData.append('content', formData.content);
             submitData.append('author', formData.author);
-            
-            // Ajouter le fichier si sélectionné
+
+            // Add the file if selected
             if (formData.coverFile) {
                 submitData.append('cover', formData.coverFile);
             }
 
             if (selectedQuote) {
                 await quoteService.updateQuote(selectedQuote.id, submitData);
-                toast.success('Citation modifiée');
+                toast.success('Quote updated');
             } else {
                 await quoteService.createQuote(submitData);
-                toast.success('Citation créée');
+                toast.success('Quote created');
             }
 
             setIsFormModalOpen(false);
             setPage(1);
         } catch (error: any) {
             console.error('Error:', error);
-            toast.error(error?.message || 'Erreur lors de la soumission');
+            toast.error(error?.message || 'Error while submitting');
         } finally {
             setIsSubmitting(false);
         }
@@ -157,16 +157,16 @@ const Quotes: React.FC = () => {
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                         }}>
-                        Citations
+                        Quotes
                     </h1>
-                    <p className="text-gray-600 dark:text-text-tertiary mt-1">Gérez toutes vos citations inspirantes</p>
+                    <p className="text-gray-600 dark:text-text-tertiary mt-1">Manage all your inspiring quotes</p>
                 </div>
                 <button
                     onClick={handleCreate}
                     className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors shadow-md font-medium"
                 >
                     <PlusIcon className="w-5 h-5 mr-2" />
-                    Nouvelle citation
+                    New quote
                 </button>
             </div>
 
@@ -192,7 +192,7 @@ const Quotes: React.FC = () => {
                     <div className="relative">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm font-medium text-gray-600 dark:text-text-tertiary">Auteurs uniques</p>
+                                <p className="text-sm font-medium text-gray-600 dark:text-text-tertiary">Unique authors</p>
                                 <p className="text-3xl font-bold text-amber-600 dark:text-amber-400 mt-2">
                                     {new Set(quotes.map(q => q.author)).size}
                                 </p>
@@ -209,7 +209,7 @@ const Quotes: React.FC = () => {
                     <div className="relative">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm font-medium text-gray-600 dark:text-text-tertiary">Longueur moyenne</p>
+                                <p className="text-sm font-medium text-gray-600 dark:text-text-tertiary">Average length</p>
                                 <p className="text-3xl font-bold text-gray-600 dark:text-text-secondary mt-2">
                                     {quotes.length > 0
                                         ? Math.round(quotes.reduce((sum, q) => sum + q.content.length, 0) / quotes.length)
@@ -230,7 +230,7 @@ const Quotes: React.FC = () => {
                     <SearchBar
                         value={search}
                         onChange={setSearch}
-                        placeholder="Rechercher une citation..."
+                        placeholder="Search for a quote..."
                     />
 
                     <select
@@ -238,10 +238,10 @@ const Quotes: React.FC = () => {
                         onChange={(e) => setLimit(Number(e.target.value))}
                         className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent text-sm transition-all"
                     >
-                        <option value="9">9 par page</option>
-                        <option value="18">18 par page</option>
-                        <option value="27">27 par page</option>
-                        <option value="36">36 par page</option>
+                        <option value="9">9 per page</option>
+                        <option value="18">18 per page</option>
+                        <option value="27">27 per page</option>
+                        <option value="36">36 per page</option>
                     </select>
 
                     {/* View Toggle */}
@@ -280,14 +280,14 @@ const Quotes: React.FC = () => {
                     <div className="w-16 h-16 bg-gradient-to-br from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
                         <Lightbulb className="w-8 h-8 text-amber-600 dark:text-amber-400" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">Aucune citation</h3>
-                    <p className="text-gray-600 dark:text-text-tertiary mb-6">Commencez par créer votre première citation</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">No quote</h3>
+                    <p className="text-gray-600 dark:text-text-tertiary mb-6">Start by creating your first quote</p>
                     <button
                         onClick={handleCreate}
                         className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors font-medium"
                     >
                         <PlusIcon className="w-5 h-5 mr-2" />
-                        Créer une citation
+                        Create a quote
                     </button>
                 </div>
             ) : (
@@ -322,7 +322,7 @@ const Quotes: React.FC = () => {
                                                     {quote.author}
                                                 </p>
                                                 <p className="text-xs text-gray-500 dark:text-text-tertiary">
-                                                    {quote.content.length} caractères
+                                                    {quote.content.length} characters
                                                 </p>
                                             </div>
                                         </div>
@@ -335,14 +335,14 @@ const Quotes: React.FC = () => {
                                         <div className="flex justify-end gap-2 pt-4 border-t border-gray-200 dark:border-gray-800">
                                             <button
                                                 onClick={() => handleEdit(quote)}
-                                                title="Modifier"
+                                                title="Edit"
                                                 className="p-2 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/30 rounded-lg transition-colors"
                                             >
                                                 <PencilIcon className="w-4 h-4" />
                                             </button>
                                             <button
                                                 onClick={() => handleDelete(quote.id)}
-                                                title="Supprimer"
+                                                title="Delete"
                                                 className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
                                             >
                                                 <TrashIcon className="w-4 h-4" />
@@ -357,9 +357,9 @@ const Quotes: React.FC = () => {
                             <table className="w-full">
                                 <thead className="bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 border-b border-gray-200 dark:border-gray-800">
                                     <tr>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Citation</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Auteur</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Longueur</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Quote</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Author</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Length</th>
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Actions</th>
                                     </tr>
                                 </thead>
@@ -375,14 +375,14 @@ const Quotes: React.FC = () => {
                                                 <div className="flex gap-2">
                                                     <button
                                                         onClick={() => handleEdit(quote)}
-                                                        title="Modifier"
+                                                        title="Edit"
                                                         className="p-2 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/30 rounded-lg transition-colors"
                                                     >
                                                         <PencilIcon className="w-4 h-4" />
                                                     </button>
                                                     <button
                                                         onClick={() => handleDelete(quote.id)}
-                                                        title="Supprimer"
+                                                        title="Delete"
                                                         className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
                                                     >
                                                         <TrashIcon className="w-4 h-4" />
@@ -425,7 +425,7 @@ const Quotes: React.FC = () => {
                             )}
                         </div>
                         <h2 className="text-2xl font-bold text-gray-900 dark:text-text-primary">
-                            {selectedQuote ? 'Modifier la citation' : 'Créer une nouvelle citation'}
+                            {selectedQuote ? 'Edit quote' : 'Create a new quote'}
                         </h2>
                     </div>
 
@@ -433,32 +433,32 @@ const Quotes: React.FC = () => {
                         {/* Content */}
                         <div>
                             <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">
-                                Contenu *
+                                Content *
                             </label>
                             <textarea
                                 value={formData.content}
                                 onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                                 rows={4}
                                 className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:bg-white dark:focus:bg-bg-secondary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent resize-none transition-all"
-                                placeholder="Entrez la citation inspirante"
+                                placeholder="Enter the inspiring quote"
                                 required
                             />
                             <p className="text-xs text-gray-500 dark:text-text-tertiary mt-1">
-                                {formData.content.length}/1000 caractères
+                                {formData.content.length}/1000 characters
                             </p>
                         </div>
 
                         {/* Author */}
                         <div>
                             <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">
-                                Auteur *
+                                Author *
                             </label>
                             <input
                                 type="text"
                                 value={formData.author}
                                 onChange={(e) => setFormData({ ...formData, author: e.target.value })}
                                 className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:bg-white dark:focus:bg-bg-secondary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
-                                placeholder="Nom de l'auteur"
+                                placeholder="Author name"
                                 required
                             />
                         </div>
@@ -466,7 +466,7 @@ const Quotes: React.FC = () => {
                         {/* Cover Image Upload */}
                         <div>
                             <label className="block text-sm font-semibold text-gray-700 dark:text-text-primary mb-2">
-                                Image de couverture (optionnel)
+                                Cover image (optional)
                             </label>
                             <input
                                 type="file"
@@ -485,13 +485,13 @@ const Quotes: React.FC = () => {
                                 className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:bg-white dark:focus:bg-bg-secondary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-[#D4AF37] file:to-[#FFD700] file:text-black hover:file:shadow-md file:cursor-pointer"
                             />
                             <p className="text-xs text-gray-500 dark:text-text-tertiary mt-1">
-                                Formats acceptés: JPEG, PNG, WEBP (max 10 MB)
+                                Accepted formats: JPEG, PNG, WEBP (max 10 MB)
                             </p>
 
                             {/* Image Preview */}
                             {coverPreview && (
                                 <div className="mt-4">
-                                    <p className="text-xs text-gray-600 dark:text-text-secondary font-medium mb-2">Aperçu:</p>
+                                    <p className="text-xs text-gray-600 dark:text-text-secondary font-medium mb-2">Preview:</p>
                                     <div className="relative">
                                         <img
                                             src={coverPreview}
@@ -526,7 +526,7 @@ const Quotes: React.FC = () => {
                                 disabled={isSubmitting}
                                 className="flex-1 px-6 py-3 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-text-primary font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Annuler
+                                Cancel
                             </button>
                             <button
                                 type="submit"
@@ -536,17 +536,17 @@ const Quotes: React.FC = () => {
                                 {isSubmitting ? (
                                     <>
                                         <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                                        Traitement...
+                                        Processing...
                                     </>
                                 ) : selectedQuote ? (
                                     <>
                                         <PencilIcon className="w-4 h-4" />
-                                        Modifier la citation
+                                        Update quote
                                     </>
                                 ) : (
                                     <>
                                         <PlusIcon className="w-4 h-4" />
-                                        Créer la citation
+                                        Create quote
                                     </>
                                 )}
                             </button>

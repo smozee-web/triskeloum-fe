@@ -31,7 +31,7 @@ interface RichTextEditorProps {
 const RichTextEditor: React.FC<RichTextEditorProps> = ({
   value,
   onChange,
-  placeholder = 'Commencez à écrire...'
+  placeholder = 'Start writing...'
 }) => {
   const turndownService = new TurndownService({
     headingStyle: 'atx',
@@ -147,7 +147,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
             className={`p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ${
               editor.isActive('underline') ? 'bg-gray-300 dark:bg-gray-600' : ''
             }`}
-            title="Souligné (Ctrl+U)"
+            title="Underline (Ctrl+U)"
           >
             <UnderlineIcon className="w-4 h-4 text-gray-700 dark:text-text-secondary" />
           </button>
@@ -157,7 +157,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
             className={`p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ${
               editor.isActive('strike') ? 'bg-gray-300 dark:bg-gray-600' : ''
             }`}
-            title="Barré"
+            title="Strikethrough"
           >
             <StrikethroughIcon className="w-4 h-4 text-gray-700 dark:text-text-secondary" />
           </button>
@@ -183,7 +183,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
               className={`px-2 py-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium text-gray-700 dark:text-text-secondary ${
                 editor.isActive('heading', { level }) ? 'bg-gray-300 dark:bg-gray-600' : ''
               }`}
-              title={`Titre ${level}`}
+              title={`Heading ${level}`}
             >
               H{level}
             </button>
@@ -198,7 +198,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
             className={`p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ${
               editor.isActive('bulletList') ? 'bg-gray-300 dark:bg-gray-600' : ''
             }`}
-            title="Liste à puces"
+            title="Bulleted list"
           >
             <ListBulletIcon className="w-4 h-4 text-gray-700 dark:text-text-secondary" />
           </button>
@@ -208,7 +208,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
             className={`p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ${
               editor.isActive('orderedList') ? 'bg-gray-300 dark:bg-gray-600' : ''
             }`}
-            title="Liste numérotée"
+            title="Numbered list"
           >
             <ListBulletIcon className="w-4 h-4 text-gray-700 dark:text-text-secondary" />
           </button>
@@ -236,7 +236,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
             className={`p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ${
               editor.isActive('link') ? 'bg-gray-300 dark:bg-gray-600' : ''
             }`}
-            title="Insérer un lien"
+            title="Insert a link"
           >
             <LinkIcon className="w-4 h-4 text-gray-700 dark:text-text-secondary" />
           </button>
@@ -244,7 +244,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
             type="button"
             onClick={addImage}
             className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            title="Insérer une image"
+            title="Insert an image"
           >
             <PhotoIcon className="w-4 h-4 text-gray-700 dark:text-text-secondary" />
           </button>

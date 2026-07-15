@@ -28,31 +28,31 @@ const CourseActions: React.FC<CourseActionsProps> = ({
     <div className="bg-gray-50 dark:bg-bg-secondary border-b border-gray-200 dark:border-gray-800 px-8 py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          {/* Statut de publication */}
+          {/* Publication status */}
           <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-text-secondary">
             <div className={`w-2 h-2 rounded-full ${
               course.published ? 'bg-green-500' : 'bg-gray-400 dark:bg-gray-600'
             }`} />
             <span>
-              {course.published ? 'Publié' : 'Brouillon'}
+              {course.published ? 'Published' : 'Draft'}
             </span>
           </div>
         </div>
 
         {/* Actions */}
         <div className="flex items-center space-x-3">
-          {/* Dupliquer */}
+          {/* Duplicate */}
           {onDuplicate && (
             <button
               onClick={() => onDuplicate(course)}
               className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-700 dark:text-text-primary bg-white dark:bg-bg-secondary hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
             >
               <DocumentDuplicateIcon className="w-4 h-4 mr-2" />
-              Dupliquer
+              Duplicate
             </button>
           )}
 
-          {/* Publier/Dépublier */}
+          {/* Publish/Unpublish */}
           {onTogglePublish && (
             <button
               onClick={() => onTogglePublish(course)}
@@ -65,36 +65,36 @@ const CourseActions: React.FC<CourseActionsProps> = ({
               {course.published ? (
                 <>
                   <EyeSlashIcon className="w-4 h-4 mr-2" />
-                  Dépublier
+                  Unpublish
                 </>
               ) : (
                 <>
                   <EyeIcon className="w-4 h-4 mr-2" />
-                  Publier
+                  Publish
                 </>
               )}
             </button>
           )}
 
-          {/* Éditer */}
+          {/* Edit */}
           {onEdit && (
             <button
               onClick={() => onEdit(course)}
               className="inline-flex items-center px-3 py-2 border border-amber-300 dark:border-amber-700 text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 rounded-lg text-sm font-medium hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors"
             >
               <PencilIcon className="w-4 h-4 mr-2" />
-              Éditer
+              Edit
             </button>
           )}
 
-          {/* Supprimer */}
+          {/* Delete */}
           {onDelete && (
             <button
               onClick={() => onDelete(course)}
               className="inline-flex items-center px-3 py-2 border border-red-300 dark:border-red-700 text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/30 rounded-lg text-sm font-medium hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
             >
               <TrashIcon className="w-4 h-4 mr-2" />
-              Supprimer
+              Delete
             </button>
           )}
         </div>

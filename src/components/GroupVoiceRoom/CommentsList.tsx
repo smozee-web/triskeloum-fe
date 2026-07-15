@@ -37,7 +37,7 @@ export const CommentsList: React.FC<CommentsListProps> = ({ comments, isLoading 
 
   const formatTime = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
   };
 
   const formatDuration = (seconds: number) => {
@@ -50,7 +50,7 @@ export const CommentsList: React.FC<CommentsListProps> = ({ comments, isLoading 
     return (
       <div className="comments-list loading">
         <div className="spinner"></div>
-        <p>Chargement des messages...</p>
+        <p>Loading messages...</p>
       </div>
     );
   }
@@ -59,8 +59,8 @@ export const CommentsList: React.FC<CommentsListProps> = ({ comments, isLoading 
     <div className="comments-list">
       {comments.length === 0 ? (
         <div className="no-comments">
-          <p>Aucun message pour le moment</p>
-          <span>Soyez le premier à envoyer un message !</span>
+          <p>No messages yet</p>
+          <span>Be the first to send a message!</span>
         </div>
       ) : (
         <>
@@ -104,7 +104,7 @@ export const CommentsList: React.FC<CommentsListProps> = ({ comments, isLoading 
                         <polyline points="7 10 12 15 17 10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         <line x1="12" y1="15" x2="12" y2="3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
-                      <span>Télécharger</span>
+                      <span>Download</span>
                       {comment.metadata.duration && (
                         <span className="duration">({formatDuration(comment.metadata.duration)})</span>
                       )}

@@ -89,7 +89,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
                 </h3>
 
                 <p className="text-xs text-gray-400 mb-2">
-                    {new Date(category.created_at).toLocaleDateString('fr-FR')}
+                    {new Date(category.created_at).toLocaleDateString('en-US')}
                 </p>
 
                 {/* Actions - Compact */}
@@ -97,7 +97,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
                     <button
                         onClick={() => onEdit(category)}
                         className="flex-1 flex items-center justify-center gap-1 px-2 py-1.5 bg-blue-50 text-blue-700 rounded hover:bg-blue-100 transition-colors text-xs font-medium"
-                        title="Éditer"
+                        title="Edit"
                     >
                         <PencilIcon className="w-3.5 h-3.5" />
                     </button>
@@ -109,7 +109,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
                                 : 'bg-red-50 text-red-700 hover:bg-red-100'
                             }`}
                         disabled={isDisabled}
-                        title={isDisabled ? 'Impossible (cours associés)' : 'Supprimer'}
+                        title={isDisabled ? 'Not possible (associated courses)' : 'Delete'}
                     >
                         <TrashIcon className="w-3.5 h-3.5" />
                     </button>

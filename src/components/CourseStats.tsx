@@ -21,20 +21,20 @@ const CourseStats: React.FC<CourseStatsProps> = ({ course }) => {
       color: 'gold'
     },
     {
-      label: 'Parties',
+      label: 'Parts',
       value: totalParts,
       icon: '📝',
       color: 'gold'
     },
     {
-      label: 'Durée estimée',
+      label: 'Estimated duration',
       value: `${course.est_time_min} min`,
       icon: '⏱️',
       color: 'gold'
     },
     {
-      label: 'Niveau',
-      value: course.levels?.[0]?.name || 'Non défini',
+      label: 'Level',
+      value: course.levels?.[0]?.name || 'Not defined',
       icon: '🎯',
       color: 'gold'
     }

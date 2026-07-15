@@ -47,7 +47,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                 {/* Status Badge */}
                 {course.is_published && (
                     <div className="absolute top-2 right-2 bg-green-600 text-white px-2 py-0.5 rounded text-xs font-medium">
-                        ✓ Publié
+                        ✓ Published
                     </div>
                 )}
             </div>

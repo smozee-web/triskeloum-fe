@@ -69,14 +69,14 @@ const BasicInfo: React.FC<BasicInfoProps> = ({
         {/* Title */}
         <div>
           <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-1">
-            Titre du cours *
+            Course title *
           </label>
           <input
             id="title"
             type="text"
-            {...register('title', { required: 'Le titre est requis' })}
+            {...register('title', { required: 'Title is required' })}
             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary rounded-md focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent"
-            placeholder="Entrez le titre du cours"
+            placeholder="Enter the course title"
           />
           {errors.title && (
             <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.title.message as string}</p>
@@ -86,14 +86,14 @@ const BasicInfo: React.FC<BasicInfoProps> = ({
         {/* Legend */}
         <div>
           <label htmlFor="legend" className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-1">
-            Légende du cours *
+            Course legend *
           </label>
           <textarea
             id="legend"
-            {...register('legend', { required: 'La légende est requise' })}
+            {...register('legend', { required: 'Legend is required' })}
             rows={3}
             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary rounded-md focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent"
-            placeholder="Brève description du cours"
+            placeholder="Brief course description"
           />
           {errors.legend && (
             <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.legend.message as string}</p>
@@ -103,15 +103,15 @@ const BasicInfo: React.FC<BasicInfoProps> = ({
         {/* Estimated time */}
         <div>
           <label htmlFor="est_time_min" className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-1">
-            Durée estimée (minutes) *
+            Estimated duration (minutes) *
           </label>
           <input
             id="est_time_min"
             type="number"
             min="1"
             {...register('est_time_min', {
-              required: 'La durée est requise',
-              min: { value: 1, message: 'La durée doit être positive' }
+              required: 'Duration is required',
+              min: { value: 1, message: 'Duration must be positive' }
             })}
             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary rounded-md focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent"
           />
@@ -126,7 +126,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({
         {/* Cover image */}
         <div>
           <label htmlFor="cover" className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-1">
-            Image de couverture
+            Cover image
           </label>
           <div className="flex items-center space-x-4">
             <div className="flex-1">
@@ -151,7 +151,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({
                   type="button"
                   onClick={handleRemoveCover}
                   className="absolute -top-2 -right-2 bg-red-500 dark:bg-red-600 text-white rounded-full p-1 hover:bg-red-600 dark:hover:bg-red-700 transition-colors"
-                  title="Supprimer l'image"
+                  title="Remove image"
                 >
                   ✕
                 </button>
@@ -163,7 +163,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({
         {/* Levels (Multi-select) */}
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-            Niveaux * <span className="text-xs text-gray-500 dark:text-text-tertiary">(sélectionner 1 ou plusieurs)</span>
+            Levels * <span className="text-xs text-gray-500 dark:text-text-tertiary">(select 1 or more)</span>
           </label>
           <div className="space-y-2 border border-gray-300 dark:border-gray-700 rounded-md p-3 bg-white dark:bg-bg-secondary max-h-48 overflow-y-auto">
             {levels.map((level: Level) => (
@@ -191,21 +191,21 @@ const BasicInfo: React.FC<BasicInfoProps> = ({
             <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.levels.message as string}</p>
           )}
           {selectedLevels.length === 0 && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400">Sélectionnez au moins un niveau</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400">Select at least one level</p>
           )}
         </div>
 
         {/* Category */}
         <div>
           <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-1">
-            Catégorie *
+            Category *
           </label>
           <select
             id="category"
-            {...register('category', { required: 'La catégorie est requise' })}
+            {...register('category', { required: 'Category is required' })}
             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary rounded-md focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent"
           >
-            <option value="">Sélectionnez une catégorie</option>
+            <option value="">Select a category</option>
             {categories.map((category: Category) => (
               <option key={category.id} value={category.id}>
                 {category.title}
@@ -226,7 +226,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({
             className="h-4 w-4 text-amber-600 dark:text-amber-500 focus:ring-amber-500 border-gray-300 dark:border-gray-700 rounded"
           />
           <label htmlFor="published" className="text-sm font-medium text-gray-700 dark:text-text-primary">
-            Publier immédiatement
+            Publish immediately
           </label>
         </div>
       </div>

@@ -7,9 +7,9 @@ const playNotificationSound = () => {
     try {
         const audio = new Audio('/sounds/acknowledgment.mp3');
         audio.volume = 0.5;
-        audio.play().catch(err => console.warn('Son non joué:', err.message));
+        audio.play().catch(err => console.warn('Sound not played:', err.message));
     } catch (error) {
-        console.warn('Erreur lecture son:', error);
+        console.warn('Error playing sound:', error);
     }
 };
 

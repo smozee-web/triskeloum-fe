@@ -38,7 +38,7 @@ const Settings: React.FC = () => {
         weeklyDigest: false,
     });
 
-    const [languagePreference, setLanguagePreference] = useState('fr');
+    const [languagePreference, setLanguagePreference] = useState('en');
 
     const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
     const [passwordData, setPasswordData] = useState({
@@ -54,29 +54,29 @@ const Settings: React.FC = () => {
                 lastname: profileData.lastname,
                 phone: profileData.phone || undefined,
             }).unwrap();
-            toast.success('Profil mis à jour avec succès');
+            toast.success('Profile updated successfully');
             setIsEditingProfile(false);
         } catch (error: any) {
             console.error('Error updating profile:', error);
-            toast.error(error?.data?.message || 'Erreur lors de la mise à jour du profil');
+            toast.error(error?.data?.message || 'Error updating profile');
         }
     };
 
     const handleSaveNotifications = async () => {
         try {
             // TODO: API call to update notification settings
-            toast.success('Préférences de notification mises à jour');
+            toast.success('Notification preferences updated');
         } catch (error) {
-            toast.error('Erreur lors de la mise à jour');
+            toast.error('Error updating preferences');
         }
     };
 
     const handleSaveLanguage = async () => {
         try {
             // TODO: API call to update language preference
-            toast.success('Langue mise à jour');
+            toast.success('Language updated');
         } catch (error) {
-            toast.error('Erreur lors de la mise à jour');
+            toast.error('Error updating language');
         }
     };
 
@@ -84,17 +84,17 @@ const Settings: React.FC = () => {
         try {
             // Validation
             if (!passwordData.currentPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
-                toast.error('Veuillez remplir tous les champs');
+                toast.error('Please fill in all fields');
                 return;
             }
 
             if (passwordData.newPassword !== passwordData.confirmPassword) {
-                toast.error('Les mots de passe ne correspondent pas');
+                toast.error('Passwords do not match');
                 return;
             }
 
             if (passwordData.newPassword.length < 6) {
-                toast.error('Le mot de passe doit contenir au moins 6 caractères');
+                toast.error('Password must be at least 6 characters');
                 return;
             }
 
@@ -103,7 +103,7 @@ const Settings: React.FC = () => {
                 newPassword: passwordData.newPassword,
             }).unwrap();
 
-            toast.success('Mot de passe mis à jour avec succès');
+            toast.success('Password updated successfully');
             setIsPasswordModalOpen(false);
             setPasswordData({
                 currentPassword: '',
@@ -112,7 +112,7 @@ const Settings: React.FC = () => {
             });
         } catch (error: any) {
             console.error('Error updating password:', error);
-            toast.error(error?.data?.message || 'Erreur lors de la mise à jour du mot de passe');
+            toast.error(error?.data?.message || 'Error updating password');
         }
     };
 
@@ -127,10 +127,10 @@ const Settings: React.FC = () => {
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                         }}>
-                        Paramètres
+                        Settings
                     </h1>
                     <p className="text-gray-600 dark:text-text-tertiary mt-1 text-sm sm:text-base">
-                        Gérez votre profil et vos préférences
+                        Manage your profile and preferences
                     </p>
                 </div>
 
@@ -144,7 +144,7 @@ const Settings: React.FC = () => {
                                         <User className="w-5 h-5 text-black" />
                                     </div>
                                     <h2 className="text-xl font-semibold text-gray-900 dark:text-text-primary">
-                                        Informations du profil
+                                        Profile Information
                                     </h2>
                                 </div>
                                 <button
@@ -154,12 +154,12 @@ const Settings: React.FC = () => {
                                     {isEditingProfile ? (
                                         <>
                                             <Save className="w-4 h-4" />
-                                            Enregistrer
+                                            Save
                                         </>
                                     ) : (
                                         <>
                                             <Edit2 className="w-4 h-4" />
-                                            Modifier
+                                            Edit
                                         </>
                                     )}
                                 </button>
@@ -185,7 +185,7 @@ const Settings: React.FC = () => {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                            Prénom
+                                            First Name
                                         </label>
                                         <input
                                             type="text"
@@ -193,12 +193,12 @@ const Settings: React.FC = () => {
                                             onChange={(e) => setProfileData({ ...profileData, firstname: e.target.value })}
                                             disabled={!isEditingProfile}
                                             className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all disabled:bg-gray-100 dark:disabled:bg-bg-primary disabled:cursor-not-allowed"
-                                            placeholder="Votre prénom"
+                                            placeholder="Your first name"
                                         />
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                            Nom
+                                            Last Name
                                         </label>
                                         <input
                                             type="text"
@@ -206,14 +206,14 @@ const Settings: React.FC = () => {
                                             onChange={(e) => setProfileData({ ...profileData, lastname: e.target.value })}
                                             disabled={!isEditingProfile}
                                             className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all disabled:bg-gray-100 dark:disabled:bg-bg-primary disabled:cursor-not-allowed"
-                                            placeholder="Votre nom"
+                                            placeholder="Your last name"
                                         />
                                     </div>
                                 </div>
 
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                        Téléphone (optionnel)
+                                        Phone (optional)
                                     </label>
                                     <input
                                         type="tel"
@@ -221,13 +221,13 @@ const Settings: React.FC = () => {
                                         onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
                                         disabled={!isEditingProfile}
                                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all disabled:bg-gray-100 dark:disabled:bg-bg-primary disabled:cursor-not-allowed"
-                                        placeholder="Votre numéro de téléphone"
+                                        placeholder="Your phone number"
                                     />
                                 </div>
 
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                        Rôle
+                                        Role
                                     </label>
                                     <div className="relative">
                                         <Shield className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -249,7 +249,7 @@ const Settings: React.FC = () => {
                                     <Lock className="w-5 h-5 text-black" />
                                 </div>
                                 <h2 className="text-xl font-semibold text-gray-900 dark:text-text-primary">
-                                    Sécurité
+                                    Security
                                 </h2>
                             </div>
 
@@ -260,10 +260,10 @@ const Settings: React.FC = () => {
                                 <div className="flex items-center justify-between">
                                     <div>
                                         <p className="font-medium text-gray-900 dark:text-text-primary">
-                                            Changer le mot de passe
+                                            Change password
                                         </p>
                                         <p className="text-sm text-gray-500 dark:text-text-tertiary">
-                                            Mettez à jour votre mot de passe régulièrement
+                                            Update your password regularly
                                         </p>
                                     </div>
                                     <Lock className="w-5 h-5 text-gray-400 group-hover:text-amber-500 transition-colors" />
@@ -289,11 +289,11 @@ const Settings: React.FC = () => {
                                 {Object.entries(notificationSettings).map(([key, value]) => (
                                     <label key={key} className="flex items-center justify-between cursor-pointer group">
                                         <span className="text-sm text-gray-700 dark:text-text-secondary group-hover:text-gray-900 dark:group-hover:text-text-primary transition-colors">
-                                            {key === 'emailNotifications' && 'Notifications email'}
-                                            {key === 'pushNotifications' && 'Notifications push'}
-                                            {key === 'courseUpdates' && 'Mises à jour des cours'}
-                                            {key === 'newMessages' && 'Nouveaux messages'}
-                                            {key === 'weeklyDigest' && 'Résumé hebdomadaire'}
+                                            {key === 'emailNotifications' && 'Email notifications'}
+                                            {key === 'pushNotifications' && 'Push notifications'}
+                                            {key === 'courseUpdates' && 'Course updates'}
+                                            {key === 'newMessages' && 'New messages'}
+                                            {key === 'weeklyDigest' && 'Weekly digest'}
                                         </span>
                                         <input
                                             type="checkbox"
@@ -309,7 +309,7 @@ const Settings: React.FC = () => {
                                 onClick={handleSaveNotifications}
                                 className="w-full mt-4 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                             >
-                                Enregistrer
+                                Save
                             </button>
                         </div>
 
@@ -320,7 +320,7 @@ const Settings: React.FC = () => {
                                     <Globe className="w-5 h-5 text-black" />
                                 </div>
                                 <h2 className="text-xl font-semibold text-gray-900 dark:text-text-primary">
-                                    Langue
+                                    Language
                                 </h2>
                             </div>
 
@@ -329,15 +329,15 @@ const Settings: React.FC = () => {
                                 onChange={(e) => setLanguagePreference(e.target.value)}
                                 className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                             >
-                                <option value="fr">Français</option>
                                 <option value="en">English</option>
+                                <option value="fr">Français</option>
                             </select>
 
                             <button
                                 onClick={handleSaveLanguage}
                                 className="w-full mt-4 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                             >
-                                Enregistrer
+                                Save
                             </button>
                         </div>
                     </div>
@@ -348,7 +348,7 @@ const Settings: React.FC = () => {
                     <div className="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm transition-all duration-300 flex items-center justify-center z-50">
                         <div className="bg-white dark:bg-bg-tertiary rounded-xl shadow-2xl max-w-md w-full mx-4 border border-gray-200 dark:border-gray-800">
                             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800">
-                                <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Changer le mot de passe</h3>
+                                <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Change password</h3>
                                 <button
                                     onClick={() => {
                                         setIsPasswordModalOpen(false);
@@ -365,40 +365,40 @@ const Settings: React.FC = () => {
                             <div className="p-6 space-y-4">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                        Mot de passe actuel
+                                        Current password
                                     </label>
                                     <input
                                         type="password"
                                         value={passwordData.currentPassword}
                                         onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })}
                                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
-                                        placeholder="Entrez votre mot de passe actuel"
+                                        placeholder="Enter your current password"
                                     />
                                 </div>
 
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                        Nouveau mot de passe
+                                        New password
                                     </label>
                                     <input
                                         type="password"
                                         value={passwordData.newPassword}
                                         onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
                                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
-                                        placeholder="Entrez un nouveau mot de passe"
+                                        placeholder="Enter a new password"
                                     />
                                 </div>
 
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
-                                        Confirmer le nouveau mot de passe
+                                        Confirm new password
                                     </label>
                                     <input
                                         type="password"
                                         value={passwordData.confirmPassword}
                                         onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
                                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
-                                        placeholder="Confirmez le nouveau mot de passe"
+                                        placeholder="Confirm the new password"
                                     />
                                 </div>
 
@@ -411,7 +411,7 @@ const Settings: React.FC = () => {
                                         disabled={isUpdatingPassword}
                                         className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-text-primary rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50 transition-colors"
                                     >
-                                        Annuler
+                                        Cancel
                                     </button>
                                     <button
                                         onClick={handleChangePassword}
@@ -421,7 +421,7 @@ const Settings: React.FC = () => {
                                         {isUpdatingPassword && (
                                             <div className="animate-spin h-4 w-4 border-2 border-black border-t-transparent rounded-full" />
                                         )}
-                                        Changer
+                                        Change
                                     </button>
                                 </div>
                             </div>

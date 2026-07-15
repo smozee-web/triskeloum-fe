@@ -16,7 +16,7 @@ const CourseDescription: React.FC<CourseDescriptionProps> = ({ legend }) => {
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }}>
-        À propos de ce cours
+        About this course
       </span>
       <p className="text-gray-700 dark:text-text-secondary text-sm leading-relaxed">
         {legend}

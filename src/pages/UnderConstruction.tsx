@@ -32,10 +32,10 @@ const UnderConstruction = () => {
   }, []);
 
   const features = [
-    { text: "Interface utilisateur moderne", completed: true },
-    { text: "Système de trading avancé", completed: true },
-    { text: "Notifications en temps réel", completed: false },
-    { text: "Analytics détaillés", completed: false },
+    { text: "Modern user interface", completed: true },
+    { text: "Advanced trading system", completed: true },
+    { text: "Real-time notifications", completed: false },
+    { text: "Detailed analytics", completed: false },
   ];
 
   return (
@@ -74,7 +74,7 @@ const UnderConstruction = () => {
                   objectFit: 'contain',
                   display: 'block'
                 }}
-                alt="Terminal d'Échanges Logo" 
+                alt="Terminal d'Echanges Logo"
               />
               <div style={{
                 position: 'absolute',
@@ -96,7 +96,7 @@ const UnderConstruction = () => {
               fontWeight: 600,
               textAlign: 'center'
             }}>
-              Nouvelle fonctionnalité en développement
+              New feature under development
             </Title>
           }
           subTitle={
@@ -109,8 +109,8 @@ const UnderConstruction = () => {
                 margin: '0 auto',
                 textAlign: 'center'
               }}>
-                Nous travaillons activement sur cette nouvelle section de <strong>Terminal d'Échanges
-                </strong>  pour vous offrir une expérience encore plus performante et intuitive.
+                We are actively working on this new section of <strong>Terminal d'Echanges
+                </strong> to offer you an even more powerful and intuitive experience.
               </Paragraph>
             </Space>
           }
@@ -128,7 +128,7 @@ const UnderConstruction = () => {
                 boxShadow: '0 4px 12px rgba(24, 144, 255, 0.3)'
               }}
             >
-              Retour au tableau de bord
+              Back to dashboard
             </Button>,
             <Button
               size="large"
@@ -141,7 +141,7 @@ const UnderConstruction = () => {
                 fontWeight: 500
               }}
             >
-              Page précédente
+              Previous page
             </Button>,
         
           ]}
@@ -156,8 +156,8 @@ const UnderConstruction = () => {
           border: '1px solid #f0f0f0'
         }}>
           <Text type="secondary" style={{ fontSize: '14px' }}>
-            💡 <strong>Astuce :</strong> Suivez-nous sur nos réseaux sociaux pour être informé 
-            des dernières mises à jour et nouvelles fonctionnalités de Terminal d'Échanges.
+            💡 <strong>Tip:</strong> Follow us on social media to stay informed
+            about the latest updates and new features of Terminal d'Echanges.
           </Text>
         </div>
       </Card>
