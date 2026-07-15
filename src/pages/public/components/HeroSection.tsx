@@ -20,7 +20,7 @@ const HeroSection = () => {
 
     // Get home section content from API or use hardcoded fallback
     const homeSection = contentData?.payload?.find((section: any) => section.section === 'home');
-    const title = homeSection ? (lang === 'fr' ? homeSection.titleFr : homeSection.titleEn) : 'SERANOUN';
+    const title = homeSection ? (lang === 'fr' ? homeSection.titleFr : homeSection.titleEn) : 'USRATUL AZKAAR';
     const subtitle = homeSection ? (lang === 'fr' ? homeSection.subtitleFr : homeSection.subtitleEn) : t('Cabinet digital de développement spirituel', 'Digital Spiritual Development Practice');
     const description = homeSection ? (lang === 'fr' ? homeSection.descriptionFr : homeSection.descriptionEn) : t("Guérir les maux de l'âme et accompagner chacun dans un voyage profond de connaissance de soi.", "Healing the wounds of the soul and guiding each person on a deep journey of self-discovery.");
     const ctaText = homeSection ? (lang === 'fr' ? homeSection.ctaTextFr : homeSection.ctaTextEn) : t('Commencer le voyage', 'Begin the journey');
@@ -97,7 +97,7 @@ const HeroSection = () => {
                     </div>
                 </div>
 
-                {/* Title - SERANOUN */}
+                {/* Title - USRATUL AZKAAR */}
                 <h1 className="mb-6 text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.3em] md:tracking-[0.4em] text-center">
                     <span className="title-text">{title}</span>
                 </h1>

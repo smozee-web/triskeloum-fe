@@ -18,7 +18,7 @@ interface ThemeProviderProps {
 export const ThemeProvider = ({ children, defaultTheme = 'dark' }: ThemeProviderProps) => {
   const [theme, setThemeState] = useState<Theme>(() => {
     // Check localStorage first
-    const savedTheme = localStorage.getItem('seranoun-theme') as Theme | null;
+    const savedTheme = localStorage.getItem('usratul-azkaar-theme') as Theme | null;
     if (savedTheme) return savedTheme;
 
     // Check system preference
@@ -39,7 +39,7 @@ export const ThemeProvider = ({ children, defaultTheme = 'dark' }: ThemeProvider
     root.classList.add(theme);
 
     // Save to localStorage
-    localStorage.setItem('seranoun-theme', theme);
+    localStorage.setItem('usratul-azkaar-theme', theme);
 
     // Update meta theme-color for mobile browsers
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');

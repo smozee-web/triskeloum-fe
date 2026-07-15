@@ -1,6 +1,6 @@
 {
-  "name": "SERANOUN - Cabinet Digital de Développement Spirituel",
-  "short_name": "SERANOUN",
+  "name": "USRATUL AZKAAR - Cabinet Digital de Développement Spirituel",
+  "short_name": "USRATUL AZKAAR",
   "description": "Guérir les maux de l'âme et accompagner chacun dans un voyage profond de connaissance de soi",
   "start_url": "/",
   "display": "standalone",
@@ -34,7 +34,7 @@
     }
   ],
   "categories": ["lifestyle", "education", "health"],
-  "lang": "fr",
+  "lang": "en",
   "dir": "ltr",
   "scope": "/",
   "related_applications": [],

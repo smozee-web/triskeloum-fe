@@ -43,13 +43,13 @@ const Footer = () => {
                     {/* Brand */}
                     <div className="lg:col-span-2">
                         <div className="flex items-center gap-3 mb-6">
-                            {/* Seranoun Logo */}
+                            {/* Usratul Azkaar Logo */}
                             <img
-                                src="/images/rmvLogoSeranoun.png"
-                                alt="SERANOUN Logo"
+                                src="/images/rmvLogoUsratulAzkaar.png"
+                                alt="USRATUL AZKAAR Logo"
                                 className="w-10 h-10 object-contain"
                             />
-                            <span className="text-xl font-light tracking-[0.2em] text-amber-400">SERANOUN</span>
+                            <span className="text-xl font-light tracking-[0.2em] text-amber-400">USRATUL AZKAAR</span>
                         </div>
                         <p className="text-gray-500 text-sm leading-relaxed mb-6 max-w-sm">
                             {t(
@@ -120,7 +120,7 @@ const Footer = () => {
                 {/* Bottom */}
                 <div className="mt-12 pt-8 border-t border-amber-900/20 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-gray-600 text-sm">
-                        © {new Date().getFullYear()} Seranoun. {t('Tous droits réservés.', 'All rights reserved.')}
+                        © {new Date().getFullYear()} Usratul Azkaar. {t('Tous droits réservés.', 'All rights reserved.')}
                     </p>
                     <p className="text-gray-600 text-sm italic">
                         "{t("L'éveil spirituel est un briseur d'illusions", "Spiritual awakening is a breaker of illusions")}"

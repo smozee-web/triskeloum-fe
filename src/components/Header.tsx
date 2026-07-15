@@ -64,16 +64,16 @@ const Header = () => {
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3 group">
             <div className="relative w-12 h-12">
-              {/* Seranoun Logo */}
+              {/* Usratul Azkaar Logo */}
               <img
-                src="/images/rmvLogoSeranoun.png"
-                alt="SERANOUN Logo"
+                src="/images/rmvLogoUsratulAzkaar.png"
+                alt="USRATUL AZKAAR Logo"
                 className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
               />
             </div>
             <div className="hidden sm:block">
               <span className="text-xl font-light tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600">
-                SERANOUN
+                USRATUL AZKAAR
               </span>
               <p className="text-[10px] text-amber-500/60 tracking-widest">
                 {t('Cabinet de développement spirituel', 'Spiritual Development Practice')}

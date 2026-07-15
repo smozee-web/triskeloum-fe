@@ -102,7 +102,7 @@ const Login = () => {
                 Swal.fire({
                     icon: 'success',
                     title: 'Connexion réussie',
-                    text: 'Bienvenue sur SERANOUN !',
+                    text: 'Bienvenue sur USRATUL AZKAAR !',
                     timer: 2000,
                     showConfirmButton: false,
                 });
@@ -150,19 +150,19 @@ const Login = () => {
                 <div className="text-center mb-8">
                     <div className="flex justify-center items-center mb-6">
                         <div className="relative w-24 h-24">
-                            {/* Seranoun Logo with subtle animation */}
+                            {/* Usratul Azkaar Logo with subtle animation */}
                             <div className="absolute inset-0 w-full h-full animate-pulse opacity-30">
                                 <div className="w-full h-full rounded-full bg-gradient-to-br from-amber-400 to-amber-600 blur-xl"></div>
                             </div>
                             <img
-                                src="/images/rmvLogoSeranoun.png"
-                                alt="SERANOUN Logo"
+                                src="/images/rmvLogoUsratulAzkaar.png"
+                                alt="USRATUL AZKAAR Logo"
                                 className="relative w-full h-full object-contain"
                             />
                         </div>
                     </div>
                     <h1 className="text-4xl font-light tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 mb-2">
-                        SERANOUN
+                        USRATUL AZKAAR
                     </h1>
                     <p className="text-amber-500/80 text-sm tracking-[0.2em] uppercase">
                         Cabinet digital de développement spirituel
@@ -254,7 +254,7 @@ const Login = () => {
 
                 <div className="text-center mt-6 text-sm text-gray-600">
                     <p>
-                        SERANOUN © {new Date().getFullYear()}
+                        USRATUL AZKAAR © {new Date().getFullYear()}
                     </p>
                 </div>
             </div>
