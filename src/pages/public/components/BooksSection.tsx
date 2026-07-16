@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useGetLandingPageContentQuery, useGetBooksQuery, useGetBookCategoriesQuery } from '../../../services/api';
+import { getImageUrl } from '../../../utils/imageUtils';
 
 const BooksSection = () => {
   const { lang, t } = useLanguage();
@@ -132,7 +133,7 @@ const BooksSection = () => {
                 <div key={book.id} className="group relative rounded-2xl overflow-hidden bg-black/50 border border-amber-900/30 hover:border-amber-600/50 transition-all duration-300">
                   <div className="aspect-[3/4] bg-gradient-to-b from-amber-900/20 to-black flex items-center justify-center overflow-hidden">
                     {book.coverImageUrl ? (
-                      <img src={book.coverImageUrl} alt={title} className="w-full h-full object-cover" />
+                      <img src={getImageUrl(book.coverImageUrl)} alt={title} className="w-full h-full object-cover" />
                     ) : (
                       <span className="text-5xl">📖</span>
                     )}
@@ -161,7 +162,7 @@ const BooksSection = () => {
                     {free ? (
                       book.deliveryMode === 'DOWNLOADABLE' ? (
                         <a
-                          href={book.fileUrl}
+                          href={getImageUrl(book.fileUrl)}
                           download
                           className="flex items-center justify-center w-full py-2.5 rounded-full text-sm font-medium bg-amber-900/30 text-amber-400 border border-amber-700/30 hover:bg-amber-800/50 transition-colors"
                         >
@@ -204,7 +205,7 @@ const BooksSection = () => {
               ✕
             </button>
             <iframe
-              src={readingBook.fileUrl}
+              src={getImageUrl(readingBook.fileUrl)}
               title={lang === 'fr' ? readingBook.titleFr : readingBook.titleEn}
               className="w-full h-full"
             />

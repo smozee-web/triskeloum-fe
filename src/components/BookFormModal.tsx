@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal2 from './Modal2';
 import FileUploadZone from './FileUploadZone';
+import { getImageUrl } from '../utils/imageUtils';
 
 const DELIVERY_MODES = ['READ_ONLY', 'DOWNLOADABLE'];
 const FILE_SOURCES = ['UPLOAD', 'EXTERNAL_URL'];
@@ -167,7 +168,7 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ isOpen, onClose, initialD
                             type="image"
                             accept="image/*"
                             selectedFile={coverFile}
-                            preview={!coverFile ? form.cover_image_url : undefined}
+                            preview={!coverFile && form.cover_image_url ? getImageUrl(form.cover_image_url) : undefined}
                             onChange={setCoverFile}
                         />
                     </div>

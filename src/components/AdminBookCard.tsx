@@ -87,7 +87,7 @@ const AdminBookCard: React.FC<AdminBookCardProps> = ({ book, onEdit, onDelete, o
                 {/* Actions */}
                 <div className="flex gap-1.5">
                     <button
-                        onClick={() => book.fileUrl && window.open(book.fileUrl, '_blank', 'noopener,noreferrer')}
+                        onClick={() => book.fileUrl && window.open(getImageUrl(book.fileUrl), '_blank', 'noopener,noreferrer')}
                         disabled={!book.fileUrl}
                         className="flex-1 flex items-center justify-center gap-1 px-2 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                         title={book.fileUrl ? 'Preview file' : 'No file uploaded yet'}

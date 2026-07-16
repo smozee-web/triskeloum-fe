@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserOutlined, LogoutOutlined, BellOutlined, SettingOutlined } from '@ant-design/icons';
+import { UserOutlined, LogoutOutlined, BellOutlined, SettingOutlined, GlobalOutlined } from '@ant-design/icons';
 import { Avatar, Badge, Dropdown } from 'antd';
 import type { MenuProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -65,6 +65,18 @@ const Navbar: React.FC = () => {
 
       {/* Right side */}
       <div className="flex items-center gap-4">
+        {/* View public site */}
+        <a
+          href="/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-bg-tertiary hover:bg-gray-200 dark:hover:bg-amber-900/20 text-sm text-gray-700 dark:text-text-primary transition-colors duration-200"
+          title="Open the public site in a new tab"
+        >
+          <GlobalOutlined />
+          View Site
+        </a>
+
         {/* Theme Toggle */}
         <ThemeToggle />
 
