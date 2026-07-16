@@ -98,7 +98,7 @@ const SectionItem: React.FC<SectionItemProps> = ({
   return (
     <div className="border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden shadow-sm">
       {/* Section header */}
-      <div className="bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 px-4 py-3">
+      <div className="bg-gradient-to-r from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3 flex-1">
             <button
@@ -112,7 +112,7 @@ const SectionItem: React.FC<SectionItemProps> = ({
                 <ChevronUpIcon className="w-5 h-5" />
               )}
             </button>
-            <span className="w-7 h-7 bg-gradient-to-br from-[#D4AF37] to-[#FFD700] text-black rounded-full flex items-center justify-center text-sm font-bold">
+            <span className="w-7 h-7 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-full flex items-center justify-center text-sm font-bold">
               {sectionIndex + 1}
             </span>
             <input
@@ -167,7 +167,7 @@ const SectionItem: React.FC<SectionItemProps> = ({
               </div>
               {coverPreview && (
                 <div className="relative">
-                  <div className="w-24 h-24 rounded-lg overflow-hidden border-2 border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
+                  <div className="w-24 h-24 rounded-lg overflow-hidden border-2 border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50">
                     <img
                       src={coverPreview}
                       alt="Section cover preview"

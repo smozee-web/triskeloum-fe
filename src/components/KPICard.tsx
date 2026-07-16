@@ -29,7 +29,7 @@ const KPICard: React.FC<KPICardProps> = ({
             {/* Content */}
             <div className="relative">
                 {/* Icon */}
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <div className="text-black">
                         {icon}
                     </div>

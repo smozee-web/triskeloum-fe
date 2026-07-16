@@ -153,7 +153,7 @@ const Quotes: React.FC = () => {
                 <div>
                     <h1 className="text-3xl font-bold mb-1"
                         style={{
-                            background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+                            background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                         }}>
@@ -163,7 +163,7 @@ const Quotes: React.FC = () => {
                 </div>
                 <button
                     onClick={handleCreate}
-                    className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors shadow-md font-medium"
+                    className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-lg hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] transition-colors shadow-md font-medium"
                 >
                     <PlusIcon className="w-5 h-5 mr-2" />
                     New quote
@@ -197,7 +197,7 @@ const Quotes: React.FC = () => {
                                     {new Set(quotes.map(q => q.author)).size}
                                 </p>
                             </div>
-                            <div className="w-12 h-12 bg-gradient-to-br from-[#D4AF37] to-[#FFD700] rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                 <PenTool className="w-6 h-6 text-black" />
                             </div>
                         </div>
@@ -251,7 +251,7 @@ const Quotes: React.FC = () => {
                                 onClick={() => setViewMode('grid')}
                                 className={`px-3 py-2 text-sm font-medium transition-colors ${
                                     viewMode === 'grid'
-                                        ? 'bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black'
+                                        ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black'
                                         : 'bg-white dark:bg-bg-secondary text-gray-700 dark:text-text-primary hover:bg-gray-50 dark:hover:bg-gray-800'
                                 }`}
                             >
@@ -261,7 +261,7 @@ const Quotes: React.FC = () => {
                                 onClick={() => setViewMode('list')}
                                 className={`px-3 py-2 text-sm font-medium transition-colors border-l border-gray-300 dark:border-gray-700 ${
                                     viewMode === 'list'
-                                        ? 'bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black'
+                                        ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black'
                                         : 'bg-white dark:bg-bg-secondary text-gray-700 dark:text-text-primary hover:bg-gray-50 dark:hover:bg-gray-800'
                                 }`}
                             >
@@ -277,14 +277,14 @@ const Quotes: React.FC = () => {
                 <LoadingSkeleton />
             ) : quotes.length === 0 ? (
                 <div className="bg-white dark:bg-bg-tertiary rounded-lg shadow-md p-12 text-center border border-gray-200 dark:border-gray-800">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50">
                         <Lightbulb className="w-8 h-8 text-amber-600 dark:text-amber-400" />
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">No quote</h3>
                     <p className="text-gray-600 dark:text-text-tertiary mb-6">Start by creating your first quote</p>
                     <button
                         onClick={handleCreate}
-                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors font-medium"
+                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-lg hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] transition-colors font-medium"
                     >
                         <PlusIcon className="w-5 h-5 mr-2" />
                         Create a quote
@@ -314,7 +314,7 @@ const Quotes: React.FC = () => {
                                     {/* Content */}
                                     <div className="p-6">
                                         <div className="flex items-start gap-3 mb-4">
-                                            <div className="w-10 h-10 bg-gradient-to-br from-[#D4AF37] to-[#FFD700] rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <div className="w-10 h-10 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] rounded-lg flex items-center justify-center flex-shrink-0">
                                                 <Lightbulb className="w-5 h-5 text-black" />
                                             </div>
                                             <div className="flex-1 min-w-0">
@@ -355,7 +355,7 @@ const Quotes: React.FC = () => {
                     ) : (
                         <div className="bg-white dark:bg-bg-tertiary rounded-lg shadow-md overflow-hidden border border-gray-200 dark:border-gray-800">
                             <table className="w-full">
-                                <thead className="bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 border-b border-gray-200 dark:border-gray-800">
+                                <thead className="bg-gradient-to-r from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 border-b border-gray-200 dark:border-gray-800">
                                     <tr>
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Quote</th>
                                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Author</th>
@@ -417,7 +417,7 @@ const Quotes: React.FC = () => {
                 <div className="p-6 sm:p-8">
                     {/* Header with gradient accent */}
                     <div className="flex items-center gap-4 mb-6 pb-6 border-b border-gray-200 dark:border-gray-800">
-                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center shadow-md">
+                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center shadow-md">
                             {selectedQuote ? (
                                 <PencilIcon className="w-6 h-6 text-black" />
                             ) : (
@@ -482,7 +482,7 @@ const Quotes: React.FC = () => {
                                         reader.readAsDataURL(file);
                                     }
                                 }}
-                                className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:bg-white dark:focus:bg-bg-secondary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-[#D4AF37] file:to-[#FFD700] file:text-black hover:file:shadow-md file:cursor-pointer"
+                                className="w-full px-4 py-3 bg-gray-50 dark:bg-bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-gray-900 dark:text-text-primary focus:bg-white dark:focus:bg-bg-secondary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-[var(--color-primary)] file:to-[var(--color-primary-light)] file:text-black hover:file:shadow-md file:cursor-pointer"
                             />
                             <p className="text-xs text-gray-500 dark:text-text-tertiary mt-1">
                                 Accepted formats: JPEG, PNG, WEBP (max 10 MB)
@@ -531,7 +531,7 @@ const Quotes: React.FC = () => {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="flex-1 px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                className="flex-1 px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                             >
                                 {isSubmitting ? (
                                     <>

@@ -632,7 +632,7 @@ export default function CRMPage() {
                 {/* Header */}
                 <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
                     <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] rounded-xl">
+                        <div className="p-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] rounded-xl">
                             <ChatBubbleLeftRightIcon className="w-5 h-5 text-black" />
                         </div>
                         <div>
@@ -688,7 +688,7 @@ export default function CRMPage() {
                                         key={room.id}
                                         onClick={() => setSelectedRoom(room)}
                                         className={`w-full p-3 rounded-lg mb-1 transition-colors text-left ${
-                                            isSelected ? 'bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20' : 'hover:bg-gray-50 dark:hover:bg-gray-800'
+                                            isSelected ? 'bg-gradient-to-r from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20' : 'hover:bg-gray-50 dark:hover:bg-gray-800'
                                         }`}
                                     >
                                         <div className="flex mx-4 items-center gap-3">
@@ -716,7 +716,7 @@ export default function CRMPage() {
                                                             </span>
                                                         )}
                                                         {unreadCount > 0 && (
-                                                            <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-black bg-gradient-to-r from-[#D4AF37] to-[#FFD700] rounded-full flex-shrink-0">
+                                                            <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-black bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] rounded-full flex-shrink-0">
                                                                 {unreadCount > 99 ? '99+' : unreadCount}
                                                             </span>
                                                         )}
@@ -849,7 +849,7 @@ export default function CRMPage() {
                                             <div
                                                 className={`px-4 py-2 rounded-2xl ${
                                                     isCurrentUser
-                                                        ? 'bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black'
+                                                        ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black'
                                                         : 'bg-white dark:bg-bg-secondary text-black dark:text-text-primary border border-gray-200 dark:border-gray-700'
                                                 }`}
                                             >
@@ -989,7 +989,7 @@ export default function CRMPage() {
                             <button
                                 type="submit"
                                 disabled={isSending || (!messageInput.trim() && selectedFiles.length === 0)}
-                                className="px-5 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg font-medium text-sm hover:from-[#B8860B] hover:to-[#D4AF37] disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
+                                className="px-5 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-lg font-medium text-sm hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
                             >
                                 {isSending ? (
                                     <div className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-transparent"></div>
@@ -1013,7 +1013,7 @@ export default function CRMPage() {
                 </div>
             ) : (
                 <div className="flex-1 flex flex-col items-center justify-center bg-white dark:bg-bg-primary w-full">
-                    <div className="p-6 rounded-full bg-gradient-to-br from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 mb-4">
+                    <div className="p-6 rounded-full bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 mb-4">
                         <ChatBubbleLeftRightIcon className="w-16 h-16 text-gray-300 dark:text-gray-700" />
                     </div>
                     <p className="text-lg font-semibold text-black dark:text-text-primary mb-2">No conversation selected</p>

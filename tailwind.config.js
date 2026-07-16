@@ -15,17 +15,17 @@ export default {
           200: '#FFE799',
           300: '#FFDB66',
           400: '#FFCF33',
-          500: '#FFD700', // Pure Gold
-          600: '#D4AF37', // Ancient Gold
-          700: '#B8860B', // Dark Goldenrod
+          500: 'var(--color-primary-light)', // Pure Gold
+          600: 'var(--color-primary)', // Ancient Gold
+          700: 'var(--color-primary-dark)', // Dark Goldenrod
           800: '#8B6508',
           900: '#5E4405',
         },
 
         // Amber accents
-        'gold-light': '#FFD700',
-        'gold': '#D4AF37',
-        'gold-dark': '#B8860B',
+        'gold-light': 'var(--color-primary-light)',
+        'gold': 'var(--color-primary)',
+        'gold-dark': 'var(--color-primary-dark)',
 
         // Background colors
         'bg-primary': '#000000',
@@ -38,7 +38,7 @@ export default {
         'text-secondary': '#d1d5db',
         'text-tertiary': '#9ca3af',
         'text-muted': '#6b7280',
-        'text-accent': '#D4AF37',
+        'text-accent': 'var(--color-primary)',
       },
 
       fontFamily: {
@@ -59,9 +59,9 @@ export default {
       },
 
       backgroundImage: {
-        'gradient-gold': 'linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #B8860B 100%)',
-        'gradient-gold-vertical': 'linear-gradient(180deg, #D4AF37 0%, #FFD700 50%, #B8860B 100%)',
-        'gradient-gold-radial': 'radial-gradient(circle, #FFD700 0%, #D4AF37 50%, #B8860B 100%)',
+        'gradient-gold': 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-primary-dark) 100%)',
+        'gradient-gold-vertical': 'linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-primary-dark) 100%)',
+        'gradient-gold-radial': 'radial-gradient(circle, var(--color-primary-light) 0%, var(--color-primary) 50%, var(--color-primary-dark) 100%)',
         'gradient-amber': 'linear-gradient(to right, #f59e0b, #d97706)',
         'gradient-amber-dark': 'linear-gradient(to right, #d97706, #b45309)',
         'gradient-black': 'linear-gradient(to bottom, #000000, #1a1a1a)',

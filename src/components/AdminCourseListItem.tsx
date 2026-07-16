@@ -31,7 +31,7 @@ const AdminCourseListItem: React.FC<AdminCourseListItemProps> = ({
         <div className="bg-white dark:bg-bg-tertiary rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-200 group">
             <div className="flex items-center gap-4 p-4">
                 {/* Image - Compact square */}
-                <div className="relative w-24 h-24 flex-shrink-0 bg-gradient-to-br from-[#D4AF37] to-[#FFD700] rounded-lg overflow-hidden">
+                <div className="relative w-24 h-24 flex-shrink-0 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] rounded-lg overflow-hidden">
                     {course.cover ? (
                         <img
                             src={getImageUrl(course.cover)}

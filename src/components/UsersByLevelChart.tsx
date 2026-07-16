@@ -18,7 +18,7 @@ interface UsersByLevelChartProps {
     data: any[];
 }
 
-const COLORS = ['#D4AF37', '#FFD700', '#B8860B', '#f59e0b', '#fbbf24', '#eab308'];
+const COLORS = ['var(--color-primary)', 'var(--color-primary-light)', 'var(--color-primary-dark)', '#f59e0b', '#fbbf24', '#eab308'];
 
 const UsersByLevelChart: React.FC<UsersByLevelChartProps> = ({ data }) => {
     return (
@@ -48,7 +48,7 @@ const UsersByLevelChart: React.FC<UsersByLevelChartProps> = ({ data }) => {
                     <Tooltip
                         contentStyle={{
                             backgroundColor: '#1a1a1a',
-                            border: '1px solid #D4AF37',
+                            border: '1px solid var(--color-primary)',
                             borderRadius: '0.5rem',
                             color: '#ffffff'
                         }}

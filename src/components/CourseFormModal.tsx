@@ -38,7 +38,7 @@ const CourseFormModal: React.FC<CourseFormModalProps> = ({
           <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800">
             <h2 className="text-xl font-bold"
               style={{
-                background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+                background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}>

@@ -77,7 +77,7 @@ const Sidebar = () => {
       <div className="px-4 py-6 border-b border-gray-200 dark:border-gray-800">
         <h2 className="text-base font-bold tracking-wider text-center"
           style={{
-            background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+            background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
           }}>
@@ -97,7 +97,7 @@ const Sidebar = () => {
               w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
               transition-all duration-200
               ${isSelected(item.key)
-                ? 'bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black shadow-md'
+                ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black shadow-md'
                 : isHovered(item.key)
                 ? 'bg-amber-50 dark:bg-amber-900/10 text-gray-900 dark:text-amber-400'
                 : 'text-gray-600 dark:text-text-tertiary hover:text-gray-900 dark:hover:text-amber-400'

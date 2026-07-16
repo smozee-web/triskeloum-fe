@@ -661,7 +661,7 @@ const LandingPageSettings: React.FC = () => {
                         sort_order: services.length + 1,
                         is_active: true,
                     }])}
-                    className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
+                    className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                 >
                     + Add a service
                 </button>
@@ -888,7 +888,7 @@ const LandingPageSettings: React.FC = () => {
                             ...formationSettings,
                             topics: [...formationSettings.topics, { icon: '☿', label_fr: '', label_en: '' }]
                         })}
-                        className="text-sm px-3 py-1.5 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:shadow"
+                        className="text-sm px-3 py-1.5 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-lg hover:shadow"
                     >
                         + Add a topic
                     </button>
@@ -971,7 +971,7 @@ const LandingPageSettings: React.FC = () => {
                             }
                         ]
                     })}
-                    className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
+                    className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                 >
                     + Add a pack
                 </button>
@@ -1390,7 +1390,7 @@ const LandingPageSettings: React.FC = () => {
                         features_en: [],
                         recommended: false,
                     }])}
-                    className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
+                    className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                 >
                     + Add a plan
                 </button>
@@ -1717,7 +1717,7 @@ const LandingPageSettings: React.FC = () => {
                 <div className="mb-6">
                     <h1 className="text-2xl sm:text-3xl font-bold mb-1"
                         style={{
-                            background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+                            background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                         }}>
@@ -1739,7 +1739,7 @@ const LandingPageSettings: React.FC = () => {
                                     onClick={() => setActiveTab(tab.id)}
                                     className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium transition-all ${
                                         activeTab === tab.id
-                                            ? 'bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black shadow-md'
+                                            ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black shadow-md'
                                             : 'text-gray-600 dark:text-text-tertiary hover:bg-gray-100 dark:hover:bg-bg-secondary'
                                     }`}
                                 >
@@ -1768,7 +1768,7 @@ const LandingPageSettings: React.FC = () => {
                     <button
                         onClick={handleSave}
                         disabled={isSaving}
-                        className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:hover:scale-100"
+                        className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:hover:scale-100"
                     >
                         <Save className="w-5 h-5" />
                         {isSaving ? 'Saving...' : 'Save changes'}

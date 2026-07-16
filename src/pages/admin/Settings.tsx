@@ -1,8 +1,17 @@
 // src/pages/admin/Settings.tsx
 import React, { useState, useEffect } from 'react';
-import { User, Mail, Shield, Bell, Globe, Lock, Edit2, Save } from 'lucide-react';
+import { User, Mail, Shield, Bell, Globe, Lock, Edit2, Save, Palette } from 'lucide-react';
 import { toast } from 'react-hot-toast';
-import { useLoadUserQuery, useUpdateUserProfileMutation, useUpdatePasswordMutation } from '../../services/api';
+import {
+    useLoadUserQuery,
+    useUpdateUserProfileMutation,
+    useUpdatePasswordMutation,
+    useGetLandingPageContentQuery,
+    useUpdateLandingPageContentMutation,
+} from '../../services/api';
+
+const DEFAULT_PRIMARY_COLOR = '#D4AF37';
+const DEFAULT_SECONDARY_COLOR = '#FFD700';
 
 const Settings: React.FC = () => {
     const { data: response } = useLoadUserQuery({});
@@ -39,6 +48,29 @@ const Settings: React.FC = () => {
     });
 
     const [languagePreference, setLanguagePreference] = useState('en');
+
+    const { data: contentData } = useGetLandingPageContentQuery();
+    const [updateContent, { isLoading: isSavingAppearance }] = useUpdateLandingPageContentMutation();
+    const appearance = contentData?.payload?.find((s: any) => s.section === 'appearance');
+
+    const [appearanceSettings, setAppearanceSettings] = useState({
+        primary_color: DEFAULT_PRIMARY_COLOR,
+        secondary_color: DEFAULT_SECONDARY_COLOR,
+        default_mode: 'dark',
+    });
+
+    useEffect(() => {
+        if (appearance?.metadata) {
+            setAppearanceSettings({
+                // API responses are auto-normalized snake_case -> camelCase
+                // (utils/urlUtils.ts normalizeObject) even though we save
+                // these fields as snake_case in handleSaveAppearance below.
+                primary_color: appearance.metadata.primaryColor || DEFAULT_PRIMARY_COLOR,
+                secondary_color: appearance.metadata.secondaryColor || DEFAULT_SECONDARY_COLOR,
+                default_mode: appearance.metadata.defaultMode || 'dark',
+            });
+        }
+    }, [appearance]);
 
     const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
     const [passwordData, setPasswordData] = useState({
@@ -78,6 +110,32 @@ const Settings: React.FC = () => {
         } catch (error) {
             toast.error('Error updating language');
         }
+    };
+
+    const handleSaveAppearance = async () => {
+        try {
+            await updateContent({
+                section: 'appearance',
+                data: {
+                    title_fr: '',
+                    title_en: '',
+                    metadata: appearanceSettings,
+                },
+            }).unwrap();
+            toast.success('Appearance updated successfully');
+        } catch (error: any) {
+            console.error('Error updating appearance:', error);
+            toast.error(error?.data?.message || 'Error updating appearance');
+        }
+    };
+
+    const handleResetAppearance = () => {
+        setAppearanceSettings({
+            primary_color: DEFAULT_PRIMARY_COLOR,
+            secondary_color: DEFAULT_SECONDARY_COLOR,
+            default_mode: 'dark',
+        });
+        toast('Reset to defaults — click Save to apply', { icon: '↺' });
     };
 
     const handleChangePassword = async () => {
@@ -123,7 +181,7 @@ const Settings: React.FC = () => {
                 <div className="mb-6">
                     <h1 className="text-2xl sm:text-3xl font-bold mb-1"
                         style={{
-                            background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+                            background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                         }}>
@@ -140,7 +198,7 @@ const Settings: React.FC = () => {
                         <div className="bg-white dark:bg-bg-tertiary rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-6 transition-colors">
                             <div className="flex items-center justify-between mb-6">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center">
+                                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center">
                                         <User className="w-5 h-5 text-black" />
                                     </div>
                                     <h2 className="text-xl font-semibold text-gray-900 dark:text-text-primary">
@@ -149,7 +207,7 @@ const Settings: React.FC = () => {
                                 </div>
                                 <button
                                     onClick={() => isEditingProfile ? handleSaveProfile() : setIsEditingProfile(true)}
-                                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
+                                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                                 >
                                     {isEditingProfile ? (
                                         <>
@@ -245,7 +303,7 @@ const Settings: React.FC = () => {
                         {/* Security Section */}
                         <div className="bg-white dark:bg-bg-tertiary rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-6 mt-6 transition-colors">
                             <div className="flex items-center gap-3 mb-6">
-                                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center">
+                                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center">
                                     <Lock className="w-5 h-5 text-black" />
                                 </div>
                                 <h2 className="text-xl font-semibold text-gray-900 dark:text-text-primary">
@@ -277,7 +335,7 @@ const Settings: React.FC = () => {
                         {/* Notifications */}
                         <div className="bg-white dark:bg-bg-tertiary rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-6 transition-colors">
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center">
+                                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center">
                                     <Bell className="w-5 h-5 text-black" />
                                 </div>
                                 <h2 className="text-xl font-semibold text-gray-900 dark:text-text-primary">
@@ -307,7 +365,7 @@ const Settings: React.FC = () => {
 
                             <button
                                 onClick={handleSaveNotifications}
-                                className="w-full mt-4 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
+                                className="w-full mt-4 px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                             >
                                 Save
                             </button>
@@ -316,7 +374,7 @@ const Settings: React.FC = () => {
                         {/* Language */}
                         <div className="bg-white dark:bg-bg-tertiary rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-6 transition-colors">
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center">
+                                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center">
                                     <Globe className="w-5 h-5 text-black" />
                                 </div>
                                 <h2 className="text-xl font-semibold text-gray-900 dark:text-text-primary">
@@ -335,10 +393,99 @@ const Settings: React.FC = () => {
 
                             <button
                                 onClick={handleSaveLanguage}
-                                className="w-full mt-4 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
+                                className="w-full mt-4 px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                             >
                                 Save
                             </button>
+                        </div>
+
+                        {/* Appearance */}
+                        <div className="bg-white dark:bg-bg-tertiary rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-6 transition-colors">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center">
+                                    <Palette className="w-5 h-5 text-black" />
+                                </div>
+                                <h2 className="text-xl font-semibold text-gray-900 dark:text-text-primary">
+                                    Appearance
+                                </h2>
+                            </div>
+
+                            <p className="text-xs text-gray-500 dark:text-text-tertiary mb-4">
+                                Controls the site's brand colors and the default light/dark mode for first-time visitors. Visitors who've already picked a mode themselves keep their own choice.
+                            </p>
+
+                            <div className="space-y-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                                        Primary color
+                                    </label>
+                                    <div className="flex items-center gap-3">
+                                        <input
+                                            type="color"
+                                            value={appearanceSettings.primary_color}
+                                            onChange={(e) => setAppearanceSettings({ ...appearanceSettings, primary_color: e.target.value })}
+                                            className="w-11 h-11 rounded-lg border border-gray-300 dark:border-gray-700 cursor-pointer bg-transparent"
+                                        />
+                                        <input
+                                            type="text"
+                                            value={appearanceSettings.primary_color}
+                                            onChange={(e) => setAppearanceSettings({ ...appearanceSettings, primary_color: e.target.value })}
+                                            className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                                        Secondary color
+                                    </label>
+                                    <div className="flex items-center gap-3">
+                                        <input
+                                            type="color"
+                                            value={appearanceSettings.secondary_color}
+                                            onChange={(e) => setAppearanceSettings({ ...appearanceSettings, secondary_color: e.target.value })}
+                                            className="w-11 h-11 rounded-lg border border-gray-300 dark:border-gray-700 cursor-pointer bg-transparent"
+                                        />
+                                        <input
+                                            type="text"
+                                            value={appearanceSettings.secondary_color}
+                                            onChange={(e) => setAppearanceSettings({ ...appearanceSettings, secondary_color: e.target.value })}
+                                            className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                                        Default mode
+                                    </label>
+                                    <select
+                                        value={appearanceSettings.default_mode}
+                                        onChange={(e) => setAppearanceSettings({ ...appearanceSettings, default_mode: e.target.value })}
+                                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                                    >
+                                        <option value="dark">Dark</option>
+                                        <option value="light">Light</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="flex gap-3 mt-4">
+                                <button
+                                    onClick={handleResetAppearance}
+                                    disabled={isSavingAppearance}
+                                    className="px-4 py-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-text-primary rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50"
+                                >
+                                    Reset to defaults
+                                </button>
+                                <button
+                                    onClick={handleSaveAppearance}
+                                    disabled={isSavingAppearance}
+                                    className="flex-1 px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:hover:scale-100"
+                                >
+                                    {isSavingAppearance ? 'Saving...' : 'Save'}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -416,7 +563,7 @@ const Settings: React.FC = () => {
                                     <button
                                         onClick={handleChangePassword}
                                         disabled={isUpdatingPassword}
-                                        className="flex-1 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2 transition-all duration-200"
+                                        className="flex-1 px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2 transition-all duration-200"
                                     >
                                         {isUpdatingPassword && (
                                             <div className="animate-spin h-4 w-4 border-2 border-black border-t-transparent rounded-full" />

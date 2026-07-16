@@ -400,7 +400,7 @@ export default function VoiceRoomsPage() {
                 {/* Header */}
                 <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
                     <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] rounded-xl">
+                        <div className="p-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] rounded-xl">
                             <MicrophoneIcon className="w-5 h-5 text-black" />
                         </div>
                         <div>
@@ -414,7 +414,7 @@ export default function VoiceRoomsPage() {
                     {/* Create Button */}
                     <button
                         onClick={() => setShowCreateModal(true)}
-                        className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors font-medium text-sm mb-3"
+                        className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-lg hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] transition-colors font-medium text-sm mb-3"
                     >
                         <PlusIcon className="w-4 h-4" />
                         Create a room
@@ -487,7 +487,7 @@ export default function VoiceRoomsPage() {
                                     onClick={() => handleSelectRoom(room)}
                                     className={`w-full p-3 rounded-lg mb-2 text-left transition-colors ${
                                         selectedRoom?.id === room.id
-                                            ? 'bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 border border-[#D4AF37]/30 dark:border-[#D4AF37]/50'
+                                            ? 'bg-gradient-to-r from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 border border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50'
                                             : 'hover:bg-gray-50 dark:hover:bg-gray-800 border border-transparent'
                                     }`}
                                 >
@@ -527,7 +527,7 @@ export default function VoiceRoomsPage() {
                 {!selectedRoom ? (
                     <div className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-bg-primary">
                         <div className="text-center">
-                            <div className="p-6 bg-gradient-to-br from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 rounded-full inline-block mb-4 border border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
+                            <div className="p-6 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 rounded-full inline-block mb-4 border border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50">
                                 <MicrophoneIcon className="w-12 h-12 text-amber-600 dark:text-amber-400" />
                             </div>
                             <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">
@@ -572,7 +572,7 @@ export default function VoiceRoomsPage() {
                                             <button
                                                 onClick={handleJoinRoom}
                                                 disabled={isConnecting}
-                                                className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+                                                className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-lg hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
                                             >
                                                 {isConnecting ? (
                                                     <>
@@ -663,7 +663,7 @@ export default function VoiceRoomsPage() {
                                                         : 'bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700'
                                                 }`}
                                             >
-                                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center text-black text-xs font-medium shadow-sm">
+                                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center text-black text-xs font-medium shadow-sm">
                                                     {participant.firstname[0]}{participant.lastname[0]}
                                                 </div>
                                                 <span className="text-sm text-gray-900 dark:text-text-primary">
@@ -711,7 +711,7 @@ export default function VoiceRoomsPage() {
                                                                 key={comment.id}
                                                                 className="flex gap-3 p-3 bg-gray-50 dark:bg-bg-secondary rounded-lg border border-gray-200 dark:border-gray-700"
                                                             >
-                                                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center text-black text-xs font-medium shadow-sm flex-shrink-0">
+                                                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center text-black text-xs font-medium shadow-sm flex-shrink-0">
                                                                     {comment.user.firstname[0]}{comment.user.lastname[0]}
                                                                 </div>
                                                                 <div className="flex-1 min-w-0">
@@ -759,7 +759,7 @@ export default function VoiceRoomsPage() {
                                                         className="flex items-center justify-between p-3 bg-gray-50 dark:bg-bg-secondary rounded-lg border border-gray-200 dark:border-gray-700 hover:border-amber-500 dark:hover:border-amber-500 transition-colors group"
                                                     >
                                                         <div className="flex items-center gap-3 flex-1 min-w-0">
-                                                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 flex items-center justify-center border border-[#D4AF37]/30 dark:border-[#D4AF37]/50 flex-shrink-0">
+                                                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 flex items-center justify-center border border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50 flex-shrink-0">
                                                                 <DocumentIcon className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                                                             </div>
                                                             <div className="flex-1 min-w-0">
@@ -816,7 +816,7 @@ export default function VoiceRoomsPage() {
                                                 <button
                                                     onClick={handleSendComment}
                                                     disabled={isSubmitting || !newComment.trim() || !selectedRoom}
-                                                    className="p-3 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                                    className="p-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-lg hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                                                     title="Send"
                                                 >
                                                     {isSubmitting ? (
@@ -1001,9 +1001,9 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
                                 {selectedUsers.map((user) => (
                                     <span
                                         key={user.id}
-                                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 border border-[#D4AF37]/30 dark:border-[#D4AF37]/50 text-sm"
+                                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 border border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50 text-sm"
                                     >
-                                        <span className="w-7 h-7 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#FFD700] text-black flex items-center justify-center text-xs font-semibold shadow-sm">
+                                        <span className="w-7 h-7 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] text-black flex items-center justify-center text-xs font-semibold shadow-sm">
                                             {user.firstname[0]}{user.lastname[0]}
                                         </span>
                                         <span className="text-gray-900 dark:text-text-primary">{user.firstname} {user.lastname}</span>
@@ -1051,7 +1051,7 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
                                                 onChange={() => toggleUser(user.id)}
                                                 className="w-4 h-4 text-amber-600 dark:text-amber-500 border-gray-300 dark:border-gray-700 rounded focus:ring-amber-500"
                                             />
-                                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center text-black text-xs font-medium shadow-sm">
+                                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center text-black text-xs font-medium shadow-sm">
                                                 {user.firstname[0]}{user.lastname[0]}
                                             </div>
                                             <div className="flex flex-col">
@@ -1087,7 +1087,7 @@ function CreateVoiceRoomModal({ onClose, onCreated }: {
                     <button
                         onClick={handleCreate}
                         disabled={isLoading || !name.trim()}
-                        className="px-6 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium flex items-center gap-2"
+                        className="px-6 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-lg hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium flex items-center gap-2"
                     >
                         {isLoading ? (
                             <>

@@ -190,7 +190,7 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ isOpen, onClose, initialD
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:hover:scale-100"
+                        className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:hover:scale-100"
                     >
                         {isSubmitting ? 'Saving...' : (initialData ? 'Save changes' : 'Create book')}
                     </button>

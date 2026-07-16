@@ -298,7 +298,7 @@ const Users: React.FC = () => {
           <div>
             <h1 className="text-2xl md:text-3xl font-bold mb-1"
               style={{
-                background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+                background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}>
@@ -308,7 +308,7 @@ const Users: React.FC = () => {
           </div>
           <button
             onClick={handleCreateUser}
-            className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
+            className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
           >
             <PlusIcon className="h-5 w-5" />
             Create user
@@ -332,7 +332,7 @@ const Users: React.FC = () => {
             <div className="relative bg-gradient-to-br from-amber-50/30 to-white dark:from-transparent dark:to-transparent dark:bg-bg-tertiary rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 group overflow-hidden shadow-sm hover:shadow-md">
               <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent dark:from-amber-500/5 dark:to-transparent" />
               <div className="relative">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <UsersIcon className="h-6 w-6 text-black" />
                 </div>
                 <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Total Users</h3>
@@ -344,7 +344,7 @@ const Users: React.FC = () => {
             <div className="relative bg-gradient-to-br from-amber-50/30 to-white dark:from-transparent dark:to-transparent dark:bg-bg-tertiary rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 group overflow-hidden shadow-sm hover:shadow-md">
               <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent dark:from-amber-500/5 dark:to-transparent" />
               <div className="relative">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <UserPlusIcon className="h-6 w-6 text-black" />
                 </div>
                 <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">New (7 days)</h3>
@@ -356,7 +356,7 @@ const Users: React.FC = () => {
             <div className="relative bg-gradient-to-br from-amber-50/30 to-white dark:from-transparent dark:to-transparent dark:bg-bg-tertiary rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 group overflow-hidden shadow-sm hover:shadow-md">
               <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent dark:from-amber-500/5 dark:to-transparent" />
               <div className="relative">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <UserGroupIcon className="h-6 w-6 text-black" />
                 </div>
                 <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Active Users</h3>
@@ -369,7 +369,7 @@ const Users: React.FC = () => {
             <div className="relative bg-gradient-to-br from-amber-50/30 to-white dark:from-transparent dark:to-transparent dark:bg-bg-tertiary rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 group overflow-hidden shadow-sm hover:shadow-md">
               <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent dark:from-amber-500/5 dark:to-transparent" />
               <div className="relative">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <ClockIcon className="h-6 w-6 text-black" />
                 </div>
                 <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">New (30 days)</h3>
@@ -476,7 +476,7 @@ const Users: React.FC = () => {
                 <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-amber-900/10 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center text-black font-bold">
+                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center text-black font-bold">
                         {user.firstname.charAt(0)}{user.lastname.charAt(0)}
                       </div>
                       <div>

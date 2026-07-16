@@ -151,7 +151,7 @@ const Faq: React.FC = () => {
                     <div>
                         <h1 className="text-2xl sm:text-3xl font-bold mb-1"
                             style={{
-                                background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+                                background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                             }}>
@@ -161,7 +161,7 @@ const Faq: React.FC = () => {
                     </div>
                     <button
                         onClick={handleCreate}
-                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors shadow-md w-full sm:w-auto justify-center sm:justify-start font-medium"
+                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-lg hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] transition-colors shadow-md w-full sm:w-auto justify-center sm:justify-start font-medium"
                     >
                         <PlusIcon className="w-5 h-5 mr-2" />
                         New FAQ
@@ -178,7 +178,7 @@ const Faq: React.FC = () => {
                                     <p className="text-sm font-medium text-gray-600 dark:text-text-tertiary">Total</p>
                                     <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-text-primary mt-2">{stats.total}</p>
                                 </div>
-                                <div className="w-12 h-12 bg-gradient-to-br from-[#D4AF37] to-[#FFD700] rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                     <HelpCircle className="w-6 h-6 text-black" />
                                 </div>
                             </div>
@@ -233,14 +233,14 @@ const Faq: React.FC = () => {
                     <LoadingSkeleton />
                 ) : faqs.length === 0 ? (
                     <div className="bg-white dark:bg-bg-tertiary rounded-lg shadow-md p-8 sm:p-12 text-center border border-gray-200 dark:border-gray-800">
-                        <div className="w-16 h-16 bg-gradient-to-br from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
+                        <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50">
                             <HelpCircle className="w-8 h-8 text-amber-600 dark:text-amber-400" />
                         </div>
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">No FAQ</h3>
                         <p className="text-gray-600 dark:text-text-tertiary mb-6 text-sm sm:text-base">Start by creating your first FAQ</p>
                         <button
                             onClick={handleCreate}
-                            className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors font-medium"
+                            className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-lg hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] transition-colors font-medium"
                         >
                             <PlusIcon className="w-5 h-5 mr-2" />
                             Create a FAQ
@@ -251,7 +251,7 @@ const Faq: React.FC = () => {
                         {/* Table */}
                         <div className="bg-white dark:bg-bg-tertiary rounded-lg shadow-md overflow-x-auto border border-gray-200 dark:border-gray-800">
                             <table className="w-full">
-                                <thead className="bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 border-b border-gray-200 dark:border-gray-800">
+                                <thead className="bg-gradient-to-r from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 border-b border-gray-200 dark:border-gray-800">
                                     <tr>
                                         <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Question</th>
                                         <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-text-primary uppercase tracking-wider">Category</th>
@@ -267,7 +267,7 @@ const Faq: React.FC = () => {
                                                 <div className="line-clamp-1">{faq.question}</div>
                                             </td>
                                             <td className="hidden sm:table-cell px-6 py-4 text-xs text-gray-600 dark:text-text-secondary">
-                                                <span className="px-2 py-1 bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 border border-[#D4AF37]/30 dark:border-[#D4AF37]/50 rounded text-xs font-medium text-gray-900 dark:text-text-primary">
+                                                <span className="px-2 py-1 bg-gradient-to-r from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 border border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50 rounded text-xs font-medium text-gray-900 dark:text-text-primary">
                                                     {FAQ_CATEGORIES.find(c => c.value === faq.category)?.label || faq.category}
                                                 </span>
                                             </td>
@@ -420,7 +420,7 @@ const Faq: React.FC = () => {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black rounded-lg hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors disabled:opacity-50 font-medium"
+                            className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-lg hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] transition-colors disabled:opacity-50 font-medium"
                         >
                             {isSubmitting ? 'Processing...' : selectedFaq ? 'Update' : 'Create'}
                         </button>

@@ -183,7 +183,7 @@ const Courses: React.FC = () => {
                     <div>
                         <h1 className="text-2xl sm:text-3xl font-bold mb-1"
                             style={{
-                                background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+                                background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                             }}>
@@ -193,7 +193,7 @@ const Courses: React.FC = () => {
                     </div>
                     <button
                         onClick={handleCreate}
-                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start"
+                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start"
                     >
                         <PlusIcon className="w-5 h-5 mr-2" />
                         New course
@@ -206,7 +206,7 @@ const Courses: React.FC = () => {
                     <div className="relative bg-gradient-to-br from-amber-50/30 to-white dark:from-transparent dark:to-transparent dark:bg-bg-tertiary rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 group overflow-hidden shadow-sm hover:shadow-md">
                         <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent dark:from-amber-500/5 dark:to-transparent" />
                         <div className="relative">
-                            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                 <AcademicCapIcon className="h-6 w-6 text-black" />
                             </div>
                             <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Total Courses</h3>
@@ -295,7 +295,7 @@ const Courses: React.FC = () => {
                                     onClick={() => setViewMode('grid')}
                                     className={`px-3 py-2 text-sm font-medium transition-colors ${
                                         viewMode === 'grid'
-                                            ? 'bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black'
+                                            ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black'
                                             : 'bg-white dark:bg-bg-secondary text-gray-700 dark:text-text-primary hover:bg-gray-50 dark:hover:bg-gray-800'
                                     }`}
                                 >
@@ -305,7 +305,7 @@ const Courses: React.FC = () => {
                                     onClick={() => setViewMode('list')}
                                     className={`px-3 py-2 text-sm font-medium transition-colors border-l border-gray-300 dark:border-gray-700 ${
                                         viewMode === 'list'
-                                            ? 'bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black'
+                                            ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black'
                                             : 'bg-white dark:bg-bg-secondary text-gray-700 dark:text-text-primary hover:bg-gray-50 dark:hover:bg-gray-800'
                                     }`}
                                 >
@@ -335,7 +335,7 @@ const Courses: React.FC = () => {
                         {!debouncedSearch && (
                             <button
                                 onClick={handleCreate}
-                                className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
+                                className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                             >
                                 <PlusIcon className="w-5 h-5 mr-2" />
                                 Create a course

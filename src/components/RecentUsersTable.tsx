@@ -64,7 +64,7 @@ const RecentUsersTable: React.FC<RecentUsersTableProps> = ({ users }) => {
                                                     alt={`${user.firstname} ${user.lastname}`}
                                                 />
                                             ) : (
-                                                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center">
+                                                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center">
                                                     <span className="text-sm font-medium text-black">
                                                         {user.firstname?.[0]?.toUpperCase() || 'U'}
                                                         {user.lastname?.[0]?.toUpperCase() || ''}

@@ -45,9 +45,9 @@ const NaturalHealingSection = () => {
       <div className="absolute inset-0">
         <svg className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.03]" viewBox="0 0 400 400">
           <g className="animate-spin-slower origin-center">
-            <circle cx="200" cy="200" r="150" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
-            <circle cx="200" cy="200" r="100" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
-            <circle cx="200" cy="200" r="50" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
+            <circle cx="200" cy="200" r="150" fill="none" stroke="var(--color-primary)" strokeWidth="0.5" />
+            <circle cx="200" cy="200" r="100" fill="none" stroke="var(--color-primary)" strokeWidth="0.5" />
+            <circle cx="200" cy="200" r="50" fill="none" stroke="var(--color-primary)" strokeWidth="0.5" />
             {[0, 60, 120, 180, 240, 300].map((angle) => (
               <line
                 key={angle}
@@ -55,7 +55,7 @@ const NaturalHealingSection = () => {
                 y1="200"
                 x2={200 + 150 * Math.cos(angle * Math.PI / 180)}
                 y2={200 + 150 * Math.sin(angle * Math.PI / 180)}
-                stroke="#D4AF37"
+                stroke="var(--color-primary)"
                 strokeWidth="0.5"
               />
             ))}
@@ -88,9 +88,9 @@ const NaturalHealingSection = () => {
               <svg viewBox="0 0 200 200" className="w-full h-full">
                 <defs>
                   <linearGradient id="bgGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#D4AF37" />
-                    <stop offset="50%" stopColor="#FFD700" />
-                    <stop offset="100%" stopColor="#B8860B" />
+                    <stop offset="0%" stopColor="var(--color-primary)" />
+                    <stop offset="50%" stopColor="var(--color-primary-light)" />
+                    <stop offset="100%" stopColor="var(--color-primary-dark)" />
                   </linearGradient>
                   <filter id="glow">
                     <feGaussianBlur stdDeviation="2" result="coloredBlur" />

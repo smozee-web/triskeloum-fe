@@ -19,7 +19,7 @@ const TopCoursesTable: React.FC<TopCoursesTableProps> = ({ courses }) => {
                         <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-4 flex-1">
                                 <div className="flex-shrink-0">
-                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center">
+                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center">
                                         <span className="text-lg font-bold text-black">
                                             #{index + 1}
                                         </span>

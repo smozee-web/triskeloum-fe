@@ -44,21 +44,21 @@ const FlameCustomCursor = () => {
         <defs>
           <radialGradient id="flameGlow" cx="50%" cy="60%" r="50%">
             <stop offset="0%" style={{ stopColor: '#FFFACD', stopOpacity: 0.8 }} />
-            <stop offset="40%" style={{ stopColor: '#FFD700', stopOpacity: 0.6 }} />
+            <stop offset="40%" style={{ stopColor: 'var(--color-primary-light)', stopOpacity: 0.6 }} />
             <stop offset="70%" style={{ stopColor: '#FF8C00', stopOpacity: 0.3 }} />
             <stop offset="100%" style={{ stopColor: '#FF4500', stopOpacity: 0 }} />
           </radialGradient>
           <linearGradient id="flameBody" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" style={{ stopColor: '#FFFACD', stopOpacity: 1 }} />
-            <stop offset="20%" style={{ stopColor: '#FFD700', stopOpacity: 1 }} />
+            <stop offset="20%" style={{ stopColor: 'var(--color-primary-light)', stopOpacity: 1 }} />
             <stop offset="50%" style={{ stopColor: '#FFA500', stopOpacity: 0.95 }} />
             <stop offset="80%" style={{ stopColor: '#FF6347', stopOpacity: 0.85 }} />
-            <stop offset="100%" style={{ stopColor: '#D4AF37', stopOpacity: 0.6 }} />
+            <stop offset="100%" style={{ stopColor: 'var(--color-primary)', stopOpacity: 0.6 }} />
           </linearGradient>
           <linearGradient id="innerFlame" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" style={{ stopColor: '#FFFFFF', stopOpacity: 0.9 }} />
             <stop offset="40%" style={{ stopColor: '#FFFACD', stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: '#FFD700', stopOpacity: 0.7 }} />
+            <stop offset="100%" style={{ stopColor: 'var(--color-primary-light)', stopOpacity: 0.7 }} />
           </linearGradient>
           <filter id="glow">
             <feGaussianBlur stdDeviation="1" result="coloredBlur" />

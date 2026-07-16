@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
       <div className="flex items-center gap-4">
         <h1 className="text-lg font-bold tracking-wider hidden md:block"
           style={{
-            background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+            background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
           }}>
@@ -100,7 +100,7 @@ const Navbar: React.FC = () => {
               <Avatar
                 size={32}
                 icon={<UserOutlined />}
-                className="bg-gradient-to-r from-[#D4AF37] to-[#FFD700]"
+                className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)]"
               />
               <div className="hidden md:block text-left">
                 <div className="text-sm font-medium text-gray-900 dark:text-text-primary">
