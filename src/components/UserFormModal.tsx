@@ -321,7 +321,7 @@ const UserFormModal: React.FC<UserFormModalProps> = ({
             <button
               type="submit"
               disabled={isLoading}
-              className="flex-1 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-md hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2 transition-all duration-200"
+              className="flex-1 px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-md hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2 transition-all duration-200"
             >
               {isLoading && <div className="animate-spin h-4 w-4 border-2 border-black border-t-transparent rounded-full" />}
               {user ? 'Update' : 'Create'}

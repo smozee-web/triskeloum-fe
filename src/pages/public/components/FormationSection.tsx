@@ -143,13 +143,13 @@ const FormationsSection = () => {
         <svg className="w-full h-full" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
           <defs>
             <pattern id="flowerOfLife" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
-              <circle cx="30" cy="26" r="15" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
-              <circle cx="15" cy="26" r="15" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
-              <circle cx="45" cy="26" r="15" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
-              <circle cx="22.5" cy="13" r="15" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
-              <circle cx="37.5" cy="13" r="15" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
-              <circle cx="22.5" cy="39" r="15" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
-              <circle cx="37.5" cy="39" r="15" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
+              <circle cx="30" cy="26" r="15" fill="none" stroke="var(--color-primary)" strokeWidth="0.5" />
+              <circle cx="15" cy="26" r="15" fill="none" stroke="var(--color-primary)" strokeWidth="0.5" />
+              <circle cx="45" cy="26" r="15" fill="none" stroke="var(--color-primary)" strokeWidth="0.5" />
+              <circle cx="22.5" cy="13" r="15" fill="none" stroke="var(--color-primary)" strokeWidth="0.5" />
+              <circle cx="37.5" cy="13" r="15" fill="none" stroke="var(--color-primary)" strokeWidth="0.5" />
+              <circle cx="22.5" cy="39" r="15" fill="none" stroke="var(--color-primary)" strokeWidth="0.5" />
+              <circle cx="37.5" cy="39" r="15" fill="none" stroke="var(--color-primary)" strokeWidth="0.5" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#flowerOfLife)" />

@@ -23,7 +23,7 @@ const Dashboard: React.FC = () => {
             <div className="mb-6">
                 <h1 className="text-2xl md:text-3xl font-bold mb-1"
                     style={{
-                        background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+                        background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                     }}>

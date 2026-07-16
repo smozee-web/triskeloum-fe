@@ -51,7 +51,7 @@ const UsersGrowthChart: React.FC<UsersGrowthChartProps> = ({ data }) => {
                     <Tooltip
                         contentStyle={{
                             backgroundColor: '#1a1a1a',
-                            border: '1px solid #D4AF37',
+                            border: '1px solid var(--color-primary)',
                             borderRadius: '0.5rem',
                             color: '#ffffff'
                         }}
@@ -62,11 +62,11 @@ const UsersGrowthChart: React.FC<UsersGrowthChartProps> = ({ data }) => {
                     <Line
                         type="monotone"
                         dataKey="count"
-                        stroke="#D4AF37"
+                        stroke="var(--color-primary)"
                         strokeWidth={3}
                         name="New users"
-                        dot={{ fill: '#FFD700', r: 4, strokeWidth: 2, stroke: '#D4AF37' }}
-                        activeDot={{ r: 6, fill: '#FFD700', stroke: '#D4AF37', strokeWidth: 2 }}
+                        dot={{ fill: 'var(--color-primary-light)', r: 4, strokeWidth: 2, stroke: 'var(--color-primary)' }}
+                        activeDot={{ r: 6, fill: 'var(--color-primary-light)', stroke: 'var(--color-primary)', strokeWidth: 2 }}
                     />
                 </LineChart>
             </ResponsiveContainer>

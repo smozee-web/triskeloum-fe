@@ -140,7 +140,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({
             </div>
             {coverPreview && (
               <div className="relative">
-                <div className="w-16 h-16 rounded-md overflow-hidden border-2 border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
+                <div className="w-16 h-16 rounded-md overflow-hidden border-2 border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50">
                   <img
                     src={coverPreview}
                     alt="Cover preview"

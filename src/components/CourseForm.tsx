@@ -200,7 +200,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
                         <div className="flex space-x-3">
                             <button
                                 onClick={handleRestoreDraft}
-                                className="flex-1 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-md hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors"
+                                className="flex-1 px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-md hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] transition-colors"
                             >
                                 Restore
                             </button>
@@ -227,7 +227,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
 
                     {/* Upload progress bar */}
                     {uploadProgress > 0 && uploadProgress < 100 && (
-                        <div className="bg-gradient-to-br from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 rounded-lg p-4 border border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
+                        <div className="bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 rounded-lg p-4 border border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50">
                             <div className="flex items-center justify-between mb-2">
                                 <span className="text-sm font-medium text-gray-900 dark:text-text-primary">
                                     Upload in progress...
@@ -238,7 +238,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
                             </div>
                             <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                                 <div
-                                    className="bg-gradient-to-r from-[#D4AF37] to-[#FFD700] h-2 rounded-full transition-all duration-300"
+                                    className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] h-2 rounded-full transition-all duration-300"
                                     style={{ width: `${uploadProgress}%` }}
                                 />
                             </div>
@@ -254,7 +254,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
                     />
 
                     {/* Content Type Toggle */}
-                    <div className="bg-gradient-to-br from-[#D4AF37]/5 to-[#FFD700]/5 dark:from-[#D4AF37]/10 dark:to-[#FFD700]/10 rounded-lg p-4 space-y-4 border border-[#D4AF37]/20 dark:border-[#D4AF37]/30">
+                    <div className="bg-gradient-to-br from-[var(--color-primary)]/5 to-[var(--color-primary-light)]/5 dark:from-[var(--color-primary)]/10 dark:to-[var(--color-primary-light)]/10 rounded-lg p-4 space-y-4 border border-[var(--color-primary)]/20 dark:border-[var(--color-primary)]/30">
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Content type</h3>
                         <div className="flex gap-4">
                             <label className="flex items-center cursor-pointer">
@@ -281,7 +281,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
 
                         {/* Media upload (only for media content type) */}
                         {contentType === 'media' && (
-                            <div className="border-t border-[#D4AF37]/20 dark:border-[#D4AF37]/30 pt-4 mt-4">
+                            <div className="border-t border-[var(--color-primary)]/20 dark:border-[var(--color-primary)]/30 pt-4 mt-4">
                                 <label htmlFor="courseMedia" className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
                                     Upload Audio or Video
                                 </label>
@@ -338,7 +338,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
                         </button>
                         <button
                             type="submit"
-                            className="px-6 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-md hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="px-6 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-md hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={isSubmitting || uploadProgress > 0}
                         >
                             {isSubmitting ? 'Saving...' : initialData ? 'Update' : 'Create course'}

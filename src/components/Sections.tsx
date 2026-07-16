@@ -103,7 +103,7 @@ const Sections: React.FC<SectionsProps> = ({
         <button
           type="button"
           onClick={handleAddSection}
-          className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-md hover:from-[#B8860B] hover:to-[#D4AF37] transition-colors"
+          className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-md hover:from-[var(--color-primary-dark)] hover:to-[var(--color-primary)] transition-colors"
         >
           Add a section
         </button>

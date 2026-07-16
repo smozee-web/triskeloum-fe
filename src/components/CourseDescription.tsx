@@ -9,10 +9,10 @@ const CourseDescription: React.FC<CourseDescriptionProps> = ({ legend }) => {
   if (!legend) return null;
 
   return (
-    <div className="bg-gradient-to-br from-[#D4AF37]/5 to-[#FFD700]/5 dark:from-[#D4AF37]/10 dark:to-[#FFD700]/10 rounded-lg p-6 border border-[#D4AF37]/20 dark:border-[#D4AF37]/30">
+    <div className="bg-gradient-to-br from-[var(--color-primary)]/5 to-[var(--color-primary-light)]/5 dark:from-[var(--color-primary)]/10 dark:to-[var(--color-primary-light)]/10 rounded-lg p-6 border border-[var(--color-primary)]/20 dark:border-[var(--color-primary)]/30">
       <span className="text-sm font-semibold mb-4 block"
         style={{
-          background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+          background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }}>

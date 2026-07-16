@@ -24,7 +24,7 @@ const AdminBookCard: React.FC<AdminBookCardProps> = ({ book, onEdit, onDelete, o
     return (
         <div className="bg-white dark:bg-bg-tertiary rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-200 group">
             {/* Cover */}
-            <div className="relative h-32 bg-gradient-to-br from-[#D4AF37] to-[#FFD700] overflow-hidden">
+            <div className="relative h-32 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] overflow-hidden">
                 {book.coverImageUrl ? (
                     <img
                         src={getImageUrl(book.coverImageUrl)}

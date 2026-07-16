@@ -41,7 +41,7 @@ const CourseStats: React.FC<CourseStatsProps> = ({ course }) => {
   ];
 
   const colorClasses = {
-    gold: 'bg-gradient-to-br from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 border-[#D4AF37]/30 dark:border-[#D4AF37]/50'
+    gold: 'bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50'
   };
 
   return (

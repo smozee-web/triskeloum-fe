@@ -65,9 +65,9 @@ const HeroSection = () => {
                         <svg className="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 200 200">
                             <defs>
                                 <linearGradient id="heroGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stopColor="#D4AF37" />
-                                    <stop offset="50%" stopColor="#FFD700" />
-                                    <stop offset="100%" stopColor="#B8860B" />
+                                    <stop offset="0%" stopColor="var(--color-primary)" />
+                                    <stop offset="50%" stopColor="var(--color-primary-light)" />
+                                    <stop offset="100%" stopColor="var(--color-primary-dark)" />
                                 </linearGradient>
                             </defs>
                             <circle cx="100" cy="100" r="95" fill="none" stroke="url(#heroGold)" strokeWidth="1" strokeDasharray="10 5" />
@@ -196,7 +196,7 @@ const HeroSection = () => {
                 .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
                 
                 .title-text {
-                    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #B8860B 100%);
+                    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-primary-dark) 100%);
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
                     background-clip: text;

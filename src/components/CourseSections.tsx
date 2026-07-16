@@ -53,7 +53,7 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
     <div className="space-y-6">
       <h2 className="text-2xl font-bold mb-6"
         style={{
-          background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+          background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }}>
@@ -72,11 +72,11 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
             <button
               type="button"
               onClick={() => toggleSection(sectionIndex)}
-              className="w-full px-6 py-4 bg-gradient-to-r from-[#D4AF37]/10 to-[#FFD700]/10 dark:from-[#D4AF37]/20 dark:to-[#FFD700]/20 hover:from-[#D4AF37]/20 hover:to-[#FFD700]/20 dark:hover:from-[#D4AF37]/30 dark:hover:to-[#FFD700]/30 transition-all duration-200"
+              className="w-full px-6 py-4 bg-gradient-to-r from-[var(--color-primary)]/10 to-[var(--color-primary-light)]/10 dark:from-[var(--color-primary)]/20 dark:to-[var(--color-primary-light)]/20 hover:from-[var(--color-primary)]/20 hover:to-[var(--color-primary-light)]/20 dark:hover:from-[var(--color-primary)]/30 dark:hover:to-[var(--color-primary-light)]/30 transition-all duration-200"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <span className="w-8 h-8 bg-gradient-to-br from-[#D4AF37] to-[#FFD700] text-black rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+                  <span className="w-8 h-8 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                     {sectionIndex + 1}
                   </span>
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary text-left">
@@ -85,7 +85,7 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
                 </div>
                 <div className="flex items-center space-x-2">
                   {section.content?.parts && (
-                    <span className="text-xs bg-gradient-to-r from-[#D4AF37]/20 to-[#FFD700]/20 dark:from-[#D4AF37]/30 dark:to-[#FFD700]/30 text-amber-700 dark:text-amber-400 px-2 py-1 rounded-full font-medium border border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
+                    <span className="text-xs bg-gradient-to-r from-[var(--color-primary)]/20 to-[var(--color-primary-light)]/20 dark:from-[var(--color-primary)]/30 dark:to-[var(--color-primary-light)]/30 text-amber-700 dark:text-amber-400 px-2 py-1 rounded-full font-medium border border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50">
                       {section.content.parts.length} part{section.content.parts.length > 1 ? 's' : ''}
                     </span>
                   )}
@@ -114,14 +114,14 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
 
                 {/* Summary */}
                 {section.content?.summary && (
-                  <div className="mb-6 p-4 bg-gradient-to-r from-[#D4AF37]/5 to-[#FFD700]/5 dark:from-[#D4AF37]/10 dark:to-[#FFD700]/10 rounded-lg border-l-4 border-[#D4AF37]">
+                  <div className="mb-6 p-4 bg-gradient-to-r from-[var(--color-primary)]/5 to-[var(--color-primary-light)]/5 dark:from-[var(--color-primary)]/10 dark:to-[var(--color-primary-light)]/10 rounded-lg border-l-4 border-[var(--color-primary)]">
                     <h4 className="text-sm font-semibold mb-3 flex items-center"
                       style={{
-                        background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+                        background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                       }}>
-                      <span className="w-6 h-6 bg-gradient-to-br from-[#D4AF37] to-[#FFD700] text-black rounded-full flex items-center justify-center text-xs mr-2">
+                      <span className="w-6 h-6 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-full flex items-center justify-center text-xs mr-2">
                         i
                       </span>
                       Summary
@@ -199,7 +199,7 @@ const CourseSections: React.FC<CourseSectionsProps> = ({ sections }) => {
                           >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center space-x-3 flex-1">
-                                <span className="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-[#D4AF37]/20 to-[#FFD700]/20 dark:from-[#D4AF37]/30 dark:to-[#FFD700]/30 text-amber-700 dark:text-amber-400 rounded-full flex items-center justify-center text-xs font-bold border border-[#D4AF37]/30 dark:border-[#D4AF37]/50">
+                                <span className="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-[var(--color-primary)]/20 to-[var(--color-primary-light)]/20 dark:from-[var(--color-primary)]/30 dark:to-[var(--color-primary-light)]/30 text-amber-700 dark:text-amber-400 rounded-full flex items-center justify-center text-xs font-bold border border-[var(--color-primary)]/30 dark:border-[var(--color-primary)]/50">
                                   {partIndex + 1}
                                 </span>
                                 <h5 className="font-medium text-gray-900 dark:text-text-primary text-left">

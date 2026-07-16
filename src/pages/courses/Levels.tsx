@@ -179,7 +179,7 @@ const Levels: React.FC = () => {
                     <div>
                         <h1 className="text-2xl sm:text-3xl font-bold mb-1"
                             style={{
-                                background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+                                background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                             }}>
@@ -189,7 +189,7 @@ const Levels: React.FC = () => {
                     </div>
                     <button
                         onClick={handleCreate}
-                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start"
+                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start"
                     >
                         <PlusIcon className="w-5 h-5 mr-2" />
                         New level
@@ -203,7 +203,7 @@ const Levels: React.FC = () => {
                         <div className="relative bg-gradient-to-br from-amber-50/30 to-white dark:from-transparent dark:to-transparent dark:bg-bg-tertiary rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 group overflow-hidden shadow-sm hover:shadow-md">
                             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent dark:from-amber-500/5 dark:to-transparent" />
                             <div className="relative">
-                                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                     <ChartBarIcon className="h-6 w-6 text-black" />
                                 </div>
                                 <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Total Levels</h3>
@@ -267,7 +267,7 @@ const Levels: React.FC = () => {
                         {!debouncedSearch && (
                             <button
                                 onClick={handleCreate}
-                                className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
+                                className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
                             >
                                 <PlusIcon className="w-5 h-5 mr-2" />
                                 Create a level
@@ -400,7 +400,7 @@ const Levels: React.FC = () => {
                     <div className="p-6 sm:p-8">
                         {/* Header with gradient accent */}
                         <div className="flex items-center gap-4 mb-6 pb-6 border-b border-gray-200 dark:border-gray-800">
-                            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center shadow-md">
+                            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center shadow-md">
                                 {selectedLevel ? (
                                     <PencilIcon className="w-6 h-6 text-black" />
                                 ) : (
@@ -494,7 +494,7 @@ const Levels: React.FC = () => {
                                 <button
                                     type="submit"
                                     disabled={isCreating || isUpdating}
-                                    className="flex-1 px-6 py-3 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed"
+                                    className="flex-1 px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed"
                                 >
                                     {isCreating || isUpdating ? (
                                         <span className="flex items-center justify-center gap-2">

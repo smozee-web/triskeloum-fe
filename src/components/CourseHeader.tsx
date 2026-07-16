@@ -13,7 +13,7 @@ const CourseHeader: React.FC<CourseHeaderProps> = ({ course }) => {
   
     return (
         <div className="relative">
-            <div className="h-64 bg-gradient-to-br from-[#D4AF37] to-[#FFD700] relative overflow-hidden">
+            <div className="h-64 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] relative overflow-hidden">
                 {course?.cover && (
                     <img
                         src={getImageUrl(course?.cover)}
@@ -35,7 +35,7 @@ const CourseHeader: React.FC<CourseHeaderProps> = ({ course }) => {
                 <div className="max-w-4xl">
                     {/* Category */}
                     {course.category && (
-                        <span className="inline-block px-3 py-1 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black text-sm font-medium rounded-full mb-3">
+                        <span className="inline-block px-3 py-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black text-sm font-medium rounded-full mb-3">
                             {course.category.title}
                         </span>
                     )}
@@ -43,7 +43,7 @@ const CourseHeader: React.FC<CourseHeaderProps> = ({ course }) => {
                     {/* Title */}
                     <h1 className="text-3xl md:text-4xl font-bold mb-3"
                         style={{
-                            background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+                            background: 'linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                         }}>
