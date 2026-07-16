@@ -1,7 +1,11 @@
 // src/pages/admin/Books.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import FileUploadZone from '../../components/FileUploadZone';
+import { PlusIcon, BookOpenIcon, CheckCircleIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
+import SearchBar from '../../components/SearchBar';
+import LoadingSkeleton from '../../components/LoadingSkeleton';
+import AdminBookCard from '../../components/AdminBookCard';
+import BookFormModal from '../../components/BookFormModal';
 import {
     useGetAdminBooksQuery,
     useCreateBookMutation,
@@ -14,125 +18,106 @@ import {
 } from '../../services/api';
 
 type BooksTab = 'catalog' | 'categories';
-
-const DELIVERY_MODES = ['READ_ONLY', 'DOWNLOADABLE'];
-const FILE_SOURCES = ['UPLOAD', 'EXTERNAL_URL'];
+type SortOption = 'newest' | 'price_asc' | 'price_desc' | 'title';
 
 const Books: React.FC = () => {
     const [activeTab, setActiveTab] = useState<BooksTab>('catalog');
 
     // ========== Catalog ==========
-    const { data: booksData } = useGetAdminBooksQuery();
+    const { data: booksData, isLoading } = useGetAdminBooksQuery();
     const { data: categoriesData } = useGetBookCategoriesQuery();
-    const [createBook] = useCreateBookMutation();
-    const [updateBook] = useUpdateBookMutation();
+    const [createBook, { isLoading: isCreating }] = useCreateBookMutation();
+    const [updateBook, { isLoading: isUpdating }] = useUpdateBookMutation();
     const [deleteBook] = useDeleteBookMutation();
 
-    const [books, setBooks] = useState<any[]>([]);
+    const books = booksData?.payload || [];
     const categories = categoriesData?.payload || [];
 
-    useEffect(() => {
-        if (booksData?.payload) {
-            setBooks(booksData.payload.map((b: any) => ({
-                id: b.id,
-                title_fr: b.titleFr,
-                title_en: b.titleEn,
-                description_fr: b.descriptionFr || '',
-                description_en: b.descriptionEn || '',
-                author_name: b.authorName || '',
-                price_ghs: b.priceGhs || 0,
-                price_usd: b.priceUsd || 0,
-                delivery_mode: b.deliveryMode || 'READ_ONLY',
-                file_source: b.fileSource || 'UPLOAD',
-                external_url_raw: b.externalUrlRaw || '',
-                cover_image_url: b.coverImageUrl || '',
-                file_url: b.fileUrl || '',
-                category_id: b.category?.id || '',
-                sort_order: b.sortOrder || 0,
-                is_active: b.isActive !== undefined ? b.isActive : true,
-                coverFile: undefined as File | undefined,
-                bookFile: undefined as File | undefined,
-            })));
-        }
-    }, [booksData]);
+    const [search, setSearch] = useState('');
+    const [statusFilter, setStatusFilter] = useState('');
+    const [categoryFilter, setCategoryFilter] = useState('');
+    const [sort, setSort] = useState<SortOption>('newest');
 
-    const handleAddBook = () => {
-        setBooks([...books, {
-            id: `temp-${Date.now()}`,
-            title_fr: '', title_en: '', description_fr: '', description_en: '',
-            author_name: '', price_ghs: 0, price_usd: 0,
-            delivery_mode: 'READ_ONLY', file_source: 'UPLOAD', external_url_raw: '',
-            cover_image_url: '', category_id: '', sort_order: books.length + 1, is_active: true,
-            coverFile: undefined, bookFile: undefined,
-        }]);
+    const [isFormModalOpen, setIsFormModalOpen] = useState(false);
+    const [selectedBook, setSelectedBook] = useState<any>(undefined);
+
+    const stats = {
+        total: books.length,
+        published: books.filter((b: any) => b.isActive).length,
+        draft: books.filter((b: any) => !b.isActive).length,
     };
 
-    const handleSaveBook = async (book: any, index: number) => {
+    const filteredBooks = books
+        .filter((b: any) => {
+            if (statusFilter === 'published' && !b.isActive) return false;
+            if (statusFilter === 'draft' && b.isActive) return false;
+            if (categoryFilter && String(b.category?.id) !== String(categoryFilter)) return false;
+            if (search) {
+                const q = search.toLowerCase();
+                const matches = b.titleEn?.toLowerCase().includes(q)
+                    || b.titleFr?.toLowerCase().includes(q)
+                    || b.authorName?.toLowerCase().includes(q);
+                if (!matches) return false;
+            }
+            return true;
+        })
+        .slice()
+        .sort((a: any, b: any) => {
+            switch (sort) {
+                case 'price_asc': return (parseFloat(a.priceGhs) || 0) - (parseFloat(b.priceGhs) || 0);
+                case 'price_desc': return (parseFloat(b.priceGhs) || 0) - (parseFloat(a.priceGhs) || 0);
+                case 'title': return (a.titleEn || '').localeCompare(b.titleEn || '');
+                case 'newest':
+                default: return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+            }
+        });
+
+    const handleCreate = () => {
+        setSelectedBook(undefined);
+        setIsFormModalOpen(true);
+    };
+
+    const handleEdit = (book: any) => {
+        setSelectedBook(book);
+        setIsFormModalOpen(true);
+    };
+
+    const handleFormSubmit = async (formData: FormData) => {
         try {
-            if (book.file_source === 'UPLOAD' && !book.bookFile && !book.file_url && typeof book.id === 'string') {
-                toast.error('Upload a book file, or switch to "External URL" and paste a link');
-                return;
-            }
-            if (book.file_source === 'EXTERNAL_URL' && !book.external_url_raw) {
-                toast.error('Paste an external URL, or switch to "Upload a file"');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('title_fr', book.title_fr);
-            formData.append('title_en', book.title_en);
-            formData.append('description_fr', book.description_fr || '');
-            formData.append('description_en', book.description_en || '');
-            formData.append('author_name', book.author_name || '');
-            formData.append('price_ghs', String(book.price_ghs || 0));
-            formData.append('price_usd', String(book.price_usd || 0));
-            formData.append('delivery_mode', book.delivery_mode);
-            formData.append('file_source', book.file_source);
-            formData.append('sort_order', String(book.sort_order || 0));
-            formData.append('is_active', String(book.is_active));
-            if (book.category_id) formData.append('category_id', String(book.category_id));
-
-            if (book.file_source === 'EXTERNAL_URL') {
-                formData.append('external_url_raw', book.external_url_raw || '');
-            } else if (book.bookFile) {
-                formData.append('file', book.bookFile);
-            }
-            if (book.coverFile) {
-                formData.append('cover', book.coverFile);
-            }
-
-            const isPersisted = typeof book.id === 'number' || (typeof book.id === 'string' && !book.id.startsWith('temp-'));
-
-            if (isPersisted) {
-                await updateBook({ id: book.id, data: formData }).unwrap();
+            if (selectedBook) {
+                await updateBook({ id: selectedBook.id, data: formData }).unwrap();
                 toast.success('Book updated successfully');
             } else {
-                const result = await createBook(formData).unwrap();
-                const updated = [...books];
-                updated[index].id = result.payload.id;
-                setBooks(updated);
+                await createBook(formData).unwrap();
                 toast.success('Book created successfully');
             }
+            setIsFormModalOpen(false);
         } catch (error: any) {
             console.error('Save book error:', error);
             toast.error(error?.data?.message || 'Error while saving the book');
         }
     };
 
-    const handleDeleteBook = async (book: any) => {
-        const isTempId = typeof book.id === 'string' && book.id.startsWith('temp-');
-        if (!book.id || isTempId) {
-            setBooks(books.filter(b => b !== book));
-            return;
-        }
-        if (!confirm('Are you sure you want to delete this book?')) return;
+    const handleDelete = async (book: any) => {
+        if (!confirm(`Are you sure you want to delete "${book.titleEn}"?`)) return;
         try {
             await deleteBook(book.id).unwrap();
-            setBooks(books.filter(b => b.id !== book.id));
             toast.success('Book deleted successfully');
         } catch (error: any) {
             console.error('Delete book error:', error);
             toast.error(error?.data?.message || 'Error while deleting the book');
+        }
+    };
+
+    const handleTogglePublish = async (book: any) => {
+        try {
+            const formData = new FormData();
+            formData.append('is_active', String(!book.isActive));
+            await updateBook({ id: book.id, data: formData }).unwrap();
+            toast.success(book.isActive ? 'Book unpublished successfully' : 'Book published successfully');
+        } catch (error: any) {
+            console.error('Toggle publish error:', error);
+            toast.error(error?.data?.message || 'Error while changing status');
         }
     };
 
@@ -142,7 +127,7 @@ const Books: React.FC = () => {
     const [deleteCategory] = useDeleteBookCategoryMutation();
     const [localCategories, setLocalCategories] = useState<any[]>([]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         setLocalCategories(categories.map((c: any) => ({
             id: c.id,
             name_fr: c.nameFr,
@@ -211,21 +196,43 @@ const Books: React.FC = () => {
 
     return (
         <div className="flex-1 flex flex-col bg-gray-50 dark:bg-bg-primary p-4 sm:p-6 lg:p-8 overflow-auto transition-colors duration-300">
-            <div className="max-w-6xl mx-auto w-full">
-                <div className="mb-6">
-                    <h1 className="text-2xl sm:text-3xl font-bold mb-1"
-                        style={{
-                            background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                        }}>
-                        Books
-                    </h1>
-                    <p className="text-gray-600 dark:text-text-tertiary mt-1 text-sm sm:text-base">
-                        Manage the book catalog and categories
-                    </p>
+            <div className="max-w-8xl mx-auto w-full">
+                {/* Header */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                    <div>
+                        <h1 className="text-2xl sm:text-3xl font-bold mb-1"
+                            style={{
+                                background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                            }}>
+                            Books
+                        </h1>
+                        <p className="text-gray-600 dark:text-text-tertiary mt-1 text-sm sm:text-base">
+                            Manage the book catalog and categories
+                        </p>
+                    </div>
+                    {activeTab === 'catalog' && (
+                        <button
+                            onClick={handleCreate}
+                            className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start"
+                        >
+                            <PlusIcon className="w-5 h-5 mr-2" />
+                            New book
+                        </button>
+                    )}
+                    {activeTab === 'categories' && (
+                        <button
+                            onClick={handleAddCategory}
+                            className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200 w-full sm:w-auto justify-center sm:justify-start"
+                        >
+                            <PlusIcon className="w-5 h-5 mr-2" />
+                            New category
+                        </button>
+                    )}
                 </div>
 
+                {/* Tabs */}
                 <div className="flex gap-2 mb-6 border-b border-gray-200 dark:border-gray-800">
                     {(['catalog', 'categories'] as BooksTab[]).map(tab => (
                         <button
@@ -242,157 +249,139 @@ const Books: React.FC = () => {
                 </div>
 
                 {activeTab === 'catalog' && (
-                    <div className="space-y-6">
-                        <div className="flex justify-between items-center">
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Books</h3>
-                            <button
-                                onClick={handleAddBook}
-                                className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
-                            >
-                                + Add a book
-                            </button>
-                        </div>
-
-                        {books.map((book, index) => (
-                            <div key={book.id} className="p-6 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary space-y-4">
-                                <div className="flex justify-between items-center">
-                                    <h4 className="font-medium text-gray-900 dark:text-text-primary">Book {index + 1}</h4>
-                                    <div className="flex gap-2">
-                                        <button onClick={() => handleSaveBook(book, index)} className="px-3 py-1.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm">Save</button>
-                                        <button onClick={() => handleDeleteBook(book)} className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">Delete</button>
+                    <>
+                        {/* Stats Cards */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                            <div className="relative bg-gradient-to-br from-amber-50/30 to-white dark:from-transparent dark:to-transparent dark:bg-bg-tertiary rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 group overflow-hidden shadow-sm hover:shadow-md">
+                                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent dark:from-amber-500/5 dark:to-transparent" />
+                                <div className="relative">
+                                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#FFD700] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <BookOpenIcon className="h-6 w-6 text-black" />
                                     </div>
-                                </div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label className={labelClass}>Title (French)</label>
-                                        <input type="text" value={book.title_fr} onChange={(e) => {
-                                            const updated = [...books]; updated[index].title_fr = e.target.value; setBooks(updated);
-                                        }} className={inputClass} />
-                                    </div>
-                                    <div>
-                                        <label className={labelClass}>Title (English)</label>
-                                        <input type="text" value={book.title_en} onChange={(e) => {
-                                            const updated = [...books]; updated[index].title_en = e.target.value; setBooks(updated);
-                                        }} className={inputClass} />
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <label className={labelClass}>Description (French)</label>
-                                        <textarea rows={2} value={book.description_fr} onChange={(e) => {
-                                            const updated = [...books]; updated[index].description_fr = e.target.value; setBooks(updated);
-                                        }} className={inputClass} />
-                                    </div>
-                                    <div className="md:col-span-2">
-                                        <label className={labelClass}>Description (English)</label>
-                                        <textarea rows={2} value={book.description_en} onChange={(e) => {
-                                            const updated = [...books]; updated[index].description_en = e.target.value; setBooks(updated);
-                                        }} className={inputClass} />
-                                    </div>
-                                    <div>
-                                        <label className={labelClass}>Author</label>
-                                        <input type="text" value={book.author_name} onChange={(e) => {
-                                            const updated = [...books]; updated[index].author_name = e.target.value; setBooks(updated);
-                                        }} className={inputClass} />
-                                    </div>
-                                    <div>
-                                        <label className={labelClass}>Category</label>
-                                        <select value={book.category_id} onChange={(e) => {
-                                            const updated = [...books]; updated[index].category_id = e.target.value; setBooks(updated);
-                                        }} className={inputClass}>
-                                            <option value="">No category</option>
-                                            {categories.map((c: any) => (
-                                                <option key={c.id} value={c.id}>{c.nameEn}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label className={labelClass}>Price (GHS)</label>
-                                        <input type="number" value={book.price_ghs} onChange={(e) => {
-                                            const updated = [...books]; updated[index].price_ghs = parseFloat(e.target.value) || 0; setBooks(updated);
-                                        }} className={inputClass} />
-                                    </div>
-                                    <div>
-                                        <label className={labelClass}>Price (USD)</label>
-                                        <input type="number" value={book.price_usd} onChange={(e) => {
-                                            const updated = [...books]; updated[index].price_usd = parseFloat(e.target.value) || 0; setBooks(updated);
-                                        }} className={inputClass} />
-                                    </div>
-                                    <p className="md:col-span-2 text-xs text-gray-500 dark:text-text-tertiary -mt-2">
-                                        Free (price 0/0) books can be read online or downloaded directly from the site. Paid books show a "Buy via WhatsApp" button instead — there's no automated checkout yet.
-                                    </p>
-                                    <div>
-                                        <label className={labelClass}>Delivery mode</label>
-                                        <select value={book.delivery_mode} onChange={(e) => {
-                                            const updated = [...books]; updated[index].delivery_mode = e.target.value; setBooks(updated);
-                                        }} className={inputClass}>
-                                            {DELIVERY_MODES.map(m => <option key={m} value={m}>{m === 'READ_ONLY' ? 'Read-only (in-browser)' : 'Downloadable'}</option>)}
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label className={labelClass}>File source</label>
-                                        <select value={book.file_source} onChange={(e) => {
-                                            const updated = [...books]; updated[index].file_source = e.target.value; setBooks(updated);
-                                        }} className={inputClass}>
-                                            {FILE_SOURCES.map(s => <option key={s} value={s}>{s === 'UPLOAD' ? 'Upload a file' : 'Paste a URL'}</option>)}
-                                        </select>
-                                    </div>
-
-                                    {book.file_source === 'EXTERNAL_URL' ? (
-                                        <div className="md:col-span-2">
-                                            <label className={labelClass}>External URL (Google Drive, Dropbox, ...)</label>
-                                            <input type="text" placeholder="https://drive.google.com/file/d/..." value={book.external_url_raw} onChange={(e) => {
-                                                const updated = [...books]; updated[index].external_url_raw = e.target.value; setBooks(updated);
-                                            }} className={inputClass} />
-                                        </div>
-                                    ) : (
-                                        <div className="md:col-span-2">
-                                            <label className={labelClass}>Book file (PDF or EPUB)</label>
-                                            <input type="file" accept="application/pdf,application/epub+zip" onChange={(e) => {
-                                                const updated = [...books]; updated[index].bookFile = e.target.files?.[0]; setBooks(updated);
-                                            }} className={inputClass} />
-                                            {book.file_url && !book.bookFile && (
-                                                <p className="text-xs text-gray-500 dark:text-text-tertiary mt-1">Current file: {book.file_url}</p>
-                                            )}
-                                        </div>
-                                    )}
-
-                                    <div className="md:col-span-2">
-                                        <FileUploadZone
-                                            label="Cover image"
-                                            type="image"
-                                            accept="image/*"
-                                            selectedFile={book.coverFile}
-                                            preview={!book.coverFile ? book.cover_image_url : undefined}
-                                            onChange={(file) => {
-                                                const updated = [...books]; updated[index].coverFile = file; setBooks(updated);
-                                            }}
-                                        />
-                                    </div>
-
-                                    <div className="flex items-center gap-2">
-                                        <input type="checkbox" checked={book.is_active} onChange={(e) => {
-                                            const updated = [...books]; updated[index].is_active = e.target.checked; setBooks(updated);
-                                        }} />
-                                        <label className="text-sm text-gray-700 dark:text-text-primary">Active (visible on the site)</label>
-                                    </div>
+                                    <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Total Books</h3>
+                                    <p className="text-2xl font-bold text-gray-900 dark:text-text-primary">{stats.total}</p>
                                 </div>
                             </div>
-                        ))}
-                    </div>
+
+                            <div className="relative bg-gradient-to-br from-amber-50/30 to-white dark:from-transparent dark:to-transparent dark:bg-bg-tertiary rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 group overflow-hidden shadow-sm hover:shadow-md">
+                                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent dark:from-green-500/5 dark:to-transparent" />
+                                <div className="relative">
+                                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <CheckCircleIcon className="h-6 w-6 text-white" />
+                                    </div>
+                                    <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Published Books</h3>
+                                    <p className="text-2xl font-bold text-green-600 dark:text-green-400">{stats.published}</p>
+                                </div>
+                            </div>
+
+                            <div className="relative bg-gradient-to-br from-amber-50/30 to-white dark:from-transparent dark:to-transparent dark:bg-bg-tertiary rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 group overflow-hidden shadow-sm hover:shadow-md">
+                                <div className="absolute inset-0 bg-gradient-to-br from-gray-500/5 to-transparent dark:from-gray-500/5 dark:to-transparent" />
+                                <div className="relative">
+                                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-gray-600 to-gray-700 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <DocumentTextIcon className="h-6 w-6 text-white" />
+                                    </div>
+                                    <h3 className="text-sm font-medium text-gray-600 dark:text-text-tertiary mb-1">Drafts</h3>
+                                    <p className="text-2xl font-bold text-gray-700 dark:text-gray-300">{stats.draft}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Filters */}
+                        <div className="bg-gradient-to-br from-amber-50/30 to-white dark:from-transparent dark:to-transparent dark:bg-bg-tertiary rounded-xl shadow-sm hover:shadow-md p-6 mb-6 border border-gray-200 dark:border-gray-800 transition-all duration-300">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                                <SearchBar
+                                    value={search}
+                                    onChange={setSearch}
+                                    placeholder="Search for a book or author..."
+                                />
+
+                                <select
+                                    value={statusFilter}
+                                    onChange={(e) => setStatusFilter(e.target.value)}
+                                    className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent text-sm transition-all"
+                                >
+                                    <option value="">All statuses</option>
+                                    <option value="published">Published</option>
+                                    <option value="draft">Drafts</option>
+                                </select>
+
+                                <select
+                                    value={categoryFilter}
+                                    onChange={(e) => setCategoryFilter(e.target.value)}
+                                    className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent text-sm transition-all"
+                                >
+                                    <option value="">All categories</option>
+                                    {categories.map((c: any) => (
+                                        <option key={c.id} value={c.id}>{c.icon} {c.nameEn}</option>
+                                    ))}
+                                </select>
+
+                                <select
+                                    value={sort}
+                                    onChange={(e) => setSort(e.target.value as SortOption)}
+                                    className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent text-sm transition-all"
+                                >
+                                    <option value="newest">Newest</option>
+                                    <option value="price_asc">Price: low to high</option>
+                                    <option value="price_desc">Price: high to low</option>
+                                    <option value="title">Title</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        {/* Content */}
+                        {isLoading ? (
+                            <LoadingSkeleton />
+                        ) : filteredBooks.length === 0 ? (
+                            <div className="bg-white dark:bg-bg-tertiary rounded-xl shadow-md border border-gray-200 dark:border-gray-800 p-8 sm:p-12 text-center transition-colors">
+                                <div className="w-16 h-16 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <BookOpenIcon className="h-8 w-8 text-amber-600 dark:text-amber-400" />
+                                </div>
+                                <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary mb-2">
+                                    {search || statusFilter || categoryFilter ? 'No book found' : 'No books yet'}
+                                </h3>
+                                <p className="text-gray-600 dark:text-text-tertiary mb-6 text-sm sm:text-base">
+                                    {search || statusFilter || categoryFilter
+                                        ? 'Try adjusting your search or filters'
+                                        : 'Start by creating your first book'}
+                                </p>
+                                {!(search || statusFilter || categoryFilter) && (
+                                    <button
+                                        onClick={handleCreate}
+                                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
+                                    >
+                                        <PlusIcon className="w-5 h-5 mr-2" />
+                                        Create a book
+                                    </button>
+                                )}
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                                {filteredBooks.map((book: any) => (
+                                    <AdminBookCard
+                                        key={book.id}
+                                        book={book}
+                                        onEdit={handleEdit}
+                                        onDelete={handleDelete}
+                                        onTogglePublish={handleTogglePublish}
+                                    />
+                                ))}
+                            </div>
+                        )}
+
+                        <BookFormModal
+                            isOpen={isFormModalOpen}
+                            onClose={() => setIsFormModalOpen(false)}
+                            initialData={selectedBook}
+                            categories={categories}
+                            onSubmit={handleFormSubmit}
+                            isSubmitting={isCreating || isUpdating}
+                        />
+                    </>
                 )}
 
                 {activeTab === 'categories' && (
                     <div className="space-y-6">
-                        <div className="flex justify-between items-center">
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-text-primary">Categories</h3>
-                            <button
-                                onClick={handleAddCategory}
-                                className="px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
-                            >
-                                + Add a category
-                            </button>
-                        </div>
-
                         {localCategories.map((category, index) => (
                             <div key={category.id} className="p-6 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary space-y-4">
                                 <div className="flex justify-between items-center">
