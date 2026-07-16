@@ -6,6 +6,7 @@ import HeroSection from './components/HeroSection';
 import ServicesSection from './components/ServicesSection';
 import FormationSection from './components/FormationSection';
 import NaturalHealingSection from './components/NaturalHealingSection';
+import BooksSection from './components/BooksSection';
 import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 import FlameCustomCursor from '../../components/FlameCustomCursor';
@@ -35,6 +36,7 @@ const LandingPage = () => {
         <ServicesSection />
         <FormationSection />
         <NaturalHealingSection />
+        <BooksSection />
         <AboutSection />
         <ContactSection />
       </main>

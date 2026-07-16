@@ -10,7 +10,8 @@ import {
   QuestionCircleOutlined,
   AudioOutlined,
   BarsOutlined,
-  GlobalOutlined
+  GlobalOutlined,
+  ReadOutlined
 } from '@ant-design/icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -40,6 +41,7 @@ const Sidebar = () => {
       '/admin/courses/quotes': '9',
       '/admin/courses/faqs': '10',
       '/admin/landing-page-settings': '11',
+      '/admin/books': '12',
     };
 
     const currentKey = pathToKey[location.pathname] || '1';
@@ -58,6 +60,7 @@ const Sidebar = () => {
     { key: '9', icon: <FileTextOutlined />, label: 'Quotes', path: '/admin/courses/quotes' },
     { key: '10', icon: <QuestionCircleOutlined />, label: 'FAQs', path: '/admin/courses/faqs' },
     { key: '11', icon: <GlobalOutlined />, label: 'Homepage', path: '/admin/landing-page-settings' },
+    { key: '12', icon: <ReadOutlined />, label: 'Books', path: '/admin/books' },
   ];
 
   const handleMenuClick = (item: MenuItem) => {

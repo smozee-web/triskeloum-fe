@@ -24,6 +24,7 @@ import VoiceRooms from "./pages/admin/VoiceRooms";
 import Notifications from "./pages/admin/Notifications";
 import Settings from "./pages/admin/Settings";
 import LandingPageSettings from "./pages/admin/LandingPageSettings";
+import Books from "./pages/admin/Books";
 import LandingPage from "./pages/public/LandingPage";
 import { SocketProvider } from "./contexts/SocketContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -71,6 +72,7 @@ const App = () => {
               <Route path="/admin/notifications" element={<Notifications />} />
               <Route path="/admin/settings" element={<Settings />} />
               <Route path="/admin/landing-page-settings" element={<LandingPageSettings />} />
+              <Route path="/admin/books" element={<Books />} />
               <Route path="/admin/courses/categories" element={<Categories />} />
               <Route path="/admin/levels" element={<Levels />} />
               <Route path="/admin/courses/exercises" element={<Exercises />} />

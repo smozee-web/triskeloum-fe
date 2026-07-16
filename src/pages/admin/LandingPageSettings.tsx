@@ -16,7 +16,7 @@ import {
     useDeletePricingPlanMutation,
 } from '../../services/api';
 
-type TabType = 'home' | 'services' | 'formations' | 'pricing' | 'about' | 'contact' | 'social';
+type TabType = 'home' | 'services' | 'formations' | 'pricing' | 'about' | 'contact' | 'social' | 'books';
 
 const LandingPageSettings: React.FC = () => {
     const [activeTab, setActiveTab] = useState<TabType>('home');
@@ -106,6 +106,16 @@ const LandingPageSettings: React.FC = () => {
         location_en: '',
     });
 
+    // Books Section State (header copy only — the catalog itself is managed on the Books admin page)
+    const [booksSettings, setBooksSettings] = useState({
+        title_fr: '',
+        title_en: '',
+        subtitle_fr: '',
+        subtitle_en: '',
+        description_fr: '',
+        description_en: '',
+    });
+
     // Social Media State
     const [socialMedia, setSocialMedia] = useState({
         facebook: '',
@@ -179,6 +189,19 @@ const LandingPageSettings: React.FC = () => {
                     email: contactSection.metadata?.email || '',
                     location_fr: contactSection.metadata?.location_fr ?? contactSection.metadata?.locationFr ?? '',
                     location_en: contactSection.metadata?.location_en ?? contactSection.metadata?.locationEn ?? '',
+                });
+            }
+
+            // Load books section (header copy only)
+            const booksSection = sections.find((s: any) => s.section === 'books');
+            if (booksSection) {
+                setBooksSettings({
+                    title_fr: booksSection.titleFr || booksSection.title_fr || '',
+                    title_en: booksSection.titleEn || booksSection.title_en || '',
+                    subtitle_fr: booksSection.subtitleFr || booksSection.subtitle_fr || '',
+                    subtitle_en: booksSection.subtitleEn || booksSection.subtitle_en || '',
+                    description_fr: booksSection.descriptionFr || booksSection.description_fr || '',
+                    description_en: booksSection.descriptionEn || booksSection.description_en || '',
                 });
             }
 
@@ -366,6 +389,18 @@ const LandingPageSettings: React.FC = () => {
                         metadata: { ...socialMedia }
                     }
                 }).unwrap();
+            } else if (activeTab === 'books') {
+                await updateContent({
+                    section: 'books',
+                    data: {
+                        title_fr: booksSettings.title_fr,
+                        title_en: booksSettings.title_en,
+                        subtitle_fr: booksSettings.subtitle_fr,
+                        subtitle_en: booksSettings.subtitle_en,
+                        description_fr: booksSettings.description_fr,
+                        description_en: booksSettings.description_en,
+                    }
+                }).unwrap();
             }
 
             toast.success('Settings saved successfully');
@@ -385,6 +420,7 @@ const LandingPageSettings: React.FC = () => {
         { id: 'about' as TabType, label: 'About', icon: Users },
         { id: 'contact' as TabType, label: 'Contact', icon: Mail },
         { id: 'social' as TabType, label: 'Social Media', icon: Share2 },
+        { id: 'books' as TabType, label: 'Books', icon: BookOpen },
     ];
 
     const renderHomeSection = () => (
@@ -1570,6 +1606,89 @@ const LandingPageSettings: React.FC = () => {
         </div>
     );
 
+    const renderBooksSection = () => (
+        <div className="space-y-6">
+            <p className="text-sm text-gray-500 dark:text-text-tertiary">
+                This tab controls the public Books section's heading text only. Individual books are managed on the{' '}
+                <a href="/admin/books" className="text-amber-600 dark:text-amber-400 underline">Books admin page</a>.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Title (French)
+                    </label>
+                    <input
+                        type="text"
+                        value={booksSettings.title_fr}
+                        onChange={(e) => setBooksSettings({ ...booksSettings, title_fr: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Title (English)
+                    </label>
+                    <input
+                        type="text"
+                        value={booksSettings.title_en}
+                        onChange={(e) => setBooksSettings({ ...booksSettings, title_en: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Subtitle (French)
+                    </label>
+                    <input
+                        type="text"
+                        value={booksSettings.subtitle_fr}
+                        onChange={(e) => setBooksSettings({ ...booksSettings, subtitle_fr: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Subtitle (English)
+                    </label>
+                    <input
+                        type="text"
+                        value={booksSettings.subtitle_en}
+                        onChange={(e) => setBooksSettings({ ...booksSettings, subtitle_en: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Description (French)
+                    </label>
+                    <textarea
+                        value={booksSettings.description_fr}
+                        onChange={(e) => setBooksSettings({ ...booksSettings, description_fr: e.target.value })}
+                        rows={3}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Description (English)
+                    </label>
+                    <textarea
+                        value={booksSettings.description_en}
+                        onChange={(e) => setBooksSettings({ ...booksSettings, description_en: e.target.value })}
+                        rows={3}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
+            </div>
+        </div>
+    );
+
     const renderSocialSection = () => (
         <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1641,6 +1760,7 @@ const LandingPageSettings: React.FC = () => {
                     {activeTab === 'about' && renderAboutSection()}
                     {activeTab === 'contact' && renderContactSection()}
                     {activeTab === 'social' && renderSocialSection()}
+                    {activeTab === 'books' && renderBooksSection()}
                 </div>
 
                 {/* Save Button */}

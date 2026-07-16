@@ -29,7 +29,11 @@ const baseQuery = fetchBaseQuery({
             headers.set('Authorization', `Bearer ${token}`);
         }
 
-        headers.set("Content-Type", "application/json");
+        // Don't force JSON content-type here — it would override the
+        // multipart/form-data boundary header the browser sets for FormData
+        // bodies (file uploads), which breaks them server-side. fetchBaseQuery
+        // already sets 'Content-Type: application/json' by itself for plain
+        // JSON bodies when no content-type is present yet.
         return headers;
     },
 });
@@ -113,6 +117,8 @@ export const api = createApi({
         'LandingServices',
         'PricingPlans',
         'FormationTags',
+        'Books',
+        'BookCategories',
     ],
     endpoints: (builder) => ({
         // ========== AUTH ==========
@@ -704,6 +710,85 @@ export const api = createApi({
             invalidatesTags: ['FormationTags'],
         }),
 
+        // ========== BOOKS (public) ==========
+        getBooks: builder.query<ApiResponse<any[]>, { category?: string; q?: string; sort?: string } | void>({
+            query: (filters) => ({
+                url: '/app/books',
+                params: filters || undefined,
+            }),
+            providesTags: ['Books'],
+        }),
+
+        getBook: builder.query<ApiResponse<any>, number>({
+            query: (id) => `/app/books/${id}`,
+            providesTags: ['Books'],
+        }),
+
+        getBookCategories: builder.query<ApiResponse<any[]>, void>({
+            query: () => '/app/book-categories',
+            providesTags: ['BookCategories'],
+        }),
+
+        // ========== BOOKS (admin) ==========
+        getAdminBooks: builder.query<ApiResponse<any[]>, void>({
+            query: () => '/app/admin/books',
+            providesTags: ['Books'],
+        }),
+
+        createBook: builder.mutation<ApiResponse<any>, FormData>({
+            query: (data) => ({
+                url: '/app/admin/books',
+                method: 'POST',
+                body: data,
+                formData: true,
+            }),
+            invalidatesTags: ['Books'],
+        }),
+
+        updateBook: builder.mutation<ApiResponse<any>, { id: number; data: FormData }>({
+            query: ({ id, data }) => ({
+                url: `/app/admin/books/${id}`,
+                method: 'PUT',
+                body: data,
+                formData: true,
+            }),
+            invalidatesTags: ['Books'],
+        }),
+
+        deleteBook: builder.mutation<ApiResponse<null>, number>({
+            query: (id) => ({
+                url: `/app/admin/books/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Books'],
+        }),
+
+        createBookCategory: builder.mutation<ApiResponse<any>, any>({
+            query: (data) => ({
+                url: '/app/admin/book-categories',
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['BookCategories'],
+        }),
+
+        updateBookCategory: builder.mutation<ApiResponse<any>, { id: number; data: any }>({
+            query: ({ id, data }) => ({
+                url: `/app/admin/book-categories/${id}`,
+                method: 'PUT',
+                body: data,
+            }),
+            invalidatesTags: ['BookCategories'],
+        }),
+
+        deleteBookCategory: builder.mutation<ApiResponse<null>, number>({
+            query: (id) => ({
+                url: `/app/admin/book-categories/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['BookCategories'],
+        }),
+
     }),
 });
 
@@ -776,4 +861,14 @@ export const {
     useCreateFormationTagMutation,
     useUpdateFormationTagMutation,
     useDeleteFormationTagMutation,
+    useGetBooksQuery,
+    useGetBookQuery,
+    useGetBookCategoriesQuery,
+    useGetAdminBooksQuery,
+    useCreateBookMutation,
+    useUpdateBookMutation,
+    useDeleteBookMutation,
+    useCreateBookCategoryMutation,
+    useUpdateBookCategoryMutation,
+    useDeleteBookCategoryMutation,
 } = api;

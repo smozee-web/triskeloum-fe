@@ -14,7 +14,7 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    const sectionIds = ['home', 'services', 'formations', 'about', 'contact'];
+    const sectionIds = ['home', 'services', 'formations', 'books', 'about', 'contact'];
     const observers = sectionIds.map(id => {
       const element = document.getElementById(id);
       if (!element) return null;
@@ -47,6 +47,7 @@ const Header = () => {
     { fr: 'Accueil', en: 'Home', href: '#home' },
     { fr: 'Services', en: 'Services', href: '#services' },
     { fr: 'Formations', en: 'Training', href: '#formations' },
+    { fr: 'Livres', en: 'Books', href: '#books' },
     { fr: 'À propos', en: 'About', href: '#about' },
     { fr: 'Contact', en: 'Contact', href: '#contact' },
   ];
