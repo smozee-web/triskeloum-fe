@@ -1,0 +1,44 @@
+name: Deploy Frontend
+
+# Only fires on pushes that land on dev — i.e. after a merge. Pushes to
+# feature branches never trigger a deploy.
+on:
+  push:
+    branches: [ "dev" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.SERVER_IP }}" >> ~/.ssh/known_hosts
+
+      - name: Sync source to server
+        run: |
+          rsync -az --delete \
+            --exclude '.git' \
+            --exclude 'node_modules' \
+            --exclude 'dist' \
+            --exclude '.env' \
+            -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
+            ./ "${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:~/apps/usratul-azkaar-fe/"
+
+      - name: Rebuild and restart frontend
+        run: |
+          ssh -i ~/.ssh/id_ed25519 "${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}" '
+            set -e
+            cd ~/apps/usratul-azkaar-be
+            docker compose up -d --build frontend
+            docker image prune -f
+          '
+
+      - name: Clean up SSH key
+        if: always()
+        run: rm -f ~/.ssh/id_ed25519
