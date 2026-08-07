@@ -2,67 +2,33 @@ name: Deploy Frontend
 
 # Only fires on pushes that land on dev — i.e. after a merge. Pushes to
 # feature branches never trigger a deploy.
+#
+# Runs on a self-hosted runner installed directly on the target server
+# (see ~/actions-runner-fe there). GitHub-hosted runners' IPs get silently
+# dropped by this server's network before reaching SSH, so the deploy
+# has to run locally instead of connecting in over SSH.
 on:
   push:
     branches: [ "dev" ]
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
-      - name: Verify required secrets are set
+      - name: Sync source to deploy directory
         run: |
-          for name in SSH_KEY SERVER_IP SERVER_USERNAME; do
-            value="${!name}"
-            if [ -z "$value" ]; then
-              echo "::error::Secret $name is missing or empty. Add it under Settings > Secrets and variables > Actions."
-              exit 1
-            fi
-          done
-        env:
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-          SERVER_IP: ${{ secrets.SERVER_IP }}
-          SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
-
-      - name: Create SSH directory
-        run: mkdir -p ~/.ssh
-
-      - name: Write private key
-        run: |
-          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-
-      - name: Add server to known_hosts
-        run: ssh-keyscan -H "${{ secrets.SERVER_IP }}" >> ~/.ssh/known_hosts
-
-      - name: Test SSH connection
-        run: |
-          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
-            "${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}" \
-            'echo "SSH OK: logged in as $(whoami) on $(hostname)"'
-
-      - name: Sync source to server
-        run: |
-          rsync -az --delete \
+          rsync -a --delete \
             --exclude '.git' \
             --exclude 'node_modules' \
             --exclude 'dist' \
             --exclude '.env' \
-            -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
-            ./ "${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:~/apps/usratul-azkaar-fe/"
+            "$GITHUB_WORKSPACE"/ ~/apps/usratul-azkaar-fe/
 
       - name: Rebuild and restart frontend
         run: |
-          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}" '
-            set -e
-            cd ~/apps/usratul-azkaar-be
-            docker compose up -d --build frontend
-            docker image prune -f
-          '
-
-      - name: Clean up SSH key
-        if: always()
-        run: rm -f ~/.ssh/id_ed25519
+          cd ~/apps/usratul-azkaar-be
+          docker compose up -d --build frontend
+          docker image prune -f
