@@ -13,12 +13,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up SSH
+      - name: Verify required secrets are set
         run: |
-          mkdir -p ~/.ssh
+          for name in SSH_KEY SERVER_IP SERVER_USERNAME; do
+            value="${!name}"
+            if [ -z "$value" ]; then
+              echo "::error::Secret $name is missing or empty. Add it under Settings > Secrets and variables > Actions."
+              exit 1
+            fi
+          done
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
+
+      - name: Create SSH directory
+        run: mkdir -p ~/.ssh
+
+      - name: Write private key
+        run: |
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H "${{ secrets.SERVER_IP }}" >> ~/.ssh/known_hosts
+
+      - name: Add server to known_hosts
+        run: ssh-keyscan -H "${{ secrets.SERVER_IP }}" >> ~/.ssh/known_hosts
+
+      - name: Test SSH connection
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no \
+            "${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}" \
+            'echo "SSH OK: logged in as $(whoami) on $(hostname)"'
 
       - name: Sync source to server
         run: |
@@ -32,7 +56,7 @@ jobs:
 
       - name: Rebuild and restart frontend
         run: |
-          ssh -i ~/.ssh/id_ed25519 "${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}" '
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}" '
             set -e
             cd ~/apps/usratul-azkaar-be
             docker compose up -d --build frontend
