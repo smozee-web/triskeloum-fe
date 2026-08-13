@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useGetLandingPageContentQuery, useGetBooksQuery, useGetBookCategoriesQuery } from '../../../services/api';
 import { getImageUrl } from '../../../utils/imageUtils';
+import { localized } from '../../../utils/localize';
 
 const BooksSection = () => {
   const { lang, t } = useLanguage();
@@ -23,14 +24,13 @@ const BooksSection = () => {
   const whatsapp = contactSection?.metadata?.whatsapp || '22890000000';
 
   const booksSection = contentData?.payload?.find((section: any) => section.section === 'books');
-  const sectionTitle = booksSection ? (lang === 'fr' ? booksSection.titleFr : booksSection.titleEn) : t('Nos Livres', 'Our Books');
-  const sectionSubtitle = booksSection ? (lang === 'fr' ? booksSection.subtitleFr : booksSection.subtitleEn) : t('BIBLIOTHÈQUE', 'LIBRARY');
+  const sectionTitle = booksSection ? localized(booksSection, 'title', lang) : t('Nos Livres', 'Our Books', 'كتبنا');
+  const sectionSubtitle = booksSection ? localized(booksSection, 'subtitle', lang) : t('BIBLIOTHÈQUE', 'LIBRARY', 'المكتبة');
   const sectionDescription = booksSection
-    ? (lang === 'fr' ? booksSection.descriptionFr : booksSection.descriptionEn)
+    ? localized(booksSection, 'description', lang)
     : t(
       "Des livres pour approfondir les sciences des Asraar et des Azkaar, la Tazkiyah et la médecine prophétique.",
-      "Books to deepen the sciences of Asraar and Azkaar, Tazkiyah, and prophetic medicine."
-    );
+      "Books to deepen the sciences of Asraar and Azkaar, Tazkiyah, and prophetic medicine.", 'كتب لتعميق علوم الأسرار والأذكار، والتزكية، والطب النبوي.');
 
   const categories = categoriesData?.payload || [];
   const books = booksData?.payload || [];
@@ -42,7 +42,11 @@ const BooksSection = () => {
   const isFree = (book: any) => (parseFloat(book.priceGhs) || 0) === 0 && (parseFloat(book.priceUsd) || 0) === 0;
 
   const buyText = (title: string) =>
-    encodeURIComponent(t(`Bonjour, je suis intéressé(e) par le livre "${title}".`, `Hi, I'm interested in the book "${title}".`));
+    encodeURIComponent(t(
+      `Bonjour, je suis intéressé(e) par le livre "${title}".`,
+      `Hi, I'm interested in the book "${title}".`,
+      `السلام عليكم، أنا مهتم بكتاب "${title}".`
+    ));
 
   return (
     <section id="books" className="relative py-24 bg-gradient-to-b from-black via-stone-950 to-black overflow-hidden">
@@ -70,7 +74,7 @@ const BooksSection = () => {
                 : 'border-amber-700/30 text-amber-400 hover:bg-amber-900/20'
                 }`}
             >
-              {t('Tous', 'All')}
+              {t('Tous', 'All', 'الكل')}
             </button>
             {categories.map((c: any) => (
               <button
@@ -81,7 +85,7 @@ const BooksSection = () => {
                   : 'border-amber-700/30 text-amber-400 hover:bg-amber-900/20'
                   }`}
               >
-                {c.icon} {lang === 'fr' ? c.nameFr : c.nameEn}
+                {c.icon} {localized(c, 'name', lang)}
               </button>
             ))}
           </div>
@@ -91,7 +95,7 @@ const BooksSection = () => {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder={t('Rechercher un livre ou un auteur...', 'Search a book or author...')}
+              placeholder={t('Rechercher un livre ou un auteur...', 'Search a book or author...', 'ابحث عن كتاب أو مؤلف...')}
               className="w-full max-w-xs px-4 py-2 bg-black/50 border border-amber-900/30 rounded-full text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-600/50"
             />
             <select
@@ -99,10 +103,10 @@ const BooksSection = () => {
               onChange={(e) => setSort(e.target.value as any)}
               className="px-4 py-2 bg-black/50 border border-amber-900/30 rounded-full text-sm text-amber-400 focus:outline-none focus:border-amber-600/50"
             >
-              <option value="newest">{t('Plus récent', 'Newest')}</option>
-              <option value="price_asc">{t('Prix croissant', 'Price: low to high')}</option>
-              <option value="price_desc">{t('Prix décroissant', 'Price: high to low')}</option>
-              <option value="title">{t('Titre', 'Title')}</option>
+              <option value="newest">{t('Plus récent', 'Newest', 'الأحدث')}</option>
+              <option value="price_asc">{t('Prix croissant', 'Price: low to high', 'السعر: من الأقل إلى الأعلى')}</option>
+              <option value="price_desc">{t('Prix décroissant', 'Price: high to low', 'السعر: من الأعلى إلى الأقل')}</option>
+              <option value="title">{t('Titre', 'Title', 'العنوان')}</option>
             </select>
             <button
               onClick={() => setShowUsd(!showUsd)}
@@ -110,7 +114,7 @@ const BooksSection = () => {
             >
               <span className={!showUsd ? 'font-bold' : 'opacity-60'}>GHS</span>
               <div className="w-8 h-4 bg-black/50 rounded-full relative">
-                <div className={`absolute top-0.5 w-3 h-3 bg-amber-500 rounded-full transition-all ${showUsd ? 'left-4' : 'left-0.5'}`} />
+                <div className={`absolute top-0.5 w-3 h-3 bg-amber-500 rounded-full transition-all ${showUsd ? 'start-4' : 'start-0.5'}`} />
               </div>
               <span className={showUsd ? 'font-bold' : 'opacity-60'}>USD</span>
             </button>
@@ -119,14 +123,14 @@ const BooksSection = () => {
 
         {/* Books Grid */}
         {isLoading ? (
-          <p className="text-center text-gray-500">{t('Chargement...', 'Loading...')}</p>
+          <p className="text-center text-gray-500">{t('Chargement...', 'Loading...', 'جارٍ التحميل...')}</p>
         ) : books.length === 0 ? (
-          <p className="text-center text-gray-500">{t('Aucun livre disponible pour le moment.', 'No books available yet.')}</p>
+          <p className="text-center text-gray-500">{t('Aucun livre disponible pour le moment.', 'No books available yet.', 'لا توجد كتب متاحة حاليًا.')}</p>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {books.map((book: any) => {
-              const title = lang === 'fr' ? book.titleFr : book.titleEn;
-              const description = lang === 'fr' ? book.descriptionFr : book.descriptionEn;
+              const title = localized(book, 'title', lang);
+              const description = localized(book, 'description', lang);
               const free = isFree(book);
 
               return (
@@ -142,12 +146,12 @@ const BooksSection = () => {
                   <div className="p-4">
                     {book.category && (
                       <span className="text-xs text-amber-500/80 tracking-wide">
-                        {book.category.icon} {lang === 'fr' ? book.category.nameFr : book.category.nameEn}
+                        {book.category.icon} {localized(book.category, 'name', lang)}
                       </span>
                     )}
                     <h3 className="text-lg font-medium text-white mt-1 mb-1">{title}</h3>
                     {book.authorName && (
-                      <p className="text-xs text-gray-500 mb-2">{t('par', 'by')} {book.authorName}</p>
+                      <p className="text-xs text-gray-500 mb-2">{t('par', 'by', 'بقلم')} {book.authorName}</p>
                     )}
                     {description && (
                       <p className="text-sm text-gray-400 mb-4 line-clamp-2">{description}</p>
@@ -155,7 +159,7 @@ const BooksSection = () => {
 
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-lg font-light text-amber-400">
-                        {free ? t('Gratuit', 'Free') : formatPrice(book.priceGhs, book.priceUsd)}
+                        {free ? t('Gratuit', 'Free', 'مجاني') : formatPrice(book.priceGhs, book.priceUsd)}
                       </span>
                     </div>
 
@@ -166,14 +170,14 @@ const BooksSection = () => {
                           download
                           className="flex items-center justify-center w-full py-2.5 rounded-full text-sm font-medium bg-amber-900/30 text-amber-400 border border-amber-700/30 hover:bg-amber-800/50 transition-colors"
                         >
-                          {t('Télécharger', 'Download')}
+                          {t('Télécharger', 'Download', 'تحميل')}
                         </a>
                       ) : (
                         <button
                           onClick={() => setReadingBook(book)}
                           className="w-full py-2.5 rounded-full text-sm font-medium bg-amber-900/30 text-amber-400 border border-amber-700/30 hover:bg-amber-800/50 transition-colors"
                         >
-                          {t('Lire en ligne', 'Read Online')}
+                          {t('Lire en ligne', 'Read Online', 'القراءة عبر الإنترنت')}
                         </button>
                       )
                     ) : (
@@ -183,7 +187,7 @@ const BooksSection = () => {
                         rel="noopener noreferrer"
                         className="flex items-center justify-center gap-2 w-full py-2.5 rounded-full text-sm font-medium bg-gradient-to-r from-amber-500 to-amber-700 text-black hover:from-amber-400 hover:to-amber-600 transition-all"
                       >
-                        {t('Acheter via WhatsApp', 'Buy via WhatsApp')}
+                        {t('Acheter via WhatsApp', 'Buy via WhatsApp', 'الشراء عبر واتساب')}
                       </a>
                     )}
                   </div>
@@ -200,13 +204,13 @@ const BooksSection = () => {
           <div className="w-full max-w-4xl h-[85vh] bg-black rounded-xl overflow-hidden relative" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setReadingBook(null)}
-              className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/70 text-white flex items-center justify-center hover:bg-black"
+              className="absolute top-3 end-3 z-10 w-9 h-9 rounded-full bg-black/70 text-white flex items-center justify-center hover:bg-black"
             >
               ✕
             </button>
             <iframe
               src={getImageUrl(readingBook.fileUrl)}
-              title={lang === 'fr' ? readingBook.titleFr : readingBook.titleEn}
+              title={localized(readingBook, 'title', lang)}
               className="w-full h-full"
             />
           </div>

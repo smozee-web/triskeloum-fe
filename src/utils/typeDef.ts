@@ -375,4 +375,4 @@ export interface TeamMember {
     image: string;
 }
 
-export type Language = 'fr' | 'en';
+export type Language = 'fr' | 'en' | 'ar';

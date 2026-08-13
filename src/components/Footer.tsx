@@ -19,20 +19,20 @@ const Footer = () => {
 
     const links = {
         services: [
-            { fr: 'Consultation', en: 'Consultation', href: '#services' },
-            { fr: 'Diagnostic Spirituel', en: 'Spiritual Diagnosis', href: '#services' },
-            { fr: 'Ruqyah & Purification', en: 'Ruqyah & Purification', href: '#services' },
-            { fr: 'Livre de Guidance', en: 'Book of Guidance', href: '#services' },
+            { fr: 'Consultation', en: 'Consultation', ar: 'استشارة', href: '#services' },
+            { fr: 'Diagnostic Spirituel', en: 'Spiritual Diagnosis', ar: 'التشخيص الروحي', href: '#services' },
+            { fr: 'Ruqyah & Purification', en: 'Ruqyah & Purification', ar: 'الرقية والتطهير', href: '#services' },
+            { fr: 'Livre de Guidance', en: 'Book of Guidance', ar: 'كتاب الإرشاد', href: '#services' },
         ],
         formations: [
-            { fr: 'Formation Classique', en: 'Classic Training', href: '#formations' },
-            { fr: 'Formation Premium', en: 'Premium Training', href: '#formations' },
-            { fr: 'Guérison Naturelle', en: 'Natural Healing', href: '#natural-healing' },
+            { fr: 'Formation Classique', en: 'Classic Training', ar: 'الدورة الأساسية', href: '#formations' },
+            { fr: 'Formation Premium', en: 'Premium Training', ar: 'الدورة المتقدمة', href: '#formations' },
+            { fr: 'Guérison Naturelle', en: 'Natural Healing', ar: 'الشفاء الطبيعي', href: '#natural-healing' },
         ],
         about: [
-            { fr: 'Le Cheikh', en: 'The Sheikh', href: '#about' },
-            { fr: 'Transmissions', en: 'Transmissions', href: '#about' },
-            { fr: 'Nous contacter', en: 'Contact Us', href: '#contact' },
+            { fr: 'Le Cheikh', en: 'The Sheikh', ar: 'الشيخ', href: '#about' },
+            { fr: 'Transmissions', en: 'Transmissions', ar: 'الإجازات', href: '#about' },
+            { fr: 'Nous contacter', en: 'Contact Us', ar: 'اتصل بنا', href: '#contact' },
         ],
     };
 
@@ -49,13 +49,12 @@ const Footer = () => {
                                 alt="USRATUL AZKAAR Logo"
                                 className="w-10 h-10 object-contain"
                             />
-                            <span className="text-xl font-light tracking-[0.2em] text-amber-400">USRATUL AZKAAR</span>
+                            <span className="force-ltr text-xl font-light tracking-[0.2em] text-amber-400">USRATUL AZKAAR</span>
                         </div>
                         <p className="text-gray-500 text-sm leading-relaxed mb-6 max-w-sm">
                             {t(
                                 "Pratique spirituelle islamique digitale. Guérir les cœurs à travers les sciences des Asraar et des Azkaar, et guider chaque chercheur sur le chemin de la connaissance de soi et du rapprochement d'Allah.",
-                                "Digital Islamic spiritual practice. Healing hearts through the sciences of Asraar and Azkaar, and guiding each seeker on the path of self-knowledge and nearness to Allah."
-                            )}
+                                "Digital Islamic spiritual practice. Healing hearts through the sciences of Asraar and Azkaar, and guiding each seeker on the path of self-knowledge and nearness to Allah.", 'ممارسة روحانية إسلامية رقمية. شفاء القلوب من خلال علوم الأسرار والأذكار، وإرشاد كل سالك في طريق معرفة النفس والقرب من الله.')}
                         </p>
                         {socialLinks.length > 0 && (
                             <div className="flex gap-4">
@@ -76,12 +75,12 @@ const Footer = () => {
 
                     {/* Services */}
                     <div>
-                        <h4 className="text-amber-400 font-medium mb-4">{t('Services', 'Services')}</h4>
+                        <h4 className="text-amber-400 font-medium mb-4">{t('Services', 'Services', 'الخدمات')}</h4>
                         <ul className="space-y-2">
                             {links.services.map((link, i) => (
                                 <li key={i}>
                                     <a href={link.href} className="text-gray-500 hover:text-amber-400 text-sm transition-colors">
-                                        {t(link.fr, link.en)}
+                                        {t(link.fr, link.en, link.ar)}
                                     </a>
                                 </li>
                             ))}
@@ -90,12 +89,12 @@ const Footer = () => {
 
                     {/* Formations */}
                     <div>
-                        <h4 className="text-amber-400 font-medium mb-4">{t('Formations', 'Training')}</h4>
+                        <h4 className="text-amber-400 font-medium mb-4">{t('Formations', 'Training', 'الدورات')}</h4>
                         <ul className="space-y-2">
                             {links.formations.map((link, i) => (
                                 <li key={i}>
                                     <a href={link.href} className="text-gray-500 hover:text-amber-400 text-sm transition-colors">
-                                        {t(link.fr, link.en)}
+                                        {t(link.fr, link.en, link.ar)}
                                     </a>
                                 </li>
                             ))}
@@ -104,12 +103,12 @@ const Footer = () => {
 
                     {/* About */}
                     <div>
-                        <h4 className="text-amber-400 font-medium mb-4">{t('À propos', 'About')}</h4>
+                        <h4 className="text-amber-400 font-medium mb-4">{t('À propos', 'About', 'من نحن')}</h4>
                         <ul className="space-y-2">
                             {links.about.map((link, i) => (
                                 <li key={i}>
                                     <a href={link.href} className="text-gray-500 hover:text-amber-400 text-sm transition-colors">
-                                        {t(link.fr, link.en)}
+                                        {t(link.fr, link.en, link.ar)}
                                     </a>
                                 </li>
                             ))}
@@ -120,10 +119,10 @@ const Footer = () => {
                 {/* Bottom */}
                 <div className="mt-12 pt-8 border-t border-amber-900/20 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-gray-600 text-sm">
-                        © {new Date().getFullYear()} Usratul Azkaar. {t('Tous droits réservés.', 'All rights reserved.')}
+                        © {new Date().getFullYear()} Usratul Azkaar. {t('Tous droits réservés.', 'All rights reserved.', 'جميع الحقوق محفوظة.')}
                     </p>
                     <p className="text-gray-600 text-sm italic">
-                        "{t("C'est par le rappel d'Allah que les cœurs se tranquillisent", "Verily, in the remembrance of Allah do hearts find rest")}" — {t('Coran 13:28', "Qur'an 13:28")}
+                        "{t("C'est par le rappel d'Allah que les cœurs se tranquillisent", "Verily, in the remembrance of Allah do hearts find rest", 'أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ')}" — {t('Coran 13:28', "Qur'an 13:28", 'القرآن ١٣:٢٨')}
                     </p>
                 </div>
             </div>

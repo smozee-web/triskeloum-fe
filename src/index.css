@@ -6,6 +6,35 @@ html {
   font-size: 88%;
 }
 
+/* ---- Arabic / RTL ----
+   LanguageProvider sets lang and dir on <html>, so these hook off the document
+   itself and need no wrapper class. */
+
+html[lang='ar'] body {
+  font-family: 'Noto Kufi Arabic', 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Arabic glyphs have taller ascenders and deeper descenders than Latin ones;
+   at the page's default leading, diacritics collide with the line above. */
+html[lang='ar'] body {
+  line-height: 1.9;
+}
+
+/* The design leans on wide Latin letter-spacing (tracking-[0.3em] and the
+   custom 'ultra'/'supreme' scales). Applied to Arabic that is not a style
+   choice but a rendering bug: Arabic is cursive, and spacing the letters
+   breaks the joins so words fall apart into disconnected glyphs. */
+html[dir='rtl'] [class*='tracking-']:not(.force-ltr) {
+  letter-spacing: normal;
+}
+
+/* Latin-only brand wordmarks keep their own direction and tracking inside an
+   RTL page — "USRATUL AZKAAR" is a logotype, not translated copy. */
+html[dir='rtl'] .force-ltr {
+  direction: ltr;
+  display: inline-block;
+}
+
 /* src/index.css ou App.css */
 
 /* Styles personnalisés pour le contenu markdown */

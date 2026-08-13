@@ -13,29 +13,37 @@ const NaturalHealingSection = () => {
       iconPath: "M12 6.253v13M12 6.253C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
       titleFr: "Remèdes à Base de Plantes",
       titleEn: "Herbal Remedies",
+      titleAr: "العلاج بالأعشاب",
       descFr: "Préparations personnalisées à base de plantes pour les maux du corps.",
       descEn: "Personalized plant-based preparations for the ailments of the body.",
+      descAr: "تحضيرات نباتية مخصّصة لعلل الجسد.",
     },
     {
       iconPath: "M12 2C9 6 6 9.5 6 13a6 6 0 0012 0c0-3.5-3-7-6-11zM9 13a3 3 0 006 0",
       titleFr: "Médecine Prophétique",
       titleEn: "Prophetic Medicine",
+      titleAr: "الطب النبوي",
       descFr: "Guérison par la graine noire, le miel, des conseils sur la hijama et les remèdes de la Sunna.",
       descEn: "Healing with black seed, honey, hijama guidance and the remedies of the Sunnah.",
+      descAr: "الشفاء بالحبة السوداء والعسل، وإرشادات الحجامة، وعلاجات السنة.",
     },
     {
       iconPath: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
       titleFr: "Protection du Foyer",
       titleEn: "Home Protection",
+      titleAr: "حماية البيت",
       descFr: "Purification et fortification du foyer contre les nuisances invisibles, l'envie et les perturbations.",
       descEn: "Cleansing and fortifying the home against unseen harm, envy and disturbance.",
+      descAr: "تطهير البيت وتحصينه من الأذى الخفي والحسد والاضطراب.",
     },
     {
       iconPath: "M12 3c-1.5 3-4 5.5-4 9a4 4 0 008 0c0-3.5-2.5-6-4-9z M6 20h12",
       titleFr: "Eau Bénie & Préparations",
       titleEn: "Blessed Water & Preparations",
+      titleAr: "الماء المرقي والتحضيرات",
       descFr: "Versets coraniques récités sur l'eau et les éléments naturels pour la guérison et la protection.",
       descEn: "Qur'anic verses recited over water and natural elements for healing and protection.",
+      descAr: "آيات قرآنية تُتلى على الماء والعناصر الطبيعية للشفاء والحماية.",
     },
   ];
 
@@ -67,16 +75,15 @@ const NaturalHealingSection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1 mb-4 text-xs tracking-[0.3em] text-amber-500 border border-amber-600/30 rounded-full">
-            {t('MÉDECINE PROPHÉTIQUE', 'PROPHETIC MEDICINE')}
+            {t('MÉDECINE PROPHÉTIQUE', 'PROPHETIC MEDICINE', 'الطب النبوي')}
           </span>
           <h2 className="text-3xl md:text-5xl font-light text-white mb-6">
-            {t('Guérison Naturelle', 'Natural Healing')}
+            {t('Guérison Naturelle', 'Natural Healing', 'الشفاء الطبيعي')}
           </h2>
           <p className="max-w-3xl mx-auto text-gray-400">
             {t(
               "S'appuyant sur le Tibb Nabawi (Médecine Prophétique) et des générations de savoir hérité sur les plantes curatives d'Afrique de l'Ouest, le Cheikh prescrit des remèdes naturels qui soignent le corps pendant que les azkaar soignent l'âme.",
-              "Drawing on Tibb Nabawi (Prophetic Medicine) and generations of inherited knowledge of West African healing plants, the Sheikh prescribes natural remedies that treat the body while the azkaar treat the soul."
-            )}
+              "Drawing on Tibb Nabawi (Prophetic Medicine) and generations of inherited knowledge of West African healing plants, the Sheikh prescribes natural remedies that treat the body while the azkaar treat the soul.", 'استنادًا إلى الطب النبوي وأجيال من المعرفة الموروثة بالنباتات العلاجية في غرب إفريقيا، يصف الشيخ علاجات طبيعية تداوي الجسد بينما تداوي الأذكار الروح.')}
           </p>
         </div>
 
@@ -124,21 +131,19 @@ const NaturalHealingSection = () => {
 
           {/* Content */}
           <div className="space-y-6">
-            <div className="p-6 bg-gradient-to-r from-amber-900/20 to-transparent border-l-2 border-amber-500 rounded-r-xl">
-              <h3 className="text-xl text-amber-400 mb-3">{t("La Sagesse de la Création", "The Wisdom of Creation")}</h3>
+            <div className="p-6 bg-gradient-to-r from-amber-900/20 to-transparent border-s-2 border-amber-500 rounded-e-xl">
+              <h3 className="text-xl text-amber-400 mb-3">{t("La Sagesse de la Création", "The Wisdom of Creation", 'حكمة الخلق')}</h3>
               <p className="text-gray-300">
                 {t(
                   "Allah a placé un remède dans Sa création pour chaque maladie. De la graine noire et du miel loués dans la Sunna, aux feuilles, racines et écorces connues de nos ancêtres, la médecine traditionnelle par les plantes restaure ce que la vie moderne a affaibli.",
-                  "Allah has placed a cure in His creation for every illness. From black seed and honey praised in the Sunnah, to the leaves, roots and barks known to our ancestors, traditional plant medicine restores what modern life has weakened."
-                )}
+                  "Allah has placed a cure in His creation for every illness. From black seed and honey praised in the Sunnah, to the leaves, roots and barks known to our ancestors, traditional plant medicine restores what modern life has weakened.", 'جعل الله لكل داء دواءً في خلقه. من الحبة السوداء والعسل الممدوحَين في السنة، إلى الأوراق والجذور واللحاء التي عرفها أجدادنا، يعيد الطب النباتي التقليدي ما أوهنته الحياة الحديثة.')}
               </p>
             </div>
 
             <p className="text-gray-400 leading-relaxed">
               {t(
                 "Nos environnements et nos régimes modernes nous ont déconnectés de cet héritage naturel. De nombreux maux du corps — fatigue, infertilité, douleurs chroniques, maladies inexpliquées — trouvent des remèdes qui poussent de la terre.",
-                "Our modern environments and diets have disconnected us from this natural inheritance. Many ailments of the body — fatigue, infertility, chronic pain, unexplained illness — have remedies that grow from the earth."
-              )}
+                "Our modern environments and diets have disconnected us from this natural inheritance. Many ailments of the body — fatigue, infertility, chronic pain, unexplained illness — have remedies that grow from the earth.", 'أبعدتنا بيئاتنا وأنظمتنا الغذائية الحديثة عن هذا الإرث الطبيعي. وكثير من علل الجسد — الإرهاق، والعقم، والألم المزمن، والأمراض غير المبررة — لها علاجات تنبت من الأرض.')}
             </p>
 
             <a
@@ -147,7 +152,7 @@ const NaturalHealingSection = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-amber-900/30 border border-amber-600/50 rounded-full text-amber-400 hover:bg-amber-800/40 transition-all duration-300"
             >
-              {t('Demander une consultation de remède', 'Request a remedy consultation')}
+              {t('Demander une consultation de remède', 'Request a remedy consultation', 'اطلب استشارة علاجية')}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -167,8 +172,8 @@ const NaturalHealingSection = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d={benefit.iconPath} />
                 </svg>
               </div>
-              <h4 className="text-lg font-medium text-white mb-2">{t(benefit.titleFr, benefit.titleEn)}</h4>
-              <p className="text-sm text-gray-400">{t(benefit.descFr, benefit.descEn)}</p>
+              <h4 className="text-lg font-medium text-white mb-2">{t(benefit.titleFr, benefit.titleEn, benefit.titleAr)}</h4>
+              <p className="text-sm text-gray-400">{t(benefit.descFr, benefit.descEn, benefit.descAr)}</p>
             </div>
           ))}
         </div>
@@ -179,7 +184,7 @@ const NaturalHealingSection = () => {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            {t('Remèdes naturels - Prix sur demande', 'Natural remedies - Price on request')}
+            {t('Remèdes naturels - Prix sur demande', 'Natural remedies - Price on request', 'علاجات طبيعية — السعر عند الطلب')}
           </p>
         </div>
       </div>

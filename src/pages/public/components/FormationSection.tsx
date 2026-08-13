@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useGetLandingPageContentQuery } from '../../../services/api';
+import { localized } from '../../../utils/localize';
 
 const FormationsSection = () => {
   const { lang, t } = useLanguage();
@@ -15,18 +16,18 @@ const FormationsSection = () => {
   const formationsSection = contentData?.payload?.find((section: any) => section.section === 'formations');
 
   const defaultTopics = [
-    { icon: '📿', label: t('Azkaar & Awraad', 'Azkaar & Awraad') },
-    { icon: '🕌', label: t('Asraar des Noms Divins', 'Asraar of the Divine Names') },
-    { icon: '📖', label: t('Secrets des Versets Coraniques', 'Secrets of the Qur\'anic Verses') },
-    { icon: '🌙', label: t("Tazkiyah (Purification de l'âme)", 'Tazkiyah (Purification of the Soul)') },
-    { icon: '🌿', label: t('Médecine Prophétique & Plantes', 'Prophetic & Herbal Medicine') },
-    { icon: '⭐', label: t('Sciences Sacrées des Lettres', 'Sacred Sciences of the Letters') },
-    { icon: '🤲', label: t('Ruqyah & Protection Spirituelle', 'Ruqyah & Spiritual Protection') },
+    { icon: '📿', label: t('Azkaar & Awraad', 'Azkaar & Awraad', 'الأذكار والأوراد') },
+    { icon: '🕌', label: t('Asraar des Noms Divins', 'Asraar of the Divine Names', 'أسرار الأسماء الحسنى') },
+    { icon: '📖', label: t('Secrets des Versets Coraniques', 'Secrets of the Qur\'anic Verses', 'أسرار الآيات القرآنية') },
+    { icon: '🌙', label: t("Tazkiyah (Purification de l'âme)", 'Tazkiyah (Purification of the Soul)', 'التزكية (تطهير النفس)') },
+    { icon: '🌿', label: t('Médecine Prophétique & Plantes', 'Prophetic & Herbal Medicine', 'الطب النبوي والأعشاب') },
+    { icon: '⭐', label: t('Sciences Sacrées des Lettres', 'Sacred Sciences of the Letters', 'علوم الحروف') },
+    { icon: '🤲', label: t('Ruqyah & Protection Spirituelle', 'Ruqyah & Spiritual Protection', 'الرقية والحماية الروحية') },
   ];
 
   const topicsFromApi = (formationsSection?.metadata?.topics || []).map((topic: any) => ({
     icon: topic.icon || '📿',
-    label: t(topic.labelFr || topic.label_fr || 'Azkaar & Awraad', topic.labelEn || topic.label_en || 'Azkaar & Awraad'),
+    label: localized(topic, 'label', lang) || t('Azkaar & Awraad', 'Azkaar & Awraad', 'الأذكار والأوراد'),
   }));
 
   const topics = topicsFromApi.length ? topicsFromApi : defaultTopics;
@@ -36,14 +37,18 @@ const FormationsSection = () => {
       id: 'classique',
       titleFr: 'Formation Classique',
       titleEn: 'Classic Training',
+      titleAr: 'الدورة الأساسية',
       subtitleFr: 'Parcours complet de la science des Asraar',
       subtitleEn: 'Complete path into the science of Asraar',
+      subtitleAr: 'مسار كامل في علم الأسرار',
       ghs: 5200,
       usd: 335,
       periodFr: '/mois',
       periodEn: '/month',
+      periodAr: '/شهريًا',
       durationFr: 'Durée indéterminée',
       durationEn: 'Unlimited duration',
+      durationAr: 'مدة غير محددة',
       featuresFr: [
         'Fondations de la science des Asraar',
         'Azkaar et awraad : litanies quotidiennes et leurs secrets',
@@ -64,20 +69,34 @@ const FormationsSection = () => {
         'Spiritual protection for oneself and one\'s family',
         '2 live sessions/month (2h)',
       ],
+      featuresAr: [
+        'أسس علم الأسرار',
+        'الأذكار والأوراد: الأوراد اليومية وأسرارها',
+        'الأسماء الحسنى: معانيها وخواصها وتطبيقها',
+        'أسرار الآيات والسور القرآنية',
+        'تزكية النفس: تطهير القلب والروح',
+        'مدخل إلى الطب النبوي والنباتات العلاجية',
+        'الحماية الروحية للنفس والأهل',
+        'جلستان مباشرتان شهريًا (ساعتان)',
+      ],
       isPremium: false,
     },
     {
       id: 'premium',
       titleFr: 'Formation Premium',
       titleEn: 'Premium Training',
+      titleAr: 'الدورة المتقدمة',
       subtitleFr: 'Accompagnement intensif et personnalisé',
       subtitleEn: 'Intensive personalized support',
+      subtitleAr: 'مرافقة مكثّفة وشخصية',
       ghs: 27000,
       usd: 1730,
       periodFr: '/mois',
       periodEn: '/month',
+      periodAr: '/شهريًا',
       durationFr: 'Engagement 3 ans',
       durationEn: '3-year commitment',
+      durationAr: 'التزام لمدة ٣ سنوات',
       featuresFr: [
         'Tout le programme Classique',
         'Séances ILLIMITÉES de ruqyah et de guérison',
@@ -98,6 +117,16 @@ const FormationsSection = () => {
         'Priority access to the Sheikh',
         'Complete purification and fortification of the seeker',
       ],
+      featuresAr: [
+        'كامل برنامج الدورة الأساسية',
+        'جلسات رقية وشفاء غير محدودة',
+        'تلقين شخصي للأوراد والإجازة',
+        'أربع جلسات مباشرة شهريًا (ساعتان)',
+        'أوراد موصوفة فرديًا بحسب طبيعتك الروحية',
+        'مرافقة فردية مصمّمة خصيصًا',
+        'أولوية الوصول إلى الشيخ',
+        'تطهير وتحصين كاملان للسالك',
+      ],
       isPremium: true,
     },
   ];
@@ -105,36 +134,43 @@ const FormationsSection = () => {
   const formationsFromApi = (formationsSection?.metadata?.packs || []).map((pack: any, idx: number) => {
     const featuresFr = pack.featuresFr || pack.features_fr || [];
     const featuresEn = pack.featuresEn || pack.features_en || [];
+    const featuresAr = pack.featuresAr || pack.features_ar || [];
 
     return {
       id: pack.id || `pack-${idx}`,
       titleFr: pack.titleFr || pack.title_fr || '',
       titleEn: pack.titleEn || pack.title_en || '',
+      titleAr: pack.titleAr || pack.title_ar || '',
       subtitleFr: pack.subtitleFr || pack.subtitle_fr || '',
       subtitleEn: pack.subtitleEn || pack.subtitle_en || '',
+      subtitleAr: pack.subtitleAr || pack.subtitle_ar || '',
       ghs: pack.priceGhs || pack.price_ghs || 0,
       usd: pack.priceUsd || pack.price_usd || 0,
       periodFr: pack.periodFr || pack.period_fr || '/mois',
       periodEn: pack.periodEn || pack.period_en || '/month',
+      periodAr: pack.periodAr || pack.period_ar || '/شهريًا',
       durationFr: pack.durationFr || pack.duration_fr || '',
       durationEn: pack.durationEn || pack.duration_en || '',
+      durationAr: pack.durationAr || pack.duration_ar || '',
       featuresFr,
       featuresEn,
+      featuresAr,
       isPremium: !!(pack.isPremium ?? pack.is_premium),
     };
   });
 
   const formations = formationsFromApi.length > 0 ? formationsFromApi : defaultFormations;
 
-  const headerTitle = t(
-    formationsSection?.titleFr || formationsSection?.title_fr || "La Science des Asraar",
-    formationsSection?.titleEn || formationsSection?.title_en || 'The Science of Asraar'
-  );
-  const headerSubtitle = t(formationsSection?.subtitleFr || formationsSection?.subtitle_fr || 'FORMATIONS', formationsSection?.subtitleEn || formationsSection?.subtitle_en || 'TRAINING PROGRAMS');
-  const headerDescription = t(
-    formationsSection?.descriptionFr || formationsSection?.description_fr || "Héritée à travers des chaînes de transmission ininterrompues des savants et saints de l'Islam, la science des Asraar dévoile les secrets des versets coraniques, des Noms Divins et des lettres — guidant l'étudiant vers la connaissance, la protection et la réalisation spirituelle.",
-    formationsSection?.descriptionEn || formationsSection?.description_en || "Inherited through unbroken chains of transmission from the scholars and saints of Islam, the science of Asraar unveils the secrets of the Qur'anic verses, the Divine Names, and the letters — guiding the student toward knowledge, protection, and spiritual realization."
-  );
+  const headerTitle = localized(formationsSection, 'title', lang)
+    || t("La Science des Asraar", 'The Science of Asraar', 'علم الأسرار');
+  const headerSubtitle = localized(formationsSection, 'subtitle', lang)
+    || t('FORMATIONS', 'TRAINING PROGRAMS', 'الدورات');
+  const headerDescription = localized(formationsSection, 'description', lang)
+    || t(
+      "Héritée à travers des chaînes de transmission ininterrompues des savants et saints de l'Islam, la science des Asraar dévoile les secrets des versets coraniques, des Noms Divins et des lettres — guidant l'étudiant vers la connaissance, la protection et la réalisation spirituelle.",
+      "Inherited through unbroken chains of transmission from the scholars and saints of Islam, the science of Asraar unveils the secrets of the Qur'anic verses, the Divine Names, and the letters — guiding the student toward knowledge, protection, and spiritual realization.",
+      'موروث عبر أسانيد متصلة من علماء الإسلام وأوليائه، يكشف علم الأسرار أسرار الآيات القرآنية والأسماء الحسنى والحروف — موجّهًا الطالب نحو المعرفة والحماية والتحقق الروحي.'
+    );
 
   return (
     <section id="formations" className="relative py-24 bg-gradient-to-b from-black via-stone-950 to-black overflow-hidden">
@@ -176,7 +212,7 @@ const FormationsSection = () => {
                 key={i}
                 className="px-4 py-2 bg-amber-900/20 border border-amber-700/30 rounded-full text-sm text-amber-400 hover:bg-amber-800/30 transition-colors cursor-default"
               >
-                <span className="mr-2">{topic.icon}</span>
+                <span className="me-2">{topic.icon}</span>
                 {topic.label}
               </span>
             ))}
@@ -189,7 +225,7 @@ const FormationsSection = () => {
           >
             <span className={!showUsd ? 'font-bold' : 'opacity-60'}>GHS</span>
             <div className="w-8 h-4 bg-black/50 rounded-full relative">
-              <div className={`absolute top-0.5 w-3 h-3 bg-amber-500 rounded-full transition-all ${showUsd ? 'left-4' : 'left-0.5'}`} />
+              <div className={`absolute top-0.5 w-3 h-3 bg-amber-500 rounded-full transition-all ${showUsd ? 'start-4' : 'start-0.5'}`} />
             </div>
             <span className={showUsd ? 'font-bold' : 'opacity-60'}>USD</span>
           </button>
@@ -216,7 +252,7 @@ const FormationsSection = () => {
 
               {/* Premium Badge */}
               {formation.isPremium && (
-                <div className="absolute top-0 right-0 px-6 py-2 bg-gradient-to-r from-amber-500 to-red-600 text-black text-xs font-bold tracking-wider rounded-bl-2xl">
+                <div className="absolute top-0 end-0 px-6 py-2 bg-gradient-to-r from-amber-500 to-red-600 text-black text-xs font-bold tracking-wider rounded-bl-2xl">
                   PREMIUM
                 </div>
               )}
@@ -225,10 +261,10 @@ const FormationsSection = () => {
                 {/* Header */}
                 <div className="mb-6">
                   <h3 className="text-2xl font-medium text-white mb-2">
-                    {t(formation.titleFr, formation.titleEn)}
+                    {t(formation.titleFr, formation.titleEn, formation.titleAr)}
                   </h3>
                   <p className="text-amber-500/80 text-sm">
-                    {t(formation.subtitleFr, formation.subtitleEn)}
+                    {t(formation.subtitleFr, formation.subtitleEn, formation.subtitleAr)}
                   </p>
                 </div>
 
@@ -238,22 +274,23 @@ const FormationsSection = () => {
                     <span className={`text-4xl font-light ${formation.isPremium ? 'text-amber-400' : 'text-white'}`}>
                       {formatPrice(formation.ghs, formation.usd)}
                     </span>
-                    <span className="text-gray-500">{t(formation.periodFr || '/mois', formation.periodEn || '/month')}</span>
+                    <span className="text-gray-500">{t(formation.periodFr || '/mois', formation.periodEn || '/month', formation.periodAr || '/شهريًا')}</span>
                   </div>
-                  <p className="text-sm text-gray-500 mt-2">{t(formation.durationFr || '', formation.durationEn || '')}</p>
+                  <p className="text-sm text-gray-500 mt-2">{t(formation.durationFr || '', formation.durationEn || '', formation.durationAr || '')}</p>
                 </div>
 
                 {/* Features */}
                 <ul className="space-y-3 mb-8">
-                  {Array.from({ length: Math.max(formation.featuresFr?.length || 0, formation.featuresEn?.length || 0) }).map((_, i) => {
+                  {Array.from({ length: Math.max(formation.featuresFr?.length || 0, formation.featuresEn?.length || 0, formation.featuresAr?.length || 0) }).map((_, i) => {
                     const fr = formation.featuresFr?.[i] || formation.featuresEn?.[i] || '';
                     const en = formation.featuresEn?.[i] || formation.featuresFr?.[i] || '';
+                    const ar = formation.featuresAr?.[i] || '';
                     return (
                     <li key={i} className="flex items-start gap-3 text-sm">
                       <svg className={`w-5 h-5 mt-0.5 flex-shrink-0 ${formation.isPremium ? 'text-amber-400' : 'text-amber-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-gray-300">{t(fr, en)}</span>
+                      <span className="text-gray-300">{t(fr, en, ar)}</span>
                     </li>
                   )})}
                 </ul>
@@ -271,7 +308,7 @@ const FormationsSection = () => {
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                   </svg>
-                  {t("Rejoindre la formation", "Join the training")}
+                  {t("Rejoindre la formation", "Join the training", 'الالتحاق بالدورة')}
                 </a>
               </div>
             </div>

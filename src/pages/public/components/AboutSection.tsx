@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useGetLandingPageContentQuery } from '../../../services/api';
+import { localized, localizedList } from '../../../utils/localize';
 
 const AboutSection = () => {
   const { lang, t } = useLanguage();
@@ -8,14 +9,14 @@ const AboutSection = () => {
 
   // Get about section content from API or use hardcoded fallback
   const aboutSection = contentData?.payload?.find((section: any) => section.section === 'about');
-  const title = aboutSection ? (lang === 'fr' ? (aboutSection.titleFr ?? aboutSection.title_fr) : (aboutSection.titleEn ?? aboutSection.title_en)) : t('Le Cheikh', 'The Sheikh');
-  const subtitle = aboutSection ? (lang === 'fr' ? (aboutSection.subtitleFr ?? aboutSection.subtitle_fr) : (aboutSection.subtitleEn ?? aboutSection.subtitle_en)) : t('À PROPOS', 'ABOUT');
-  const description = aboutSection ? (lang === 'fr' ? (aboutSection.descriptionFr ?? aboutSection.description_fr) : (aboutSection.descriptionEn ?? aboutSection.description_en)) : t("Fondateur de USRATUL AZKAAR, j'accompagne les chercheurs sur le chemin de la purification intérieure et du rapprochement d'Allah, à travers les sciences des Asraar et des Azkaar héritées de mes maîtres, ainsi que les connaissances curatives de la médecine prophétique et traditionnelle.", "Founder of USRATUL AZKAAR, I guide seekers on the path of inner purification and nearness to Allah, through the sciences of Asraar and Azkaar inherited from my teachers, and the healing knowledge of prophetic and traditional medicine.");
-  const content = aboutSection ? (lang === 'fr' ? (aboutSection.contentFr ?? aboutSection.content_fr) : (aboutSection.contentEn ?? aboutSection.content_en)) : t("Mon chemin a commencé dès le plus jeune âge, porté par une soif profonde des sciences sacrées. Au fil des années, j'ai reçu la transmission et l'autorisation (ijazah) de maîtres de ces disciplines, ainsi qu'une vie entière d'étude des plantes curatives de nos terres.", "My path began at a young age, driven by a deep thirst for the sacred sciences. Over the years, I received transmission and authorization (ijazah) from masters of these disciplines, alongside a lifetime of study of the healing plants of our lands.");
+  const title = aboutSection ? localized(aboutSection, 'title', lang) : t('Le Cheikh', 'The Sheikh', 'الشيخ');
+  const subtitle = aboutSection ? localized(aboutSection, 'subtitle', lang) : t('À PROPOS', 'ABOUT', 'نبذة');
+  const description = aboutSection ? localized(aboutSection, 'description', lang) : t("Fondateur de USRATUL AZKAAR, j'accompagne les chercheurs sur le chemin de la purification intérieure et du rapprochement d'Allah, à travers les sciences des Asraar et des Azkaar héritées de mes maîtres, ainsi que les connaissances curatives de la médecine prophétique et traditionnelle.", "Founder of USRATUL AZKAAR, I guide seekers on the path of inner purification and nearness to Allah, through the sciences of Asraar and Azkaar inherited from my teachers, and the healing knowledge of prophetic and traditional medicine.", 'مؤسس أسرة الأذكار، أرافق السالكين في طريق التزكية الباطنة والقرب من الله، من خلال علوم الأسرار والأذكار التي تلقيتها عن مشايخي، وعلوم الطب النبوي والتقليدي.');
+  const content = aboutSection ? localized(aboutSection, 'content', lang) : t("Mon chemin a commencé dès le plus jeune âge, porté par une soif profonde des sciences sacrées. Au fil des années, j'ai reçu la transmission et l'autorisation (ijazah) de maîtres de ces disciplines, ainsi qu'une vie entière d'étude des plantes curatives de nos terres.", "My path began at a young age, driven by a deep thirst for the sacred sciences. Over the years, I received transmission and authorization (ijazah) from masters of these disciplines, alongside a lifetime of study of the healing plants of our lands.", 'بدأ طريقي منذ الصغر، بدافع من شوق عميق إلى العلوم الشرعية. وعلى مر السنين، تلقيت الإجازة والسند عن أساتذة هذه العلوم، إلى جانب عمر كامل في دراسة النباتات العلاجية في أرضنا.');
   const meta = aboutSection?.metadata || {};
   const masterName = meta.master_name ?? meta.masterName ?? 'Sheikh Antar Ayatollah Fofana';
-  const masterTitle = aboutSection?.metadata ? (lang === 'fr' ? (meta.master_title_fr ?? meta.masterTitleFr ?? 'Enseignant des Asraar & Guide Spirituel') : (meta.master_title_en ?? meta.masterTitleEn ?? 'Teacher of Asraar & Spiritual Guide')) : t('Enseignant des Asraar & Guide Spirituel', 'Teacher of Asraar & Spiritual Guide');
-  const quote = aboutSection?.metadata ? (lang === 'fr' ? (meta.quote_fr ?? meta.quoteFr ?? '') : (meta.quote_en ?? meta.quoteEn ?? '')) : t("Le rappel d'Allah est le polissoir des cœurs.", "Remembrance of Allah is the polish of the heart.");
+  const masterTitle = aboutSection?.metadata ? (localized(meta, 'masterTitle', lang) || t('Enseignant des Asraar & Guide Spirituel', 'Teacher of Asraar & Spiritual Guide', 'معلّم الأسرار ومرشد روحي')) : t('Enseignant des Asraar & Guide Spirituel', 'Teacher of Asraar & Spiritual Guide', 'معلّم الأسرار ومرشد روحي');
+  const quote = aboutSection?.metadata ? localized(meta, 'quote', lang) : t("Le rappel d'Allah est le polissoir des cœurs.", "Remembrance of Allah is the polish of the heart.", 'ذكر الله جلاء القلوب.');
 
   const initiationsRaw = aboutSection?.metadata?.initiations || [];
   const initiations = (initiationsRaw.length ? initiationsRaw : [
@@ -30,15 +31,15 @@ const AboutSection = () => {
     labelEn: init.label_en ?? init.labelEn ?? '',
   }));
 
-  const expertiseRaw = aboutSection?.metadata ? (lang === 'fr' ? (meta.expertise_fr ?? meta.expertiseFr) : (meta.expertise_en ?? meta.expertiseEn)) : null;
+  const expertiseRaw = aboutSection?.metadata ? (localizedList(meta, 'expertise', lang, []).length ? localizedList(meta, 'expertise', lang) : (meta.expertise_ar ?? meta.expertiseAr ?? meta.expertise_en ?? meta.expertiseEn)) : null;
   const expertise = expertiseRaw && expertiseRaw.length ? expertiseRaw : [
-    t('Science des Asraar', 'Science of Asraar'),
-    t('Azkaar & Litanies', 'Azkaar & Litanies'),
-    t("Tazkiyah (Purification de l'âme)", 'Tazkiyah (Purification of the Soul)'),
-    t('Ruqyah & Protection spirituelle', 'Ruqyah & Spiritual Protection'),
-    t('Médecine prophétique', 'Prophetic Medicine'),
-    t('Plantes de guérison traditionnelles', 'Traditional Healing Plants'),
-    t('Guidance spirituelle', 'Spiritual Guidance'),
+    t('Science des Asraar', 'Science of Asraar', 'علم الأسرار'),
+    t('Azkaar & Litanies', 'Azkaar & Litanies', 'الأذكار والأوراد'),
+    t("Tazkiyah (Purification de l'âme)", 'Tazkiyah (Purification of the Soul)', 'التزكية (تطهير النفس)'),
+    t('Ruqyah & Protection spirituelle', 'Ruqyah & Spiritual Protection', 'الرقية والحماية الروحية'),
+    t('Médecine prophétique', 'Prophetic Medicine', 'الطب النبوي'),
+    t('Plantes de guérison traditionnelles', 'Traditional Healing Plants', 'النباتات العلاجية التقليدية'),
+    t('Guidance spirituelle', 'Spiritual Guidance', 'الإرشاد الروحي'),
   ];
 
   const teamData = aboutSection?.metadata?.team || [];
@@ -85,7 +86,7 @@ const AboutSection = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
                     </div>
-                    <p className="text-amber-600/60 text-sm">{t('Photo du Cheikh', "Sheikh's Photo")}</p>
+                    <p className="text-amber-600/60 text-sm">{t('Photo du Cheikh', "Sheikh's Photo", 'صورة الشيخ')}</p>
                   </div>
                 </div>
 
@@ -114,15 +115,15 @@ const AboutSection = () => {
 
             {/* Initiations */}
             <div className="pt-6">
-              <h4 className="text-sm text-amber-500 tracking-wider mb-4">{t('TRANSMISSIONS REÇUES', 'RECEIVED TRANSMISSIONS')}</h4>
+              <h4 className="text-sm text-amber-500 tracking-wider mb-4">{t('TRANSMISSIONS REÇUES', 'RECEIVED TRANSMISSIONS', 'الإجازات المتلقاة')}</h4>
               <div className="flex flex-wrap gap-3">
                 {initiations.map((init, i) => (
                   <span
                     key={i}
                     className="px-4 py-2 bg-gradient-to-r from-amber-900/30 to-red-900/20 border border-amber-700/30 rounded-full text-sm text-amber-300"
                   >
-                    <span className="mr-2">{init.icon}</span>
-                    {lang === 'fr' ? init.labelFr : init.labelEn}
+                    <span className="me-2">{init.icon}</span>
+                    {localized(init, 'label', lang)}
                   </span>
                 ))}
               </div>
@@ -130,7 +131,7 @@ const AboutSection = () => {
 
             {/* Expertise */}
             <div className="pt-4">
-              <h4 className="text-sm text-amber-500 tracking-wider mb-4">{t('DOMAINES D\'EXPERTISE', 'AREAS OF EXPERTISE')}</h4>
+              <h4 className="text-sm text-amber-500 tracking-wider mb-4">{t('DOMAINES D\'EXPERTISE', 'AREAS OF EXPERTISE', 'مجالات التخصص')}</h4>
               <div className="flex flex-wrap gap-2">
                 {expertise.map((exp, i) => (
                   <span
@@ -145,10 +146,10 @@ const AboutSection = () => {
 
             {/* Quote */}
             <blockquote className="relative pt-6 mt-6 border-t border-amber-900/30">
-              <svg className="absolute -top-3 left-0 w-8 h-8 text-amber-600/30" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="absolute -top-3 start-0 w-8 h-8 text-amber-600/30" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
               </svg>
-              <p className="text-lg italic text-amber-100/80 pl-10">
+              <p className="text-lg italic text-amber-100/80 ps-10">
                 {quote}
               </p>
             </blockquote>
@@ -158,7 +159,7 @@ const AboutSection = () => {
         {/* Team Section */}
         <div className="mt-24">
           <h3 className="text-2xl font-light text-white text-center mb-12">
-            {t('Équipe du Cabinet', 'Our Team')}
+            {t('Équipe du Cabinet', 'Our Team', 'فريق العمل')}
           </h3>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
@@ -175,7 +176,7 @@ const AboutSection = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium text-amber-400">{member.name}</h4>
-                    <p className="text-sm text-gray-400">{lang === 'fr' ? member.roleFr : member.roleEn}</p>
+                    <p className="text-sm text-gray-400">{localized(member, 'role', lang)}</p>
                   </div>
                 </div>
               </div>

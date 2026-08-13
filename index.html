@@ -60,7 +60,12 @@
     <meta name="msapplication-config" content="/browserconfig.xml" />
 
     <!-- Fonts -->
+    <!-- Josefin Sans has no Arabic coverage, so Arabic text would otherwise
+         fall back to whatever the OS picks — usually a default that clashes
+         badly with the rest of the page. Noto Kufi Arabic is loaded alongside
+         it and applied only under html[lang="ar"] (see index.css). -->
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />

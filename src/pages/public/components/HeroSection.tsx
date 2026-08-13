@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useGetLandingPageContentQuery } from '../../../services/api';
+import { localized } from '../../../utils/localize';
 
 const HeroSection = () => {
     const { lang, t } = useLanguage();
@@ -20,11 +21,11 @@ const HeroSection = () => {
 
     // Get home section content from API or use hardcoded fallback
     const homeSection = contentData?.payload?.find((section: any) => section.section === 'home');
-    const title = homeSection ? (lang === 'fr' ? homeSection.titleFr : homeSection.titleEn) : 'USRATUL AZKAAR';
-    const subtitle = homeSection ? (lang === 'fr' ? homeSection.subtitleFr : homeSection.subtitleEn) : t('Pratique spirituelle islamique digitale', 'Digital Islamic Spiritual Practice');
-    const description = homeSection ? (lang === 'fr' ? homeSection.descriptionFr : homeSection.descriptionEn) : t("Faire revivre les sciences sacrées des Asraar et des Azkaar — guérir les cœurs, purifier les âmes, et guider chaque chercheur sur le chemin du rapprochement d'Allah.", "Reviving the sacred sciences of Asraar and Azkaar — healing hearts, purifying souls, and guiding each seeker on the path of nearness to Allah.");
-    const ctaText = homeSection ? (lang === 'fr' ? homeSection.ctaTextFr : homeSection.ctaTextEn) : t('Commencer votre voyage', 'Begin your journey');
-    const ctaSecondaryText = homeSection?.metadata?.cta_secondary_text_fr || homeSection?.metadata?.cta_secondary_text_en ? (lang === 'fr' ? homeSection.metadata.cta_secondary_text_fr : homeSection.metadata.cta_secondary_text_en) : t('Découvrir nos services', 'Discover our services');
+    const title = homeSection ? localized(homeSection, 'title', lang) : 'USRATUL AZKAAR';
+    const subtitle = homeSection ? localized(homeSection, 'subtitle', lang) : t('Pratique spirituelle islamique digitale', 'Digital Islamic Spiritual Practice', 'ممارسة روحانية إسلامية رقمية');
+    const description = homeSection ? localized(homeSection, 'description', lang) : t("Faire revivre les sciences sacrées des Asraar et des Azkaar — guérir les cœurs, purifier les âmes, et guider chaque chercheur sur le chemin du rapprochement d'Allah.", "Reviving the sacred sciences of Asraar and Azkaar — healing hearts, purifying souls, and guiding each seeker on the path of nearness to Allah.", 'إحياء علوم الأسرار والأذكار — شفاء القلوب، وتزكية النفوس، وإرشاد كل سالك في طريق القرب من الله.');
+    const ctaText = homeSection ? localized(homeSection, 'ctaText', lang) : t('Commencer votre voyage', 'Begin your journey', 'ابدأ رحلتك');
+    const ctaSecondaryText = homeSection?.metadata?.cta_secondary_text_fr || homeSection?.metadata?.cta_secondary_text_en ? localized(homeSection.metadata, 'ctaSecondaryText', lang) : t('Découvrir nos services', 'Discover our services', 'اكتشف خدماتنا');
     const ctaSecondaryLink = homeSection?.metadata?.cta_secondary_link || '#services';
     const contactSection = contentData?.payload?.find((section: any) => section.section === 'contact');
     const whatsapp = contactSection?.metadata?.whatsapp || '22890000000';
@@ -147,7 +148,7 @@ const HeroSection = () => {
                 className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-amber-500/60 hover:text-amber-400 transition-colors cursor-pointer group"
             >
                 <span className="text-xs tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity">
-                    {t('Défiler', 'Scroll')}
+                    {t('Défiler', 'Scroll', 'مرّر')}
                 </span>
                 <div className="relative w-6 h-10 border-2 border-amber-500/40 rounded-full group-hover:border-amber-500/60 transition-colors">
                     <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-amber-500 rounded-full animate-scroll-dot" />

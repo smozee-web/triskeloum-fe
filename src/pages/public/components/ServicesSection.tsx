@@ -1,6 +1,7 @@
 import { JSX, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState } from 'react';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useGetLandingServicesQuery, useGetLandingPageContentQuery } from '../../../services/api';
+import { localized } from '../../../utils/localize';
 
 const getServiceIcon = (iconName: string) => {
   const icons: Record<string, JSX.Element> = {
@@ -66,8 +67,10 @@ const ServicesSection = () => {
     icon: getServiceIcon(service.icon),
     titleFr: service.titleFr,
     titleEn: service.titleEn,
+    titleAr: service.titleAr ?? service.title_ar,
     descFr: service.descriptionFr,
     descEn: service.descriptionEn,
+    descAr: service.descriptionAr ?? service.description_ar,
     ghs: service.priceGhs,
     usd: service.priceUsd,
     featured: service.sortOrder === 4, // Last service is featured
@@ -77,8 +80,10 @@ const ServicesSection = () => {
       icon: getServiceIcon('consultation'),
       titleFr: 'Consultation',
       titleEn: 'Consultation',
+      titleAr: 'استشارة',
       descFr: "Une session approfondie avec le Cheikh pour évoquer votre situation, identifier les causes spirituelles de vos difficultés, et recevoir une guidance personnalisée ainsi que des azkaar prescrits.",
       descEn: "An in-depth session with the Sheikh to discuss your situation, identify the spiritual causes behind your difficulties, and receive personalized guidance and prescribed azkaar.",
+      descAr: "جلسة معمّقة مع الشيخ لمناقشة حالتك، وتحديد الأسباب الروحية لصعوباتك، وتلقّي إرشاد شخصي وأذكار موصوفة.",
       ghs: 2500,
       usd: 165,
     },
@@ -87,8 +92,10 @@ const ServicesSection = () => {
       icon: getServiceIcon('lecture'),
       titleFr: "Diagnostic Spirituel",
       titleEn: "Spiritual Diagnosis",
+      titleAr: "التشخيص الروحي",
       descFr: "Une évaluation profonde de votre état intérieur : l'état du cœur, les afflictions spirituelles (mauvais œil, envie, nuisances invisibles), et les blocages qui vous retiennent — avec des étapes claires pour la guérison.",
       descEn: "A deep assessment of your inner state: the condition of the heart, spiritual afflictions (evil eye, envy, unseen harm), and the blockages holding you back — with clear steps for healing.",
+      descAr: "تقييم عميق لحالتك الباطنة: حال القلب، والعلل الروحية (العين، والحسد، والأذى الخفي)، والعوائق التي تحبسك — مع خطوات واضحة للشفاء.",
       ghs: 3800,
       usd: 248,
     },
@@ -97,8 +104,10 @@ const ServicesSection = () => {
       icon: getServiceIcon('bilan'),
       titleFr: 'Séance de Ruqyah & Purification',
       titleEn: 'Ruqyah & Purification Session',
+      titleAr: 'جلسة رقية وتطهير',
       descFr: "Séance de guérison par la récitation coranique, les Noms Divins et les invocations prescrites, pour purifier et protéger le corps, le foyer et l'âme des influences nuisibles.",
       descEn: "Healing session through Qur'anic recitation, the Divine Names and prescribed supplications, to cleanse and protect the body, home and soul from harmful influences.",
+      descAr: "جلسة شفاء بالرقية القرآنية والأسماء الحسنى والأدعية الموصوفة، لتطهير الجسد والبيت والروح وحمايتها من التأثيرات الضارة.",
       ghs: 3800,
       usd: 248,
     },
@@ -107,8 +116,10 @@ const ServicesSection = () => {
       icon: getServiceIcon('livre'),
       titleFr: 'Livre de Guidance',
       titleEn: 'Book of Guidance',
+      titleAr: 'كتاب الإرشاد',
       descFr: "Un document personnalisé de 20 pages préparé à travers la science des Asraar : votre nature spirituelle, vos forces et épreuves, votre direction de vie, ainsi que les azkaar, versets et pratiques spécifiques prescrits pour votre chemin vers l'harmonie et la réussite.",
       descEn: "A personalized 20-page document prepared through the science of Asraar: your spiritual nature, your strengths and trials, your life direction, and the specific azkaar, verses and practices prescribed for your path to harmony and success.",
+      descAr: "وثيقة مخصّصة من عشرين صفحة تُعدّ عبر علم الأسرار: طبيعتك الروحية، ونقاط قوتك وابتلاءاتك، ووجهة حياتك، والأذكار والآيات والأعمال الموصوفة لطريقك نحو الانسجام والتوفيق.",
       ghs: 7600,
       usd: 496,
       featured: true,
@@ -117,9 +128,9 @@ const ServicesSection = () => {
 
   // Get section content from API or use hardcoded fallback
   const servicesSection = contentData?.payload?.find((section: any) => section.section === 'services');
-  const sectionTitle = servicesSection ? (lang === 'fr' ? servicesSection.titleFr : servicesSection.titleEn) : t('Consultations', 'Consultations');
-  const sectionSubtitle = servicesSection ? (lang === 'fr' ? servicesSection.subtitleFr : servicesSection.subtitleEn) : t('NOS SERVICES', 'OUR SERVICES');
-  const sectionDescription = servicesSection ? (lang === 'fr' ? servicesSection.descriptionFr : servicesSection.descriptionEn) : t("Un accompagnement spirituel sur-mesure, ancré dans le Coran, la Sunna et les sciences héritées des Asraar.", "Tailored spiritual guidance rooted in the Qur'an, the Sunnah, and the inherited sciences of Asraar.");
+  const sectionTitle = servicesSection ? localized(servicesSection, 'title', lang) : t('Consultations', 'Consultations', 'الاستشارات');
+  const sectionSubtitle = servicesSection ? localized(servicesSection, 'subtitle', lang) : t('NOS SERVICES', 'OUR SERVICES', 'خدماتنا');
+  const sectionDescription = servicesSection ? localized(servicesSection, 'description', lang) : t("Un accompagnement spirituel sur-mesure, ancré dans le Coran, la Sunna et les sciences héritées des Asraar.", "Tailored spiritual guidance rooted in the Qur'an, the Sunnah, and the inherited sciences of Asraar.", 'إرشاد روحي مصمّم خصيصًا، متجذّر في القرآن والسنة وعلوم الأسرار الموروثة.');
 
   return (
     <section id="services" className="relative py-24 bg-gradient-to-b from-black via-neutral-950 to-black overflow-hidden">
@@ -149,7 +160,7 @@ const ServicesSection = () => {
           >
             <span className={!showUsd ? 'font-bold' : 'opacity-60'}>GHS</span>
             <div className="w-8 h-4 bg-black/50 rounded-full relative">
-              <div className={`absolute top-0.5 w-3 h-3 bg-amber-500 rounded-full transition-all ${showUsd ? 'left-4' : 'left-0.5'}`} />
+              <div className={`absolute top-0.5 w-3 h-3 bg-amber-500 rounded-full transition-all ${showUsd ? 'start-4' : 'start-0.5'}`} />
             </div>
             <span className={showUsd ? 'font-bold' : 'opacity-60'}>USD</span>
           </button>
@@ -157,7 +168,7 @@ const ServicesSection = () => {
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service: { id: Key | null | undefined; featured: any; icon: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; titleFr: string; titleEn: string; descFr: string; descEn: string; ghs: any; usd: any; }, index: number) => (
+          {services.map((service: { id: Key | null | undefined; featured: any; icon: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; titleFr: string; titleEn: string; titleAr?: string; descFr: string; descEn: string; descAr?: string; ghs: any; usd: any; }, index: number) => (
             <div
               key={service.id}
               onMouseEnter={() => setHoveredCard(service.id)}
@@ -172,7 +183,7 @@ const ServicesSection = () => {
               {/* Featured Badge */}
               {service.featured && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-700 rounded-full text-xs text-black font-semibold">
-                  {t('POPULAIRE', 'POPULAR')}
+                  {t('POPULAIRE', 'POPULAR', 'الأكثر طلبًا')}
                 </div>
               )}
 
@@ -183,12 +194,12 @@ const ServicesSection = () => {
 
               {/* Title */}
               <h3 className="text-xl font-medium text-white mb-3 group-hover:text-amber-400 transition-colors">
-                {t(service.titleFr, service.titleEn)}
+                {t(service.titleFr, service.titleEn, service.titleAr)}
               </h3>
 
               {/* Description */}
               <p className="text-sm text-gray-400 mb-6 leading-relaxed">
-                {t(service.descFr, service.descEn)}
+                {t(service.descFr, service.descEn, service.descAr)}
               </p>
 
               {/* Price */}
@@ -212,7 +223,7 @@ const ServicesSection = () => {
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
-                {t('Réserver', 'Book')}
+                {t('Réserver', 'Book', 'احجز')}
               </a>
 
               {/* Hover Glow */}
