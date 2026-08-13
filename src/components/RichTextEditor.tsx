@@ -26,12 +26,17 @@ interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  /** Set to 'rtl' for Arabic content so the caret, alignment and punctuation
+   *  behave. Applied to the ProseMirror element itself — a dir on an outer
+   *  wrapper does not reach the contenteditable. */
+  dir?: 'ltr' | 'rtl';
 }
 
 const RichTextEditor: React.FC<RichTextEditorProps> = ({
   value,
   onChange,
-  placeholder = 'Start writing...'
+  placeholder = 'Start writing...',
+  dir = 'ltr'
 }) => {
   const turndownService = new TurndownService({
     headingStyle: 'atx',
@@ -84,7 +89,8 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     },
     editorProps: {
       attributes: {
-        class: 'prose prose-sm dark:prose-invert max-w-none focus:outline-none min-h-[200px] p-4 text-gray-900 dark:text-text-primary'
+        class: 'prose prose-sm dark:prose-invert max-w-none focus:outline-none min-h-[200px] p-4 text-gray-900 dark:text-text-primary',
+        dir
       }
     }
   });

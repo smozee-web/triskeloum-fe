@@ -132,6 +132,7 @@ const Books: React.FC = () => {
             id: c.id,
             name_fr: c.nameFr,
             name_en: c.nameEn,
+            name_ar: c.nameAr,
             slug: c.slug,
             icon: c.icon || '',
             sort_order: c.sortOrder || 0,
@@ -143,7 +144,7 @@ const Books: React.FC = () => {
     const handleAddCategory = () => {
         setLocalCategories([...localCategories, {
             id: `temp-${Date.now()}`,
-            name_fr: '', name_en: '', slug: '', icon: '', sort_order: localCategories.length + 1, is_active: true,
+            name_fr: '', name_en: '', name_ar: '', slug: '', icon: '', sort_order: localCategories.length + 1, is_active: true,
         }]);
     };
 
@@ -152,6 +153,7 @@ const Books: React.FC = () => {
             const data = {
                 name_fr: category.name_fr,
                 name_en: category.name_en,
+                name_ar: category.name_ar,
                 slug: category.slug,
                 icon: category.icon,
                 sort_order: category.sort_order,
@@ -402,6 +404,12 @@ const Books: React.FC = () => {
                                         <label className={labelClass}>Name (English)</label>
                                         <input type="text" value={category.name_en} onChange={(e) => {
                                             const updated = [...localCategories]; updated[index].name_en = e.target.value; setLocalCategories(updated);
+                                        }} className={inputClass} />
+                                    </div>
+                                    <div>
+                                        <label className={labelClass}>Name (Arabic)</label>
+                                        <input type="text" dir="rtl" value={category.name_ar || ''} onChange={(e) => {
+                                            const updated = [...localCategories]; updated[index].name_ar = e.target.value; setLocalCategories(updated);
                                         }} className={inputClass} />
                                     </div>
                                     <div>

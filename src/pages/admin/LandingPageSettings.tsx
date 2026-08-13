@@ -40,16 +40,21 @@ const LandingPageSettings: React.FC = () => {
     const [homeSettings, setHomeSettings] = useState({
         title_fr: '',
         title_en: '',
+        title_ar: '',
         subtitle_fr: '',
         subtitle_en: '',
+        subtitle_ar: '',
         description_fr: '',
         description_en: '',
+        description_ar: '',
         heroImage: null as File | null,
         ctaText_fr: '',
         ctaText_en: '',
+        ctaText_ar: '',
         ctaLink: '',
         ctaSecondaryText_fr: '',
         ctaSecondaryText_en: '',
+        ctaSecondaryText_ar: '',
         ctaSecondaryLink: '',
     });
 
@@ -60,10 +65,13 @@ const LandingPageSettings: React.FC = () => {
     const [formationSettings, setFormationSettings] = useState({
         title_fr: '',
         title_en: '',
+        title_ar: '',
         subtitle_fr: '',
         subtitle_en: '',
+        subtitle_ar: '',
         description_fr: '',
         description_en: '',
+        description_ar: '',
         topics: [] as any[],
         packs: [] as any[],
     });
@@ -75,20 +83,27 @@ const LandingPageSettings: React.FC = () => {
     const [aboutSettings, setAboutSettings] = useState({
         title_fr: '',
         title_en: '',
+        title_ar: '',
         subtitle_fr: '',
         subtitle_en: '',
+        subtitle_ar: '',
         description_fr: '',
         description_en: '',
+        description_ar: '',
         content_fr: '',
         content_en: '',
+        content_ar: '',
         masterName: '',
         masterTitle_fr: '',
         masterTitle_en: '',
+        masterTitle_ar: '',
         quote_fr: '',
         quote_en: '',
+        quote_ar: '',
         initiations: [] as any[],
         expertise_fr: [] as string[],
         expertise_en: [] as string[],
+        expertise_ar: [] as string[],
         team: [] as any[],
     });
 
@@ -96,24 +111,31 @@ const LandingPageSettings: React.FC = () => {
     const [contactSettings, setContactSettings] = useState({
         title_fr: '',
         title_en: '',
+        title_ar: '',
         subtitle_fr: '',
         subtitle_en: '',
+        subtitle_ar: '',
         description_fr: '',
         description_en: '',
+        description_ar: '',
         whatsapp: '',
         email: '',
         location_fr: '',
         location_en: '',
+        location_ar: '',
     });
 
     // Books Section State (header copy only — the catalog itself is managed on the Books admin page)
     const [booksSettings, setBooksSettings] = useState({
         title_fr: '',
         title_en: '',
+        title_ar: '',
         subtitle_fr: '',
         subtitle_en: '',
+        subtitle_ar: '',
         description_fr: '',
         description_en: '',
+        description_ar: '',
     });
 
     // Social Media State
@@ -137,16 +159,21 @@ const LandingPageSettings: React.FC = () => {
                 setHomeSettings({
                     title_fr: homeSection.titleFr || '',
                     title_en: homeSection.titleEn || '',
+                    title_ar: homeSection.titleAr || '',
                     subtitle_fr: homeSection.subtitleFr || '',
                     subtitle_en: homeSection.subtitleEn || '',
+                    subtitle_ar: homeSection.subtitleAr || '',
                     description_fr: homeSection.descriptionFr || '',
                     description_en: homeSection.descriptionEn || '',
+                    description_ar: homeSection.descriptionAr || '',
                     heroImage: null,
                     ctaText_fr: homeSection.ctaTextFr || '',
                     ctaText_en: homeSection.ctaTextEn || '',
+                    ctaText_ar: homeSection.ctaTextAr || '',
                     ctaLink: homeSection.ctaLink || '',
                     ctaSecondaryText_fr: homeSection.metadata?.cta_secondary_text_fr || '',
                     ctaSecondaryText_en: homeSection.metadata?.cta_secondary_text_en || '',
+                    ctaSecondaryText_ar: homeSection.metadata?.cta_secondary_text_ar || '',
                     ctaSecondaryLink: homeSection.metadata?.cta_secondary_link || '',
                 });
             }
@@ -157,20 +184,27 @@ const LandingPageSettings: React.FC = () => {
                 setAboutSettings({
                     title_fr: aboutSection.titleFr ?? aboutSection.title_fr ?? '',
                     title_en: aboutSection.titleEn ?? aboutSection.title_en ?? '',
+                    title_ar: aboutSection.titleAr ?? aboutSection.title_ar ?? '',
                     subtitle_fr: aboutSection.subtitleFr ?? aboutSection.subtitle_fr ?? '',
                     subtitle_en: aboutSection.subtitleEn ?? aboutSection.subtitle_en ?? '',
+                    subtitle_ar: aboutSection.subtitleAr ?? aboutSection.subtitle_ar ?? '',
                     description_fr: aboutSection.descriptionFr ?? aboutSection.description_fr ?? '',
                     description_en: aboutSection.descriptionEn ?? aboutSection.description_en ?? '',
+                    description_ar: aboutSection.descriptionAr ?? aboutSection.description_ar ?? '',
                     content_fr: aboutSection.contentFr ?? aboutSection.content_fr ?? '',
                     content_en: aboutSection.contentEn ?? aboutSection.content_en ?? '',
+                    content_ar: aboutSection.contentAr ?? aboutSection.content_ar ?? '',
                     masterName: aboutSection.metadata?.master_name ?? aboutSection.metadata?.masterName ?? '',
                     masterTitle_fr: aboutSection.metadata?.master_title_fr ?? aboutSection.metadata?.masterTitleFr ?? '',
                     masterTitle_en: aboutSection.metadata?.master_title_en ?? aboutSection.metadata?.masterTitleEn ?? '',
+                    masterTitle_ar: aboutSection.metadata?.master_title_ar ?? aboutSection.metadata?.masterTitleAr ?? '',
                     quote_fr: aboutSection.metadata?.quote_fr ?? aboutSection.metadata?.quoteFr ?? '',
                     quote_en: aboutSection.metadata?.quote_en ?? aboutSection.metadata?.quoteEn ?? '',
+                    quote_ar: aboutSection.metadata?.quote_ar ?? aboutSection.metadata?.quoteAr ?? '',
                     initiations: aboutSection.metadata?.initiations || [],
                     expertise_fr: aboutSection.metadata?.expertise_fr ?? aboutSection.metadata?.expertiseFr ?? [],
                     expertise_en: aboutSection.metadata?.expertise_en ?? aboutSection.metadata?.expertiseEn ?? [],
+                    expertise_ar: aboutSection.metadata?.expertise_ar ?? aboutSection.metadata?.expertiseAr ?? [],
                     team: aboutSection.metadata?.team || [],
                 });
             }
@@ -181,14 +215,18 @@ const LandingPageSettings: React.FC = () => {
                 setContactSettings({
                     title_fr: contactSection.titleFr || contactSection.title_fr || '',
                     title_en: contactSection.titleEn || contactSection.title_en || '',
+                    title_ar: contactSection.titleAr || contactSection.title_ar || '',
                     subtitle_fr: contactSection.subtitleFr || contactSection.subtitle_fr || '',
                     subtitle_en: contactSection.subtitleEn || contactSection.subtitle_en || '',
+                    subtitle_ar: contactSection.subtitleAr || contactSection.subtitle_ar || '',
                     description_fr: contactSection.descriptionFr || contactSection.description_fr || '',
                     description_en: contactSection.descriptionEn || contactSection.description_en || '',
+                    description_ar: contactSection.descriptionAr || contactSection.description_ar || '',
                     whatsapp: contactSection.metadata?.whatsapp || '',
                     email: contactSection.metadata?.email || '',
                     location_fr: contactSection.metadata?.location_fr ?? contactSection.metadata?.locationFr ?? '',
                     location_en: contactSection.metadata?.location_en ?? contactSection.metadata?.locationEn ?? '',
+                    location_ar: contactSection.metadata?.location_ar ?? contactSection.metadata?.locationAr ?? '',
                 });
             }
 
@@ -198,10 +236,13 @@ const LandingPageSettings: React.FC = () => {
                 setBooksSettings({
                     title_fr: booksSection.titleFr || booksSection.title_fr || '',
                     title_en: booksSection.titleEn || booksSection.title_en || '',
+                    title_ar: booksSection.titleAr || booksSection.title_ar || '',
                     subtitle_fr: booksSection.subtitleFr || booksSection.subtitle_fr || '',
                     subtitle_en: booksSection.subtitleEn || booksSection.subtitle_en || '',
+                    subtitle_ar: booksSection.subtitleAr || booksSection.subtitle_ar || '',
                     description_fr: booksSection.descriptionFr || booksSection.description_fr || '',
                     description_en: booksSection.descriptionEn || booksSection.description_en || '',
+                    description_ar: booksSection.descriptionAr || booksSection.description_ar || '',
                 });
             }
 
@@ -224,32 +265,41 @@ const LandingPageSettings: React.FC = () => {
                     icon: t.icon || '',
                     label_fr: t.label_fr ?? t.labelFr ?? '',
                     label_en: t.label_en ?? t.labelEn ?? '',
+                    label_ar: t.label_ar ?? t.labelAr ?? '',
                 }));
 
                 const packs = (formationsSection.metadata?.packs || []).map((p: any, idx: number) => ({
                     id: p.id || `pack-${idx}`,
                     title_fr: p.title_fr ?? p.titleFr ?? '',
                     title_en: p.title_en ?? p.titleEn ?? '',
+                    title_ar: p.title_ar ?? p.titleAr ?? '',
                     subtitle_fr: p.subtitle_fr ?? p.subtitleFr ?? '',
                     subtitle_en: p.subtitle_en ?? p.subtitleEn ?? '',
+                    subtitle_ar: p.subtitle_ar ?? p.subtitleAr ?? '',
                     price_ghs: p.price_ghs ?? p.priceGhs ?? 0,
                     price_usd: p.price_usd ?? p.priceUsd ?? 0,
                     period_fr: p.period_fr ?? p.periodFr ?? '/mois',
                     period_en: p.period_en ?? p.periodEn ?? '/month',
+                    period_ar: p.period_ar ?? p.periodAr ?? '/month',
                     duration_fr: p.duration_fr ?? p.durationFr ?? '',
                     duration_en: p.duration_en ?? p.durationEn ?? '',
+                    duration_ar: p.duration_ar ?? p.durationAr ?? '',
                     features_fr: p.features_fr ?? p.featuresFr ?? [],
                     features_en: p.features_en ?? p.featuresEn ?? [],
+                    features_ar: p.features_ar ?? p.featuresAr ?? [],
                     is_premium: p.is_premium ?? p.isPremium ?? false,
                 }));
 
                 setFormationSettings({
                     title_fr: formationsSection.titleFr || '',
                     title_en: formationsSection.titleEn || '',
+                    title_ar: formationsSection.titleAr || '',
                     subtitle_fr: formationsSection.subtitleFr || '',
                     subtitle_en: formationsSection.subtitleEn || '',
+                    subtitle_ar: formationsSection.subtitleAr || '',
                     description_fr: formationsSection.descriptionFr || '',
                     description_en: formationsSection.descriptionEn || '',
+                    description_ar: formationsSection.descriptionAr || '',
                     topics,
                     packs,
                 });
@@ -263,8 +313,10 @@ const LandingPageSettings: React.FC = () => {
                 id: s.id,
                 title_fr: s.titleFr,
                 title_en: s.titleEn,
+                title_ar: s.titleAr,
                 description_fr: s.descriptionFr,
                 description_en: s.descriptionEn,
+                description_ar: s.descriptionAr,
                 icon: s.icon,
                 price_ghs: s.priceGhs,
                 price_usd: s.priceUsd,
@@ -280,13 +332,16 @@ const LandingPageSettings: React.FC = () => {
                 id: p.id,
                 name_fr: p.nameFr,
                 name_en: p.nameEn,
+                name_ar: p.nameAr,
                 description_fr: p.descriptionFr,
                 description_en: p.descriptionEn,
+                description_ar: p.descriptionAr,
                 price_eur: p.priceEur,
                 price_usd: p.priceUsd,
                 price_xof: p.priceXof,
                 features_fr: p.featuresFr || [],
                 features_en: p.featuresEn || [],
+                features_ar: p.featuresAr || [],
                 recommended: p.isRecommended,
             })));
         }
@@ -301,16 +356,21 @@ const LandingPageSettings: React.FC = () => {
                     data: {
                         title_fr: homeSettings.title_fr,
                         title_en: homeSettings.title_en,
+                        title_ar: homeSettings.title_ar,
                         subtitle_fr: homeSettings.subtitle_fr,
                         subtitle_en: homeSettings.subtitle_en,
+                        subtitle_ar: homeSettings.subtitle_ar,
                         description_fr: homeSettings.description_fr,
                         description_en: homeSettings.description_en,
+                        description_ar: homeSettings.description_ar,
                         cta_text_fr: homeSettings.ctaText_fr,
                         cta_text_en: homeSettings.ctaText_en,
+                        cta_text_ar: homeSettings.ctaText_ar,
                         cta_link: homeSettings.ctaLink,
                         metadata: {
                             cta_secondary_text_fr: homeSettings.ctaSecondaryText_fr,
                             cta_secondary_text_en: homeSettings.ctaSecondaryText_en,
+                            cta_secondary_text_ar: homeSettings.ctaSecondaryText_ar,
                             cta_secondary_link: homeSettings.ctaSecondaryLink,
                         }
                     }
@@ -321,21 +381,28 @@ const LandingPageSettings: React.FC = () => {
                     data: {
                         title_fr: aboutSettings.title_fr,
                         title_en: aboutSettings.title_en,
+                        title_ar: aboutSettings.title_ar,
                         subtitle_fr: aboutSettings.subtitle_fr,
                         subtitle_en: aboutSettings.subtitle_en,
+                        subtitle_ar: aboutSettings.subtitle_ar,
                         description_fr: aboutSettings.description_fr,
                         description_en: aboutSettings.description_en,
+                        description_ar: aboutSettings.description_ar,
                         content_fr: aboutSettings.content_fr,
                         content_en: aboutSettings.content_en,
+                        content_ar: aboutSettings.content_ar,
                         metadata: {
                             master_name: aboutSettings.masterName,
                             master_title_fr: aboutSettings.masterTitle_fr,
                             master_title_en: aboutSettings.masterTitle_en,
+                            master_title_ar: aboutSettings.masterTitle_ar,
                             quote_fr: aboutSettings.quote_fr,
                             quote_en: aboutSettings.quote_en,
+                            quote_ar: aboutSettings.quote_ar,
                             initiations: aboutSettings.initiations,
                             expertise_fr: aboutSettings.expertise_fr,
                             expertise_en: aboutSettings.expertise_en,
+                            expertise_ar: aboutSettings.expertise_ar,
                             team: aboutSettings.team,
                         }
                     }
@@ -346,15 +413,19 @@ const LandingPageSettings: React.FC = () => {
                     data: {
                         title_fr: contactSettings.title_fr,
                         title_en: contactSettings.title_en,
+                        title_ar: contactSettings.title_ar,
                         subtitle_fr: contactSettings.subtitle_fr,
                         subtitle_en: contactSettings.subtitle_en,
+                        subtitle_ar: contactSettings.subtitle_ar,
                         description_fr: contactSettings.description_fr,
                         description_en: contactSettings.description_en,
+                        description_ar: contactSettings.description_ar,
                         metadata: {
                             whatsapp: contactSettings.whatsapp,
                             email: contactSettings.email,
                             location_fr: contactSettings.location_fr,
                             location_en: contactSettings.location_en,
+                            location_ar: contactSettings.location_ar,
                         }
                     }
                 }).unwrap();
@@ -368,10 +439,13 @@ const LandingPageSettings: React.FC = () => {
                     data: {
                         title_fr: formationSettings.title_fr,
                         title_en: formationSettings.title_en,
+                        title_ar: formationSettings.title_ar,
                         subtitle_fr: formationSettings.subtitle_fr,
                         subtitle_en: formationSettings.subtitle_en,
+                        subtitle_ar: formationSettings.subtitle_ar,
                         description_fr: formationSettings.description_fr,
                         description_en: formationSettings.description_en,
+                        description_ar: formationSettings.description_ar,
                         metadata: {
                             topics: formationSettings.topics,
                             packs: formationSettings.packs,
@@ -395,10 +469,13 @@ const LandingPageSettings: React.FC = () => {
                     data: {
                         title_fr: booksSettings.title_fr,
                         title_en: booksSettings.title_en,
+                        title_ar: booksSettings.title_ar,
                         subtitle_fr: booksSettings.subtitle_fr,
                         subtitle_en: booksSettings.subtitle_en,
+                        subtitle_ar: booksSettings.subtitle_ar,
                         description_fr: booksSettings.description_fr,
                         description_en: booksSettings.description_en,
+                        description_ar: booksSettings.description_ar,
                     }
                 }).unwrap();
             }
@@ -448,6 +525,18 @@ const LandingPageSettings: React.FC = () => {
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Title (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={homeSettings.title_ar}
+                        onChange={(e) => setHomeSettings({ ...homeSettings, title_ar: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -473,6 +562,18 @@ const LandingPageSettings: React.FC = () => {
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Subtitle (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={homeSettings.subtitle_ar}
+                        onChange={(e) => setHomeSettings({ ...homeSettings, subtitle_ar: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -494,6 +595,17 @@ const LandingPageSettings: React.FC = () => {
                         value={homeSettings.description_en}
                         onChange={(value) => setHomeSettings({ ...homeSettings, description_en: value })}
                         placeholder="Description in English..."
+                    />
+                </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Description (Arabic)
+                    </label>
+                    <RichTextEditor
+                        value={homeSettings.description_ar}
+                        onChange={(value) => setHomeSettings({ ...homeSettings, description_ar: value })}
+                        placeholder="Description in Arabic..."
+                        dir="rtl"
                     />
                 </div>
             </div>
@@ -530,6 +642,18 @@ const LandingPageSettings: React.FC = () => {
                         type="text"
                         value={homeSettings.ctaText_en}
                         onChange={(e) => setHomeSettings({ ...homeSettings, ctaText_en: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Primary CTA Text (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={homeSettings.ctaText_ar}
+                        onChange={(e) => setHomeSettings({ ...homeSettings, ctaText_ar: e.target.value })}
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
@@ -570,6 +694,18 @@ const LandingPageSettings: React.FC = () => {
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Secondary CTA Text (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={homeSettings.ctaSecondaryText_ar}
+                        onChange={(e) => setHomeSettings({ ...homeSettings, ctaSecondaryText_ar: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
                         Secondary CTA Link
@@ -591,8 +727,10 @@ const LandingPageSettings: React.FC = () => {
             const serviceData = {
                 title_fr: service.title_fr,
                 title_en: service.title_en,
+                title_ar: service.title_ar,
                 description_fr: service.description_fr,
                 description_en: service.description_en,
+                description_ar: service.description_ar,
                 icon: service.icon,
                 price_ghs: service.price_ghs,
                 price_usd: service.price_usd,
@@ -653,8 +791,10 @@ const LandingPageSettings: React.FC = () => {
                         id: `temp-${Date.now()}`,
                         title_fr: '',
                         title_en: '',
+                        title_ar: '',
                         description_fr: '',
                         description_en: '',
+                        description_ar: '',
                         icon: 'consultation',
                         price_ghs: 0,
                         price_usd: 0,
@@ -720,6 +860,22 @@ const LandingPageSettings: React.FC = () => {
                         </div>
                         <div className="md:col-span-2">
                             <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                                Title (Arabic)
+                            </label>
+                            <input
+                                dir="rtl"
+                                type="text"
+                                value={service.title_ar}
+                                onChange={(e) => {
+                                    const updated = [...services];
+                                    updated[index].title_ar = e.target.value;
+                                    setServices(updated);
+                                }}
+                                className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                            />
+                        </div>
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
                                 Description (French)
                             </label>
                             <textarea
@@ -742,6 +898,22 @@ const LandingPageSettings: React.FC = () => {
                                 onChange={(e) => {
                                     const updated = [...services];
                                     updated[index].description_en = e.target.value;
+                                    setServices(updated);
+                                }}
+                                rows={2}
+                                className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                            />
+                        </div>
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                                Description (Arabic)
+                            </label>
+                            <textarea
+                                dir="rtl"
+                                value={service.description_ar}
+                                onChange={(e) => {
+                                    const updated = [...services];
+                                    updated[index].description_ar = e.target.value;
                                     setServices(updated);
                                 }}
                                 rows={2}
@@ -828,6 +1000,18 @@ const LandingPageSettings: React.FC = () => {
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Title (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={formationSettings.title_ar}
+                        onChange={(e) => setFormationSettings({ ...formationSettings, title_ar: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -850,6 +1034,18 @@ const LandingPageSettings: React.FC = () => {
                         type="text"
                         value={formationSettings.subtitle_en}
                         onChange={(e) => setFormationSettings({ ...formationSettings, subtitle_en: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Subtitle (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={formationSettings.subtitle_ar}
+                        onChange={(e) => setFormationSettings({ ...formationSettings, subtitle_ar: e.target.value })}
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
@@ -878,6 +1074,18 @@ const LandingPageSettings: React.FC = () => {
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Description (Arabic)
+                    </label>
+                    <textarea
+                        dir="rtl"
+                        value={formationSettings.description_ar}
+                        onChange={(e) => setFormationSettings({ ...formationSettings, description_ar: e.target.value })}
+                        rows={3}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
             </div>
 
             <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-bg-secondary space-y-3">
@@ -886,7 +1094,7 @@ const LandingPageSettings: React.FC = () => {
                     <button
                         onClick={() => setFormationSettings({
                             ...formationSettings,
-                            topics: [...formationSettings.topics, { icon: '☿', label_fr: '', label_en: '' }]
+                            topics: [...formationSettings.topics, { icon: '☿', label_fr: '', label_en: '', label_ar: '' }]
                         })}
                         className="text-sm px-3 py-1.5 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black rounded-lg hover:shadow"
                     >
@@ -941,6 +1149,18 @@ const LandingPageSettings: React.FC = () => {
                                 }}
                                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
                             />
+                            <input
+                                dir="rtl"
+                                type="text"
+                                placeholder="Label (AR)"
+                                value={topic.label_ar}
+                                onChange={(e) => {
+                                    const updated = [...formationSettings.topics];
+                                    updated[index] = { ...topic, label_ar: e.target.value };
+                                    setFormationSettings({ ...formationSettings, topics: updated });
+                                }}
+                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
+                            />
                         </div>
                     ))}
                 </div>
@@ -957,16 +1177,21 @@ const LandingPageSettings: React.FC = () => {
                                 id: `temp-${Date.now()}`,
                                 title_fr: '',
                                 title_en: '',
+                                title_ar: '',
                                 subtitle_fr: '',
                                 subtitle_en: '',
+                                subtitle_ar: '',
                                 price_ghs: 0,
                                 price_usd: 0,
                                 period_fr: '/mois',
                                 period_en: '/month',
+                                period_ar: '/شهريًا',
                                 duration_fr: '',
                                 duration_en: '',
+                                duration_ar: '',
                                 features_fr: [] as string[],
                                 features_en: [] as string[],
+                                features_ar: [] as string[],
                                 is_premium: false,
                             }
                         ]
@@ -1038,6 +1263,22 @@ const LandingPageSettings: React.FC = () => {
                                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
                                 />
                             </div>
+                            <div className="md:col-span-2">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                                    Title (AR)
+                                </label>
+                                <input
+                                    dir="rtl"
+                                    type="text"
+                                    value={pack.title_ar}
+                                    onChange={(e) => {
+                                        const updated = [...formationSettings.packs];
+                                        updated[index] = { ...pack, title_ar: e.target.value };
+                                        setFormationSettings({ ...formationSettings, packs: updated });
+                                    }}
+                                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
+                                />
+                            </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
                                     Subtitle (FR)
@@ -1063,6 +1304,22 @@ const LandingPageSettings: React.FC = () => {
                                     onChange={(e) => {
                                         const updated = [...formationSettings.packs];
                                         updated[index] = { ...pack, subtitle_en: e.target.value };
+                                        setFormationSettings({ ...formationSettings, packs: updated });
+                                    }}
+                                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
+                                />
+                            </div>
+                            <div className="md:col-span-2">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                                    Subtitle (AR)
+                                </label>
+                                <input
+                                    dir="rtl"
+                                    type="text"
+                                    value={pack.subtitle_ar}
+                                    onChange={(e) => {
+                                        const updated = [...formationSettings.packs];
+                                        updated[index] = { ...pack, subtitle_ar: e.target.value };
                                         setFormationSettings({ ...formationSettings, packs: updated });
                                     }}
                                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
@@ -1131,6 +1388,22 @@ const LandingPageSettings: React.FC = () => {
                                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
                                 />
                             </div>
+                            <div className="md:col-span-2">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                                    Period (AR)
+                                </label>
+                                <input
+                                    dir="rtl"
+                                    type="text"
+                                    value={pack.period_ar || ''}
+                                    onChange={(e) => {
+                                        const updated = [...formationSettings.packs];
+                                        updated[index] = { ...pack, period_ar: e.target.value };
+                                        setFormationSettings({ ...formationSettings, packs: updated });
+                                    }}
+                                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
+                                />
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1159,6 +1432,22 @@ const LandingPageSettings: React.FC = () => {
                                     onChange={(e) => {
                                         const updated = [...formationSettings.packs];
                                         updated[index] = { ...pack, duration_en: e.target.value };
+                                        setFormationSettings({ ...formationSettings, packs: updated });
+                                    }}
+                                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
+                                />
+                            </div>
+                            <div className="md:col-span-2">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                                    Duration (AR)
+                                </label>
+                                <input
+                                    dir="rtl"
+                                    type="text"
+                                    value={pack.duration_ar || ''}
+                                    onChange={(e) => {
+                                        const updated = [...formationSettings.packs];
+                                        updated[index] = { ...pack, duration_ar: e.target.value };
                                         setFormationSettings({ ...formationSettings, packs: updated });
                                     }}
                                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
@@ -1197,6 +1486,22 @@ const LandingPageSettings: React.FC = () => {
                                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
                                 />
                             </div>
+                            <div className="md:col-span-2">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                                    Features (AR) — one per line
+                                </label>
+                                <textarea
+                                    rows={5}
+                                    dir="rtl"
+                                    value={(pack.features_ar || []).join('\n')}
+                                    onChange={(e) => {
+                                        const updated = [...formationSettings.packs];
+                                        updated[index] = { ...pack, features_ar: e.target.value.split('\n').filter(Boolean) };
+                                        setFormationSettings({ ...formationSettings, packs: updated });
+                                    }}
+                                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary"
+                                />
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -1229,6 +1534,18 @@ const LandingPageSettings: React.FC = () => {
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Title (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={aboutSettings.title_ar}
+                        onChange={(e) => setAboutSettings({ ...aboutSettings, title_ar: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1251,6 +1568,18 @@ const LandingPageSettings: React.FC = () => {
                         type="text"
                         value={aboutSettings.subtitle_en}
                         onChange={(e) => setAboutSettings({ ...aboutSettings, subtitle_en: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Subtitle (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={aboutSettings.subtitle_ar}
+                        onChange={(e) => setAboutSettings({ ...aboutSettings, subtitle_ar: e.target.value })}
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
@@ -1279,6 +1608,18 @@ const LandingPageSettings: React.FC = () => {
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Description (Arabic)
+                    </label>
+                    <textarea
+                        dir="rtl"
+                        value={aboutSettings.description_ar}
+                        onChange={(e) => setAboutSettings({ ...aboutSettings, description_ar: e.target.value })}
+                        rows={3}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1300,6 +1641,18 @@ const LandingPageSettings: React.FC = () => {
                     <textarea
                         value={aboutSettings.content_en}
                         onChange={(e) => setAboutSettings({ ...aboutSettings, content_en: e.target.value })}
+                        rows={3}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Content (Arabic)
+                    </label>
+                    <textarea
+                        dir="rtl"
+                        value={aboutSettings.content_ar}
+                        onChange={(e) => setAboutSettings({ ...aboutSettings, content_ar: e.target.value })}
                         rows={3}
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
@@ -1342,6 +1695,18 @@ const LandingPageSettings: React.FC = () => {
                             className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                         />
                     </div>
+                    <div className="md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                            Master Title (Arabic)
+                        </label>
+                        <input
+                            dir="rtl"
+                            type="text"
+                            value={aboutSettings.masterTitle_ar}
+                            onChange={(e) => setAboutSettings({ ...aboutSettings, masterTitle_ar: e.target.value })}
+                            className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                        />
+                    </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
                             Quote (French)
@@ -1364,6 +1729,18 @@ const LandingPageSettings: React.FC = () => {
                             className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                         />
                     </div>
+                    <div className="md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                            Quote (Arabic)
+                        </label>
+                        <textarea
+                            dir="rtl"
+                            value={aboutSettings.quote_ar}
+                            onChange={(e) => setAboutSettings({ ...aboutSettings, quote_ar: e.target.value })}
+                            rows={2}
+                            className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -1382,12 +1759,15 @@ const LandingPageSettings: React.FC = () => {
                         id: Date.now(),
                         name_fr: '',
                         name_en: '',
+                        name_ar: '',
                         description_fr: '',
                         description_en: '',
+                        description_ar: '',
                         price_eur: 0,
                         price_usd: 0,
                         features_fr: [],
                         features_en: [],
+                        features_ar: [],
                         recommended: false,
                     }])}
                     className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] text-black font-medium rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-200"
@@ -1428,6 +1808,18 @@ const LandingPageSettings: React.FC = () => {
                                 onChange={(e) => {
                                     const updated = [...pricingPlans];
                                     updated[index].name_en = e.target.value;
+                                    setPricingPlans(updated);
+                                }}
+                                className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                            />
+                            <input
+                                dir="rtl"
+                                type="text"
+                                placeholder="Name (AR)"
+                                value={plan.name_ar}
+                                onChange={(e) => {
+                                    const updated = [...pricingPlans];
+                                    updated[index].name_ar = e.target.value;
                                     setPricingPlans(updated);
                                 }}
                                 className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
@@ -1501,6 +1893,18 @@ const LandingPageSettings: React.FC = () => {
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Title (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={contactSettings.title_ar}
+                        onChange={(e) => setContactSettings({ ...contactSettings, title_ar: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1526,6 +1930,18 @@ const LandingPageSettings: React.FC = () => {
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Subtitle (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={contactSettings.subtitle_ar}
+                        onChange={(e) => setContactSettings({ ...contactSettings, subtitle_ar: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1547,6 +1963,18 @@ const LandingPageSettings: React.FC = () => {
                     <textarea
                         value={contactSettings.description_en}
                         onChange={(e) => setContactSettings({ ...contactSettings, description_en: e.target.value })}
+                        rows={3}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Description (Arabic)
+                    </label>
+                    <textarea
+                        dir="rtl"
+                        value={contactSettings.description_ar}
+                        onChange={(e) => setContactSettings({ ...contactSettings, description_ar: e.target.value })}
                         rows={3}
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
@@ -1602,6 +2030,18 @@ const LandingPageSettings: React.FC = () => {
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Location (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={contactSettings.location_ar}
+                        onChange={(e) => setContactSettings({ ...contactSettings, location_ar: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
             </div>
         </div>
     );
@@ -1635,6 +2075,18 @@ const LandingPageSettings: React.FC = () => {
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Title (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={booksSettings.title_ar}
+                        onChange={(e) => setBooksSettings({ ...booksSettings, title_ar: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1660,6 +2112,18 @@ const LandingPageSettings: React.FC = () => {
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Subtitle (Arabic)
+                    </label>
+                    <input
+                        dir="rtl"
+                        type="text"
+                        value={booksSettings.subtitle_ar}
+                        onChange={(e) => setBooksSettings({ ...booksSettings, subtitle_ar: e.target.value })}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1681,6 +2145,18 @@ const LandingPageSettings: React.FC = () => {
                     <textarea
                         value={booksSettings.description_en}
                         onChange={(e) => setBooksSettings({ ...booksSettings, description_en: e.target.value })}
+                        rows={3}
+                        className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
+                    />
+                </div>
+                <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-text-primary mb-2">
+                        Description (Arabic)
+                    </label>
+                    <textarea
+                        dir="rtl"
+                        value={booksSettings.description_ar}
+                        onChange={(e) => setBooksSettings({ ...booksSettings, description_ar: e.target.value })}
                         rows={3}
                         className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-bg-secondary text-gray-900 dark:text-text-primary focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent transition-all"
                     />

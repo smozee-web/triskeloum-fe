@@ -17,7 +17,7 @@ interface BookFormModalProps {
 }
 
 const emptyForm = {
-    title_fr: '', title_en: '', description_fr: '', description_en: '',
+    title_fr: '', title_en: '', title_ar: '', description_fr: '', description_en: '', description_ar: '',
     author_name: '', price_ghs: 0, price_usd: 0,
     delivery_mode: 'READ_ONLY', file_source: 'UPLOAD', external_url_raw: '',
     category_id: '', sort_order: 0, is_active: true,
@@ -34,8 +34,10 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ isOpen, onClose, initialD
                 setForm({
                     title_fr: initialData.titleFr || '',
                     title_en: initialData.titleEn || '',
+                    title_ar: initialData.titleAr || '',
                     description_fr: initialData.descriptionFr || '',
                     description_en: initialData.descriptionEn || '',
+                    description_ar: initialData.descriptionAr || '',
                     author_name: initialData.authorName || '',
                     price_ghs: initialData.priceGhs || 0,
                     price_usd: initialData.priceUsd || 0,
@@ -62,8 +64,10 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ isOpen, onClose, initialD
         const formData = new FormData();
         formData.append('title_fr', form.title_fr);
         formData.append('title_en', form.title_en);
+        formData.append('title_ar', form.title_ar || '');
         formData.append('description_fr', form.description_fr || '');
         formData.append('description_en', form.description_en || '');
+        formData.append('description_ar', form.description_ar || '');
         formData.append('author_name', form.author_name || '');
         formData.append('price_ghs', String(form.price_ghs || 0));
         formData.append('price_usd', String(form.price_usd || 0));
@@ -91,7 +95,11 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ isOpen, onClose, initialD
     return (
         <Modal2 isOpen={isOpen} onClose={onClose} size="lg" title={initialData ? 'Edit book' : 'Create a new book'}>
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Translated fields get their own three-column rows so each
+                    language sits beside its siblings. Arabic is not `required`:
+                    the *_ar columns are nullable and the public site falls back
+                    to English, so a book can ship before it is translated. */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                         <label className={labelClass}>Title (French)</label>
                         <input required type="text" value={form.title_fr} onChange={(e) => setForm({ ...form, title_fr: e.target.value })} className={inputClass} />
@@ -101,6 +109,13 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ isOpen, onClose, initialD
                         <input required type="text" value={form.title_en} onChange={(e) => setForm({ ...form, title_en: e.target.value })} className={inputClass} />
                     </div>
                     <div>
+                        <label className={labelClass}>Title (Arabic)</label>
+                        <input type="text" dir="rtl" value={form.title_ar} onChange={(e) => setForm({ ...form, title_ar: e.target.value })} className={inputClass} />
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
                         <label className={labelClass}>Description (French)</label>
                         <textarea rows={2} value={form.description_fr} onChange={(e) => setForm({ ...form, description_fr: e.target.value })} className={inputClass} />
                     </div>
@@ -108,6 +123,13 @@ const BookFormModal: React.FC<BookFormModalProps> = ({ isOpen, onClose, initialD
                         <label className={labelClass}>Description (English)</label>
                         <textarea rows={2} value={form.description_en} onChange={(e) => setForm({ ...form, description_en: e.target.value })} className={inputClass} />
                     </div>
+                    <div>
+                        <label className={labelClass}>Description (Arabic)</label>
+                        <textarea rows={2} dir="rtl" value={form.description_ar} onChange={(e) => setForm({ ...form, description_ar: e.target.value })} className={inputClass} />
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label className={labelClass}>Author</label>
                         <input type="text" value={form.author_name} onChange={(e) => setForm({ ...form, author_name: e.target.value })} className={inputClass} />
